@@ -1,0 +1,526 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78481B58BC8A004535BC /* AppDelegate.swift */; };
+		C2BF784B1B58BC8A004535BC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF784A1B58BC8A004535BC /* Document.swift */; };
+		C2BF784E1B58BC8A004535BC /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2BF784C1B58BC8A004535BC /* Document.xib */; };
+		C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C2BF784F1B58BC8A004535BC /* Document.xcdatamodeld */; };
+		C2BF78531B58BC8A004535BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2BF78521B58BC8A004535BC /* Assets.xcassets */; };
+		C2BF78561B58BC8A004535BC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2BF78541B58BC8A004535BC /* MainMenu.xib */; };
+		C2BF78611B58BC8A004535BC /* MetalEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78601B58BC8A004535BC /* MetalEditorTests.swift */; };
+		C2BF786C1B58BC8A004535BC /* MetalEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C2BF785D1B58BC8A004535BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C2BF783D1B58BC8A004535BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2BF78441B58BC8A004535BC;
+			remoteInfo = MetalEditor;
+		};
+		C2BF78681B58BC8A004535BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C2BF783D1B58BC8A004535BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C2BF78441B58BC8A004535BC;
+			remoteInfo = MetalEditor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C2BF78451B58BC8A004535BC /* MetalEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2BF78481B58BC8A004535BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C2BF784A1B58BC8A004535BC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		C2BF784D1B58BC8A004535BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		C2BF78501B58BC8A004535BC /* Document.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Document.xcdatamodel; sourceTree = "<group>"; };
+		C2BF78521B58BC8A004535BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C2BF78551B58BC8A004535BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C2BF78571B58BC8A004535BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2BF785C1B58BC8A004535BC /* MetalEditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalEditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2BF78601B58BC8A004535BC /* MetalEditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalEditorTests.swift; sourceTree = "<group>"; };
+		C2BF78621B58BC8A004535BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2BF78671B58BC8A004535BC /* MetalEditorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalEditorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalEditorUITests.swift; sourceTree = "<group>"; };
+		C2BF786D1B58BC8A004535BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C2BF78421B58BC8A004535BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2BF78591B58BC8A004535BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2BF78641B58BC8A004535BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C2BF783C1B58BC8A004535BC = {
+			isa = PBXGroup;
+			children = (
+				C2BF78471B58BC8A004535BC /* MetalEditor */,
+				C2BF785F1B58BC8A004535BC /* MetalEditorTests */,
+				C2BF786A1B58BC8A004535BC /* MetalEditorUITests */,
+				C2BF78461B58BC8A004535BC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C2BF78461B58BC8A004535BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C2BF78451B58BC8A004535BC /* MetalEditor.app */,
+				C2BF785C1B58BC8A004535BC /* MetalEditorTests.xctest */,
+				C2BF78671B58BC8A004535BC /* MetalEditorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C2BF78471B58BC8A004535BC /* MetalEditor */ = {
+			isa = PBXGroup;
+			children = (
+				C2BF78481B58BC8A004535BC /* AppDelegate.swift */,
+				C2BF784A1B58BC8A004535BC /* Document.swift */,
+				C2BF784C1B58BC8A004535BC /* Document.xib */,
+				C2BF78521B58BC8A004535BC /* Assets.xcassets */,
+				C2BF78541B58BC8A004535BC /* MainMenu.xib */,
+				C2BF78571B58BC8A004535BC /* Info.plist */,
+				C2BF784F1B58BC8A004535BC /* Document.xcdatamodeld */,
+			);
+			path = MetalEditor;
+			sourceTree = "<group>";
+		};
+		C2BF785F1B58BC8A004535BC /* MetalEditorTests */ = {
+			isa = PBXGroup;
+			children = (
+				C2BF78601B58BC8A004535BC /* MetalEditorTests.swift */,
+				C2BF78621B58BC8A004535BC /* Info.plist */,
+			);
+			path = MetalEditorTests;
+			sourceTree = "<group>";
+		};
+		C2BF786A1B58BC8A004535BC /* MetalEditorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */,
+				C2BF786D1B58BC8A004535BC /* Info.plist */,
+			);
+			path = MetalEditorUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C2BF78441B58BC8A004535BC /* MetalEditor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2BF78701B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditor" */;
+			buildPhases = (
+				C2BF78411B58BC8A004535BC /* Sources */,
+				C2BF78421B58BC8A004535BC /* Frameworks */,
+				C2BF78431B58BC8A004535BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetalEditor;
+			productName = MetalEditor;
+			productReference = C2BF78451B58BC8A004535BC /* MetalEditor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C2BF785B1B58BC8A004535BC /* MetalEditorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2BF78731B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditorTests" */;
+			buildPhases = (
+				C2BF78581B58BC8A004535BC /* Sources */,
+				C2BF78591B58BC8A004535BC /* Frameworks */,
+				C2BF785A1B58BC8A004535BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C2BF785E1B58BC8A004535BC /* PBXTargetDependency */,
+			);
+			name = MetalEditorTests;
+			productName = MetalEditorTests;
+			productReference = C2BF785C1B58BC8A004535BC /* MetalEditorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C2BF78661B58BC8A004535BC /* MetalEditorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2BF78761B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditorUITests" */;
+			buildPhases = (
+				C2BF78631B58BC8A004535BC /* Sources */,
+				C2BF78641B58BC8A004535BC /* Frameworks */,
+				C2BF78651B58BC8A004535BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C2BF78691B58BC8A004535BC /* PBXTargetDependency */,
+			);
+			name = MetalEditorUITests;
+			productName = MetalEditorUITests;
+			productReference = C2BF78671B58BC8A004535BC /* MetalEditorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C2BF783D1B58BC8A004535BC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = Litherum;
+				TargetAttributes = {
+					C2BF78441B58BC8A004535BC = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					C2BF785B1B58BC8A004535BC = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = C2BF78441B58BC8A004535BC;
+					};
+					C2BF78661B58BC8A004535BC = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = C2BF78441B58BC8A004535BC;
+					};
+				};
+			};
+			buildConfigurationList = C2BF78401B58BC8A004535BC /* Build configuration list for PBXProject "MetalEditor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C2BF783C1B58BC8A004535BC;
+			productRefGroup = C2BF78461B58BC8A004535BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C2BF78441B58BC8A004535BC /* MetalEditor */,
+				C2BF785B1B58BC8A004535BC /* MetalEditorTests */,
+				C2BF78661B58BC8A004535BC /* MetalEditorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C2BF78431B58BC8A004535BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2BF78531B58BC8A004535BC /* Assets.xcassets in Resources */,
+				C2BF784E1B58BC8A004535BC /* Document.xib in Resources */,
+				C2BF78561B58BC8A004535BC /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2BF785A1B58BC8A004535BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2BF78651B58BC8A004535BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C2BF78411B58BC8A004535BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
+				C2BF784B1B58BC8A004535BC /* Document.swift in Sources */,
+				C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2BF78581B58BC8A004535BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2BF78611B58BC8A004535BC /* MetalEditorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2BF78631B58BC8A004535BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2BF786C1B58BC8A004535BC /* MetalEditorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C2BF785E1B58BC8A004535BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C2BF78441B58BC8A004535BC /* MetalEditor */;
+			targetProxy = C2BF785D1B58BC8A004535BC /* PBXContainerItemProxy */;
+		};
+		C2BF78691B58BC8A004535BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C2BF78441B58BC8A004535BC /* MetalEditor */;
+			targetProxy = C2BF78681B58BC8A004535BC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C2BF784C1B58BC8A004535BC /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2BF784D1B58BC8A004535BC /* Base */,
+			);
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		C2BF78541B58BC8A004535BC /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2BF78551B58BC8A004535BC /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C2BF786E1B58BC8A004535BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C2BF786F1B58BC8A004535BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C2BF78711B58BC8A004535BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalEditor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Litherum.MetalEditor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C2BF78721B58BC8A004535BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalEditor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Litherum.MetalEditor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C2BF78741B58BC8A004535BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalEditorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Litherum.MetalEditorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalEditor.app/Contents/MacOS/MetalEditor";
+			};
+			name = Debug;
+		};
+		C2BF78751B58BC8A004535BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalEditorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Litherum.MetalEditorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MetalEditor.app/Contents/MacOS/MetalEditor";
+			};
+			name = Release;
+		};
+		C2BF78771B58BC8A004535BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalEditorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Litherum.MetalEditorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MetalEditor;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		C2BF78781B58BC8A004535BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = MetalEditorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Litherum.MetalEditorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MetalEditor;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C2BF78401B58BC8A004535BC /* Build configuration list for PBXProject "MetalEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2BF786E1B58BC8A004535BC /* Debug */,
+				C2BF786F1B58BC8A004535BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2BF78701B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2BF78711B58BC8A004535BC /* Debug */,
+				C2BF78721B58BC8A004535BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C2BF78731B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2BF78741B58BC8A004535BC /* Debug */,
+				C2BF78751B58BC8A004535BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C2BF78761B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2BF78771B58BC8A004535BC /* Debug */,
+				C2BF78781B58BC8A004535BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C2BF784F1B58BC8A004535BC /* Document.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C2BF78501B58BC8A004535BC /* Document.xcdatamodel */,
+			);
+			currentVersion = C2BF78501B58BC8A004535BC /* Document.xcdatamodel */;
+			path = Document.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C2BF783D1B58BC8A004535BC /* Project object */;
+}
