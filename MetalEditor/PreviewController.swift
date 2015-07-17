@@ -14,7 +14,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var buffer: MTLBuffer!
-    let bufferLength = 10
+    let bufferLength = 16
     var bufferLock: NSLock!
     var computePipelineState: MTLComputePipelineState!
 
@@ -68,7 +68,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
         computeCommandEncoder.label = "Compute command encoder"
         computeCommandEncoder.setComputePipelineState(computePipelineState)
         computeCommandEncoder.setBuffer(buffer, offset: 0, atIndex: 0)
-        computeCommandEncoder.dispatchThreadgroups(MTLSize(width: 1, height: 1, depth: 1), threadsPerThreadgroup: MTLSize(width: 10, height: 1, depth: 1))
+        computeCommandEncoder.dispatchThreadgroups(MTLSize(width: 1, height: 1, depth: 1), threadsPerThreadgroup: MTLSize(width: bufferLength, height: 1, depth: 1))
         computeCommandEncoder.endEncoding()
         computeCommandBuffer.commit()
 
@@ -86,6 +86,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
             print("")
             dispatch_async(dispatch_get_main_queue()) {
                 self.bufferLock.unlock()
+                // Rather than kicking off another job, we can just wait for the next drawInView
             }
         }
         blitCommandBuffer.commit()
