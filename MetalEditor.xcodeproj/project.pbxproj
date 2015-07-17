@@ -15,6 +15,8 @@
 		C2BF78561B58BC8A004535BC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2BF78541B58BC8A004535BC /* MainMenu.xib */; };
 		C2BF78611B58BC8A004535BC /* MetalEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78601B58BC8A004535BC /* MetalEditorTests.swift */; };
 		C2BF786C1B58BC8A004535BC /* MetalEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */; };
+		C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78791B58C09B004535BC /* PreviewController.swift */; };
+		C2BF787C1B58C69A004535BC /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C2BF787B1B58C69A004535BC /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		C2BF78671B58BC8A004535BC /* MetalEditorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MetalEditorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalEditorUITests.swift; sourceTree = "<group>"; };
 		C2BF786D1B58BC8A004535BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2BF78791B58C09B004535BC /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		C2BF787B1B58C69A004535BC /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				C2BF78541B58BC8A004535BC /* MainMenu.xib */,
 				C2BF78571B58BC8A004535BC /* Info.plist */,
 				C2BF784F1B58BC8A004535BC /* Document.xcdatamodeld */,
+				C2BF78791B58C09B004535BC /* PreviewController.swift */,
+				C2BF787B1B58C69A004535BC /* Shaders.metal */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -258,9 +264,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */,
 				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
 				C2BF784B1B58BC8A004535BC /* Document.swift in Sources */,
 				C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */,
+				C2BF787C1B58C69A004535BC /* Shaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
