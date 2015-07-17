@@ -36,12 +36,10 @@ class PreviewController: NSViewController, MTKViewDelegate {
 
         metalView.enableSetNeedsDisplay = true
 
-        buffer = device.newBufferWithLength(bufferLength, options: MTLResourceOptions())
-        let bufferContents = UnsafeMutablePointer<UInt8>(buffer.contents())
-        for i in 0 ..< bufferLength {
-            bufferContents[i] = 0
-        }
-        buffer.didModifyRange(NSMakeRange(0, bufferLength))
+        //buffer = device.newBufferWithLength(bufferLength, options: .StorageModeAuto)
+        var array = Array<UInt8>(count: bufferLength, repeatedValue: 17)
+        buffer = device.newBufferWithBytes(&array, length: bufferLength, options: .StorageModeManaged)
+        print("Mode: \(buffer.storageMode.rawValue)")
         bufferLock = NSLock()
 
         guard let function = library.newFunctionWithName("increment") else {
@@ -76,7 +74,9 @@ class PreviewController: NSViewController, MTKViewDelegate {
         let blitCommandBuffer = commandQueue.commandBuffer()
         let blitCommandEncoder = blitCommandBuffer.blitCommandEncoder()
         blitCommandEncoder.label = "Blit command encoder"
-        blitCommandEncoder.synchronizeResource(buffer)
+        if buffer.storageMode  == .Managed {
+            blitCommandEncoder.synchronizeResource(buffer)
+        }
         blitCommandEncoder.endEncoding()
         blitCommandBuffer.addCompletedHandler() {(cmdBuffer) in
             let bufferContents = UnsafeMutablePointer<UInt8>(self.buffer.contents())
