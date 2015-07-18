@@ -27,6 +27,18 @@
 		C24CDCC01B5A18D200348941 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAE1B5A18D200348941 /* Library.swift */; };
 		C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */; };
 		C24CDCC21B5A18D200348941 /* BufferBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCB01B5A18D200348941 /* BufferBinding.swift */; };
+		C24CDCEE1B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE21B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift */; };
+		C24CDCEF1B5AC44000348941 /* RenderInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE31B5AC44000348941 /* RenderInvocation.swift */; };
+		C24CDCF01B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE41B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift */; };
+		C24CDCF11B5AC44000348941 /* RenderPipelineColorAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE51B5AC44000348941 /* RenderPipelineColorAttachment.swift */; };
+		C24CDCF41B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE81B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift */; };
+		C24CDCF51B5AC44000348941 /* RenderPipelineState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE91B5AC44000348941 /* RenderPipelineState.swift */; };
+		C24CDCF61B5AC44000348941 /* RenderPass+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCEA1B5AC44000348941 /* RenderPass+CoreDataProperties.swift */; };
+		C24CDCF71B5AC44000348941 /* RenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCEB1B5AC44000348941 /* RenderPass.swift */; };
+		C24CDCFC1B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCF81B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift */; };
+		C24CDCFD1B5AC86D00348941 /* VertexAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCF91B5AC86D00348941 /* VertexAttribute.swift */; };
+		C24CDCFE1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCFA1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift */; };
+		C24CDCFF1B5AC86D00348941 /* VertexBufferLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCFB1B5AC86D00348941 /* VertexBufferLayout.swift */; };
 		C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78481B58BC8A004535BC /* AppDelegate.swift */; };
 		C2BF784B1B58BC8A004535BC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF784A1B58BC8A004535BC /* Document.swift */; };
 		C2BF784E1B58BC8A004535BC /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2BF784C1B58BC8A004535BC /* Document.xib */; };
@@ -77,6 +89,18 @@
 		C24CDCAE1B5A18D200348941 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BufferBinding+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C24CDCB01B5A18D200348941 /* BufferBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferBinding.swift; sourceTree = "<group>"; };
+		C24CDCE21B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderInvocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCE31B5AC44000348941 /* RenderInvocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderInvocation.swift; sourceTree = "<group>"; };
+		C24CDCE41B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderPipelineColorAttachment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCE51B5AC44000348941 /* RenderPipelineColorAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderPipelineColorAttachment.swift; sourceTree = "<group>"; };
+		C24CDCE81B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderPipelineState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCE91B5AC44000348941 /* RenderPipelineState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderPipelineState.swift; sourceTree = "<group>"; };
+		C24CDCEA1B5AC44000348941 /* RenderPass+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderPass+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCEB1B5AC44000348941 /* RenderPass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderPass.swift; sourceTree = "<group>"; };
+		C24CDCF81B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VertexAttribute+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCF91B5AC86D00348941 /* VertexAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexAttribute.swift; sourceTree = "<group>"; };
+		C24CDCFA1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VertexBufferLayout+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCFB1B5AC86D00348941 /* VertexBufferLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexBufferLayout.swift; sourceTree = "<group>"; };
 		C2BF78451B58BC8A004535BC /* MetalEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2BF78481B58BC8A004535BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2BF784A1B58BC8A004535BC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -123,6 +147,18 @@
 		C2205E1A1B5A15A70046F04D /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
+				C24CDCF81B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift */,
+				C24CDCF91B5AC86D00348941 /* VertexAttribute.swift */,
+				C24CDCFA1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift */,
+				C24CDCFB1B5AC86D00348941 /* VertexBufferLayout.swift */,
+				C24CDCE21B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift */,
+				C24CDCE31B5AC44000348941 /* RenderInvocation.swift */,
+				C24CDCE41B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift */,
+				C24CDCE51B5AC44000348941 /* RenderPipelineColorAttachment.swift */,
+				C24CDCE81B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift */,
+				C24CDCE91B5AC44000348941 /* RenderPipelineState.swift */,
+				C24CDCEA1B5AC44000348941 /* RenderPass+CoreDataProperties.swift */,
+				C24CDCEB1B5AC44000348941 /* RenderPass.swift */,
 				C24CDC9F1B5A18D200348941 /* Size+CoreDataProperties.swift */,
 				C24CDCA01B5A18D200348941 /* Size.swift */,
 				C24CDCA11B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift */,
@@ -337,8 +373,10 @@
 				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
 				C24CDCBD1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift in Sources */,
 				C24CDCC21B5A18D200348941 /* BufferBinding.swift in Sources */,
+				C24CDCEE1B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift in Sources */,
 				C24CDCB51B5A18D200348941 /* ComputePass+CoreDataProperties.swift in Sources */,
 				C24CDCBE1B5A18D200348941 /* ComputePipelineState.swift in Sources */,
+				C24CDCFC1B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift in Sources */,
 				C24CDCBC1B5A18D200348941 /* Buffer.swift in Sources */,
 				C2BF784B1B58BC8A004535BC /* Document.swift in Sources */,
 				C24CDCB61B5A18D200348941 /* ComputePass.swift in Sources */,
@@ -347,15 +385,25 @@
 				C24CDCB21B5A18D200348941 /* Size.swift in Sources */,
 				C24CDCBA1B5A18D200348941 /* Frame.swift in Sources */,
 				C24CDC9E1B5A17BF00348941 /* MetalState.swift in Sources */,
+				C24CDCFF1B5AC86D00348941 /* VertexBufferLayout.swift in Sources */,
+				C24CDCEF1B5AC44000348941 /* RenderInvocation.swift in Sources */,
+				C24CDCF11B5AC44000348941 /* RenderPipelineColorAttachment.swift in Sources */,
+				C24CDCFE1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift in Sources */,
 				C24CDCBF1B5A18D200348941 /* Library+CoreDataProperties.swift in Sources */,
 				C2BF787C1B58C69A004535BC /* Shaders.metal in Sources */,
 				C24CDCB11B5A18D200348941 /* Size+CoreDataProperties.swift in Sources */,
 				C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */,
+				C24CDCF61B5AC44000348941 /* RenderPass+CoreDataProperties.swift in Sources */,
+				C24CDCFD1B5AC86D00348941 /* VertexAttribute.swift in Sources */,
+				C24CDCF71B5AC44000348941 /* RenderPass.swift in Sources */,
 				C24CDCBB1B5A18D200348941 /* Buffer+CoreDataProperties.swift in Sources */,
+				C24CDCF51B5AC44000348941 /* RenderPipelineState.swift in Sources */,
 				C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */,
 				C24CDCB81B5A18D200348941 /* Pass.swift in Sources */,
+				C24CDCF41B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */,
 				C24CDCB31B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */,
 				C24CDCB91B5A18D200348941 /* Frame+CoreDataProperties.swift in Sources */,
+				C24CDCF01B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */,
 				C24CDCC01B5A18D200348941 /* Library.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

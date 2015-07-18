@@ -34,7 +34,23 @@ class PreviewController: NSViewController, MTKViewDelegate {
     func view(view: MTKView, willLayoutWithSize size: CGSize) {
     }
 
+    class func toMetalPrimitiveType(i: Int16) -> MTLPrimitiveType {
+        guard let result = MTLPrimitiveType(rawValue: UInt(i)) else {
+            assertionFailure()
+            assert(false)
+        }
+        return result
+    }
+
     func drawInView(view: MTKView) {
+        guard frame != nil else {
+            return
+        }
+        // FIXME: Support render-to-texture
+        guard let renderPassDescriptor = metalView.currentRenderPassDescriptor else {
+            assertionFailure()
+            assert(false)
+        }
         for passObject in frame.passes {
             let pass = passObject as! Pass
             let commandBuffer = commandQueue.commandBuffer()
@@ -61,6 +77,36 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     computeCommandEncoder.dispatchThreadgroups(metalThreadgroupsPerGrid, threadsPerThreadgroup: metalThreadPerThreadgroup)
                 }
                 computeCommandEncoder.endEncoding()
+            } else if let renderPass = pass as? RenderPass {
+                let renderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor)
+                for invocationObject in renderPass.invocations {
+                    let invocation = invocationObject as! RenderInvocation
+                    guard let metalRenderPipelineState = metalState.renderPipelineStates[invocation.state] else {
+                        continue
+                    }
+                    renderCommandEncoder.setRenderPipelineState(metalRenderPipelineState)
+                    for i in 0 ..< invocation.vertexBufferBindings.count {
+                        let bufferOptional = (invocation.vertexBufferBindings.objectAtIndex(i) as! BufferBinding).buffer
+                        if let buffer = bufferOptional {
+                            renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, atIndex: i)
+                        } else {
+                            renderCommandEncoder.setVertexBuffer(nil, offset: 0, atIndex: i)
+                        }
+                    }
+                    for i in 0 ..< invocation.fragmentBufferBindings.count {
+                        let bufferOptional = (invocation.fragmentBufferBindings.objectAtIndex(i) as! BufferBinding).buffer
+                        if let buffer = bufferOptional {
+                            renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, atIndex: i)
+                        } else {
+                            renderCommandEncoder.setVertexBuffer(nil, offset: 0, atIndex: i)
+                        }
+                    }
+                    renderCommandEncoder.drawPrimitives(PreviewController.toMetalPrimitiveType(invocation.primitiveType), vertexStart: Int(invocation.vertexStart), vertexCount: Int(invocation.vertexCount))
+                }
+                renderCommandEncoder.endEncoding()
+            } else {
+                assertionFailure()
+                assert(false)
             }
             if pass == frame.passes.objectAtIndex(frame.passes.count - 1) as! Pass && metalView.currentDrawable != nil {
                 commandBuffer.presentDrawable(metalView.currentDrawable!)
