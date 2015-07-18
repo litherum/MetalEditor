@@ -14,8 +14,8 @@ import CoreData
 
 extension Size {
 
-    @NSManaged var depth: Int32
-    @NSManaged var height: Int32
-    @NSManaged var width: Int32
+    @NSManaged var depth: NSNumber
+    @NSManaged var height: NSNumber
+    @NSManaged var width: NSNumber
 
 }

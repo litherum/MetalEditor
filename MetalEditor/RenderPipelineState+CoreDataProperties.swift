@@ -14,13 +14,13 @@ import CoreData
 
 extension RenderPipelineState {
 
-    @NSManaged var vertexFunction: String!
-    @NSManaged var fragmentFunction: String!
-    @NSManaged var depthAttachmentPixelFormat: Int32
-    @NSManaged var stencilAttachmentPixelFormat: Int32
-    @NSManaged var sampleCount: Int32
-    @NSManaged var colorAttachments: NSOrderedSet!
-    @NSManaged var vertexAttributes: NSOrderedSet!
-    @NSManaged var vertexBufferLayouts: NSOrderedSet!
+    @NSManaged var vertexFunction: String
+    @NSManaged var fragmentFunction: String
+    @NSManaged var depthAttachmentPixelFormat: NSNumber?
+    @NSManaged var stencilAttachmentPixelFormat: NSNumber?
+    @NSManaged var sampleCount: NSNumber?
+    @NSManaged var colorAttachments: NSOrderedSet
+    @NSManaged var vertexAttributes: NSOrderedSet
+    @NSManaged var vertexBufferLayouts: NSOrderedSet
 
 }

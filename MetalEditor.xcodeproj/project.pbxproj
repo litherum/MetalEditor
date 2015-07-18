@@ -27,8 +27,6 @@
 		C24CDCC01B5A18D200348941 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAE1B5A18D200348941 /* Library.swift */; };
 		C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */; };
 		C24CDCC21B5A18D200348941 /* BufferBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCB01B5A18D200348941 /* BufferBinding.swift */; };
-		C24CDCEE1B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE21B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift */; };
-		C24CDCEF1B5AC44000348941 /* RenderInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE31B5AC44000348941 /* RenderInvocation.swift */; };
 		C24CDCF01B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE41B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift */; };
 		C24CDCF11B5AC44000348941 /* RenderPipelineColorAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE51B5AC44000348941 /* RenderPipelineColorAttachment.swift */; };
 		C24CDCF41B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE81B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift */; };
@@ -39,6 +37,40 @@
 		C24CDCFD1B5AC86D00348941 /* VertexAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCF91B5AC86D00348941 /* VertexAttribute.swift */; };
 		C24CDCFE1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCFA1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift */; };
 		C24CDCFF1B5AC86D00348941 /* VertexBufferLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCFB1B5AC86D00348941 /* VertexBufferLayout.swift */; };
+		C24CDD071B5AD8E600348941 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD061B5AD8E600348941 /* main.swift */; };
+		C24CDD0B1B5AD9CC00348941 /* Document.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C2BF784F1B58BC8A004535BC /* Document.xcdatamodeld */; };
+		C24CDD2D1B5ADDFD00348941 /* VertexAttribute+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCF81B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift */; };
+		C24CDD2E1B5ADE0100348941 /* VertexAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCF91B5AC86D00348941 /* VertexAttribute.swift */; };
+		C24CDD2F1B5ADE0500348941 /* VertexBufferLayout+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCFA1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift */; };
+		C24CDD301B5ADE0800348941 /* VertexBufferLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCFB1B5AC86D00348941 /* VertexBufferLayout.swift */; };
+		C24CDD331B5ADE0F00348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE41B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift */; };
+		C24CDD341B5ADE0F00348941 /* RenderPipelineColorAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE51B5AC44000348941 /* RenderPipelineColorAttachment.swift */; };
+		C24CDD351B5ADE0F00348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE81B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift */; };
+		C24CDD361B5ADE0F00348941 /* RenderPipelineState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCE91B5AC44000348941 /* RenderPipelineState.swift */; };
+		C24CDD371B5ADE0F00348941 /* RenderPass+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCEA1B5AC44000348941 /* RenderPass+CoreDataProperties.swift */; };
+		C24CDD381B5ADE0F00348941 /* RenderPass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCEB1B5AC44000348941 /* RenderPass.swift */; };
+		C24CDD391B5ADE0F00348941 /* Size+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDC9F1B5A18D200348941 /* Size+CoreDataProperties.swift */; };
+		C24CDD3A1B5ADE0F00348941 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA01B5A18D200348941 /* Size.swift */; };
+		C24CDD3B1B5ADE0F00348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA11B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift */; };
+		C24CDD3C1B5ADE0F00348941 /* ComputeInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA21B5A18D200348941 /* ComputeInvocation.swift */; };
+		C24CDD3D1B5ADE0F00348941 /* ComputePass+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA31B5A18D200348941 /* ComputePass+CoreDataProperties.swift */; };
+		C24CDD3E1B5ADE0F00348941 /* ComputePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA41B5A18D200348941 /* ComputePass.swift */; };
+		C24CDD3F1B5ADE0F00348941 /* Pass+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA51B5A18D200348941 /* Pass+CoreDataProperties.swift */; };
+		C24CDD401B5ADE0F00348941 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA61B5A18D200348941 /* Pass.swift */; };
+		C24CDD411B5ADE0F00348941 /* Frame+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA71B5A18D200348941 /* Frame+CoreDataProperties.swift */; };
+		C24CDD421B5ADE0F00348941 /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA81B5A18D200348941 /* Frame.swift */; };
+		C24CDD431B5ADE0F00348941 /* Buffer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA91B5A18D200348941 /* Buffer+CoreDataProperties.swift */; };
+		C24CDD441B5ADE0F00348941 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAA1B5A18D200348941 /* Buffer.swift */; };
+		C24CDD451B5ADE0F00348941 /* ComputePipelineState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAB1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift */; };
+		C24CDD461B5ADE0F00348941 /* ComputePipelineState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAC1B5A18D200348941 /* ComputePipelineState.swift */; };
+		C24CDD471B5ADE0F00348941 /* Library+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAD1B5A18D200348941 /* Library+CoreDataProperties.swift */; };
+		C24CDD481B5ADE0F00348941 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAE1B5A18D200348941 /* Library.swift */; };
+		C24CDD491B5ADE0F00348941 /* BufferBinding+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */; };
+		C24CDD4A1B5ADE0F00348941 /* BufferBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCB01B5A18D200348941 /* BufferBinding.swift */; };
+		C24CDD511B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD4F1B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift */; };
+		C24CDD521B5AFB3900348941 /* RenderInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD501B5AFB3900348941 /* RenderInvocation.swift */; };
+		C24CDD531B5AFB7D00348941 /* RenderInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD501B5AFB3900348941 /* RenderInvocation.swift */; };
+		C24CDD541B5AFB8000348941 /* RenderInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD4F1B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift */; };
 		C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78481B58BC8A004535BC /* AppDelegate.swift */; };
 		C2BF784B1B58BC8A004535BC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF784A1B58BC8A004535BC /* Document.swift */; };
 		C2BF784E1B58BC8A004535BC /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2BF784C1B58BC8A004535BC /* Document.xib */; };
@@ -48,7 +80,6 @@
 		C2BF78611B58BC8A004535BC /* MetalEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78601B58BC8A004535BC /* MetalEditorTests.swift */; };
 		C2BF786C1B58BC8A004535BC /* MetalEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */; };
 		C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78791B58C09B004535BC /* PreviewController.swift */; };
-		C2BF787C1B58C69A004535BC /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C2BF787B1B58C69A004535BC /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +98,18 @@
 			remoteInfo = MetalEditor;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C24CDD021B5AD8E500348941 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C2205E181B5A0E0A0046F04D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -89,8 +132,6 @@
 		C24CDCAE1B5A18D200348941 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BufferBinding+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C24CDCB01B5A18D200348941 /* BufferBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferBinding.swift; sourceTree = "<group>"; };
-		C24CDCE21B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderInvocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C24CDCE31B5AC44000348941 /* RenderInvocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderInvocation.swift; sourceTree = "<group>"; };
 		C24CDCE41B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderPipelineColorAttachment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C24CDCE51B5AC44000348941 /* RenderPipelineColorAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderPipelineColorAttachment.swift; sourceTree = "<group>"; };
 		C24CDCE81B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderPipelineState+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -101,6 +142,10 @@
 		C24CDCF91B5AC86D00348941 /* VertexAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexAttribute.swift; sourceTree = "<group>"; };
 		C24CDCFA1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VertexBufferLayout+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C24CDCFB1B5AC86D00348941 /* VertexBufferLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexBufferLayout.swift; sourceTree = "<group>"; };
+		C24CDD041B5AD8E500348941 /* TestDatabaseWriter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestDatabaseWriter; sourceTree = BUILT_PRODUCTS_DIR; };
+		C24CDD061B5AD8E600348941 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C24CDD4F1B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderInvocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDD501B5AFB3900348941 /* RenderInvocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderInvocation.swift; sourceTree = "<group>"; };
 		C2BF78451B58BC8A004535BC /* MetalEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2BF78481B58BC8A004535BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2BF784A1B58BC8A004535BC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -116,10 +161,16 @@
 		C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalEditorUITests.swift; sourceTree = "<group>"; };
 		C2BF786D1B58BC8A004535BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2BF78791B58C09B004535BC /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
-		C2BF787B1B58C69A004535BC /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C24CDD011B5AD8E500348941 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C2BF78421B58BC8A004535BC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -147,12 +198,12 @@
 		C2205E1A1B5A15A70046F04D /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
+				C24CDD4F1B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift */,
+				C24CDD501B5AFB3900348941 /* RenderInvocation.swift */,
 				C24CDCF81B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift */,
 				C24CDCF91B5AC86D00348941 /* VertexAttribute.swift */,
 				C24CDCFA1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift */,
 				C24CDCFB1B5AC86D00348941 /* VertexBufferLayout.swift */,
-				C24CDCE21B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift */,
-				C24CDCE31B5AC44000348941 /* RenderInvocation.swift */,
 				C24CDCE41B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift */,
 				C24CDCE51B5AC44000348941 /* RenderPipelineColorAttachment.swift */,
 				C24CDCE81B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift */,
@@ -181,12 +232,21 @@
 			name = "Managed Objects";
 			sourceTree = "<group>";
 		};
+		C24CDD051B5AD8E600348941 /* TestDatabaseWriter */ = {
+			isa = PBXGroup;
+			children = (
+				C24CDD061B5AD8E600348941 /* main.swift */,
+			);
+			path = TestDatabaseWriter;
+			sourceTree = "<group>";
+		};
 		C2BF783C1B58BC8A004535BC = {
 			isa = PBXGroup;
 			children = (
 				C2BF78471B58BC8A004535BC /* MetalEditor */,
 				C2BF785F1B58BC8A004535BC /* MetalEditorTests */,
 				C2BF786A1B58BC8A004535BC /* MetalEditorUITests */,
+				C24CDD051B5AD8E600348941 /* TestDatabaseWriter */,
 				C2BF78461B58BC8A004535BC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -197,6 +257,7 @@
 				C2BF78451B58BC8A004535BC /* MetalEditor.app */,
 				C2BF785C1B58BC8A004535BC /* MetalEditorTests.xctest */,
 				C2BF78671B58BC8A004535BC /* MetalEditorUITests.xctest */,
+				C24CDD041B5AD8E500348941 /* TestDatabaseWriter */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -213,7 +274,6 @@
 				C2BF78571B58BC8A004535BC /* Info.plist */,
 				C2BF784F1B58BC8A004535BC /* Document.xcdatamodeld */,
 				C2BF78791B58C09B004535BC /* PreviewController.swift */,
-				C2BF787B1B58C69A004535BC /* Shaders.metal */,
 				C2205E181B5A0E0A0046F04D /* DetailViewController.swift */,
 				C24CDC9D1B5A17BF00348941 /* MetalState.swift */,
 			);
@@ -241,6 +301,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C24CDD031B5AD8E500348941 /* TestDatabaseWriter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C24CDD081B5AD8E600348941 /* Build configuration list for PBXNativeTarget "TestDatabaseWriter" */;
+			buildPhases = (
+				C24CDD001B5AD8E500348941 /* Sources */,
+				C24CDD011B5AD8E500348941 /* Frameworks */,
+				C24CDD021B5AD8E500348941 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestDatabaseWriter;
+			productName = TestDatabaseWriter;
+			productReference = C24CDD041B5AD8E500348941 /* TestDatabaseWriter */;
+			productType = "com.apple.product-type.tool";
+		};
 		C2BF78441B58BC8A004535BC /* MetalEditor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2BF78701B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditor" */;
@@ -303,6 +380,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Litherum;
 				TargetAttributes = {
+					C24CDD031B5AD8E500348941 = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					C2BF78441B58BC8A004535BC = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -332,6 +412,7 @@
 				C2BF78441B58BC8A004535BC /* MetalEditor */,
 				C2BF785B1B58BC8A004535BC /* MetalEditorTests */,
 				C2BF78661B58BC8A004535BC /* MetalEditorUITests */,
+				C24CDD031B5AD8E500348941 /* TestDatabaseWriter */,
 			);
 		};
 /* End PBXProject section */
@@ -364,6 +445,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C24CDD001B5AD8E500348941 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C24CDD3A1B5ADE0F00348941 /* Size.swift in Sources */,
+				C24CDD2F1B5ADE0500348941 /* VertexBufferLayout+CoreDataProperties.swift in Sources */,
+				C24CDD301B5ADE0800348941 /* VertexBufferLayout.swift in Sources */,
+				C24CDD4A1B5ADE0F00348941 /* BufferBinding.swift in Sources */,
+				C24CDD341B5ADE0F00348941 /* RenderPipelineColorAttachment.swift in Sources */,
+				C24CDD351B5ADE0F00348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */,
+				C24CDD461B5ADE0F00348941 /* ComputePipelineState.swift in Sources */,
+				C24CDD2D1B5ADDFD00348941 /* VertexAttribute+CoreDataProperties.swift in Sources */,
+				C24CDD3B1B5ADE0F00348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */,
+				C24CDD401B5ADE0F00348941 /* Pass.swift in Sources */,
+				C24CDD471B5ADE0F00348941 /* Library+CoreDataProperties.swift in Sources */,
+				C24CDD421B5ADE0F00348941 /* Frame.swift in Sources */,
+				C24CDD331B5ADE0F00348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */,
+				C24CDD361B5ADE0F00348941 /* RenderPipelineState.swift in Sources */,
+				C24CDD0B1B5AD9CC00348941 /* Document.xcdatamodeld in Sources */,
+				C24CDD3D1B5ADE0F00348941 /* ComputePass+CoreDataProperties.swift in Sources */,
+				C24CDD2E1B5ADE0100348941 /* VertexAttribute.swift in Sources */,
+				C24CDD481B5ADE0F00348941 /* Library.swift in Sources */,
+				C24CDD411B5ADE0F00348941 /* Frame+CoreDataProperties.swift in Sources */,
+				C24CDD381B5ADE0F00348941 /* RenderPass.swift in Sources */,
+				C24CDD3F1B5ADE0F00348941 /* Pass+CoreDataProperties.swift in Sources */,
+				C24CDD531B5AFB7D00348941 /* RenderInvocation.swift in Sources */,
+				C24CDD431B5ADE0F00348941 /* Buffer+CoreDataProperties.swift in Sources */,
+				C24CDD371B5ADE0F00348941 /* RenderPass+CoreDataProperties.swift in Sources */,
+				C24CDD441B5ADE0F00348941 /* Buffer.swift in Sources */,
+				C24CDD541B5AFB8000348941 /* RenderInvocation+CoreDataProperties.swift in Sources */,
+				C24CDD3E1B5ADE0F00348941 /* ComputePass.swift in Sources */,
+				C24CDD3C1B5ADE0F00348941 /* ComputeInvocation.swift in Sources */,
+				C24CDD451B5ADE0F00348941 /* ComputePipelineState+CoreDataProperties.swift in Sources */,
+				C24CDD071B5AD8E600348941 /* main.swift in Sources */,
+				C24CDD391B5ADE0F00348941 /* Size+CoreDataProperties.swift in Sources */,
+				C24CDD491B5ADE0F00348941 /* BufferBinding+CoreDataProperties.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C2BF78411B58BC8A004535BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -373,7 +493,6 @@
 				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
 				C24CDCBD1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift in Sources */,
 				C24CDCC21B5A18D200348941 /* BufferBinding.swift in Sources */,
-				C24CDCEE1B5AC44000348941 /* RenderInvocation+CoreDataProperties.swift in Sources */,
 				C24CDCB51B5A18D200348941 /* ComputePass+CoreDataProperties.swift in Sources */,
 				C24CDCBE1B5A18D200348941 /* ComputePipelineState.swift in Sources */,
 				C24CDCFC1B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift in Sources */,
@@ -386,11 +505,10 @@
 				C24CDCBA1B5A18D200348941 /* Frame.swift in Sources */,
 				C24CDC9E1B5A17BF00348941 /* MetalState.swift in Sources */,
 				C24CDCFF1B5AC86D00348941 /* VertexBufferLayout.swift in Sources */,
-				C24CDCEF1B5AC44000348941 /* RenderInvocation.swift in Sources */,
 				C24CDCF11B5AC44000348941 /* RenderPipelineColorAttachment.swift in Sources */,
 				C24CDCFE1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift in Sources */,
+				C24CDD511B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift in Sources */,
 				C24CDCBF1B5A18D200348941 /* Library+CoreDataProperties.swift in Sources */,
-				C2BF787C1B58C69A004535BC /* Shaders.metal in Sources */,
 				C24CDCB11B5A18D200348941 /* Size+CoreDataProperties.swift in Sources */,
 				C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */,
 				C24CDCF61B5AC44000348941 /* RenderPass+CoreDataProperties.swift in Sources */,
@@ -405,6 +523,7 @@
 				C24CDCB91B5A18D200348941 /* Frame+CoreDataProperties.swift in Sources */,
 				C24CDCF01B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */,
 				C24CDCC01B5A18D200348941 /* Library.swift in Sources */,
+				C24CDD521B5AFB3900348941 /* RenderInvocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +578,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C24CDD091B5AD8E600348941 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C24CDD0A1B5AD8E600348941 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		C2BF786E1B58BC8A004535BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -618,6 +751,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C24CDD081B5AD8E600348941 /* Build configuration list for PBXNativeTarget "TestDatabaseWriter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C24CDD091B5AD8E600348941 /* Debug */,
+				C24CDD0A1B5AD8E600348941 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		C2BF78401B58BC8A004535BC /* Build configuration list for PBXProject "MetalEditor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

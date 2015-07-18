@@ -14,6 +14,6 @@ import CoreData
 
 extension ComputePass {
 
-    @NSManaged var invocations: NSOrderedSet!
+    @NSManaged var invocations: NSOrderedSet
 
 }

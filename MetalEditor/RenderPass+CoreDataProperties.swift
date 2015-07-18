@@ -14,6 +14,6 @@ import CoreData
 
 extension RenderPass {
 
-    @NSManaged var invocations: NSOrderedSet!
+    @NSManaged var invocations: NSOrderedSet
 
 }

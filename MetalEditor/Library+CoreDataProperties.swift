@@ -14,6 +14,6 @@ import CoreData
 
 extension Library {
 
-    @NSManaged var source: String!
+    @NSManaged var source: String
 
 }

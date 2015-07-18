@@ -13,12 +13,12 @@ import Foundation
 import CoreData
 
 extension RenderInvocation {
-    
-    @NSManaged var vertexBufferBindings: NSOrderedSet!
-    @NSManaged var fragmentBufferBindings: NSOrderedSet!
-    @NSManaged var state: RenderPipelineState!
-    @NSManaged var primitiveType: Int16
-    @NSManaged var vertexStart: Int32
-    @NSManaged var vertexCount: Int32
+
+    @NSManaged var primitive: NSNumber
+    @NSManaged var vertexStart: NSNumber
+    @NSManaged var vertexCount: NSNumber
+    @NSManaged var state: RenderPipelineState
+    @NSManaged var vertexBufferBindings: NSOrderedSet
+    @NSManaged var fragmentBufferBindings: NSOrderedSet
 
 }

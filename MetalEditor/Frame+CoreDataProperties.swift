@@ -14,6 +14,6 @@ import CoreData
 
 extension Frame {
 
-    @NSManaged var passes: NSOrderedSet!
+    @NSManaged var passes: NSOrderedSet
 
 }

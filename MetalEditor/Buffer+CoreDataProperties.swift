@@ -15,6 +15,6 @@ import CoreData
 extension Buffer {
 
     @NSManaged var initialData: NSData?
-    @NSManaged var initialLength: Int32
+    @NSManaged var initialLength: NSNumber?
 
 }

@@ -34,7 +34,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
     func view(view: MTKView, willLayoutWithSize size: CGSize) {
     }
 
-    class func toMetalPrimitiveType(i: Int16) -> MTLPrimitiveType {
+    class func toMetalPrimitiveType(i: NSNumber) -> MTLPrimitiveType {
         guard let result = MTLPrimitiveType(rawValue: UInt(i)) else {
             assertionFailure()
             assert(false)
@@ -73,8 +73,8 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     let threadgroupsPerGrid = invocation.threadgroupsPerGrid
                     let threadsPerThreadgroup = invocation.threadsPerThreadgroup
                     let metalThreadgroupsPerGrid = MTLSizeMake(Int(threadgroupsPerGrid.width), Int(threadgroupsPerGrid.height), Int(threadgroupsPerGrid.depth))
-                    let metalThreadPerThreadgroup = MTLSizeMake(Int(threadsPerThreadgroup.width), Int(threadsPerThreadgroup.height), Int(threadsPerThreadgroup.depth))
-                    computeCommandEncoder.dispatchThreadgroups(metalThreadgroupsPerGrid, threadsPerThreadgroup: metalThreadPerThreadgroup)
+                    let metalThreadsPerThreadgroup = MTLSizeMake(Int(threadsPerThreadgroup.width), Int(threadsPerThreadgroup.height), Int(threadsPerThreadgroup.depth))
+                    computeCommandEncoder.dispatchThreadgroups(metalThreadgroupsPerGrid, threadsPerThreadgroup: metalThreadsPerThreadgroup)
                 }
                 computeCommandEncoder.endEncoding()
             } else if let renderPass = pass as? RenderPass {
@@ -101,15 +101,18 @@ class PreviewController: NSViewController, MTKViewDelegate {
                             renderCommandEncoder.setVertexBuffer(nil, offset: 0, atIndex: i)
                         }
                     }
-                    renderCommandEncoder.drawPrimitives(PreviewController.toMetalPrimitiveType(invocation.primitiveType), vertexStart: Int(invocation.vertexStart), vertexCount: Int(invocation.vertexCount))
+                    renderCommandEncoder.drawPrimitives(PreviewController.toMetalPrimitiveType(invocation.primitive), vertexStart: Int(invocation.vertexStart), vertexCount: Int(invocation.vertexCount))
                 }
                 renderCommandEncoder.endEncoding()
             } else {
                 assertionFailure()
-                assert(false)
             }
-            if pass == frame.passes.objectAtIndex(frame.passes.count - 1) as! Pass && metalView.currentDrawable != nil {
-                commandBuffer.presentDrawable(metalView.currentDrawable!)
+            if pass == frame.passes.objectAtIndex(frame.passes.count - 1) as! Pass {
+                commandBuffer.addCompletedHandler() {(commandBuffer) in
+                }
+                if metalView.currentDrawable != nil {
+                    commandBuffer.presentDrawable(metalView.currentDrawable!)
+                }
             }
             commandBuffer.commit()
         }

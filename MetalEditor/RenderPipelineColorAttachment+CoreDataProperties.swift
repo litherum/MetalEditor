@@ -14,6 +14,6 @@ import CoreData
 
 extension RenderPipelineColorAttachment {
 
-    @NSManaged var pixelFormat: Int32
+    @NSManaged var pixelFormat: NSNumber?
 
 }

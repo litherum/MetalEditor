@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MetalKit
 
 class MetalState {
     var buffers: [Buffer: MTLBuffer] = [:]
@@ -22,7 +23,7 @@ class MetalState {
         }
     }
 
-    class func toMetalPixelFormat(i: Int32) -> MTLPixelFormat {
+    class func toMetalPixelFormat(i: NSNumber) -> MTLPixelFormat {
         guard let result = MTLPixelFormat(rawValue: UInt(i)) else {
             assertionFailure()
             assert(false)
@@ -30,7 +31,7 @@ class MetalState {
         return result
     }
 
-    class func toMetalVertexFormat(i: Int32) -> MTLVertexFormat {
+    class func toMetalVertexFormat(i: NSNumber) -> MTLVertexFormat {
         guard let result = MTLVertexFormat(rawValue: UInt(i)) else {
             assertionFailure()
             assert(false)
@@ -38,7 +39,7 @@ class MetalState {
         return result
     }
 
-    class func toMetalVertexStepFunction(i: Int16) -> MTLVertexStepFunction {
+    class func toMetalVertexStepFunction(i: NSNumber) -> MTLVertexStepFunction {
         guard let result = MTLVertexStepFunction(rawValue: UInt(i)) else {
             assertionFailure()
             assert(false)
@@ -46,7 +47,7 @@ class MetalState {
         return result
     }
 
-    func populate(managedObjectContext: NSManagedObjectContext, device: MTLDevice) {
+    func populate(managedObjectContext: NSManagedObjectContext, device: MTLDevice, view: MTKView) {
         var library: MTLLibrary!
         var functions: [String: MTLFunction] = [:]
         buffers = [:]
@@ -58,6 +59,7 @@ class MetalState {
             do {
                 library = try device.newLibraryWithSource(libraries[0].source, options: MTLCompileOptions())
             } catch {
+                assertionFailure()
             }
             for functionName in library.functionNames {
                 functions[functionName] = library.newFunctionWithName(functionName)
@@ -67,8 +69,10 @@ class MetalState {
         for buffer in MetalState.fetchAll(managedObjectContext, entityName: "Buffer") as! [Buffer] {
             if let initialData = buffer.initialData {
                 buffers[buffer] = device.newBufferWithBytes(initialData.bytes, length: initialData.length, options: .StorageModeManaged)
+            } else if let initialLength = buffer.initialLength {
+                buffers[buffer] = device.newBufferWithLength(initialLength.integerValue, options: .StorageModePrivate)
             } else {
-                buffers[buffer] = device.newBufferWithLength(Int(buffer.initialLength), options: .StorageModePrivate)
+                assertionFailure()
             }
         }
         
@@ -79,7 +83,7 @@ class MetalState {
             let descriptor = MTLComputePipelineDescriptor()
             descriptor.computeFunction = function
             do {
-                try computePipelineStates[computePipelineState] = device.newComputePipelineStateWithDescriptor(descriptor, options: MTLPipelineOption(), reflection: nil)
+                try computePipelineStates[computePipelineState] = device.newComputePipelineStateWithFunction(function)
             } catch {
             }
         }
@@ -96,11 +100,27 @@ class MetalState {
             descriptor.fragmentFunction = fragmentFunction
             for i in 0 ..< renderPipelineState.colorAttachments.count {
                 let colorAttachment = renderPipelineState.colorAttachments[i] as! RenderPipelineColorAttachment
-                descriptor.colorAttachments[i].pixelFormat = MetalState.toMetalPixelFormat(colorAttachment.pixelFormat)
+                if let pixelFormat = colorAttachment.pixelFormat {
+                    descriptor.colorAttachments[i].pixelFormat = MetalState.toMetalPixelFormat(pixelFormat)
+                } else {
+                    descriptor.colorAttachments[i].pixelFormat = view.colorPixelFormat
+                }
             }
-            descriptor.depthAttachmentPixelFormat = MetalState.toMetalPixelFormat(renderPipelineState.depthAttachmentPixelFormat)
-            descriptor.stencilAttachmentPixelFormat = MetalState.toMetalPixelFormat(renderPipelineState.stencilAttachmentPixelFormat)
-            descriptor.sampleCount = Int(renderPipelineState.sampleCount)
+            if let depthAttachmentPixelFormat = renderPipelineState.depthAttachmentPixelFormat {
+                descriptor.depthAttachmentPixelFormat = MetalState.toMetalPixelFormat(depthAttachmentPixelFormat)
+            } else {
+                descriptor.depthAttachmentPixelFormat = view.depthStencilPixelFormat
+            }
+            if let stencilAttachmentPixelFormat = renderPipelineState.stencilAttachmentPixelFormat {
+                descriptor.stencilAttachmentPixelFormat = MetalState.toMetalPixelFormat(stencilAttachmentPixelFormat)
+            } else {
+                descriptor.stencilAttachmentPixelFormat = view.depthStencilPixelFormat
+            }
+            if let sampleCount = renderPipelineState.sampleCount {
+                descriptor.sampleCount = sampleCount.integerValue
+            } else {
+                descriptor.sampleCount = view.sampleCount
+            }
             let vertexDescriptor = MTLVertexDescriptor()
             for i in 0 ..< renderPipelineState.vertexAttributes.count {
                 let vertexAttribute = renderPipelineState.vertexAttributes[i] as! VertexAttribute

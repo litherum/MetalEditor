@@ -44,7 +44,7 @@ class Document: NSPersistentDocument {
         setupFrame()
         
         metalState = MetalState()
-        metalState.populate(managedObjectContext, device: device)
+        metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
         
         previewController.initializeWithDevice(device, commandQueue: commandQueue, frame: frame, metalState: metalState)
     }

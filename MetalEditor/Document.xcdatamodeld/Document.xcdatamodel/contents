@@ -29,7 +29,7 @@
     </entity>
     <entity name="Pass" representedClassName=".Pass" isAbstract="YES" syncable="YES"/>
     <entity name="RenderInvocation" representedClassName=".RenderInvocation" syncable="YES">
-        <attribute name="primitiveType" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="primitive" attributeType="Integer 16" syncable="YES"/>
         <attribute name="vertexCount" attributeType="Integer 32" syncable="YES"/>
         <attribute name="vertexStart" attributeType="Integer 32" syncable="YES"/>
         <relationship name="fragmentBufferBindings" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BufferBinding" syncable="YES"/>
@@ -40,13 +40,13 @@
         <relationship name="invocations" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="RenderInvocation" syncable="YES"/>
     </entity>
     <entity name="RenderPipelineColorAttachment" representedClassName=".RenderPipelineColorAttachment" syncable="YES">
-        <attribute name="pixelFormat" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="pixelFormat" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="RenderPipelineState" representedClassName=".RenderPipelineState" syncable="YES">
-        <attribute name="depthAttachmentPixelFormat" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="depthAttachmentPixelFormat" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="fragmentFunction" attributeType="String" syncable="YES"/>
-        <attribute name="sampleCount" attributeType="Integer 32" syncable="YES"/>
-        <attribute name="stencilAttachmentPixelFormat" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="sampleCount" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="stencilAttachmentPixelFormat" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="vertexFunction" attributeType="String" syncable="YES"/>
         <relationship name="colorAttachments" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="RenderPipelineColorAttachment" syncable="YES"/>
         <relationship name="vertexAttributes" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VertexAttribute" syncable="YES"/>
@@ -79,7 +79,7 @@
         <element name="Pass" positionX="0" positionY="81" width="128" height="45"/>
         <element name="RenderPass" positionX="18" positionY="99" width="128" height="60"/>
         <element name="RenderInvocation" positionX="27" positionY="108" width="128" height="135"/>
-        <element name="RenderPipelineState" positionX="45" positionY="117" width="128" height="165"/>
+        <element name="RenderPipelineState" positionX="45" positionY="117" width="128" height="30"/>
         <element name="RenderPipelineColorAttachment" positionX="-9" positionY="63" width="128" height="60"/>
         <element name="VertexAttribute" positionX="0" positionY="108" width="128" height="90"/>
         <element name="VertexBufferLayout" positionX="9" positionY="117" width="128" height="90"/>
