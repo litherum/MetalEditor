@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2205E181B5A0E0A0046F04D /* DetailViewController.swift */; };
+		C24CDC9E1B5A17BF00348941 /* MetalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDC9D1B5A17BF00348941 /* MetalState.swift */; };
+		C24CDCB11B5A18D200348941 /* Size+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDC9F1B5A18D200348941 /* Size+CoreDataProperties.swift */; };
+		C24CDCB21B5A18D200348941 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA01B5A18D200348941 /* Size.swift */; };
+		C24CDCB31B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA11B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift */; };
+		C24CDCB41B5A18D200348941 /* ComputeInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA21B5A18D200348941 /* ComputeInvocation.swift */; };
+		C24CDCB51B5A18D200348941 /* ComputePass+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA31B5A18D200348941 /* ComputePass+CoreDataProperties.swift */; };
+		C24CDCB61B5A18D200348941 /* ComputePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA41B5A18D200348941 /* ComputePass.swift */; };
+		C24CDCB71B5A18D200348941 /* Pass+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA51B5A18D200348941 /* Pass+CoreDataProperties.swift */; };
+		C24CDCB81B5A18D200348941 /* Pass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA61B5A18D200348941 /* Pass.swift */; };
+		C24CDCB91B5A18D200348941 /* Frame+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA71B5A18D200348941 /* Frame+CoreDataProperties.swift */; };
+		C24CDCBA1B5A18D200348941 /* Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA81B5A18D200348941 /* Frame.swift */; };
+		C24CDCBB1B5A18D200348941 /* Buffer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA91B5A18D200348941 /* Buffer+CoreDataProperties.swift */; };
+		C24CDCBC1B5A18D200348941 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAA1B5A18D200348941 /* Buffer.swift */; };
+		C24CDCBD1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAB1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift */; };
+		C24CDCBE1B5A18D200348941 /* ComputePipelineState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAC1B5A18D200348941 /* ComputePipelineState.swift */; };
+		C24CDCBF1B5A18D200348941 /* Library+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAD1B5A18D200348941 /* Library+CoreDataProperties.swift */; };
+		C24CDCC01B5A18D200348941 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAE1B5A18D200348941 /* Library.swift */; };
+		C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */; };
+		C24CDCC21B5A18D200348941 /* BufferBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCB01B5A18D200348941 /* BufferBinding.swift */; };
 		C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78481B58BC8A004535BC /* AppDelegate.swift */; };
 		C2BF784B1B58BC8A004535BC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF784A1B58BC8A004535BC /* Document.swift */; };
 		C2BF784E1B58BC8A004535BC /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2BF784C1B58BC8A004535BC /* Document.xib */; };
@@ -37,6 +57,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C2205E181B5A0E0A0046F04D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C24CDC9D1B5A17BF00348941 /* MetalState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalState.swift; sourceTree = "<group>"; };
+		C24CDC9F1B5A18D200348941 /* Size+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Size+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCA01B5A18D200348941 /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		C24CDCA11B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComputeInvocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCA21B5A18D200348941 /* ComputeInvocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeInvocation.swift; sourceTree = "<group>"; };
+		C24CDCA31B5A18D200348941 /* ComputePass+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComputePass+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCA41B5A18D200348941 /* ComputePass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputePass.swift; sourceTree = "<group>"; };
+		C24CDCA51B5A18D200348941 /* Pass+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pass+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCA61B5A18D200348941 /* Pass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pass.swift; sourceTree = "<group>"; };
+		C24CDCA71B5A18D200348941 /* Frame+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Frame+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCA81B5A18D200348941 /* Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Frame.swift; sourceTree = "<group>"; };
+		C24CDCA91B5A18D200348941 /* Buffer+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Buffer+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCAA1B5A18D200348941 /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
+		C24CDCAB1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComputePipelineState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCAC1B5A18D200348941 /* ComputePipelineState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputePipelineState.swift; sourceTree = "<group>"; };
+		C24CDCAD1B5A18D200348941 /* Library+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Library+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCAE1B5A18D200348941 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BufferBinding+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C24CDCB01B5A18D200348941 /* BufferBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferBinding.swift; sourceTree = "<group>"; };
 		C2BF78451B58BC8A004535BC /* MetalEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2BF78481B58BC8A004535BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2BF784A1B58BC8A004535BC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -80,6 +120,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C2205E1A1B5A15A70046F04D /* Managed Objects */ = {
+			isa = PBXGroup;
+			children = (
+				C24CDC9F1B5A18D200348941 /* Size+CoreDataProperties.swift */,
+				C24CDCA01B5A18D200348941 /* Size.swift */,
+				C24CDCA11B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift */,
+				C24CDCA21B5A18D200348941 /* ComputeInvocation.swift */,
+				C24CDCA31B5A18D200348941 /* ComputePass+CoreDataProperties.swift */,
+				C24CDCA41B5A18D200348941 /* ComputePass.swift */,
+				C24CDCA51B5A18D200348941 /* Pass+CoreDataProperties.swift */,
+				C24CDCA61B5A18D200348941 /* Pass.swift */,
+				C24CDCA71B5A18D200348941 /* Frame+CoreDataProperties.swift */,
+				C24CDCA81B5A18D200348941 /* Frame.swift */,
+				C24CDCA91B5A18D200348941 /* Buffer+CoreDataProperties.swift */,
+				C24CDCAA1B5A18D200348941 /* Buffer.swift */,
+				C24CDCAB1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift */,
+				C24CDCAC1B5A18D200348941 /* ComputePipelineState.swift */,
+				C24CDCAD1B5A18D200348941 /* Library+CoreDataProperties.swift */,
+				C24CDCAE1B5A18D200348941 /* Library.swift */,
+				C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */,
+				C24CDCB01B5A18D200348941 /* BufferBinding.swift */,
+			);
+			name = "Managed Objects";
+			sourceTree = "<group>";
+		};
 		C2BF783C1B58BC8A004535BC = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +168,7 @@
 		C2BF78471B58BC8A004535BC /* MetalEditor */ = {
 			isa = PBXGroup;
 			children = (
+				C2205E1A1B5A15A70046F04D /* Managed Objects */,
 				C2BF78481B58BC8A004535BC /* AppDelegate.swift */,
 				C2BF784A1B58BC8A004535BC /* Document.swift */,
 				C2BF784C1B58BC8A004535BC /* Document.xib */,
@@ -112,6 +178,8 @@
 				C2BF784F1B58BC8A004535BC /* Document.xcdatamodeld */,
 				C2BF78791B58C09B004535BC /* PreviewController.swift */,
 				C2BF787B1B58C69A004535BC /* Shaders.metal */,
+				C2205E181B5A0E0A0046F04D /* DetailViewController.swift */,
+				C24CDC9D1B5A17BF00348941 /* MetalState.swift */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -264,11 +332,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C24CDCB71B5A18D200348941 /* Pass+CoreDataProperties.swift in Sources */,
 				C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */,
 				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
+				C24CDCBD1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift in Sources */,
+				C24CDCC21B5A18D200348941 /* BufferBinding.swift in Sources */,
+				C24CDCB51B5A18D200348941 /* ComputePass+CoreDataProperties.swift in Sources */,
+				C24CDCBE1B5A18D200348941 /* ComputePipelineState.swift in Sources */,
+				C24CDCBC1B5A18D200348941 /* Buffer.swift in Sources */,
 				C2BF784B1B58BC8A004535BC /* Document.swift in Sources */,
+				C24CDCB61B5A18D200348941 /* ComputePass.swift in Sources */,
 				C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */,
+				C24CDCB41B5A18D200348941 /* ComputeInvocation.swift in Sources */,
+				C24CDCB21B5A18D200348941 /* Size.swift in Sources */,
+				C24CDCBA1B5A18D200348941 /* Frame.swift in Sources */,
+				C24CDC9E1B5A17BF00348941 /* MetalState.swift in Sources */,
+				C24CDCBF1B5A18D200348941 /* Library+CoreDataProperties.swift in Sources */,
 				C2BF787C1B58C69A004535BC /* Shaders.metal in Sources */,
+				C24CDCB11B5A18D200348941 /* Size+CoreDataProperties.swift in Sources */,
+				C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */,
+				C24CDCBB1B5A18D200348941 /* Buffer+CoreDataProperties.swift in Sources */,
+				C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */,
+				C24CDCB81B5A18D200348941 /* Pass.swift in Sources */,
+				C24CDCB31B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */,
+				C24CDCB91B5A18D200348941 /* Frame+CoreDataProperties.swift in Sources */,
+				C24CDCC01B5A18D200348941 /* Library.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +586,7 @@
 				C2BF78721B58BC8A004535BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C2BF78731B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditorTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +595,7 @@
 				C2BF78751B58BC8A004535BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C2BF78761B58BC8A004535BC /* Build configuration list for PBXNativeTarget "MetalEditorUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +604,7 @@
 				C2BF78781B58BC8A004535BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

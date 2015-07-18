@@ -13,98 +13,59 @@ class PreviewController: NSViewController, MTKViewDelegate {
     var metalView: MTKView!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
-    var buffer: MTLBuffer!
-    let bufferLength = 16
-    var bufferLock: NSLock!
-    var computePipelineState: MTLComputePipelineState!
+    var metalState: MetalState!
+    var frame: Frame!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("View loaded \(view)")
-        guard let device = MTLCreateSystemDefaultDevice() else {
-            exit(EXIT_FAILURE)
-        }
-        self.device = device
-        commandQueue = device.newCommandQueue()
-        guard let library = device.newDefaultLibrary() else {
-            exit(EXIT_FAILURE)
-        }
-
         metalView = view as! MTKView
         metalView.delegate = self
-        metalView.device = device
-
         metalView.enableSetNeedsDisplay = true
+    }
 
-        //buffer = device.newBufferWithLength(bufferLength, options: .StorageModeAuto)
-        var array = Array<UInt8>(count: bufferLength, repeatedValue: 17)
-        buffer = device.newBufferWithBytes(&array, length: bufferLength, options: .StorageModeManaged)
-        print("Mode: \(buffer.storageMode.rawValue)")
-        bufferLock = NSLock()
-
-        guard let function = library.newFunctionWithName("increment") else {
-            exit(EXIT_FAILURE)
-        }
-        do {
-            try computePipelineState = device.newComputePipelineStateWithFunction(function)
-        } catch {
-            exit(EXIT_FAILURE)
-        }
+    func initializeWithDevice(device: MTLDevice, commandQueue: MTLCommandQueue, frame: Frame, metalState: MetalState) {
+        self.device = device
+        self.commandQueue = commandQueue
+        self.frame = frame
+        self.metalState = metalState
+        metalView.device = device
     }
 
     func view(view: MTKView, willLayoutWithSize size: CGSize) {
     }
 
     func drawInView(view: MTKView) {
-        guard bufferLock.tryLock() else {
-            return
-        }
-
-        // 1. Compute shader
-        let computeCommandBuffer = commandQueue.commandBuffer()
-        let computeCommandEncoder = computeCommandBuffer.computeCommandEncoder()
-        computeCommandEncoder.label = "Compute command encoder"
-        computeCommandEncoder.setComputePipelineState(computePipelineState)
-        computeCommandEncoder.setBuffer(buffer, offset: 0, atIndex: 0)
-        computeCommandEncoder.dispatchThreadgroups(MTLSize(width: 1, height: 1, depth: 1), threadsPerThreadgroup: MTLSize(width: bufferLength, height: 1, depth: 1))
-        computeCommandEncoder.endEncoding()
-        computeCommandBuffer.commit()
-
-        // 2. Copy results
-        let blitCommandBuffer = commandQueue.commandBuffer()
-        let blitCommandEncoder = blitCommandBuffer.blitCommandEncoder()
-        blitCommandEncoder.label = "Blit command encoder"
-        if buffer.storageMode  == .Managed {
-            blitCommandEncoder.synchronizeResource(buffer)
-        }
-        blitCommandEncoder.endEncoding()
-        blitCommandBuffer.addCompletedHandler() {(cmdBuffer) in
-            let bufferContents = UnsafeMutablePointer<UInt8>(self.buffer.contents())
-            for i in 0 ..< self.bufferLength {
-                print("\(bufferContents[i]) ", appendNewline: false)
+        for passObject in frame.passes {
+            let pass = passObject as! Pass
+            let commandBuffer = commandQueue.commandBuffer()
+            if let computePass = pass as? ComputePass {
+                let computeCommandEncoder = commandBuffer.computeCommandEncoder()
+                for invocationObject in computePass.invocations {
+                    let invocation = invocationObject as! ComputeInvocation
+                    guard let metalComputePipelineState = metalState.computePipelineStates[invocation.state] else {
+                        continue
+                    }
+                    computeCommandEncoder.setComputePipelineState(metalComputePipelineState)
+                    for i in 0 ..< invocation.bufferBindings.count {
+                        let bufferOptional = (invocation.bufferBindings.objectAtIndex(i) as! BufferBinding).buffer
+                        if let buffer = bufferOptional {
+                            computeCommandEncoder.setBuffer(metalState.buffers[buffer], offset: 0, atIndex: i)
+                        } else {
+                            computeCommandEncoder.setBuffer(nil, offset: 0, atIndex: i)
+                        }
+                    }
+                    let threadgroupsPerGrid = invocation.threadgroupsPerGrid
+                    let threadsPerThreadgroup = invocation.threadsPerThreadgroup
+                    let metalThreadgroupsPerGrid = MTLSizeMake(Int(threadgroupsPerGrid.width), Int(threadgroupsPerGrid.height), Int(threadgroupsPerGrid.depth))
+                    let metalThreadPerThreadgroup = MTLSizeMake(Int(threadsPerThreadgroup.width), Int(threadsPerThreadgroup.height), Int(threadsPerThreadgroup.depth))
+                    computeCommandEncoder.dispatchThreadgroups(metalThreadgroupsPerGrid, threadsPerThreadgroup: metalThreadPerThreadgroup)
+                }
+                computeCommandEncoder.endEncoding()
             }
-            print("")
-            dispatch_async(dispatch_get_main_queue()) {
-                self.bufferLock.unlock()
-                // Rather than kicking off another job, we can just wait for the next drawInView
+            if pass == frame.passes.objectAtIndex(frame.passes.count - 1) as! Pass && metalView.currentDrawable != nil {
+                commandBuffer.presentDrawable(metalView.currentDrawable!)
             }
+            commandBuffer.commit()
         }
-        blitCommandBuffer.commit()
-
-        // 3. Render something
-        let renderCommandBuffer = commandQueue.commandBuffer()
-        guard let renderPassDescriptor = metalView.currentRenderPassDescriptor else {
-            exit(EXIT_FAILURE)
-        }
-
-        let renderCommandEncoder = renderCommandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor)
-        renderCommandEncoder.label = "Render command encoder"
-        renderCommandEncoder.endEncoding()
-
-        guard let drawable = metalView.currentDrawable else {
-            exit(EXIT_FAILURE)
-        }
-        renderCommandBuffer.presentDrawable(drawable)
-        renderCommandBuffer.commit()
     }
 }

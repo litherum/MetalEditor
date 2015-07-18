@@ -9,15 +9,44 @@
 import Cocoa
 
 class Document: NSPersistentDocument {
+    @IBOutlet var detailViewController: DetailViewController!
+    @IBOutlet var previewController: PreviewController!
+    var device: MTLDevice!
+    var commandQueue: MTLCommandQueue!
+    var frame: Frame!
+    var metalState: MetalState!
 
-    override init() {
-        super.init()
-        // Add your subclass-specific initialization here.
+    func setupFrame() {
+        let fetchRequest = NSFetchRequest(entityName: "Frame")
+        do {
+            let frames = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Frame]
+            if frames.count != 0 {
+                frame = frames[0]
+            }
+        } catch {
+        }
+        
+        if frame == nil {
+            frame = NSEntityDescription.insertNewObjectForEntityForName("Frame", inManagedObjectContext: managedObjectContext) as! Frame
+        }
     }
 
     override func windowControllerDidLoadNib(aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
-        // Add any code here that needs to be executed once the windowController has loaded the document's window.
+
+        guard let device = MTLCreateSystemDefaultDevice() else {
+            assertionFailure()
+            assert(false)
+        }
+        self.device = device
+        commandQueue = device.newCommandQueue()
+
+        setupFrame()
+        
+        metalState = MetalState()
+        metalState.populate(managedObjectContext, device: device)
+        
+        previewController.initializeWithDevice(device, commandQueue: commandQueue, frame: frame, metalState: metalState)
     }
 
     override class func autosavesInPlace() -> Bool {
