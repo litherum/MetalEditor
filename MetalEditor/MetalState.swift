@@ -10,11 +10,12 @@ import Cocoa
 import MetalKit
 
 class MetalState {
+    var builtInBuffer: MTLBuffer!
     var buffers: [Buffer: MTLBuffer] = [:]
     var computePipelineStates: [ComputePipelineState: MTLComputePipelineState] = [:]
     var renderPipelineStates: [RenderPipelineState: MTLRenderPipelineState] = [:]
 
-    class func fetchAll(managedObjectContext: NSManagedObjectContext, entityName: String) -> [NSManagedObject] {
+    private class func fetchAll(managedObjectContext: NSManagedObjectContext, entityName: String) -> [NSManagedObject] {
         let fetchRequest = NSFetchRequest(entityName: entityName)
         do {
             return try managedObjectContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
@@ -23,7 +24,7 @@ class MetalState {
         }
     }
 
-    class func toMetalPixelFormat(i: NSNumber) -> MTLPixelFormat {
+    private class func toMetalPixelFormat(i: NSNumber) -> MTLPixelFormat {
         guard let result = MTLPixelFormat(rawValue: UInt(i)) else {
             assertionFailure()
             assert(false)
@@ -31,7 +32,7 @@ class MetalState {
         return result
     }
 
-    class func toMetalVertexFormat(i: NSNumber) -> MTLVertexFormat {
+    private class func toMetalVertexFormat(i: NSNumber) -> MTLVertexFormat {
         guard let result = MTLVertexFormat(rawValue: UInt(i)) else {
             assertionFailure()
             assert(false)
@@ -39,7 +40,7 @@ class MetalState {
         return result
     }
 
-    class func toMetalVertexStepFunction(i: NSNumber) -> MTLVertexStepFunction {
+    private class func toMetalVertexStepFunction(i: NSNumber) -> MTLVertexStepFunction {
         guard let result = MTLVertexStepFunction(rawValue: UInt(i)) else {
             assertionFailure()
             assert(false)
@@ -65,6 +66,9 @@ class MetalState {
                 functions[functionName] = library.newFunctionWithName(functionName)
             }
         }
+
+        // | time | width | height | padding |
+        builtInBuffer = device.newBufferWithLength(16, options: .StorageModeManaged)
 
         for buffer in MetalState.fetchAll(managedObjectContext, entityName: "Buffer") as! [Buffer] {
             if let initialData = buffer.initialData {
@@ -138,6 +142,7 @@ class MetalState {
             do {
                 try renderPipelineStates[renderPipelineState] = device.newRenderPipelineStateWithDescriptor(descriptor)
             } catch {
+                assertionFailure()
             }
         }
     }

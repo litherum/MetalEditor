@@ -34,7 +34,7 @@ func main() {
 
     let library = NSEntityDescription.insertNewObjectForEntityForName("Library", inManagedObjectContext: managedObjectContext) as! Library
     do {
-        try library.source = String(contentsOfFile: "/Users/litherum/src/MetalTest/MetalTest/Shaders.metal")
+        try library.source = String(contentsOfFile: "/Users/litherum/src/MetalEditor/TestDatabaseWriter/Shaders.metal")
     } catch {
         assertionFailure()
     }
