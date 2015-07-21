@@ -8,6 +8,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="detailViewController" destination="OBd-FQ-Sir" id="3Sd-3f-cmx"/>
+                <outlet property="librarySourceView" destination="klz-0h-a07" id="orH-q0-1pv"/>
                 <outlet property="previewController" destination="AIC-WQ-HpF" id="zql-ep-a1g"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
@@ -17,23 +18,105 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="xOd-HO-29H" userLabel="Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="133" y="235" width="507" height="446"/>
+            <rect key="contentRect" x="133" y="235" width="899" height="514"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="94" height="86"/>
             <view key="contentView" id="gIp-Ho-8D9">
-                <rect key="frame" x="0.0" y="0.0" width="507" height="446"/>
+                <rect key="frame" x="0.0" y="0.0" width="899" height="514"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rdu-hA-uGi">
-                        <rect key="frame" x="0.0" y="0.0" width="507" height="446"/>
+                        <rect key="frame" x="0.0" y="0.0" width="899" height="514"/>
                         <subviews>
-                            <customView fixedFrame="YES" id="9hG-V1-2Mq" userLabel="Detail View">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="446"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <tabView fixedFrame="YES" id="Y9r-S9-cQx">
+                                <rect key="frame" x="-7" y="-6" width="458.5" height="530"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <animations/>
-                            </customView>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="Library" identifier="1" id="lnX-VV-cDe">
+                                        <view key="view" id="O2o-j5-OaB">
+                                            <rect key="frame" x="10" y="33" width="438.5" height="484"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZh-7J-WBW">
+                                                    <rect key="frame" x="0.0" y="0.0" width="439.5" height="484"/>
+                                                    <clipView key="contentView" id="EH5-WZ-rsV">
+                                                        <rect key="frame" x="1" y="1" width="437.5" height="482"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <textView importsGraphics="NO" richText="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="klz-0h-a07" userLabel="Library Source">
+                                                                <rect key="frame" x="0.0" y="0.0" width="438" height="482"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <animations/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <size key="minSize" width="437.5" height="482"/>
+                                                                <size key="maxSize" width="463" height="10000000"/>
+                                                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <size key="minSize" width="437.5" height="482"/>
+                                                                <size key="maxSize" width="463" height="10000000"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="-2" id="gZt-ox-VgI"/>
+                                                                </connections>
+                                                            </textView>
+                                                        </subviews>
+                                                        <animations/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </clipView>
+                                                    <animations/>
+                                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="deU-YT-aEX">
+                                                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <animations/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="bYc-JM-bt0">
+                                                        <rect key="frame" x="422.5" y="1" width="16" height="482"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <animations/>
+                                                    </scroller>
+                                                </scrollView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iZh-7J-WBW" firstAttribute="top" secondItem="O2o-j5-OaB" secondAttribute="top" id="6P8-Rg-m4L"/>
+                                                <constraint firstAttribute="bottom" secondItem="iZh-7J-WBW" secondAttribute="bottom" id="Cg7-F4-QC1"/>
+                                                <constraint firstAttribute="trailing" secondItem="iZh-7J-WBW" secondAttribute="trailing" id="LKT-ji-Zfm"/>
+                                                <constraint firstItem="iZh-7J-WBW" firstAttribute="leading" secondItem="O2o-j5-OaB" secondAttribute="leading" id="Luo-0o-aWc"/>
+                                            </constraints>
+                                            <animations/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Resources" identifier="" id="m7c-3Z-PkY">
+                                        <view key="view" id="N5B-CM-0Vy">
+                                            <rect key="frame" x="10" y="33" width="883" height="484"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <animations/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Render Pipeline States" identifier="2" id="Nk0-A7-Xx4">
+                                        <view key="view" id="3RX-wN-0dV">
+                                            <rect key="frame" x="10" y="33" width="883" height="484"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <animations/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Compute Pipeline States" identifier="" id="lXx-Ep-8Eq">
+                                        <view key="view" id="PKR-p5-lN5">
+                                            <rect key="frame" x="10" y="33" width="883" height="484"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <animations/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Passes" identifier="" id="uOM-Qq-pqx">
+                                        <view key="view" id="Pn9-6b-COC">
+                                            <rect key="frame" x="10" y="33" width="438.5" height="484"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <animations/>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
                             <customView fixedFrame="YES" id="wVZ-en-TXA" userLabel="Preview" customClass="MTKView">
-                                <rect key="frame" x="260" y="0.0" width="247" height="446"/>
+                                <rect key="frame" x="454.5" y="0.0" width="444.5" height="514"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <animations/>
                             </customView>
@@ -56,17 +139,13 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
-            <point key="canvasLocation" x="246.5" y="1294"/>
+            <point key="canvasLocation" x="275.5" y="1288"/>
         </window>
         <viewController id="AIC-WQ-HpF" customClass="PreviewController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="wVZ-en-TXA" id="cED-R8-In6"/>
             </connections>
         </viewController>
-        <viewController id="OBd-FQ-Sir" userLabel="Detail View Controller" customClass="DetailViewController" customModule="MetalEditor" customModuleProvider="target">
-            <connections>
-                <outlet property="view" destination="9hG-V1-2Mq" id="JuN-wn-XO7"/>
-            </connections>
-        </viewController>
+        <viewController id="OBd-FQ-Sir" userLabel="Detail View Controller" customClass="DetailViewController" customModule="MetalEditor" customModuleProvider="target"/>
     </objects>
 </document>

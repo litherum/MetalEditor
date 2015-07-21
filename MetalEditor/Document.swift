@@ -8,14 +8,16 @@
 
 import Cocoa
 
-class Document: NSPersistentDocument {
+class Document: NSPersistentDocument, NSTextDelegate {
     @IBOutlet var detailViewController: DetailViewController!
     @IBOutlet var previewController: PreviewController!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var frame: Frame!
+    var library: Library!
     var metalState: MetalState!
-
+    @IBOutlet var librarySourceView: NSTextView!
+    
     func setupFrame() {
         let fetchRequest = NSFetchRequest(entityName: "Frame")
         do {
@@ -30,6 +32,21 @@ class Document: NSPersistentDocument {
             frame = NSEntityDescription.insertNewObjectForEntityForName("Frame", inManagedObjectContext: managedObjectContext) as! Frame
         }
     }
+    
+    func setupLibrary() {
+        let fetchRequest = NSFetchRequest(entityName: "Library")
+        do {
+            let libraries = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Library]
+            if libraries.count != 0 {
+                library = libraries[0]
+            }
+        } catch {
+        }
+        
+        if library == nil {
+            library = NSEntityDescription.insertNewObjectForEntityForName("Library", inManagedObjectContext: managedObjectContext) as! Library
+        }
+    }
 
     override func windowControllerDidLoadNib(aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
@@ -42,11 +59,22 @@ class Document: NSPersistentDocument {
         commandQueue = device.newCommandQueue()
 
         setupFrame()
+        setupLibrary()
+
+        librarySourceView.string = library.source
+        librarySourceView.font = CTFontCreateWithName("Courier New", 14, nil) // FIXME: Should be able to set this in IB
         
         metalState = MetalState()
         metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
         
         previewController.initializeWithDevice(device, commandQueue: commandQueue, frame: frame, metalState: metalState)
+    }
+
+    func textDidChange(notification: NSNotification) {
+        if let source = librarySourceView.string {
+            library.source = source
+        }
+        metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
     }
 
     override class func autosavesInPlace() -> Bool {

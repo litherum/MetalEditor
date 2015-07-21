@@ -47,6 +47,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
     }
 
     private class func bufferIndex(i: Int) -> Int {
+        // FIXME: Should be able to put uniforms in buffer 0
         if i == 0 {
             return 0
         }

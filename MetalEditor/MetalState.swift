@@ -86,6 +86,7 @@ class MetalState {
         for _ in 0 ..< space - 1 {
             print("  ", appendNewline: false)
         }
+        // FIXME: There always seems to be 0 members
         print("Type: Struct (\(type.members.count) members):")
         for member in type.members {
             printSpace()
@@ -297,10 +298,12 @@ class MetalState {
             do {
                 library = try device.newLibraryWithSource(libraries[0].source, options: MTLCompileOptions())
             } catch {
-                assertionFailure()
+                print("Library creation failed.")
             }
-            for functionName in library.functionNames {
-                functions[functionName] = library.newFunctionWithName(functionName)
+            if library != nil {
+                for functionName in library.functionNames {
+                    functions[functionName] = library.newFunctionWithName(functionName)
+                }
             }
         }
 
