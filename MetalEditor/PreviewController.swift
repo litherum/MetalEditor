@@ -19,11 +19,17 @@ class PreviewController: NSViewController, MTKViewDelegate {
     var startDate = NSDate()
     var lock = NSLock()
 
+    deinit {
+        // Wait for the latest frame to complete
+        lock.lock()
+        lock.unlock()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         metalView = view as! MTKView
         metalView.delegate = self
-        metalView.enableSetNeedsDisplay = true
+        //metalView.enableSetNeedsDisplay = true
     }
 
     func initializeWithDevice(device: MTLDevice, commandQueue: MTLCommandQueue, frame: Frame, metalState: MetalState) {
@@ -36,6 +42,10 @@ class PreviewController: NSViewController, MTKViewDelegate {
 
     func view(view: MTKView, willLayoutWithSize size: CGSize) {
         self.size = size
+    }
+
+    func mtkView(mtkView: MTKView, drawableSizeWillChange size: CGSize) {
+        self.size = size;
     }
 
     private class func toMetalPrimitiveType(i: NSNumber) -> MTLPrimitiveType {
@@ -52,6 +62,10 @@ class PreviewController: NSViewController, MTKViewDelegate {
             return 0
         }
         return i + 1
+    }
+
+    func drawInMTKView(view: MTKView) {
+        drawInView(view);
     }
 
     func drawInView(view: MTKView) {

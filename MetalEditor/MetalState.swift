@@ -9,7 +9,12 @@
 import Cocoa
 import MetalKit
 
+protocol MetalStateDelegate: class {
+    func compilationCompleted(success: Bool)
+}
+
 class MetalState {
+    weak var delegate: MetalStateDelegate?
     var builtInBuffer: MTLBuffer!
     var buffers: [Buffer: MTLBuffer] = [:]
     var computePipelineStates: [ComputePipelineState: MTLComputePipelineState] = [:]
@@ -297,8 +302,13 @@ class MetalState {
         if libraries.count != 0 {
             do {
                 library = try device.newLibraryWithSource(libraries[0].source, options: MTLCompileOptions())
+                if let delegate = delegate {
+                    delegate.compilationCompleted(true)
+                }
             } catch {
-                print("Library creation failed.")
+                if let delegate = delegate {
+                    delegate.compilationCompleted(false)
+                }
             }
             if library != nil {
                 for functionName in library.functionNames {

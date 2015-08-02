@@ -8,15 +8,16 @@
 
 import Cocoa
 
-class Document: NSPersistentDocument, NSTextDelegate {
+class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate {
     @IBOutlet var detailViewController: DetailViewController!
     @IBOutlet var previewController: PreviewController!
+    @IBOutlet var librarySourceView: NSTextView!
+    @IBOutlet var resourcesTableViewDelegate: ResourcesTableViewDelegate!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var frame: Frame!
     var library: Library!
     var metalState: MetalState!
-    @IBOutlet var librarySourceView: NSTextView!
     
     func setupFrame() {
         let fetchRequest = NSFetchRequest(entityName: "Frame")
@@ -61,18 +62,32 @@ class Document: NSPersistentDocument, NSTextDelegate {
         setupFrame()
         setupLibrary()
 
+        resourcesTableViewDelegate.managedObjectContext = managedObjectContext
+
         librarySourceView.string = library.source
         librarySourceView.font = CTFontCreateWithName("Courier New", 14, nil) // FIXME: Should be able to set this in IB
         
         metalState = MetalState()
+        metalState.delegate = self
         metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
         
         previewController.initializeWithDevice(device, commandQueue: commandQueue, frame: frame, metalState: metalState)
     }
 
+    func compilationCompleted(success: Bool) {
+        if !success {
+            print("Library creation failed.")
+            librarySourceView.backgroundColor = NSColor.redColor()
+        } else {
+            librarySourceView.backgroundColor = NSColor.whiteColor()
+        }
+    }
+
     func textDidChange(notification: NSNotification) {
         if let source = librarySourceView.string {
             library.source = source
+        } else {
+            library.source = ""
         }
         metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
     }

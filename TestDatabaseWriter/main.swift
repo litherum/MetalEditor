@@ -43,6 +43,7 @@ func main() {
     var array: [Float] = [0, 0, 1, 0, 0.5, 1]
     buffer.initialData = NSData(bytes: &array, length: array.count * sizeof(Float))
     buffer.initialLength = nil
+    buffer.name = "Buffer"
     
     let vertexAttribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
     vertexAttribute.format = MTLVertexFormat.Float2.rawValue
