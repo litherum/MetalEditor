@@ -8,11 +8,15 @@
 
 import Cocoa
 
-class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate {
+protocol ModelObserver: class {
+    func modelDidChange()
+}
+
+class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver {
     @IBOutlet var detailViewController: DetailViewController!
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
-    @IBOutlet var resourcesTableViewDelegate: ResourcesTableViewDelegate!
+    @IBOutlet var buffersUIController: BuffersUIController!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var frame: Frame!
@@ -62,7 +66,8 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate {
         setupFrame()
         setupLibrary()
 
-        resourcesTableViewDelegate.managedObjectContext = managedObjectContext
+        buffersUIController.managedObjectContext = managedObjectContext
+        buffersUIController.modelObserver = self
 
         librarySourceView.string = library.source
         librarySourceView.font = CTFontCreateWithName("Courier New", 14, nil) // FIXME: Should be able to set this in IB
@@ -89,6 +94,10 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate {
         } else {
             library.source = ""
         }
+        metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
+    }
+
+    func modelDidChange() {
         metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
     }
 

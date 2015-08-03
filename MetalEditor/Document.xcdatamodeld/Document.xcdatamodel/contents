@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8154.4" systemVersion="15A216g" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8166.2" systemVersion="15A235d" minimumToolsVersion="Automatic">
     <entity name="Buffer" representedClassName=".Buffer" syncable="YES">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="initialData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="initialLength" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -69,7 +70,7 @@
         <attribute name="stride" attributeType="Integer 32" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Buffer" positionX="-18" positionY="45" width="128" height="90"/>
+        <element name="Buffer" positionX="-18" positionY="45" width="128" height="105"/>
         <element name="BufferBinding" positionX="0" positionY="63" width="128" height="60"/>
         <element name="ComputeInvocation" positionX="-36" positionY="9" width="128" height="120"/>
         <element name="ComputePass" positionX="-54" positionY="0" width="128" height="60"/>

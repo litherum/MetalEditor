@@ -339,10 +339,10 @@ class MetalState {
             var reflection: MTLComputePipelineReflection?
             do {
                 try computePipelineStates[computePipelineState] = device.newComputePipelineStateWithDescriptor(descriptor, options: MTLPipelineOption(), reflection: &reflection)
-                if let reflection = reflection {
+                /*if let reflection = reflection {
                     print("Compute arguments:")
                     MetalState.printArguments(reflection.arguments)
-                }
+                }*/
             } catch {
             }
         }
@@ -397,7 +397,7 @@ class MetalState {
             var reflection: MTLRenderPipelineReflection?
             do {
                 try renderPipelineStates[renderPipelineState] = device.newRenderPipelineStateWithDescriptor(descriptor, options: MTLPipelineOption(), reflection: &reflection)
-                if let reflection = reflection {
+                /*if let reflection = reflection {
                     if let vertexArguments = reflection.vertexArguments {
                         print("Vertex arguments:")
                         MetalState.printArguments(vertexArguments)
@@ -406,7 +406,7 @@ class MetalState {
                         print("Fragment arguments:")
                         MetalState.printArguments(fragmentArguments)
                     }
-                }
+                }*/
             } catch {
                 assertionFailure()
             }

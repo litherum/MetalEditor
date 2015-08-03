@@ -13,7 +13,8 @@ import Foundation
 import CoreData
 
 extension Buffer {
-    
+
+    @NSManaged var id: NSNumber
     @NSManaged var name: String
     @NSManaged var initialData: NSData?
     @NSManaged var initialLength: NSNumber?

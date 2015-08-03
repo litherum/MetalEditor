@@ -42,24 +42,25 @@ fragment FragmentOutput fragmentRed(VertexOutput input) {
 
 kernel void increment(device float* buffer [[ buffer(0) ]], device Uniforms* uniforms [[ buffer(1) ]], uint pos [[ thread_position_in_grid ]]) {
     float speed = 10;
+    float magnitude = 0.01;
     switch (pos) {
         case 0:
-            buffer[pos] = -0.5 + 0.3 * cos(speed * uniforms->time);
+            buffer[pos] += magnitude * cos(speed * uniforms->time);
             break;
         case 1:
-            buffer[pos] = -0.5 + 0.3 * sin(speed * uniforms->time);
+            buffer[pos] += magnitude * sin(speed * uniforms->time);
             break;
         case 2:
-            buffer[pos] = 0.5 + 0.3 * cos(speed * uniforms->time);
+            buffer[pos] += magnitude * cos(speed * uniforms->time);
             break;
         case 3:
-            buffer[pos] = -0.5 + 0.3 * sin(speed * uniforms->time);
+            buffer[pos] += magnitude * sin(speed * uniforms->time);
             break;
         case 4:
-            buffer[pos] = 0 + 0.3 * cos(speed * uniforms->time);
+            buffer[pos] += magnitude * cos(speed * uniforms->time);
             break;
         case 5:
-            buffer[pos] = 0.5 + 0.3 * sin(speed * uniforms->time);
+            buffer[pos] += magnitude * sin(speed * uniforms->time);
             break;
     }
 }

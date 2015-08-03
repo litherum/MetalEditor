@@ -41,9 +41,14 @@ func main() {
     
     let buffer = NSEntityDescription.insertNewObjectForEntityForName("Buffer", inManagedObjectContext: managedObjectContext) as! Buffer
     var array: [Float] = [0, 0, 1, 0, 0.5, 1]
-    buffer.initialData = NSData(bytes: &array, length: array.count * sizeof(Float))
+    var array2: [Float] = [0, 0, 1, 0.5, 0, 1]
+    let data = NSData(bytes: &array, length: array.count * sizeof(Float))
+    let data2 = NSData(bytes: &array2, length: array2.count * sizeof(Float))
+    buffer.initialData = data
+    data2.writeToFile("/Users/litherum/Documents/VertexData", atomically: true)
     buffer.initialLength = nil
     buffer.name = "Buffer"
+    buffer.id = 0
     
     let vertexAttribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
     vertexAttribute.format = MTLVertexFormat.Float2.rawValue
