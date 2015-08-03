@@ -32,9 +32,12 @@
                     <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rdu-hA-uGi">
                         <rect key="frame" x="0.0" y="0.0" width="899" height="514"/>
                         <subviews>
-                            <tabView fixedFrame="YES" type="leftTabsBezelBorder" id="g4y-cf-oDe">
-                                <rect key="frame" x="-7" y="-6" width="402" height="530"/>
+                            <tabView type="leftTabsBezelBorder" id="g4y-cf-oDe">
+                                <rect key="frame" x="-5" y="-4" width="397" height="528"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="nq0-G4-21G"/>
+                                </constraints>
                                 <animations/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
@@ -463,24 +466,24 @@
                                     </tabViewItem>
                                     <tabViewItem label="Render Pipeline State" identifier="" id="hMw-Ci-qXw">
                                         <view key="view" id="6qP-U5-VmT">
-                                            <rect key="frame" x="32" y="7" width="358" height="508"/>
+                                            <rect key="frame" x="32" y="7" width="355" height="508"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="402" horizontalPageScroll="10" verticalLineScroll="402" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVU-ZZ-PDG">
-                                                    <rect key="frame" x="0.0" y="49" width="358" height="459"/>
+                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="402" horizontalPageScroll="10" verticalLineScroll="402" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVU-ZZ-PDG">
+                                                    <rect key="frame" x="0.0" y="49" width="355" height="459"/>
                                                     <clipView key="contentView" id="9Ng-Zp-LyN">
-                                                        <rect key="frame" x="1" y="1" width="356" height="457"/>
+                                                        <rect key="frame" x="1" y="1" width="353" height="457"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" alternatingRowBackgroundColors="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="400" viewBased="YES" id="HTi-RO-tZ4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="356" height="457"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="353" height="457"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <animations/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                 <tableColumns>
-                                                                    <tableColumn width="342.27734375" minWidth="40" maxWidth="1000" id="hAQ-7B-AxC">
+                                                                    <tableColumn width="350" minWidth="40" maxWidth="1000" id="hAQ-7B-AxC">
                                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                                             <font key="font" metaFont="smallSystem"/>
                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -494,11 +497,11 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView identifier="DetailView" id="954-d8-qWh" customClass="RenderStateDetailView" customModule="MetalEditor" customModuleProvider="target">
-                                                                                <rect key="frame" x="1" y="1" width="381" height="17"/>
+                                                                                <rect key="frame" x="1" y="1" width="401" height="17"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hVC-ay-1bY">
-                                                                                        <rect key="frame" x="-2" y="0.0" width="126" height="17"/>
+                                                                                        <rect key="frame" x="18" y="-20" width="119" height="17"/>
                                                                                         <animations/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Name" id="68K-l7-vWO">
                                                                                             <font key="font" metaFont="system"/>
@@ -507,7 +510,7 @@
                                                                                         </textFieldCell>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JVf-3X-Ahj">
-                                                                                        <rect key="frame" x="128" y="0.0" width="125" height="17"/>
+                                                                                        <rect key="frame" x="141" y="-20" width="119" height="17"/>
                                                                                         <animations/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Vertex Function" id="lkC-T3-UeT">
                                                                                             <font key="font" metaFont="system"/>
@@ -516,7 +519,7 @@
                                                                                         </textFieldCell>
                                                                                     </textField>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-H4-bxY">
-                                                                                        <rect key="frame" x="257" y="0.0" width="126" height="17"/>
+                                                                                        <rect key="frame" x="264" y="-20" width="119" height="17"/>
                                                                                         <animations/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Fragment Function" id="zWb-Po-0Kw">
                                                                                             <font key="font" metaFont="system"/>
@@ -525,7 +528,7 @@
                                                                                         </textFieldCell>
                                                                                     </textField>
                                                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IcL-aH-4q9">
-                                                                                        <rect key="frame" x="0.0" y="-22" width="122" height="22"/>
+                                                                                        <rect key="frame" x="20" y="-50" width="115" height="22"/>
                                                                                         <animations/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="QCI-xh-dM8">
                                                                                             <font key="font" metaFont="system"/>
@@ -537,7 +540,7 @@
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-B9-3l0">
-                                                                                        <rect key="frame" x="130" y="-22" width="121" height="22"/>
+                                                                                        <rect key="frame" x="143" y="-50" width="115" height="22"/>
                                                                                         <animations/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="QYq-VS-QFt">
                                                                                             <font key="font" metaFont="system"/>
@@ -549,7 +552,7 @@
                                                                                         </connections>
                                                                                     </textField>
                                                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lrp-9H-JPG">
-                                                                                        <rect key="frame" x="259" y="-22" width="122" height="22"/>
+                                                                                        <rect key="frame" x="266" y="-50" width="115" height="22"/>
                                                                                         <animations/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="vU9-Y7-KWG">
                                                                                             <font key="font" metaFont="system"/>
@@ -562,7 +565,7 @@
                                                                                     </textField>
                                                                                 </subviews>
                                                                                 <constraints>
-                                                                                    <constraint firstItem="hVC-ay-1bY" firstAttribute="top" secondItem="954-d8-qWh" secondAttribute="top" id="1nF-AR-ilH"/>
+                                                                                    <constraint firstItem="hVC-ay-1bY" firstAttribute="top" secondItem="954-d8-qWh" secondAttribute="top" constant="20" symbolic="YES" id="1nF-AR-ilH"/>
                                                                                     <constraint firstItem="hVC-ay-1bY" firstAttribute="leading" secondItem="IcL-aH-4q9" secondAttribute="leading" id="7mo-Mw-SQZ"/>
                                                                                     <constraint firstItem="lrp-9H-JPG" firstAttribute="width" secondItem="IcL-aH-4q9" secondAttribute="width" id="9bc-tr-F0H"/>
                                                                                     <constraint firstItem="J5j-B9-3l0" firstAttribute="leading" secondItem="IcL-aH-4q9" secondAttribute="trailing" constant="8" symbolic="YES" id="J7b-fl-58D"/>
@@ -574,12 +577,12 @@
                                                                                     <constraint firstItem="JVf-3X-Ahj" firstAttribute="leading" secondItem="J5j-B9-3l0" secondAttribute="leading" id="Zct-I9-pUU"/>
                                                                                     <constraint firstItem="lrp-9H-JPG" firstAttribute="leading" secondItem="d9b-H4-bxY" secondAttribute="leading" id="ajZ-td-eeY"/>
                                                                                     <constraint firstItem="lrp-9H-JPG" firstAttribute="baseline" secondItem="IcL-aH-4q9" secondAttribute="baseline" id="dgQ-s9-kzK"/>
-                                                                                    <constraint firstItem="IcL-aH-4q9" firstAttribute="top" secondItem="hVC-ay-1bY" secondAttribute="bottom" id="fCn-PE-dBO"/>
+                                                                                    <constraint firstItem="IcL-aH-4q9" firstAttribute="top" secondItem="hVC-ay-1bY" secondAttribute="bottom" constant="8" symbolic="YES" id="fCn-PE-dBO"/>
                                                                                     <constraint firstItem="JVf-3X-Ahj" firstAttribute="baseline" secondItem="hVC-ay-1bY" secondAttribute="baseline" id="iTH-ma-4dH"/>
                                                                                     <constraint firstItem="J5j-B9-3l0" firstAttribute="width" secondItem="IcL-aH-4q9" secondAttribute="width" id="k3X-XN-G0E"/>
-                                                                                    <constraint firstItem="IcL-aH-4q9" firstAttribute="leading" secondItem="954-d8-qWh" secondAttribute="leading" id="l6v-Md-574"/>
+                                                                                    <constraint firstItem="IcL-aH-4q9" firstAttribute="leading" secondItem="954-d8-qWh" secondAttribute="leading" constant="20" symbolic="YES" id="l6v-Md-574"/>
                                                                                     <constraint firstItem="d9b-H4-bxY" firstAttribute="baseline" secondItem="hVC-ay-1bY" secondAttribute="baseline" id="vGs-Dp-ocA"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="lrp-9H-JPG" secondAttribute="trailing" id="vap-QQ-Xc8"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="lrp-9H-JPG" secondAttribute="trailing" constant="20" symbolic="YES" id="vap-QQ-Xc8"/>
                                                                                 </constraints>
                                                                                 <animations/>
                                                                                 <connections>
@@ -602,7 +605,7 @@
                                                     </clipView>
                                                     <animations/>
                                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="jfs-aM-6BR">
-                                                        <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                                        <rect key="frame" x="-100" y="-100" width="356" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <animations/>
                                                     </scroller>
@@ -613,7 +616,7 @@
                                                     </scroller>
                                                 </scrollView>
                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G12-QF-RS8">
-                                                    <rect key="frame" x="269" y="18" width="71" height="24"/>
+                                                    <rect key="frame" x="266" y="18" width="71" height="24"/>
                                                     <animations/>
                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="j04-K8-zQp">
                                                         <font key="font" metaFont="system"/>
@@ -640,9 +643,12 @@
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
-                            <customView fixedFrame="YES" id="wVZ-en-TXA" userLabel="Preview" customClass="MTKView">
-                                <rect key="frame" x="398" y="0.0" width="501" height="514"/>
+                            <customView id="wVZ-en-TXA" userLabel="Preview" customClass="MTKView">
+                                <rect key="frame" x="395" y="0.0" width="504" height="514"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="6Wa-kO-Q86"/>
+                                </constraints>
                                 <animations/>
                             </customView>
                         </subviews>
