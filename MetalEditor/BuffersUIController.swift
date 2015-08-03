@@ -180,7 +180,7 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
                 guard let buffer = getBuffer(index) else {
                     continue
                 }
-                managedObjectContext.deleteObject(buffer);
+                managedObjectContext.deleteObject(buffer)
             }
         }
         tableView.reloadData()

@@ -14,6 +14,8 @@ import CoreData
 
 extension RenderPipelineState {
 
+    @NSManaged var id: NSNumber
+    @NSManaged var name: String
     @NSManaged var vertexFunction: String
     @NSManaged var fragmentFunction: String
     @NSManaged var depthAttachmentPixelFormat: NSNumber?

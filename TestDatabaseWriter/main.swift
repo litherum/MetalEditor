@@ -64,6 +64,8 @@ func main() {
     colorAttachment.pixelFormat = nil
 
     let renderPipelineState = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineState", inManagedObjectContext: managedObjectContext) as! RenderPipelineState
+    renderPipelineState.id = 0
+    renderPipelineState.name = "Render State"
     renderPipelineState.vertexFunction = "vertexIdentity"
     renderPipelineState.fragmentFunction = "fragmentRed"
     renderPipelineState.mutableOrderedSetValueForKey("colorAttachments").addObject(colorAttachment)
@@ -88,7 +90,7 @@ func main() {
 
     let computePipelineState = NSEntityDescription.insertNewObjectForEntityForName("ComputePipelineState", inManagedObjectContext: managedObjectContext) as! ComputePipelineState
     computePipelineState.functionName = "increment"
-    computePipelineState.name = "Pipeline State"
+    computePipelineState.name = "Compute State"
     computePipelineState.id = 0
 
     let threadgroupsPerGrid = NSEntityDescription.insertNewObjectForEntityForName("Size", inManagedObjectContext: managedObjectContext) as! Size

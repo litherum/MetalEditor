@@ -114,7 +114,7 @@ class ComputeStateUIController: NSObject, NSTableViewDelegate, NSTableViewDataSo
                 guard let state = getState(index) else {
                     continue
                 }
-                managedObjectContext.deleteObject(state);
+                managedObjectContext.deleteObject(state)
             }
         }
         tableView.reloadData()

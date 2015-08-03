@@ -83,6 +83,7 @@
 		C2BF786C1B58BC8A004535BC /* MetalEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */; };
 		C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78791B58C09B004535BC /* PreviewController.swift */; };
 		C2CA03121B6F0EFF00BA6AA1 /* ComputeStateUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */; };
+		C2CA03141B6F186300BA6AA1 /* RenderStateUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		C2BF786D1B58BC8A004535BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2BF78791B58C09B004535BC /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
 		C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeStateUIController.swift; sourceTree = "<group>"; };
+		C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderStateUIController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 				C24CDC9D1B5A17BF00348941 /* MetalState.swift */,
 				C285B2521B5E1FAB00671A58 /* BuffersUIController.swift */,
 				C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */,
+				C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				C24CDCB91B5A18D200348941 /* Frame+CoreDataProperties.swift in Sources */,
 				C24CDCF01B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */,
 				C24CDCC01B5A18D200348941 /* Library.swift in Sources */,
+				C2CA03141B6F186300BA6AA1 /* RenderStateUIController.swift in Sources */,
 				C24CDD521B5AFB3900348941 /* RenderInvocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
