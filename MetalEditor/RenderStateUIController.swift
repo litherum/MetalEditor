@@ -56,11 +56,12 @@ class RenderStateUIController: NSObject, NSTableViewDelegate, NSTableViewDataSou
             assertionFailure()
             return nil
         }
-        if let result = tableView.makeViewWithIdentifier("DetailView", owner: self) as? NSTableCellView {
-            if let textField = result.textField {
-                textField.stringValue = "Woah Mackerel!"
-                return result
-            }
+        if let result = tableView.makeViewWithIdentifier("DetailView", owner: self) as? RenderStateDetailView {
+            result.managedObjectContext = managedObjectContext
+            result.modelObserver = modelObserver
+            result.state = state
+            result.initialize()
+            return result
         }
         return nil
     }
