@@ -44,5 +44,4 @@ class ComputePipelineState: NSManagedObject {
         try super.validateForUpdate()
         try validateUnique()
     }
-
 }

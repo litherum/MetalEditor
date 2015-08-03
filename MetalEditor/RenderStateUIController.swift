@@ -66,53 +66,32 @@ class RenderStateUIController: NSObject, NSTableViewDelegate, NSTableViewDataSou
         return nil
     }
 
-    @IBAction func addRemove(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 {
-            // Add
-            let stateCount = numberOfStates()
-    
-            let vertexAttribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
-            vertexAttribute.format = MTLVertexFormat.Float2.rawValue
-            vertexAttribute.offset = 0
-            vertexAttribute.bufferIndex = 0
+    @IBAction func addRemove(sender: NSButton) {
+        let stateCount = numberOfStates()
 
-            let vertexBufferLayout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
-            vertexBufferLayout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
-            vertexBufferLayout.stepRate = 1
-            vertexBufferLayout.stride = 8
+        let vertexAttribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
+        vertexAttribute.format = MTLVertexFormat.Float2.rawValue
+        vertexAttribute.offset = 0
+        vertexAttribute.bufferIndex = 0
 
-            let colorAttachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
-            colorAttachment.pixelFormat = nil
+        let vertexBufferLayout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
+        vertexBufferLayout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
+        vertexBufferLayout.stepRate = 1
+        vertexBufferLayout.stride = 8
 
-            let renderPipelineState = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineState", inManagedObjectContext: managedObjectContext) as! RenderPipelineState
-            renderPipelineState.id = stateCount
-            renderPipelineState.name = "Render State \(stateCount)"
-            renderPipelineState.vertexFunction = "vertexIdentity"
-            renderPipelineState.fragmentFunction = "fragmentRed"
-            renderPipelineState.mutableOrderedSetValueForKey("colorAttachments").addObject(colorAttachment)
-            renderPipelineState.mutableOrderedSetValueForKey("vertexAttributes").addObject(vertexAttribute)
-            renderPipelineState.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(vertexBufferLayout)
-        } else {
-            assert(sender.selectedSegment == 1)
-            // Remove
-            for index in tableView.selectedRowIndexes {
-                guard let state = getState(index) else {
-                    continue
-                }
-                for colorAttachment in state.colorAttachments {
-                    managedObjectContext.deleteObject(colorAttachment as! RenderPipelineColorAttachment)
-                }
-                for vertexAttribute in state.vertexAttributes {
-                    managedObjectContext.deleteObject(vertexAttribute as! VertexAttribute)
-                }
-                for vertexBufferLayout in state.vertexBufferLayouts {
-                    managedObjectContext.deleteObject(vertexBufferLayout as! VertexBufferLayout)
-                }
-                managedObjectContext.deleteObject(state)
-            }
-        }
+        let colorAttachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
+        colorAttachment.pixelFormat = nil
+
+        let renderPipelineState = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineState", inManagedObjectContext: managedObjectContext) as! RenderPipelineState
+        renderPipelineState.id = stateCount
+        renderPipelineState.name = "Render State \(stateCount)"
+        renderPipelineState.vertexFunction = "vertexIdentity"
+        renderPipelineState.fragmentFunction = "fragmentRed"
+        renderPipelineState.mutableOrderedSetValueForKey("colorAttachments").addObject(colorAttachment)
+        renderPipelineState.mutableOrderedSetValueForKey("vertexAttributes").addObject(vertexAttribute)
+        renderPipelineState.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(vertexBufferLayout)
+
         tableView.reloadData()
         modelObserver.modelDidChange()
-        sender.selectedSegment = -1
     }
 }
