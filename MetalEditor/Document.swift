@@ -17,6 +17,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
     @IBOutlet var buffersUIController: BuffersUIController!
+    @IBOutlet var splitView: NSSplitView!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var frame: Frame!
@@ -77,6 +78,12 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
         
         previewController.initializeWithDevice(device, commandQueue: commandQueue, frame: frame, metalState: metalState)
+
+        if windowControllers.count == 1 {
+            if let window = windowControllers[0].window {
+                splitView.setPosition(window.frame.width / 2, ofDividerAtIndex: 0)
+            }
+        }
     }
 
     func compilationCompleted(success: Bool) {

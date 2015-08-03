@@ -48,7 +48,7 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
         }
     }
 
-    func setName(sender: NSTextField) {
+    @IBAction func setName(sender: NSTextField) {
         let row = tableView.rowForView(sender)
         if row == -1 {
             return
@@ -69,7 +69,7 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
         return false
     }
 
-    func setLength(sender: NSTextField) {
+    @IBAction func setLength(sender: NSTextField) {
         let row = tableView.rowForView(sender)
         if row == -1 {
             return
@@ -83,7 +83,7 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
         modelObserver.modelDidChange()
     }
 
-    func setData(sender: NSTextField) {
+    @IBAction func setData(sender: NSButton) {
         let row = tableView.rowForView(sender)
         if row == -1 {
             return
@@ -123,51 +123,43 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
         // FIXME: Use the view cache inside the NSTableView
         switch column {
         case nameColumn:
-            let result = NSTextField()
-            result.drawsBackground = false
-            result.editable = true
-            result.bezeled = false
-            result.bordered = false
-            result.stringValue = buffer.name
-            result.target = self
-            result.action = "setName:"
-            return result
+            if let result = tableView.makeViewWithIdentifier("NameTextField", owner: self) as? NSTableCellView {
+                if let textField = result.textField {
+                    textField.editable = true
+                    textField.stringValue = buffer.name
+                    return result
+                }
+            }
+            return nil
         case typeColumn:
-            let result = NSTextField()
-            result.drawsBackground = false
-            result.editable = false
-            result.bezeled = false
-            result.bordered = false
-            if buffer.initialData != nil {
-                result.stringValue = "Data"
-            } else {
-                result.stringValue = "Length"
+            if let result = tableView.makeViewWithIdentifier("TypeTextField", owner: self) as? NSTableCellView {
+                if let textField = result.textField {
+                    if buffer.initialData != nil {
+                        textField.stringValue = "Data"
+                    } else {
+                        textField.stringValue = "Length"
+                    }
+                    return result
+                }
             }
-            return result
+            return nil
         case lengthColumn:
-            let result = NSTextField()
-            result.drawsBackground = false
-            result.editable = true
-            result.bezeled = false
-            result.bordered = false
-            if let data = buffer.initialData {
-                result.stringValue = "\(data.length)"
-            } else if let length = buffer.initialLength {
-                result.stringValue = "\(length)"
-            } else {
-                assertionFailure()
+            if let result = tableView.makeViewWithIdentifier("LengthTextField", owner: self) as? NSTableCellView {
+                if let textField = result.textField {
+                    textField.editable = true
+                    if let data = buffer.initialData {
+                        textField.stringValue = "\(data.length)"
+                    } else if let length = buffer.initialLength {
+                        textField.stringValue = "\(length)"
+                    } else {
+                        assertionFailure()
+                    }
+                    return result
+                }
             }
-            result.delegate = self
-            result.target = self
-            result.action = "setLength:"
-            return result
+            return nil
         case fileColumn:
-            let result = NSButton()
-            result.bezelStyle = .RoundedBezelStyle
-            result.title = "Choose"
-            result.target = self
-            result.action = "setData:"
-            return result
+            return tableView.makeViewWithIdentifier("FileButton", owner: self)
         default:
             return nil
         }
