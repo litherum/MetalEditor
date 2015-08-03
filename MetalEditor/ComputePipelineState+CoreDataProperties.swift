@@ -14,7 +14,9 @@ import CoreData
 
 extension ComputePipelineState {
 
+    @NSManaged var id: NSNumber
     @NSManaged var functionName: String
     @NSManaged var invocations: NSSet?
+    @NSManaged var name: String
 
 }

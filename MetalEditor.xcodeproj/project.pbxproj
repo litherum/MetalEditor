@@ -82,6 +82,7 @@
 		C2BF78611B58BC8A004535BC /* MetalEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78601B58BC8A004535BC /* MetalEditorTests.swift */; };
 		C2BF786C1B58BC8A004535BC /* MetalEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */; };
 		C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78791B58C09B004535BC /* PreviewController.swift */; };
+		C2CA03121B6F0EFF00BA6AA1 /* ComputeStateUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,7 @@
 		C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalEditorUITests.swift; sourceTree = "<group>"; };
 		C2BF786D1B58BC8A004535BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2BF78791B58C09B004535BC /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeStateUIController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 				C2205E181B5A0E0A0046F04D /* DetailViewController.swift */,
 				C24CDC9D1B5A17BF00348941 /* MetalState.swift */,
 				C285B2521B5E1FAB00671A58 /* BuffersUIController.swift */,
+				C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				C24CDCB71B5A18D200348941 /* Pass+CoreDataProperties.swift in Sources */,
 				C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */,
 				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
+				C2CA03121B6F0EFF00BA6AA1 /* ComputeStateUIController.swift in Sources */,
 				C24CDCBD1B5A18D200348941 /* ComputePipelineState+CoreDataProperties.swift in Sources */,
 				C24CDCC21B5A18D200348941 /* BufferBinding.swift in Sources */,
 				C24CDCB51B5A18D200348941 /* ComputePass+CoreDataProperties.swift in Sources */,

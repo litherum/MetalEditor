@@ -17,6 +17,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
     @IBOutlet var buffersUIController: BuffersUIController!
+    @IBOutlet var computeStateUIController: ComputeStateUIController!
     @IBOutlet var splitView: NSSplitView!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
@@ -69,6 +70,9 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
 
         buffersUIController.managedObjectContext = managedObjectContext
         buffersUIController.modelObserver = self
+
+        computeStateUIController.managedObjectContext = managedObjectContext
+        computeStateUIController.modelObserver = self
 
         librarySourceView.string = library.source
         librarySourceView.font = CTFontCreateWithName("Courier New", 14, nil) // FIXME: Should be able to set this in IB

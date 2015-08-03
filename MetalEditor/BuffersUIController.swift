@@ -120,7 +120,6 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
         guard let buffer = getBuffer(row) else {
             return nil
         }
-        // FIXME: Use the view cache inside the NSTableView
         switch column {
         case nameColumn:
             if let result = tableView.makeViewWithIdentifier("NameTextField", owner: self) as? NSTableCellView {
