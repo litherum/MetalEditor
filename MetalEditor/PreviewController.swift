@@ -102,7 +102,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     }
                     computeCommandEncoder.setComputePipelineState(metalComputePipelineState)
                     for i in 0 ..< invocation.bufferBindings.count {
-                        let bufferOptional = (invocation.bufferBindings.objectAtIndex(i) as! BufferBinding).buffer
+                        let bufferOptional = (invocation.bufferBindings[i] as! BufferBinding).buffer
                         if let buffer = bufferOptional {
                             computeCommandEncoder.setBuffer(metalState.buffers[buffer], offset: 0, atIndex: PreviewController.bufferIndex(i))
                         } else {
@@ -127,7 +127,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     }
                     renderCommandEncoder.setRenderPipelineState(metalRenderPipelineState)
                     for i in 0 ..< invocation.vertexBufferBindings.count {
-                        let bufferOptional = (invocation.vertexBufferBindings.objectAtIndex(i) as! BufferBinding).buffer
+                        let bufferOptional = (invocation.vertexBufferBindings[i] as! BufferBinding).buffer
                         if let buffer = bufferOptional {
                             renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, atIndex: PreviewController.bufferIndex(i))
                         } else {
@@ -135,7 +135,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
                         }
                     }
                     for i in 0 ..< invocation.fragmentBufferBindings.count {
-                        let bufferOptional = (invocation.fragmentBufferBindings.objectAtIndex(i) as! BufferBinding).buffer
+                        let bufferOptional = (invocation.fragmentBufferBindings[i] as! BufferBinding).buffer
                         if let buffer = bufferOptional {
                             renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, atIndex: PreviewController.bufferIndex(i))
                         } else {
@@ -148,7 +148,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
             } else {
                 assertionFailure()
             }
-            if pass == frame.passes.objectAtIndex(frame.passes.count - 1) as! Pass {
+            if pass == frame.passes[frame.passes.count - 1] as! Pass {
                 commandBuffer.addCompletedHandler() {(commandBuffer) in
                     dispatch_async(dispatch_get_main_queue()) {
                         self.lock.unlock()
