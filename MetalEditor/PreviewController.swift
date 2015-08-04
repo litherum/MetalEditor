@@ -50,8 +50,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
 
     private class func toMetalPrimitiveType(i: NSNumber) -> MTLPrimitiveType {
         guard let result = MTLPrimitiveType(rawValue: UInt(i)) else {
-            assertionFailure()
-            assert(false)
+            fatalError()
         }
         return result
     }
@@ -77,8 +76,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
         }
         // FIXME: Support render-to-texture
         guard let renderPassDescriptor = metalView.currentRenderPassDescriptor else {
-            assertionFailure()
-            assert(false)
+            fatalError()
         }
         // | time | width | height | padding |
         let builtInPointer = UnsafeMutablePointer<Float>(metalState.builtInBuffer.contents())
@@ -146,7 +144,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 }
                 renderCommandEncoder.endEncoding()
             } else {
-                assertionFailure()
+                fatalError()
             }
             if pass == frame.passes[frame.passes.count - 1] as! Pass {
                 commandBuffer.addCompletedHandler() {(commandBuffer) in

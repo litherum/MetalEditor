@@ -7,12 +7,10 @@
 //
 
 import Cocoa
-
+/*
 class RenderStateDetailView : NSTableCellView, NSTableViewDelegate, NSTableViewDataSource {
     var initialized = false
-    var managedObjectContext: NSManagedObjectContext!
-    weak var modelObserver: ModelObserver!
-    var state: RenderPipelineState!
+
     @IBOutlet var nameTextField: NSTextField!
     @IBOutlet var vertexFunctionTextField: NSTextField!
     @IBOutlet var fragmentFunctionTextField: NSTextField!
@@ -477,3 +475,4 @@ class RenderStateDetailView : NSTableCellView, NSTableViewDelegate, NSTableViewD
         }
     }
 }
+*/

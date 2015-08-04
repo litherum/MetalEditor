@@ -151,7 +151,7 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
                     } else if let length = buffer.initialLength {
                         textField.stringValue = "\(length)"
                     } else {
-                        assertionFailure()
+                        fatalError()
                     }
                     return result
                 }

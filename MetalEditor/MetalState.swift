@@ -31,24 +31,21 @@ class MetalState {
 
     private class func toMetalPixelFormat(i: NSNumber) -> MTLPixelFormat {
         guard let result = MTLPixelFormat(rawValue: UInt(i)) else {
-            assertionFailure()
-            assert(false)
+            fatalError()
         }
         return result
     }
 
     private class func toMetalVertexFormat(i: NSNumber) -> MTLVertexFormat {
         guard let result = MTLVertexFormat(rawValue: UInt(i)) else {
-            assertionFailure()
-            assert(false)
+            fatalError()
         }
         return result
     }
 
     private class func toMetalVertexStepFunction(i: NSNumber) -> MTLVertexStepFunction {
         guard let result = MTLVertexStepFunction(rawValue: UInt(i)) else {
-            assertionFailure()
-            assert(false)
+            fatalError()
         }
         return result
     }
@@ -326,7 +323,7 @@ class MetalState {
             } else if let initialLength = buffer.initialLength {
                 buffers[buffer] = device.newBufferWithLength(initialLength.integerValue, options: .StorageModePrivate)
             } else {
-                assertionFailure()
+                fatalError()
             }
         }
         
@@ -408,7 +405,7 @@ class MetalState {
                     }
                 }*/
             } catch {
-                assertionFailure()
+                fatalError()
             }
         }
     }

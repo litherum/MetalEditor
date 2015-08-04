@@ -12,8 +12,7 @@ import Metal
 func main() {
     let mom = NSManagedObjectModel(contentsOfURL: NSURL(fileURLWithPath: "/Users/litherum/Build/Products/Debug/Document.momd"))
     guard let managedObjectModel = mom else {
-        assertionFailure()
-        assert(false)
+        fatalError()
     }
     let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
     let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
@@ -29,14 +28,14 @@ func main() {
     do {
         try persistentStoreCoordinator.addPersistentStoreWithType(NSXMLStoreType, configuration: nil, URL: databaseURL, options: nil)
     } catch {
-        assertionFailure()
+        fatalError()
     }
 
     let library = NSEntityDescription.insertNewObjectForEntityForName("Library", inManagedObjectContext: managedObjectContext) as! Library
     do {
         try library.source = String(contentsOfFile: "/Users/litherum/src/MetalEditor/TestDatabaseWriter/Shaders.metal")
     } catch {
-        assertionFailure()
+        fatalError()
     }
     
     let buffer = NSEntityDescription.insertNewObjectForEntityForName("Buffer", inManagedObjectContext: managedObjectContext) as! Buffer
@@ -119,7 +118,7 @@ func main() {
     do {
         try managedObjectContext.save()
     } catch {
-        assertionFailure()
+        fatalError()
     }
 }
 

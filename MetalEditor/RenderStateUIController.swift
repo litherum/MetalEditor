@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RenderStateUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource {
+class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     @IBOutlet var tableView: NSTableView!
@@ -53,20 +53,18 @@ class RenderStateUIController: NSObject, NSTableViewDelegate, NSTableViewDataSou
             return nil
         }
         guard column == detailColumn else {
-            assertionFailure()
-            return nil
+            fatalError()
         }
-        if let result = tableView.makeViewWithIdentifier("DetailView", owner: self) as? RenderStateDetailView {
-            result.managedObjectContext = managedObjectContext
-            result.modelObserver = modelObserver
-            result.state = state
-            result.initialize()
-            return result
+        while childViewControllers.count <= row {
+            guard let controller = RenderStateViewController(nibName: "RenderStateViewController", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: state) else {
+                fatalError()
+            }
+            childViewControllers.append(controller)
         }
-        return nil
+        return childViewControllers[row].view
     }
 
-    @IBAction func addRemove(sender: NSButton) {
+    @IBAction func add(sender: NSButton) {
         let stateCount = numberOfStates()
 
         let vertexAttribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute

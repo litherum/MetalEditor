@@ -12,7 +12,7 @@
                 <outlet property="detailViewController" destination="OBd-FQ-Sir" id="3Sd-3f-cmx"/>
                 <outlet property="librarySourceView" destination="mxX-b9-wAo" id="fTN-1f-n8V"/>
                 <outlet property="previewController" destination="AIC-WQ-HpF" id="zql-ep-a1g"/>
-                <outlet property="renderStateUIController" destination="ugL-MZ-7gV" id="2a7-mr-OG5"/>
+                <outlet property="renderStateUIController" destination="cqf-KK-mFS" id="ygE-8e-jej"/>
                 <outlet property="splitView" destination="rdu-hA-uGi" id="xOH-c5-RAO"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
@@ -498,8 +498,8 @@
                                                                     </tableColumn>
                                                                 </tableColumns>
                                                                 <connections>
-                                                                    <outlet property="dataSource" destination="ugL-MZ-7gV" id="WNH-U8-zOs"/>
-                                                                    <outlet property="delegate" destination="ugL-MZ-7gV" id="FQd-2B-n4y"/>
+                                                                    <outlet property="dataSource" destination="cqf-KK-mFS" id="HxD-y0-E33"/>
+                                                                    <outlet property="delegate" destination="cqf-KK-mFS" id="fPA-p7-pOv"/>
                                                                 </connections>
                                                             </tableView>
                                                         </subviews>
@@ -526,7 +526,7 @@
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <connections>
-                                                        <action selector="addRemove:" target="ugL-MZ-7gV" id="5Uk-mE-y96"/>
+                                                        <action selector="add:" target="cqf-KK-mFS" id="0Yt-Mr-4k6"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -594,11 +594,12 @@
                 <outlet property="tableView" destination="wvw-3Y-vb0" id="Dda-sS-MHL"/>
             </connections>
         </customObject>
-        <customObject id="ugL-MZ-7gV" userLabel="Render State UI Controller" customClass="RenderStateUIController" customModule="MetalEditor" customModuleProvider="target">
+        <viewController id="cqf-KK-mFS" customClass="RenderStateUIController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
-                <outlet property="detailColumn" destination="hAQ-7B-AxC" id="gbP-xx-522"/>
-                <outlet property="tableView" destination="HTi-RO-tZ4" id="9Ut-P6-fba"/>
+                <outlet property="detailColumn" destination="hAQ-7B-AxC" id="LhJ-dw-kIi"/>
+                <outlet property="tableView" destination="HTi-RO-tZ4" id="5uh-da-1Gx"/>
+                <outlet property="view" destination="6qP-U5-VmT" id="H4l-pP-Jtg"/>
             </connections>
-        </customObject>
+        </viewController>
     </objects>
 </document>
