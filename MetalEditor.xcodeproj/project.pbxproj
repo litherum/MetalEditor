@@ -73,6 +73,7 @@
 		C24CDD541B5AFB8000348941 /* RenderInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD4F1B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift */; };
 		C24CDD561B5B32BA00348941 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD551B5B32BA00348941 /* Shaders.metal */; };
 		C285B2531B5E1FAB00671A58 /* BuffersUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C285B2521B5E1FAB00671A58 /* BuffersUIController.swift */; };
+		C2A9391D1B707A7900449A95 /* RenderStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A9391C1B707A7900449A95 /* RenderStateView.xib */; };
 		C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78481B58BC8A004535BC /* AppDelegate.swift */; };
 		C2BF784B1B58BC8A004535BC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF784A1B58BC8A004535BC /* Document.swift */; };
 		C2BF784E1B58BC8A004535BC /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2BF784C1B58BC8A004535BC /* Document.xib */; };
@@ -153,6 +154,7 @@
 		C24CDD501B5AFB3900348941 /* RenderInvocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderInvocation.swift; sourceTree = "<group>"; };
 		C24CDD551B5B32BA00348941 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		C285B2521B5E1FAB00671A58 /* BuffersUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuffersUIController.swift; sourceTree = "<group>"; };
+		C2A9391C1B707A7900449A95 /* RenderStateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderStateView.xib; sourceTree = "<group>"; };
 		C2BF78451B58BC8A004535BC /* MetalEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2BF78481B58BC8A004535BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2BF784A1B58BC8A004535BC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				C2BF78481B58BC8A004535BC /* AppDelegate.swift */,
 				C2BF784A1B58BC8A004535BC /* Document.swift */,
 				C2BF784C1B58BC8A004535BC /* Document.xib */,
+				C2A9391C1B707A7900449A95 /* RenderStateView.xib */,
 				C2BF78521B58BC8A004535BC /* Assets.xcassets */,
 				C2BF78541B58BC8A004535BC /* MainMenu.xib */,
 				C2BF78571B58BC8A004535BC /* Info.plist */,
@@ -437,6 +440,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2A9391D1B707A7900449A95 /* RenderStateView.xib in Resources */,
 				C2BF78531B58BC8A004535BC /* Assets.xcassets in Resources */,
 				C2BF784E1B58BC8A004535BC /* Document.xib in Resources */,
 				C2BF78561B58BC8A004535BC /* MainMenu.xib in Resources */,
