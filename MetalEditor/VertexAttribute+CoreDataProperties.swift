@@ -14,6 +14,7 @@ import CoreData
 
 extension VertexAttribute {
 
+    @NSManaged var id: NSNumber
     @NSManaged var format: NSNumber
     @NSManaged var offset: NSNumber
     @NSManaged var bufferIndex: NSNumber

@@ -7,8 +7,18 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RenderStateViewController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
+                <outlet property="colorAttachmentsTableDelegate" destination="2hP-Lu-8Nh" id="wTi-Oa-mba"/>
+                <outlet property="colorAttachmentsTableView" destination="xEw-AG-KZo" id="OrK-IF-QhG"/>
+                <outlet property="depthAttachmentPopUp" destination="X2V-yE-96O" id="oK7-L7-mXN"/>
                 <outlet property="fragmentFunctionTextField" destination="xuW-1M-Ztj" id="r5w-u4-8m1"/>
                 <outlet property="nameTextField" destination="Fv4-Lq-w2c" id="Gtb-Eb-y0f"/>
+                <outlet property="sampleCountCheckBox" destination="Fzb-RR-qwi" id="e84-vf-34v"/>
+                <outlet property="sampleCountTextField" destination="8Sx-50-cfD" id="HfD-dQ-NlP"/>
+                <outlet property="stencilAttachmentPopUp" destination="Wif-th-nfY" id="LVs-A3-yjW"/>
+                <outlet property="vertexAttributesTableDelegate" destination="ynd-9I-4QM" id="Ffq-oM-cMj"/>
+                <outlet property="vertexAttributesTableView" destination="Z6n-ZZ-oWE" id="SfZ-kA-qRU"/>
+                <outlet property="vertexBufferLayoutTableDelegate" destination="2qw-Qw-le7" id="ojw-5Y-9vc"/>
+                <outlet property="vertexBufferLayoutTableView" destination="Jex-P4-A5y" id="y9p-Jf-Bgv"/>
                 <outlet property="vertexFunctionTextField" destination="MJm-ly-EZA" id="MQ5-cD-kqM"/>
                 <outlet property="view" destination="bVz-qY-XJI" id="GTd-Fa-2zY"/>
             </connections>
@@ -48,6 +58,9 @@
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <action selector="setName:" target="-2" id="soE-In-zEa"/>
+                            </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MJm-ly-EZA">
                             <rect key="frame" x="181" y="0.0" width="172" height="22"/>
@@ -57,6 +70,9 @@
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <action selector="setVertexFunction:" target="-2" id="U65-vs-GGy"/>
+                            </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xuW-1M-Ztj">
                             <rect key="frame" x="361" y="0.0" width="173" height="22"/>
@@ -66,6 +82,9 @@
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
+                            <connections>
+                                <action selector="setFragmentFunction:" target="-2" id="e1C-fk-CUd"/>
+                            </connections>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="trA-4e-Bri">
                             <rect key="frame" x="359" y="30" width="177" height="17"/>
@@ -218,6 +237,10 @@
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <outlet property="dataSource" destination="ynd-9I-4QM" id="g4X-Gg-ecH"/>
+                                    <outlet property="delegate" destination="ynd-9I-4QM" id="39T-ki-9mj"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -247,9 +270,12 @@
                         <font key="font" metaFont="system"/>
                         <segments>
                             <segment label="+" width="32"/>
-                            <segment label="-" width="32" selected="YES" tag="1"/>
+                            <segment label="-" width="32" tag="1"/>
                         </segments>
                     </segmentedCell>
+                    <connections>
+                        <action selector="addRemoveVertexAttribute:" target="-2" id="CSs-TL-Qxg"/>
+                    </connections>
                 </segmentedControl>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LK-Ho-U3D" userLabel="Vertex Buffer Layouts Table">
                     <rect key="frame" x="20" y="193" width="459" height="112"/>
@@ -375,6 +401,10 @@
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <outlet property="dataSource" destination="2qw-Qw-le7" id="iQg-Bn-oYB"/>
+                                    <outlet property="delegate" destination="2qw-Qw-le7" id="a2K-JE-Pr5"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -404,9 +434,12 @@
                         <font key="font" metaFont="system"/>
                         <segments>
                             <segment label="+" width="32"/>
-                            <segment label="-" width="32" selected="YES" tag="1"/>
+                            <segment label="-" width="32" tag="1"/>
                         </segments>
                     </segmentedCell>
+                    <connections>
+                        <action selector="addRemoveVertexBufferLayout:" target="-2" id="yCS-qj-526"/>
+                    </connections>
                 </segmentedControl>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNh-6N-AQi" userLabel="Color Attachments Table">
                     <rect key="frame" x="20" y="74" width="459" height="111"/>
@@ -464,6 +497,10 @@
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <outlet property="dataSource" destination="2hP-Lu-8Nh" id="sat-kJ-m8y"/>
+                                    <outlet property="delegate" destination="2hP-Lu-8Nh" id="56T-8n-dIG"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -493,9 +530,12 @@
                         <font key="font" metaFont="system"/>
                         <segments>
                             <segment label="+" width="32"/>
-                            <segment label="-" width="32" selected="YES" tag="1"/>
+                            <segment label="-" width="32" tag="1"/>
                         </segments>
                     </segmentedCell>
+                    <connections>
+                        <action selector="addRemoveColorAttachment:" target="-2" id="71J-pO-w59"/>
+                    </connections>
                 </segmentedControl>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="aTG-DU-wmF">
                     <rect key="frame" x="20" y="20" width="534" height="46"/>
@@ -541,6 +581,9 @@
                                     </items>
                                 </menu>
                             </popUpButtonCell>
+                            <connections>
+                                <action selector="stencilAttachmentSelected:" target="-2" id="LHs-Xg-uMh"/>
+                            </connections>
                         </popUpButton>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ktZ-UL-gWM">
                             <rect key="frame" x="336" y="0.0" width="160" height="22"/>
@@ -552,6 +595,9 @@
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="sampleCountEnabled:" target="-2" id="xrT-tX-sPg"/>
+                                    </connections>
                                 </button>
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Sx-50-cfD">
                                     <rect key="frame" x="18" y="0.0" width="142" height="22"/>
@@ -561,6 +607,10 @@
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
+                                    <connections>
+                                        <action selector="sampleCountSet:" target="-2" id="exa-ab-N0V"/>
+                                        <outlet property="delegate" destination="-2" id="Yd2-UF-e83"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                             <constraints>
@@ -583,6 +633,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="remove:" target="-2" id="P2W-7A-5cW"/>
+                            </connections>
                         </button>
                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X2V-yE-96O" userLabel="Depth Attachment">
                             <rect key="frame" x="-2" y="-3" width="165" height="26"/>
@@ -598,6 +651,9 @@
                                     </items>
                                 </menu>
                             </popUpButtonCell>
+                            <connections>
+                                <action selector="depthAttachmentSelected:" target="-2" id="kJM-B9-bkC"/>
+                            </connections>
                         </popUpButton>
                     </subviews>
                     <constraints>
@@ -657,5 +713,24 @@
             <animations/>
             <point key="canvasLocation" x="240" y="455.5"/>
         </tableCellView>
+        <customObject id="ynd-9I-4QM" customClass="VertexAttributesTableDelegate" customModule="MetalEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="bufferIndexColumn" destination="cp4-kR-wgs" id="RES-hf-KFy"/>
+                <outlet property="formatColumn" destination="mXV-Hl-7FM" id="HM4-2B-KU7"/>
+                <outlet property="offsetColumn" destination="CX4-fX-Gzb" id="tlm-i4-Pdr"/>
+            </connections>
+        </customObject>
+        <customObject id="2qw-Qw-le7" customClass="VertexBufferLayoutTableDelegate" customModule="MetalEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="stepFunctionColumn" destination="nJW-P1-4cM" id="j39-Sz-kFl"/>
+                <outlet property="stepRateColumn" destination="fkz-z3-dzA" id="qRO-aK-nXz"/>
+                <outlet property="strideColumn" destination="Htz-Oh-RuI" id="B4h-1l-OaN"/>
+            </connections>
+        </customObject>
+        <customObject id="2hP-Lu-8Nh" customClass="ColorAttachmentsTableDelegate" customModule="MetalEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="pixelFormatColumn" destination="Iqz-Vg-Cr7" id="msr-25-Gf8"/>
+            </connections>
+        </customObject>
     </objects>
 </document>

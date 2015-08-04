@@ -84,9 +84,10 @@
 		C2BF786C1B58BC8A004535BC /* MetalEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF786B1B58BC8A004535BC /* MetalEditorUITests.swift */; };
 		C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78791B58C09B004535BC /* PreviewController.swift */; };
 		C2C1F3721B708F590092726F /* RenderStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C1F3711B708F590092726F /* RenderStateViewController.swift */; };
+		C2C1F3741B70A02E0092726F /* ManagedObjectHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C1F3731B70A02E0092726F /* ManagedObjectHelpers.swift */; };
+		C2C1F3751B70AAAB0092726F /* ManagedObjectHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C1F3731B70A02E0092726F /* ManagedObjectHelpers.swift */; };
 		C2CA03121B6F0EFF00BA6AA1 /* ComputeStateUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */; };
 		C2CA03141B6F186300BA6AA1 /* RenderStateUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */; };
-		C2CA03161B6F1DF200BA6AA1 /* RenderStateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA03151B6F1DF200BA6AA1 /* RenderStateDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,9 +173,9 @@
 		C2BF786D1B58BC8A004535BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2BF78791B58C09B004535BC /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
 		C2C1F3711B708F590092726F /* RenderStateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderStateViewController.swift; sourceTree = "<group>"; };
+		C2C1F3731B70A02E0092726F /* ManagedObjectHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectHelpers.swift; sourceTree = "<group>"; };
 		C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeStateUIController.swift; sourceTree = "<group>"; };
 		C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderStateUIController.swift; sourceTree = "<group>"; };
-		C2CA03151B6F1DF200BA6AA1 /* RenderStateDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderStateDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +243,7 @@
 				C24CDCAE1B5A18D200348941 /* Library.swift */,
 				C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */,
 				C24CDCB01B5A18D200348941 /* BufferBinding.swift */,
+				C2C1F3731B70A02E0092726F /* ManagedObjectHelpers.swift */,
 			);
 			name = "Managed Objects";
 			sourceTree = "<group>";
@@ -295,7 +297,6 @@
 				C285B2521B5E1FAB00671A58 /* BuffersUIController.swift */,
 				C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */,
 				C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */,
-				C2CA03151B6F1DF200BA6AA1 /* RenderStateDetailView.swift */,
 				C2C1F3711B708F590092726F /* RenderStateViewController.swift */,
 			);
 			path = MetalEditor;
@@ -489,6 +490,7 @@
 				C24CDD3D1B5ADE0F00348941 /* ComputePass+CoreDataProperties.swift in Sources */,
 				C24CDD2E1B5ADE0100348941 /* VertexAttribute.swift in Sources */,
 				C24CDD481B5ADE0F00348941 /* Library.swift in Sources */,
+				C2C1F3751B70AAAB0092726F /* ManagedObjectHelpers.swift in Sources */,
 				C24CDD411B5ADE0F00348941 /* Frame+CoreDataProperties.swift in Sources */,
 				C24CDD381B5ADE0F00348941 /* RenderPass.swift in Sources */,
 				C24CDD3F1B5ADE0F00348941 /* Pass+CoreDataProperties.swift in Sources */,
@@ -533,6 +535,7 @@
 				C24CDCF11B5AC44000348941 /* RenderPipelineColorAttachment.swift in Sources */,
 				C24CDCFE1B5AC86D00348941 /* VertexBufferLayout+CoreDataProperties.swift in Sources */,
 				C24CDD511B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift in Sources */,
+				C2C1F3741B70A02E0092726F /* ManagedObjectHelpers.swift in Sources */,
 				C24CDCBF1B5A18D200348941 /* Library+CoreDataProperties.swift in Sources */,
 				C24CDCB11B5A18D200348941 /* Size+CoreDataProperties.swift in Sources */,
 				C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */,
@@ -541,7 +544,6 @@
 				C24CDCFD1B5AC86D00348941 /* VertexAttribute.swift in Sources */,
 				C24CDCF71B5AC44000348941 /* RenderPass.swift in Sources */,
 				C24CDCBB1B5A18D200348941 /* Buffer+CoreDataProperties.swift in Sources */,
-				C2CA03161B6F1DF200BA6AA1 /* RenderStateDetailView.swift in Sources */,
 				C24CDCF51B5AC44000348941 /* RenderPipelineState.swift in Sources */,
 				C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */,
 				C24CDCB81B5A18D200348941 /* Pass.swift in Sources */,

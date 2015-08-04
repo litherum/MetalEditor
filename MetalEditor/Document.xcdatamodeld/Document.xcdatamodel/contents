@@ -44,6 +44,7 @@
         <relationship name="invocations" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="RenderInvocation" syncable="YES"/>
     </entity>
     <entity name="RenderPipelineColorAttachment" representedClassName=".RenderPipelineColorAttachment" syncable="YES">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="pixelFormat" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="RenderPipelineState" representedClassName=".RenderPipelineState" syncable="YES">
@@ -66,9 +67,11 @@
     <entity name="VertexAttribute" representedClassName=".VertexAttribute" syncable="YES">
         <attribute name="bufferIndex" attributeType="Integer 32" syncable="YES"/>
         <attribute name="format" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="offset" attributeType="Integer 32" syncable="YES"/>
     </entity>
     <entity name="VertexBufferLayout" representedClassName=".VertexBufferLayout" syncable="YES">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="stepFunction" attributeType="Integer 16" syncable="YES"/>
         <attribute name="stepRate" attributeType="Integer 32" syncable="YES"/>
         <attribute name="stride" attributeType="Integer 32" syncable="YES"/>
@@ -84,10 +87,10 @@
         <element name="Pass" positionX="0" positionY="81" width="128" height="45"/>
         <element name="RenderInvocation" positionX="27" positionY="108" width="128" height="135"/>
         <element name="RenderPass" positionX="18" positionY="99" width="128" height="60"/>
-        <element name="RenderPipelineColorAttachment" positionX="-9" positionY="63" width="128" height="60"/>
+        <element name="RenderPipelineColorAttachment" positionX="-9" positionY="63" width="128" height="75"/>
         <element name="RenderPipelineState" positionX="45" positionY="117" width="128" height="195"/>
         <element name="Size" positionX="18" positionY="90" width="128" height="90"/>
-        <element name="VertexAttribute" positionX="0" positionY="108" width="128" height="90"/>
-        <element name="VertexBufferLayout" positionX="9" positionY="117" width="128" height="90"/>
+        <element name="VertexAttribute" positionX="0" positionY="108" width="128" height="105"/>
+        <element name="VertexBufferLayout" positionX="9" positionY="117" width="128" height="105"/>
     </elements>
 </model>

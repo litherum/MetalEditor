@@ -36,7 +36,7 @@ class ComputeStateUIController: NSObject, NSTableViewDelegate, NSTableViewDataSo
         
         do {
             let states = try managedObjectContext.executeFetchRequest(fetchRequest) as! [ComputePipelineState]
-            if states.count == 0 {
+            if states.count < index {
                 return nil
             }
             return states[index]

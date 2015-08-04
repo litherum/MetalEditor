@@ -39,7 +39,7 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
         
         do {
             let buffers = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Buffer]
-            if buffers.count == 0 {
+            if buffers.count < index {
                 return nil
             }
             return buffers[index]

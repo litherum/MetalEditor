@@ -8,7 +8,11 @@
 
 import Cocoa
 
-class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+protocol RenderPipelineStateRemoveObserver: class {
+    func removeRenderPipelineState(state: RenderPipelineState)
+}
+
+class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, RenderPipelineStateRemoveObserver {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     @IBOutlet var tableView: NSTableView!
@@ -36,7 +40,7 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         
         do {
             let states = try managedObjectContext.executeFetchRequest(fetchRequest) as! [RenderPipelineState]
-            if states.count == 0 {
+            if states.count < index {
                 return nil
             }
             return states[index]
@@ -55,8 +59,9 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         guard column == detailColumn else {
             fatalError()
         }
+        // FIXME: Seems silly to keep these all around in memory at once
         while childViewControllers.count <= row {
-            guard let controller = RenderStateViewController(nibName: "RenderStateViewController", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: state) else {
+            guard let controller = RenderStateViewController(nibName: "RenderStateViewController", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: state, removeObserver: self) else {
                 fatalError()
             }
             childViewControllers.append(controller)
@@ -89,6 +94,21 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         renderPipelineState.mutableOrderedSetValueForKey("vertexAttributes").addObject(vertexAttribute)
         renderPipelineState.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(vertexBufferLayout)
 
+        tableView.reloadData()
+        modelObserver.modelDidChange()
+    }
+
+    func removeRenderPipelineState(state: RenderPipelineState) {
+        for attachment in state.colorAttachments {
+            managedObjectContext.deleteObject(attachment as! NSManagedObject)
+        }
+        for attribute in state.vertexAttributes {
+            managedObjectContext.deleteObject(attribute as! NSManagedObject)
+        }
+        for layout in state.vertexBufferLayouts {
+            managedObjectContext.deleteObject(layout as! NSManagedObject)
+        }
+        managedObjectContext.deleteObject(state)
         tableView.reloadData()
         modelObserver.modelDidChange()
     }

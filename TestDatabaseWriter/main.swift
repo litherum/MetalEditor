@@ -50,16 +50,19 @@ func main() {
     buffer.id = 0
     
     let vertexAttribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
+    vertexAttribute.id = 0
     vertexAttribute.format = MTLVertexFormat.Float2.rawValue
     vertexAttribute.offset = 0
     vertexAttribute.bufferIndex = 0
 
     let vertexBufferLayout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
+    vertexBufferLayout.id = 0
     vertexBufferLayout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
     vertexBufferLayout.stepRate = 1
     vertexBufferLayout.stride = 8
 
     let colorAttachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
+    colorAttachment.id = 0
     colorAttachment.pixelFormat = nil
 
     let renderPipelineState = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineState", inManagedObjectContext: managedObjectContext) as! RenderPipelineState
@@ -117,7 +120,8 @@ func main() {
 
     do {
         try managedObjectContext.save()
-    } catch {
+    } catch let error as NSError {
+        print("Error: \(error)")
         fatalError()
     }
 }
