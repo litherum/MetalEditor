@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol RenderPipelineStateRemoveObserver: class {
-    func removeRenderPipelineState(state: RenderPipelineState)
+    func removeRenderPipelineState(controller: RenderStateViewController)
 }
 
 class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, RenderPipelineStateRemoveObserver {
@@ -98,7 +98,8 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         modelObserver.modelDidChange()
     }
 
-    func removeRenderPipelineState(state: RenderPipelineState) {
+    func removeRenderPipelineState(controller: RenderStateViewController) {
+        let state = controller.state
         for attachment in state.colorAttachments {
             managedObjectContext.deleteObject(attachment as! NSManagedObject)
         }
@@ -109,6 +110,12 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
             managedObjectContext.deleteObject(layout as! NSManagedObject)
         }
         managedObjectContext.deleteObject(state)
+        for i in 0 ..< childViewControllers.count {
+            if childViewControllers[i] == controller {
+                childViewControllers.removeAtIndex(i)
+                break
+            }
+        }
         tableView.reloadData()
         modelObserver.modelDidChange()
     }

@@ -564,7 +564,11 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
         nameTextField.stringValue = state.name
         vertexFunctionTextField.stringValue = state.vertexFunction
         fragmentFunctionTextField.stringValue = state.fragmentFunction
+
+        depthAttachmentPopUp.menu = pixelFormatMenu()
+        stencilAttachmentPopUp.menu = pixelFormatMenu()
         // FIXME: Set depthAttachmentPopUp and stencilAttachmentPopUp
+
         if let sampleCount = state.sampleCount {
             sampleCountCheckBox.state = NSOnState
             sampleCountTextField.integerValue = sampleCount.integerValue
@@ -585,9 +589,6 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
         colorAttachmentsTableDelegate.managedObjectContext = managedObjectContext
         colorAttachmentsTableDelegate.modelObserver = modelObserver
         colorAttachmentsTableDelegate.state = state
-
-        depthAttachmentPopUp.menu = pixelFormatMenu()
-        stencilAttachmentPopUp.menu = pixelFormatMenu()
     }
 
     @IBAction func setName(sender: NSTextField) {
@@ -645,7 +646,7 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
                 managedObjectContext.deleteObject(state.vertexBufferLayouts[index] as! NSManagedObject)
             }
         }
-        vertexAttributesTableView.reloadData()
+        vertexBufferLayoutTableView.reloadData()
         modelObserver.modelDidChange()
         sender.selectedSegment = -1
     }
@@ -665,7 +666,7 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
                 managedObjectContext.deleteObject(state.colorAttachments[index] as! NSManagedObject)
             }
         }
-        vertexAttributesTableView.reloadData()
+        colorAttachmentsTableView.reloadData()
         modelObserver.modelDidChange()
         sender.selectedSegment = -1
     }
@@ -711,7 +712,7 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     }
 
     @IBAction func remove(sender: NSButton) {
-        removeObserver.removeRenderPipelineState(state)
+        removeObserver.removeRenderPipelineState(self)
     }
 
 }
