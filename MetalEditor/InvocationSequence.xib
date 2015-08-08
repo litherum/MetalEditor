@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A244d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8173.3"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="InvocationsViewController" customModule="MetalEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="stackView" destination="LR5-Ef-eBj" id="Lkr-Hd-8VA"/>
+                <outlet property="view" destination="c22-O7-iKe" id="KfM-PC-a12"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView autoresizesSubviews="NO" id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mB-2F-rpR">
+                    <rect key="frame" x="27" y="20" width="388" height="232"/>
+                    <clipView key="contentView" id="UXW-nI-V5i">
+                        <rect key="frame" x="1" y="1" width="386" height="230"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view translatesAutoresizingMaskIntoConstraints="NO" id="4BU-15-3Tf">
+                                <rect key="frame" x="0.0" y="0.0" width="211" height="148"/>
+                                <subviews>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-Ef-eBj">
+                                        <rect key="frame" x="0.0" y="0.0" width="211" height="148"/>
+                                        <animations/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="LR5-Ef-eBj" secondAttribute="trailing" id="5hD-oa-qC3"/>
+                                    <constraint firstItem="LR5-Ef-eBj" firstAttribute="leading" secondItem="4BU-15-3Tf" secondAttribute="leading" id="aYW-j4-37I"/>
+                                    <constraint firstAttribute="bottom" secondItem="LR5-Ef-eBj" secondAttribute="bottom" id="lKz-dV-NZt"/>
+                                    <constraint firstItem="LR5-Ef-eBj" firstAttribute="top" secondItem="4BU-15-3Tf" secondAttribute="top" id="nWq-hd-qFI"/>
+                                </constraints>
+                                <animations/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="4BU-15-3Tf" secondAttribute="trailing" constant="175" id="Fg6-9x-cqY"/>
+                            <constraint firstItem="4BU-15-3Tf" firstAttribute="top" secondItem="UXW-nI-V5i" secondAttribute="top" constant="82" id="QL2-fw-2KY"/>
+                            <constraint firstItem="4BU-15-3Tf" firstAttribute="leading" secondItem="UXW-nI-V5i" secondAttribute="leading" id="YUL-G1-Qjd"/>
+                            <constraint firstAttribute="bottom" secondItem="4BU-15-3Tf" secondAttribute="bottom" id="koo-CQ-J8Q"/>
+                        </constraints>
+                        <animations/>
+                    </clipView>
+                    <animations/>
+                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="L2I-g7-Jgg">
+                        <rect key="frame" x="1" y="215" width="386" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </scroller>
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cWx-mq-5o8">
+                        <rect key="frame" x="371" y="1" width="16" height="230"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </scroller>
+                </scrollView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ldf-10-gOx">
+                    <rect key="frame" x="417" y="118.5" width="49" height="32"/>
+                    <animations/>
+                    <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="C5M-f9-8Me">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ldf-10-gOx" secondAttribute="trailing" constant="20" symbolic="YES" id="Dnq-rH-yJ6"/>
+                <constraint firstAttribute="bottom" secondItem="2mB-2F-rpR" secondAttribute="bottom" constant="20" symbolic="YES" id="Ppx-za-Cpr"/>
+                <constraint firstItem="2mB-2F-rpR" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="27" id="ayL-1n-8Kh"/>
+                <constraint firstItem="ldf-10-gOx" firstAttribute="leading" secondItem="2mB-2F-rpR" secondAttribute="trailing" constant="8" symbolic="YES" id="kpx-e5-sBW"/>
+                <constraint firstItem="2mB-2F-rpR" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="oA5-4E-uno"/>
+                <constraint firstItem="ldf-10-gOx" firstAttribute="centerY" secondItem="2mB-2F-rpR" secondAttribute="centerY" id="sgs-UV-65u"/>
+            </constraints>
+            <animations/>
+        </customView>
+    </objects>
+</document>

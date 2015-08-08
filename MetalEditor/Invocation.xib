@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A244d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8173.3"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="InvocationViewController" customModule="MetalEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="box" destination="HQi-PX-cGb" id="lNi-Hb-TXT"/>
+                <outlet property="view" destination="c22-O7-iKe" id="O9q-wm-LyL"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="91"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <box title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="HQi-PX-cGb">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="91"/>
+                    <view key="contentView" id="lZs-Ux-PUO">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="91"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j9I-bA-DE7">
+                                <rect key="frame" x="139" y="42" width="47" height="32"/>
+                                <animations/>
+                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U0Y-d3-4bh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ogA-1f-5me">
+                                <rect key="frame" x="20" y="49" width="117" height="22"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="719-Zr-y0B">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X1N-zD-a36">
+                                <rect key="frame" x="14" y="13" width="172" height="32"/>
+                                <animations/>
+                                <buttonCell key="cell" type="push" title="Details..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tIl-Nh-OrO">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="X1N-zD-a36" secondAttribute="trailing" constant="20" symbolic="YES" id="28J-Th-QAD"/>
+                            <constraint firstItem="ogA-1f-5me" firstAttribute="top" secondItem="lZs-Ux-PUO" secondAttribute="top" constant="20" symbolic="YES" id="2pQ-TB-xzz"/>
+                            <constraint firstItem="X1N-zD-a36" firstAttribute="top" secondItem="ogA-1f-5me" secondAttribute="bottom" constant="8" symbolic="YES" id="7cr-Ar-hUT"/>
+                            <constraint firstAttribute="trailing" secondItem="j9I-bA-DE7" secondAttribute="trailing" constant="20" symbolic="YES" id="RSW-aI-RIe"/>
+                            <constraint firstItem="X1N-zD-a36" firstAttribute="leading" secondItem="lZs-Ux-PUO" secondAttribute="leading" constant="20" symbolic="YES" id="SY9-WB-imP"/>
+                            <constraint firstItem="ogA-1f-5me" firstAttribute="leading" secondItem="lZs-Ux-PUO" secondAttribute="leading" constant="20" symbolic="YES" id="ZKz-dd-mE0"/>
+                            <constraint firstItem="j9I-bA-DE7" firstAttribute="baseline" secondItem="ogA-1f-5me" secondAttribute="baseline" id="hNC-rh-23N"/>
+                            <constraint firstItem="j9I-bA-DE7" firstAttribute="leading" secondItem="ogA-1f-5me" secondAttribute="trailing" constant="8" symbolic="YES" id="o99-hi-GBe"/>
+                            <constraint firstAttribute="bottom" secondItem="X1N-zD-a36" secondAttribute="bottom" constant="20" symbolic="YES" id="t9l-E7-WEk"/>
+                        </constraints>
+                        <animations/>
+                    </view>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="3Wp-Wz-DAe"/>
+                    </constraints>
+                    <animations/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstItem="HQi-PX-cGb" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="3Ti-QT-JSn"/>
+                <constraint firstAttribute="trailing" secondItem="HQi-PX-cGb" secondAttribute="trailing" id="3mg-rf-xuU"/>
+                <constraint firstItem="HQi-PX-cGb" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="I17-ka-aqs"/>
+                <constraint firstAttribute="bottom" secondItem="HQi-PX-cGb" secondAttribute="bottom" id="iji-uh-hKa"/>
+            </constraints>
+            <animations/>
+        </customView>
+    </objects>
+</document>

@@ -20,6 +20,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     @IBOutlet var computeStateUIController: ComputeStateUIController!
     @IBOutlet var renderStateUIController: RenderStateUIController!
     @IBOutlet var splitView: NSSplitView!
+    @IBOutlet var invocationsStackView: NSStackView!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var frame: Frame!
@@ -29,7 +30,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     func setupFrame() {
         let fetchRequest = NSFetchRequest(entityName: "Frame")
         do {
-            let frames = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Frame]
+            let frames = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [Frame]
             if frames.count != 0 {
                 frame = frames[0]
             }
@@ -37,14 +38,14 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         }
         
         if frame == nil {
-            frame = NSEntityDescription.insertNewObjectForEntityForName("Frame", inManagedObjectContext: managedObjectContext) as! Frame
+            frame = NSEntityDescription.insertNewObjectForEntityForName("Frame", inManagedObjectContext: managedObjectContext!) as! Frame
         }
     }
     
     func setupLibrary() {
         let fetchRequest = NSFetchRequest(entityName: "Library")
         do {
-            let libraries = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Library]
+            let libraries = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [Library]
             if libraries.count != 0 {
                 library = libraries[0]
             }
@@ -52,7 +53,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         }
         
         if library == nil {
-            library = NSEntityDescription.insertNewObjectForEntityForName("Library", inManagedObjectContext: managedObjectContext) as! Library
+            library = NSEntityDescription.insertNewObjectForEntityForName("Library", inManagedObjectContext: managedObjectContext!) as! Library
         }
     }
 
@@ -75,12 +76,48 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         renderStateUIController.managedObjectContext = managedObjectContext
         renderStateUIController.modelObserver = self
 
+        for p in frame.passes {
+            if let pass = p as? ComputePass {
+                guard let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, pass: pass) else {
+                    fatalError()
+                }
+                controller.loadView()
+                for i in pass.invocations {
+                    guard let invocation = i as? ComputeInvocation else {
+                        fatalError()
+                    }
+                    guard let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, invocation: invocation) else {
+                        fatalError()
+                    }
+                    controller.addSubController(subController)
+                }
+                invocationsStackView.addArrangedSubview(controller.view)
+            } else if let pass = p as? RenderPass {
+                guard let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, pass: pass) else {
+                    fatalError()
+                }
+                controller.loadView()
+                for i in pass.invocations {
+                    guard let invocation = i as? RenderInvocation else {
+                        fatalError()
+                    }
+                    guard let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, invocation: invocation) else {
+                        fatalError()
+                    }
+                    controller.addSubController(subController)
+                }
+                invocationsStackView.addArrangedSubview(controller.view)
+            } else {
+                fatalError()
+            }
+        }
+
         librarySourceView.string = library.source
         librarySourceView.font = CTFontCreateWithName("Courier New", 14, nil) // FIXME: Should be able to set this in IB
         
         metalState = MetalState()
         metalState.delegate = self
-        metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
+        metalState.populate(managedObjectContext!, device: device, view: previewController.metalView)
         
         previewController.initializeWithDevice(device, commandQueue: commandQueue, frame: frame, metalState: metalState)
 
@@ -106,11 +143,11 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         } else {
             library.source = ""
         }
-        metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
+        metalState.populate(managedObjectContext!, device: device, view: previewController.metalView)
     }
 
     func modelDidChange() {
-        metalState.populate(managedObjectContext, device: device, view: previewController.metalView)
+        metalState.populate(managedObjectContext!, device: device, view: previewController.metalView)
     }
 
     override class func autosavesInPlace() -> Bool {
@@ -122,5 +159,4 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this property and override -makeWindowControllers instead.
         return "Document"
     }
-
 }
