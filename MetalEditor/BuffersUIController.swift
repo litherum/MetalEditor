@@ -30,6 +30,10 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
     }
 
     private func getBuffer(index: Int) -> Buffer? {
+        if index < 0 {
+            return nil
+        }
+
         let fetchRequest = NSFetchRequest(entityName: "Buffer")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         // <rdar://problem/22108925> managedObjectContext.executeFetchRequest() crashes if you add two objects.
@@ -165,21 +169,16 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
     }
 
     @IBAction func addRemove(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 {
-            // Add
+        if sender.selectedSegment == 0 { // Add
             let bufferCount = numberOfBuffers()
             let buffer = NSEntityDescription.insertNewObjectForEntityForName("Buffer", inManagedObjectContext: managedObjectContext) as! Buffer
             buffer.initialData = nil
             buffer.initialLength = 0
             buffer.name = "Buffer"
             buffer.id = bufferCount
-        } else {
+        } else { // Remove
             assert(sender.selectedSegment == 1)
-            // Remove
-            for index in tableView.selectedRowIndexes {
-                guard let buffer = getBuffer(index) else {
-                    continue
-                }
+            if let buffer = getBuffer(tableView.selectedRow) {
                 managedObjectContext.deleteObject(buffer)
             }
         }

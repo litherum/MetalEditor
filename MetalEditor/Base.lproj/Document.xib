@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8164.2" systemVersion="15A235d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8164.2" systemVersion="15A244d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8164.2"/>
@@ -102,11 +102,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Buffers" identifier="2" id="BQD-HC-HxR">
                                         <view key="view" id="O9M-9c-iVp">
-                                            <rect key="frame" x="32" y="7" width="358" height="508"/>
+                                            <rect key="frame" x="32" y="7" width="480" height="493"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR8-pf-O6j">
-                                                    <rect key="frame" x="0.0" y="49" width="358" height="459"/>
+                                                <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR8-pf-O6j">
+                                                    <rect key="frame" x="0.0" y="34" width="358" height="459"/>
                                                     <clipView key="contentView" id="eTG-hX-hPy">
                                                         <rect key="frame" x="1" y="0.0" width="356" height="458"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -292,8 +292,8 @@
                                                         <animations/>
                                                     </tableHeaderView>
                                                 </scrollView>
-                                                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5sF-0X-v4q">
-                                                    <rect key="frame" x="269" y="18" width="71" height="24"/>
+                                                <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5sF-0X-v4q">
+                                                    <rect key="frame" x="269" y="3" width="71" height="24"/>
                                                     <animations/>
                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="02v-c6-0Fe">
                                                         <font key="font" metaFont="system"/>
@@ -320,11 +320,11 @@
                                     </tabViewItem>
                                     <tabViewItem label="Compute Pipeline State" identifier="" id="3rv-n7-zTv">
                                         <view key="view" id="27F-rg-Owf">
-                                            <rect key="frame" x="32" y="7" width="358" height="508"/>
+                                            <rect key="frame" x="32" y="7" width="480" height="493"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4H-bU-uAz">
-                                                    <rect key="frame" x="0.0" y="49" width="358" height="459"/>
+                                                <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4H-bU-uAz">
+                                                    <rect key="frame" x="0.0" y="34" width="358" height="459"/>
                                                     <clipView key="contentView" id="oB1-3h-K1N">
                                                         <rect key="frame" x="1" y="0.0" width="356" height="458"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -438,8 +438,8 @@
                                                         <animations/>
                                                     </tableHeaderView>
                                                 </scrollView>
-                                                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FQJ-Uz-hHm">
-                                                    <rect key="frame" x="269" y="18" width="71" height="24"/>
+                                                <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQJ-Uz-hHm">
+                                                    <rect key="frame" x="269" y="3" width="71" height="24"/>
                                                     <animations/>
                                                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="TQp-s2-0t8">
                                                         <font key="font" metaFont="system"/>

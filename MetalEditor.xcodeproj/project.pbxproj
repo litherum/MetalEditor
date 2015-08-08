@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2205E181B5A0E0A0046F04D /* DetailViewController.swift */; };
+		C23492BB1B75E62B00712575 /* VertexAttributesTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */; };
+		C23492BD1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */; };
+		C23492BF1B75E66800712575 /* ColorAttachmentsTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BE1B75E66800712575 /* ColorAttachmentsTableDelegate.swift */; };
 		C24CDC9E1B5A17BF00348941 /* MetalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDC9D1B5A17BF00348941 /* MetalState.swift */; };
 		C24CDCB11B5A18D200348941 /* Size+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDC9F1B5A18D200348941 /* Size+CoreDataProperties.swift */; };
 		C24CDCB21B5A18D200348941 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA01B5A18D200348941 /* Size.swift */; };
@@ -121,6 +124,9 @@
 
 /* Begin PBXFileReference section */
 		C2205E181B5A0E0A0046F04D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexAttributesTableDelegate.swift; sourceTree = "<group>"; };
+		C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexBufferLayoutTableDelegate.swift; sourceTree = "<group>"; };
+		C23492BE1B75E66800712575 /* ColorAttachmentsTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorAttachmentsTableDelegate.swift; sourceTree = "<group>"; };
 		C24CDC9D1B5A17BF00348941 /* MetalState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalState.swift; sourceTree = "<group>"; };
 		C24CDC9F1B5A18D200348941 /* Size+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Size+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C24CDCA01B5A18D200348941 /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
@@ -298,6 +304,9 @@
 				C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */,
 				C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */,
 				C2C1F3711B708F590092726F /* RenderStateViewController.swift */,
+				C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */,
+				C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */,
+				C23492BE1B75E66800712575 /* ColorAttachmentsTableDelegate.swift */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -529,6 +538,7 @@
 				C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */,
 				C24CDCB41B5A18D200348941 /* ComputeInvocation.swift in Sources */,
 				C24CDCB21B5A18D200348941 /* Size.swift in Sources */,
+				C23492BD1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift in Sources */,
 				C24CDCBA1B5A18D200348941 /* Frame.swift in Sources */,
 				C24CDC9E1B5A17BF00348941 /* MetalState.swift in Sources */,
 				C24CDCFF1B5AC86D00348941 /* VertexBufferLayout.swift in Sources */,
@@ -537,8 +547,10 @@
 				C24CDD511B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift in Sources */,
 				C2C1F3741B70A02E0092726F /* ManagedObjectHelpers.swift in Sources */,
 				C24CDCBF1B5A18D200348941 /* Library+CoreDataProperties.swift in Sources */,
+				C23492BB1B75E62B00712575 /* VertexAttributesTableDelegate.swift in Sources */,
 				C24CDCB11B5A18D200348941 /* Size+CoreDataProperties.swift in Sources */,
 				C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */,
+				C23492BF1B75E66800712575 /* ColorAttachmentsTableDelegate.swift in Sources */,
 				C24CDCF61B5AC44000348941 /* RenderPass+CoreDataProperties.swift in Sources */,
 				C2C1F3721B708F590092726F /* RenderStateViewController.swift in Sources */,
 				C24CDCFD1B5AC86D00348941 /* VertexAttribute.swift in Sources */,

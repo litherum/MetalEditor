@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8164.2" systemVersion="15A235d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8164.2" systemVersion="15A244d" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8164.2"/>
@@ -158,6 +158,9 @@
                                                             <font key="font" metaFont="menu"/>
                                                             <menu key="menu" id="lan-oF-7Nb"/>
                                                         </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="formatSelected:" target="ynd-9I-4QM" id="6Gk-tT-JY1"/>
+                                                        </connections>
                                                     </popUpButton>
                                                 </subviews>
                                                 <constraints>
@@ -193,6 +196,10 @@
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <action selector="setOffset:" target="ynd-9I-4QM" id="leB-hn-oWb"/>
+                                                            <outlet property="delegate" destination="ynd-9I-4QM" id="RFd-Iy-Ohe"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <animations/>
@@ -227,6 +234,10 @@
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <action selector="setBufferIndex:" target="ynd-9I-4QM" id="hPP-yp-Mhv"/>
+                                                            <outlet property="delegate" destination="ynd-9I-4QM" id="WnJ-6P-sb5"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <animations/>
@@ -322,6 +333,9 @@
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="stepFunctionSelected:" target="2qw-Qw-le7" id="44G-c0-vqZ"/>
+                                                        </connections>
                                                     </popUpButton>
                                                 </subviews>
                                                 <constraints>
@@ -357,6 +371,10 @@
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <action selector="setStepRate:" target="2qw-Qw-le7" id="MnP-Hq-r0T"/>
+                                                            <outlet property="delegate" destination="2qw-Qw-le7" id="Ubv-kV-Ug4"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <animations/>
@@ -391,6 +409,10 @@
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
+                                                        <connections>
+                                                            <action selector="setStride:" target="2qw-Qw-le7" id="93G-0y-6hi"/>
+                                                            <outlet property="delegate" destination="2qw-Qw-le7" id="Ml0-rO-KV3"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <animations/>
@@ -486,6 +508,9 @@
                                                                 </items>
                                                             </menu>
                                                         </popUpButtonCell>
+                                                        <connections>
+                                                            <action selector="pixelFormatSelected:" target="2hP-Lu-8Nh" id="xir-f0-0Jr"/>
+                                                        </connections>
                                                     </popUpButton>
                                                 </subviews>
                                                 <constraints>
@@ -718,6 +743,7 @@
                 <outlet property="bufferIndexColumn" destination="cp4-kR-wgs" id="RES-hf-KFy"/>
                 <outlet property="formatColumn" destination="mXV-Hl-7FM" id="HM4-2B-KU7"/>
                 <outlet property="offsetColumn" destination="CX4-fX-Gzb" id="tlm-i4-Pdr"/>
+                <outlet property="tableView" destination="Z6n-ZZ-oWE" id="Q5L-vM-BTf"/>
             </connections>
         </customObject>
         <customObject id="2qw-Qw-le7" customClass="VertexBufferLayoutTableDelegate" customModule="MetalEditor" customModuleProvider="target">
@@ -725,11 +751,13 @@
                 <outlet property="stepFunctionColumn" destination="nJW-P1-4cM" id="j39-Sz-kFl"/>
                 <outlet property="stepRateColumn" destination="fkz-z3-dzA" id="qRO-aK-nXz"/>
                 <outlet property="strideColumn" destination="Htz-Oh-RuI" id="B4h-1l-OaN"/>
+                <outlet property="tableView" destination="Jex-P4-A5y" id="G6R-zH-qhR"/>
             </connections>
         </customObject>
         <customObject id="2hP-Lu-8Nh" customClass="ColorAttachmentsTableDelegate" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="pixelFormatColumn" destination="Iqz-Vg-Cr7" id="msr-25-Gf8"/>
+                <outlet property="tableView" destination="xEw-AG-KZo" id="8eh-JO-QIF"/>
             </connections>
         </customObject>
     </objects>

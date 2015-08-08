@@ -27,6 +27,10 @@ class ComputeStateUIController: NSObject, NSTableViewDelegate, NSTableViewDataSo
     }
 
     private func getState(index: Int) -> ComputePipelineState? {
+        if index < 0 {
+            return nil
+        }
+
         let fetchRequest = NSFetchRequest(entityName: "ComputePipelineState")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         // <rdar://problem/22108925> managedObjectContext.executeFetchRequest() crashes if you add two objects.
@@ -101,19 +105,14 @@ class ComputeStateUIController: NSObject, NSTableViewDelegate, NSTableViewDataSo
     }
 
     @IBAction func addRemove(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 {
-            // Add
+        if sender.selectedSegment == 0 { // Add
             let stateCount = numberOfStates()
             let state = NSEntityDescription.insertNewObjectForEntityForName("ComputePipelineState", inManagedObjectContext: managedObjectContext) as! ComputePipelineState
             state.functionName = "Function"
             state.id = stateCount
-        } else {
+        } else { // Remove
             assert(sender.selectedSegment == 1)
-            // Remove
-            for index in tableView.selectedRowIndexes {
-                guard let state = getState(index) else {
-                    continue
-                }
+            if let state = getState(tableView.selectedRow) {
                 managedObjectContext.deleteObject(state)
             }
         }

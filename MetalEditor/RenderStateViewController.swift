@@ -8,524 +8,9 @@
 
 import Cocoa
 
-private func numberToPixelFormat(pixelFormat: NSNumber?) -> MTLPixelFormat? {
-    guard let number = pixelFormat else {
-        return nil
-    }
-    return MTLPixelFormat(rawValue: number.unsignedLongValue)
-}
+let pixelFormatMenuOrder: [MTLPixelFormat] = [.Invalid, .A8Unorm, .R8Unorm, .R8Snorm, .R8Uint, .R8Sint, .R16Unorm, .R16Snorm, .R16Uint, .R16Sint, .R16Float, .RG8Unorm, .RG8Snorm, .RG8Uint, .RG8Sint, .R32Uint, .R32Sint, .R32Float, .RG16Unorm, .RG16Snorm, .RG16Uint, .RG16Sint, .RG16Float, .RGBA8Unorm, .RGBA8Unorm_sRGB, .RGBA8Snorm, .RGBA8Uint, .RGBA8Sint, .BGRA8Unorm, .BGRA8Unorm_sRGB, .RGB10A2Unorm, .RGB10A2Uint, .RG11B10Float, .RGB9E5Float, .RG32Uint, .RG32Sint, .RG32Float, .RGBA16Unorm, .RGBA16Snorm, .RGBA16Uint, .RGBA16Sint, .RGBA16Float, .RGBA32Uint, .RGBA32Sint, .RGBA32Float, .BC1_RGBA, .BC1_RGBA_sRGB, .BC2_RGBA, .BC2_RGBA_sRGB, .BC3_RGBA, .BC3_RGBA_sRGB, .BC4_RUnorm, .BC4_RSnorm, .BC5_RGUnorm, .BC5_RGSnorm, .BC6H_RGBFloat, .BC6H_RGBUfloat, .BC7_RGBAUnorm, .BC7_RGBAUnorm_sRGB, .GBGR422, .BGRG422, .Depth32Float, .Stencil8, .Depth24Unorm_Stencil8, .Depth32Float_Stencil8]
 
-private func pixelFormatToIndex(pixelFormat: MTLPixelFormat?) -> Int {
-    guard let format = pixelFormat else {
-        return 0
-    }
-    // Suuuuuuuper slow
-    var index = 0
-    for i in MTLPixelFormat.A8Unorm.rawValue ... MTLPixelFormat.Depth32Float_Stencil8.rawValue {
-        guard let probe = MTLPixelFormat(rawValue: i) else {
-            continue
-        }
-        guard pixelFormatName(probe) != nil else {
-            continue
-        }
-        if format == probe {
-            return index
-        }
-        ++index
-    }
-    return 0
-}
-
-private func pixelFormatName(format: MTLPixelFormat) -> String? {
-    switch format {
-    case .Invalid:
-        return "Invalid"
-    case .A8Unorm:
-        return "A8Unorm"
-    case .R8Unorm:
-        return "R8Unorm"
-    case .R8Snorm:
-        return "R8Snorm"
-    case .R8Uint:
-        return "R8Uint"
-    case .R8Sint:
-        return "R8Sint"
-    case .R16Unorm:
-        return "R16Unorm"
-    case .R16Snorm:
-        return "R16Snorm"
-    case .R16Uint:
-        return "R16Uint"
-    case .R16Sint:
-        return "R16Sint"
-    case .R16Float:
-        return "R16Float"
-    case .RG8Unorm:
-        return "RG8Unorm"
-    case .RG8Snorm:
-        return "RG8Snorm"
-    case .RG8Uint:
-        return "RG8Uint"
-    case .RG8Sint:
-        return "RG8Sint"
-    case .R32Uint:
-        return "R32Uint"
-    case .R32Sint:
-        return "R32Sint"
-    case .R32Float:
-        return "R32Float"
-    case .RG16Unorm:
-        return "RG16Unorm"
-    case .RG16Snorm:
-        return "RG16Snorm"
-    case .RG16Uint:
-        return "RG16Uint"
-    case .RG16Sint:
-        return "RG16Sint"
-    case .RG16Float:
-        return "RG16Float"
-    case .RGBA8Unorm:
-        return "RGBA8Unorm"
-    case .RGBA8Unorm_sRGB:
-        return "RGBA8Unorm_sRGB"
-    case .RGBA8Snorm:
-        return "RGBA8Snorm"
-    case .RGBA8Uint:
-        return "RGBA8Uint"
-    case .RGBA8Sint:
-        return "RGBA8Sint"
-    case .BGRA8Unorm:
-        return "BGRA8Unorm"
-    case .BGRA8Unorm_sRGB:
-        return "BGRA8Unorm_sRGB"
-    case .RGB10A2Unorm:
-        return "RGB10A2Unorm"
-    case .RGB10A2Uint:
-        return "RGB10A2Uint"
-    case .RG11B10Float:
-        return "RG11B10Float"
-    case .RGB9E5Float:
-        return "RGB9E5Float"
-    case .RG32Uint:
-        return "RG32Uint"
-    case .RG32Sint:
-        return "RG32Sint"
-    case .RG32Float:
-        return "RG32Float"
-    case .RGBA16Unorm:
-        return "RGBA16Unorm"
-    case .RGBA16Snorm:
-        return "RGBA16Snorm"
-    case .RGBA16Uint:
-        return "RGBA16Uint"
-    case .RGBA16Sint:
-        return "RGBA16Sint"
-    case .RGBA16Float:
-        return "RGBA16Float"
-    case .RGBA32Uint:
-        return "RGBA32Uint"
-    case .RGBA32Sint:
-        return "RGBA32Sint"
-    case .RGBA32Float:
-        return "RGBA32Float"
-    case .BC1_RGBA:
-        return "BC1_RGBA"
-    case .BC1_RGBA_sRGB:
-        return "BC1_RGBA_sRGB"
-    case .BC2_RGBA:
-        return "BC2_RGBA"
-    case .BC2_RGBA_sRGB:
-        return "BC2_RGBA_sRGB"
-    case .BC3_RGBA:
-        return "BC3_RGBA"
-    case .BC3_RGBA_sRGB:
-        return "BC3_RGBA_sRGB"
-    case .BC4_RUnorm:
-        return "BC4_RUnorm"
-    case .BC4_RSnorm:
-        return "BC4_RSnorm"
-    case .BC5_RGUnorm:
-        return "BC5_RGUnorm"
-    case .BC5_RGSnorm:
-        return "BC5_RGSnorm"
-    case .BC6H_RGBFloat:
-        return "BC6H_RGBFloat"
-    case .BC6H_RGBUfloat:
-        return "BC6H_RGBUfloat"
-    case .BC7_RGBAUnorm:
-        return "BC7_RGBAUnorm"
-    case .BC7_RGBAUnorm_sRGB:
-        return "BC7_RGBAUnorm_sRGB"
-    case .GBGR422:
-        return "GBGR422"
-    case .BGRG422:
-        return "BGRG422"
-    case .Depth32Float:
-        return "Depth32Float"
-    case .Stencil8:
-        return "Stencil8"
-    case .Depth24Unorm_Stencil8:
-        return "Depth24Unorm_Stencil8"
-    case .Depth32Float_Stencil8:
-        return "Depth32Float_Stencil8"
-    default:
-        return nil
-    }
-}
-
-private func pixelFormatMenu() -> NSMenu {
-    let result = NSMenu()
-        result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
-    for i in MTLPixelFormat.A8Unorm.rawValue ... MTLPixelFormat.Depth32Float_Stencil8.rawValue {
-        guard let format = MTLPixelFormat(rawValue: i) else {
-            continue
-        }
-        guard let name = pixelFormatName(format) else {
-            continue
-        }
-        result.addItem(NSMenuItem(title: name, action: nil, keyEquivalent: ""))
-    }
-    return result
-}
-
-private func vertexFormatName(format: MTLVertexFormat) -> String {
-    switch format {
-    case .Invalid:
-        return "Invalid"
-    case .UChar2:
-        return "UChar2"
-    case .UChar3:
-        return "UChar3"
-    case .UChar4:
-        return "UChar4"
-    case .Char2:
-        return "Char2"
-    case .Char3:
-        return "Char3"
-    case .Char4:
-        return "Char4"
-    case .UChar2Normalized:
-        return "UChar2Normalized"
-    case .UChar3Normalized:
-        return "UChar3Normalized"
-    case .UChar4Normalized:
-        return "UChar4Normalized"
-    case .Char2Normalized:
-        return "Char2Normalized"
-    case .Char3Normalized:
-        return "Char3Normalized"
-    case .Char4Normalized:
-        return "Char4Normalized"
-    case .UShort2:
-        return "UShort2"
-    case .UShort3:
-        return "UShort3"
-    case .UShort4:
-        return "UShort4"
-    case .Short2:
-        return "Short2"
-    case .Short3:
-        return "Short3"
-    case .Short4:
-        return "Short4"
-    case .UShort2Normalized:
-        return "UShort2Normalized"
-    case .UShort3Normalized:
-        return "UShort3Normalized"
-    case .UShort4Normalized:
-        return "UShort4Normalized"
-    case .Short2Normalized:
-        return "Short2Normalized"
-    case .Short3Normalized:
-        return "Short3Normalized"
-    case .Short4Normalized:
-        return "Short4Normalized"
-    case .Half2:
-        return "Half2"
-    case .Half3:
-        return "Half3"
-    case .Half4:
-        return "Half4"
-    case .Float:
-        return "Float"
-    case .Float2:
-        return "Float2"
-    case .Float3:
-        return "Float3"
-    case .Float4:
-        return "Float4"
-    case .Int:
-        return "Int"
-    case .Int2:
-        return "Int2"
-    case .Int3:
-        return "Int3"
-    case .Int4:
-        return "Int4"
-    case .UInt:
-        return "UInt"
-    case .UInt2:
-        return "UInt2"
-    case .UInt3:
-        return "UInt3"
-    case .UInt4:
-        return "UInt4"
-    case .Int1010102Normalized:
-        return "Int1010102Normalized"
-    case .UInt1010102Normalized:
-        return "UInt1010102Normalized"
-    }
-}
-
-private func vertexFormatMenu() -> NSMenu {
-    let result = NSMenu()
-    for i in MTLVertexFormat.UChar2.rawValue ... MTLVertexFormat.UInt1010102Normalized.rawValue {
-        guard let format = MTLVertexFormat(rawValue: i) else {
-            break
-        }
-        result.addItem(NSMenuItem(title: vertexFormatName(format), action: nil, keyEquivalent: ""))
-    }
-    return result
-}
-
-private func vertexFormatToIndex(vertexFormat: MTLVertexFormat) -> Int {
-    return Int(vertexFormat.rawValue - 1)
-}
-
-class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
-    var managedObjectContext: NSManagedObjectContext!
-    weak var modelObserver: ModelObserver!
-    var state: RenderPipelineState!
-    @IBOutlet var formatColumn: NSTableColumn!
-    @IBOutlet var offsetColumn: NSTableColumn!
-    @IBOutlet var bufferIndexColumn: NSTableColumn!
-
-    func numberOfVertexAttributes() -> Int {
-        let fetchRequest = NSFetchRequest(entityName: "VertexAttribute")
-        var error: NSError?
-        let result = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
-        assert(error == nil)
-        return result
-    }
-
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return numberOfVertexAttributes()
-    }
-
-    func getVertexAttribute(index: Int) -> VertexAttribute? {
-        let fetchRequest = NSFetchRequest(entityName: "VertexAttribute")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        // <rdar://problem/22108925> managedObjectContext.executeFetchRequest() crashes if you add two objects.
-        // FIXME: This is a hack.
-        //fetchRequest.fetchLimit = 1
-        //fetchRequest.fetchOffset = index
-        
-        do {
-            let attributes = try managedObjectContext.executeFetchRequest(fetchRequest) as! [VertexAttribute]
-            if attributes.count < index {
-                return nil
-            }
-            return attributes[index]
-        } catch {
-            return nil
-        }
-    }
-
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn else {
-            return nil
-        }
-        let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
-        switch column {
-        case formatColumn:
-            guard let result = tableView.makeViewWithIdentifier("FormatPopUp", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard result.subviews.count == 1 else {
-                return nil
-            }
-            guard let popUp = result.subviews[0] as? NSPopUpButton else {
-                return nil
-            }
-            guard let format = MTLVertexFormat(rawValue: vertexAttribute.format.unsignedLongValue) else {
-                return nil
-            }
-            popUp.menu = vertexFormatMenu()
-            popUp.selectItemAtIndex(vertexFormatToIndex(format))
-            return result
-        case offsetColumn:
-            guard let result = tableView.makeViewWithIdentifier("OffsetField", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard let textField = result.textField else {
-                return nil
-            }
-            textField.editable = true
-            textField.integerValue = vertexAttribute.offset.integerValue
-            return result
-        case bufferIndexColumn:
-            guard let result = tableView.makeViewWithIdentifier("BufferIndexField", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard let textField = result.textField else {
-                return nil
-            }
-            textField.editable = true
-            textField.integerValue = vertexAttribute.bufferIndex.integerValue
-            return result
-        default:
-            return nil
-        }
-    }
-}
-
-class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
-    var managedObjectContext: NSManagedObjectContext!
-    weak var modelObserver: ModelObserver!
-    var state: RenderPipelineState!
-    @IBOutlet var stepFunctionColumn: NSTableColumn!
-    @IBOutlet var stepRateColumn: NSTableColumn!
-    @IBOutlet weak var strideColumn: NSTableColumn!
-
-    func numberOfVertexBufferLayouts() -> Int {
-        let fetchRequest = NSFetchRequest(entityName: "VertexBufferLayout")
-        var error: NSError?
-        let result = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
-        assert(error == nil)
-        return result
-    }
-
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return numberOfVertexBufferLayouts()
-    }
-
-    func getVertexBufferLayout(index: Int) -> VertexBufferLayout? {
-        let fetchRequest = NSFetchRequest(entityName: "VertexBufferLayout")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        // <rdar://problem/22108925> managedObjectContext.executeFetchRequest() crashes if you add two objects.
-        // FIXME: This is a hack.
-        //fetchRequest.fetchLimit = 1
-        //fetchRequest.fetchOffset = index
-        
-        do {
-            let layouts = try managedObjectContext.executeFetchRequest(fetchRequest) as! [VertexBufferLayout]
-            if layouts.count < index {
-                return nil
-            }
-            return layouts[index]
-        } catch {
-            return nil
-        }
-    }
-
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn else {
-            return nil
-        }
-        let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
-        switch column {
-        case stepFunctionColumn:
-            guard let result = tableView.makeViewWithIdentifier("StepFunctionPopUp", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard result.subviews.count == 1 else {
-                return nil
-            }
-            guard let popUp = result.subviews[0] as? NSPopUpButton else {
-                return nil
-            }
-            guard let function = MTLVertexFormat(rawValue: vertexBufferLayout.stepFunction.unsignedLongValue) else {
-                return nil
-            }
-            popUp.selectItemAtIndex(Int(function.rawValue))
-            return result
-        case stepRateColumn:
-            guard let result = tableView.makeViewWithIdentifier("StepRateField", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard let textField = result.textField else {
-                return nil
-            }
-            textField.editable = true
-            textField.integerValue = vertexBufferLayout.stepRate.integerValue
-            return result
-        case strideColumn:
-            guard let result = tableView.makeViewWithIdentifier("StrideField", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard let textField = result.textField else {
-                return nil
-            }
-            textField.editable = true
-            textField.integerValue = vertexBufferLayout.stride.integerValue
-            return result
-        default:
-            return nil
-        }
-    }
-}
-
-class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
-    var managedObjectContext: NSManagedObjectContext!
-    weak var modelObserver: ModelObserver!
-    var state: RenderPipelineState!
-    @IBOutlet var pixelFormatColumn: NSTableColumn!
-
-    func numberOfColorAttachments() -> Int {
-        let fetchRequest = NSFetchRequest(entityName: "RenderPipelineColorAttachment")
-        var error: NSError?
-        let result = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
-        assert(error == nil)
-        return result
-    }
-
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return numberOfColorAttachments()
-    }
-
-    func getColorAttachment(index: Int) -> RenderPipelineColorAttachment? {
-        let fetchRequest = NSFetchRequest(entityName: "RenderPipelineColorAttachment")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        // <rdar://problem/22108925> managedObjectContext.executeFetchRequest() crashes if you add two objects.
-        // FIXME: This is a hack.
-        //fetchRequest.fetchLimit = 1
-        //fetchRequest.fetchOffset = index
-        
-        do {
-            let attachments = try managedObjectContext.executeFetchRequest(fetchRequest) as! [RenderPipelineColorAttachment]
-            if attachments.count < index {
-                return nil
-            }
-            return attachments[index]
-        } catch {
-            return nil
-        }
-    }
-
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn else {
-            return nil
-        }
-        let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
-        switch column {
-        case pixelFormatColumn:
-            guard let result = tableView.makeViewWithIdentifier("PixelFormatPopUp", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard result.subviews.count == 1 else {
-                return nil
-            }
-            guard let popUp = result.subviews[0] as? NSPopUpButton else {
-                return nil
-            }
-            popUp.menu = pixelFormatMenu()
-            popUp.selectItemAtIndex(pixelFormatToIndex(numberToPixelFormat(colorAttachment.pixelFormat)))
-            return result
-        default:
-            return nil
-        }
-    }
-}
+let pixelFormatNameMap: [MTLPixelFormat : String] = [.Invalid: "Invalid", .A8Unorm: "A8Unorm", .R8Unorm: "R8Unorm", .R8Snorm: "R8Snorm", .R8Uint: "R8Uint", .R8Sint: "R8Sint", .R16Unorm: "R16Unorm", .R16Snorm: "R16Snorm", .R16Uint: "R16Uint", .R16Sint: "R16Sint", .R16Float: "R16Float", .RG8Unorm: "RG8Unorm", .RG8Snorm: "RG8Snorm", .RG8Uint: "RG8Uint", .RG8Sint: "RG8Sint", .R32Uint: "R32Uint", .R32Sint: "R32Sint", .R32Float: "R32Float", .RG16Unorm: "RG16Unorm", .RG16Snorm: "RG16Snorm", .RG16Uint: "RG16Uint", .RG16Sint: "RG16Sint", .RG16Float: "RG16Float", .RGBA8Unorm: "RGBA8Unorm", .RGBA8Unorm_sRGB: "RGBA8Unorm_sRGB", .RGBA8Snorm: "RGBA8Snorm", .RGBA8Uint: "RGBA8Uint", .RGBA8Sint: "RGBA8Sint", .BGRA8Unorm: "BGRA8Unorm", .BGRA8Unorm_sRGB: "BGRA8Unorm_sRGB", .RGB10A2Unorm: "RGB10A2Unorm", .RGB10A2Uint: "RGB10A2Uint", .RG11B10Float: "RG11B10Float", .RGB9E5Float: "RGB9E5Float", .RG32Uint: "RG32Uint", .RG32Sint: "RG32Sint", .RG32Float: "RG32Float", .RGBA16Unorm: "RGBA16Unorm", .RGBA16Snorm: "RGBA16Snorm", .RGBA16Uint: "RGBA16Uint", .RGBA16Sint: "RGBA16Sint", .RGBA16Float: "RGBA16Float", .RGBA32Uint: "RGBA32Uint", .RGBA32Sint: "RGBA32Sint", .RGBA32Float: "RGBA32Float", .BC1_RGBA: "BC1_RGBA", .BC1_RGBA_sRGB: "BC1_RGBA_sRGB", .BC2_RGBA: "BC2_RGBA", .BC2_RGBA_sRGB: "BC2_RGBA_sRGB", .BC3_RGBA: "BC3_RGBA", .BC3_RGBA_sRGB: "BC3_RGBA_sRGB", .BC4_RUnorm: "BC4_RUnorm", .BC4_RSnorm: "BC4_RSnorm", .BC5_RGUnorm: "BC5_RGUnorm", .BC5_RGSnorm: "BC5_RGSnorm", .BC6H_RGBFloat: "BC6H_RGBFloat", .BC6H_RGBUfloat: "BC6H_RGBUfloat", .BC7_RGBAUnorm: "BC7_RGBAUnorm", .BC7_RGBAUnorm_sRGB: "BC7_RGBAUnorm_sRGB", .GBGR422: "GBGR422", .BGRG422: "BGRG422", .Depth32Float: "Depth32Float", .Stencil8: "Stencil8", .Depth24Unorm_Stencil8: "Depth24Unorm_Stencil8", .Depth32Float_Stencil8: "Depth32Float_Stencil8"]
 
 class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     var managedObjectContext: NSManagedObjectContext!
@@ -546,6 +31,39 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet var sampleCountCheckBox: NSButton!
     @IBOutlet var sampleCountTextField: NSTextField!
 
+    class func pixelFormatMenu(includeNone: Bool) -> NSMenu {
+        let result = NSMenu()
+        if (includeNone) {
+            result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
+        }
+        for i in MTLPixelFormat.Invalid.rawValue ... MTLPixelFormat.Depth32Float_Stencil8.rawValue {
+            guard let format = MTLPixelFormat(rawValue: i) else {
+                continue
+            }
+            guard let name = pixelFormatNameMap[format] else {
+                continue
+            }
+            result.addItem(NSMenuItem(title: name, action: nil, keyEquivalent: ""))
+        }
+        return result
+    }
+
+    class func pixelFormatToIndex(pixelFormat: MTLPixelFormat) -> Int {
+        for i in 0 ..< pixelFormatMenuOrder.count {
+            if pixelFormatMenuOrder[i] == pixelFormat {
+                return i
+            }
+        }
+        return 0
+    }
+
+    class func indexToPixelFormat(i: Int) -> MTLPixelFormat? {
+        guard i > 0 && i < pixelFormatMenuOrder.count else {
+            return nil
+        }
+        return pixelFormatMenuOrder[i]
+    }
+
     init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, state: RenderPipelineState, removeObserver: RenderPipelineStateRemoveObserver) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
@@ -565,9 +83,26 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
         vertexFunctionTextField.stringValue = state.vertexFunction
         fragmentFunctionTextField.stringValue = state.fragmentFunction
 
-        depthAttachmentPopUp.menu = pixelFormatMenu()
-        stencilAttachmentPopUp.menu = pixelFormatMenu()
-        // FIXME: Set depthAttachmentPopUp and stencilAttachmentPopUp
+        depthAttachmentPopUp.menu = RenderStateViewController.pixelFormatMenu(true)
+        if let depthAttachmentPixelFormat = state.depthAttachmentPixelFormat {
+            guard let pixelFormat = MTLPixelFormat(rawValue: depthAttachmentPixelFormat.unsignedLongValue) else {
+                fatalError()
+            }
+            depthAttachmentPopUp.selectItemAtIndex(RenderStateViewController.pixelFormatToIndex(pixelFormat) + 1)
+        } else {
+            depthAttachmentPopUp.selectItemAtIndex(0)
+        }
+
+        stencilAttachmentPopUp.menu = RenderStateViewController.pixelFormatMenu(true)
+        if let stencilAttachmentPixelFormat = state.stencilAttachmentPixelFormat {
+            if let pixelFormat = MTLPixelFormat(rawValue: stencilAttachmentPixelFormat.unsignedLongValue) {
+                stencilAttachmentPopUp.selectItemAtIndex(RenderStateViewController.pixelFormatToIndex(pixelFormat) + 1)
+            } else {
+                stencilAttachmentPopUp.selectItemAtIndex(0)
+            }
+        } else {
+            stencilAttachmentPopUp.selectItemAtIndex(0)
+        }
 
         if let sampleCount = state.sampleCount {
             sampleCountCheckBox.state = NSOnState
@@ -607,22 +142,11 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     }
 
     @IBAction func addRemoveVertexAttribute(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 {
-            // Add
-            let attributeCount = vertexAttributesTableDelegate.numberOfVertexAttributes()
-            let attribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
-            attribute.format = MTLVertexFormat.Float2.rawValue
-            attribute.offset = 0
-            attribute.bufferIndex = 0
-            attribute.id = attributeCount
-            state.mutableOrderedSetValueForKey("vertexAttributes").addObject(attribute)
-        } else {
+        if sender.selectedSegment == 0 { // Add
+            vertexAttributesTableDelegate.addVertexAttribute()
+        } else { // Remove
             assert(sender.selectedSegment == 1)
-            // Remove
-            for index in vertexAttributesTableView.selectedRowIndexes {
-                // FIXME: These deletion loops don't quite work
-                managedObjectContext.deleteObject(state.vertexAttributes[index] as! NSManagedObject)
-            }
+            vertexAttributesTableDelegate.removeSelectedVertexAttribute()
         }
         vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
@@ -630,21 +154,11 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     }
 
     @IBAction func addRemoveVertexBufferLayout(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 {
-            // Add
-            let layoutCount = vertexBufferLayoutTableDelegate.numberOfVertexBufferLayouts()
-            let layout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
-            layout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
-            layout.stepRate = 1
-            layout.stride = 8
-            layout.id = layoutCount
-            state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
-        } else {
+        if sender.selectedSegment == 0 { // Add
+            vertexBufferLayoutTableDelegate.addVertexBufferLayout()
+        } else { // Remove
             assert(sender.selectedSegment == 1)
-            // Remove
-            for index in vertexBufferLayoutTableView.selectedRowIndexes {
-                managedObjectContext.deleteObject(state.vertexBufferLayouts[index] as! NSManagedObject)
-            }
+            vertexBufferLayoutTableDelegate.removeSelectedVertexBufferLayout()
         }
         vertexBufferLayoutTableView.reloadData()
         modelObserver.modelDidChange()
@@ -652,19 +166,11 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     }
 
     @IBAction func addRemoveColorAttachment(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 {
-            // Add
-            let attachmentCount = colorAttachmentsTableDelegate.numberOfColorAttachments()
-            let attachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
-            attachment.pixelFormat = nil
-            attachment.id = attachmentCount
-            state.mutableOrderedSetValueForKey("colorAttachments").addObject(attachment)
-        } else {
+        if sender.selectedSegment == 0 { // Add
+            colorAttachmentsTableDelegate.addColorAttachment()
+        } else { // Remove
             assert(sender.selectedSegment == 1)
-            // Remove
-            for index in colorAttachmentsTableView.selectedRowIndexes {
-                managedObjectContext.deleteObject(state.colorAttachments[index] as! NSManagedObject)
-            }
+            colorAttachmentsTableDelegate.removeSelectedColorAttachment()
         }
         colorAttachmentsTableView.reloadData()
         modelObserver.modelDidChange()
@@ -672,14 +178,32 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     }
 
     @IBAction func depthAttachmentSelected(sender: NSPopUpButton) {
-        // FIXME: Implement this
-        state.depthAttachmentPixelFormat = nil
+        guard sender.indexOfSelectedItem >= 0 else {
+            return
+        }
+        guard sender.indexOfSelectedItem > 0 else {
+            state.depthAttachmentPixelFormat = nil
+            return
+        }
+        guard let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1) else {
+            fatalError()
+        }
+        state.depthAttachmentPixelFormat = format.rawValue
         modelObserver.modelDidChange()
     }
 
     @IBAction func stencilAttachmentSelected(sender: NSPopUpButton) {
-        // FIXME: Implement this
-        state.stencilAttachmentPixelFormat = nil
+        guard sender.indexOfSelectedItem >= 0 else {
+            return
+        }
+        guard sender.indexOfSelectedItem > 0 else {
+            state.depthAttachmentPixelFormat = nil
+            return
+        }
+        guard let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1) else {
+            return
+        }
+        state.stencilAttachmentPixelFormat = format.rawValue
         modelObserver.modelDidChange()
     }
 
