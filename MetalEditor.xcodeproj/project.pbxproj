@@ -100,6 +100,8 @@
 		C2EC39B61B78656C00FFD859 /* Invocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */; };
 		C2EC39B71B78664000FFD859 /* Invocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39B31B78653B00FFD859 /* Invocation.swift */; };
 		C2EC39B81B78664300FFD859 /* Invocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */; };
+		C2EC39BA1B786F8200FFD859 /* ComputeInvocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2EC39B91B786F8200FFD859 /* ComputeInvocationView.xib */; };
+		C2EC39BC1B7874AA00FFD859 /* ComputeInvocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39BB1B7874AA00FFD859 /* ComputeInvocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +200,8 @@
 		C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderStateUIController.swift; sourceTree = "<group>"; };
 		C2EC39B31B78653B00FFD859 /* Invocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invocation.swift; sourceTree = "<group>"; };
 		C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Invocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C2EC39B91B786F8200FFD859 /* ComputeInvocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComputeInvocationView.xib; sourceTree = "<group>"; };
+		C2EC39BB1B7874AA00FFD859 /* ComputeInvocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeInvocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +317,7 @@
 				C2A9391C1B707A7900449A95 /* RenderStateViewController.xib */,
 				C26B3C841B76B6C20073EACF /* InvocationSequence.xib */,
 				C26B3C881B76BD1F0073EACF /* Invocation.xib */,
+				C2EC39B91B786F8200FFD859 /* ComputeInvocationView.xib */,
 				C2BF78521B58BC8A004535BC /* Assets.xcassets */,
 				C2BF78541B58BC8A004535BC /* MainMenu.xib */,
 				C2BF78571B58BC8A004535BC /* Info.plist */,
@@ -330,6 +335,7 @@
 				C26B3C821B76B3D70073EACF /* FlippedView.swift */,
 				C26B3C861B76B9570073EACF /* InvocationsViewController.swift */,
 				C26B3C8A1B76BF290073EACF /* InvocationViewController.swift */,
+				C2EC39BB1B7874AA00FFD859 /* ComputeInvocationViewController.swift */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -479,6 +485,7 @@
 			files = (
 				C2A9391D1B707A7900449A95 /* RenderStateViewController.xib in Resources */,
 				C26B3C851B76B6C20073EACF /* InvocationSequence.xib in Resources */,
+				C2EC39BA1B786F8200FFD859 /* ComputeInvocationView.xib in Resources */,
 				C2BF78531B58BC8A004535BC /* Assets.xcassets in Resources */,
 				C26B3C891B76BD1F0073EACF /* Invocation.xib in Resources */,
 				C2BF784E1B58BC8A004535BC /* Document.xib in Resources */,
@@ -592,6 +599,7 @@
 				C24CDCF51B5AC44000348941 /* RenderPipelineState.swift in Sources */,
 				C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */,
 				C24CDCB81B5A18D200348941 /* Pass.swift in Sources */,
+				C2EC39BC1B7874AA00FFD859 /* ComputeInvocationViewController.swift in Sources */,
 				C24CDCF41B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */,
 				C24CDCB31B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */,
 				C24CDCB91B5A18D200348941 /* Frame+CoreDataProperties.swift in Sources */,

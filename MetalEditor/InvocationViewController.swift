@@ -51,5 +51,18 @@ class InvocationViewController: NSViewController {
     }
 
     @IBAction func showDetails(sender: NSButton) {
+        let popover = NSPopover()
+        popover.behavior = .Transient
+        if let _ = invocation as? RenderInvocation {
+            // FIXME: Implement this
+        } else if let computeInvocation = invocation as? ComputeInvocation {
+            guard let controller = ComputeInvocationViewController(nibName: "ComputeInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, computeInvocation: computeInvocation) else {
+                fatalError()
+            }
+            popover.contentViewController = controller
+        } else {
+            fatalError()
+        }
+        popover.showRelativeToRect(self.view.bounds, ofView: self.view, preferredEdge: .MaxX)
     }
 }
