@@ -96,6 +96,10 @@
 		C2C1F3751B70AAAB0092726F /* ManagedObjectHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C1F3731B70A02E0092726F /* ManagedObjectHelpers.swift */; };
 		C2CA03121B6F0EFF00BA6AA1 /* ComputeStateUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */; };
 		C2CA03141B6F186300BA6AA1 /* RenderStateUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */; };
+		C2EC39B41B78653B00FFD859 /* Invocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39B31B78653B00FFD859 /* Invocation.swift */; };
+		C2EC39B61B78656C00FFD859 /* Invocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */; };
+		C2EC39B71B78664000FFD859 /* Invocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39B31B78653B00FFD859 /* Invocation.swift */; };
+		C2EC39B81B78664300FFD859 /* Invocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +196,8 @@
 		C2C1F3731B70A02E0092726F /* ManagedObjectHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectHelpers.swift; sourceTree = "<group>"; };
 		C2CA03111B6F0EFF00BA6AA1 /* ComputeStateUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeStateUIController.swift; sourceTree = "<group>"; };
 		C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderStateUIController.swift; sourceTree = "<group>"; };
+		C2EC39B31B78653B00FFD859 /* Invocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invocation.swift; sourceTree = "<group>"; };
+		C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Invocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +266,8 @@
 				C24CDCAF1B5A18D200348941 /* BufferBinding+CoreDataProperties.swift */,
 				C24CDCB01B5A18D200348941 /* BufferBinding.swift */,
 				C2C1F3731B70A02E0092726F /* ManagedObjectHelpers.swift */,
+				C2EC39B31B78653B00FFD859 /* Invocation.swift */,
+				C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */,
 			);
 			name = "Managed Objects";
 			sourceTree = "<group>";
@@ -423,6 +431,7 @@
 		C2BF783D1B58BC8A004535BC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Litherum;
 				TargetAttributes = {
@@ -509,6 +518,7 @@
 				C24CDD3B1B5ADE0F00348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */,
 				C24CDD401B5ADE0F00348941 /* Pass.swift in Sources */,
 				C24CDD471B5ADE0F00348941 /* Library+CoreDataProperties.swift in Sources */,
+				C2EC39B71B78664000FFD859 /* Invocation.swift in Sources */,
 				C24CDD421B5ADE0F00348941 /* Frame.swift in Sources */,
 				C24CDD331B5ADE0F00348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */,
 				C24CDD361B5ADE0F00348941 /* RenderPipelineState.swift in Sources */,
@@ -516,6 +526,7 @@
 				C24CDD3D1B5ADE0F00348941 /* ComputePass+CoreDataProperties.swift in Sources */,
 				C24CDD2E1B5ADE0100348941 /* VertexAttribute.swift in Sources */,
 				C24CDD481B5ADE0F00348941 /* Library.swift in Sources */,
+				C2EC39B81B78664300FFD859 /* Invocation+CoreDataProperties.swift in Sources */,
 				C2C1F3751B70AAAB0092726F /* ManagedObjectHelpers.swift in Sources */,
 				C24CDD411B5ADE0F00348941 /* Frame+CoreDataProperties.swift in Sources */,
 				C24CDD381B5ADE0F00348941 /* RenderPass.swift in Sources */,
@@ -539,6 +550,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2EC39B61B78656C00FFD859 /* Invocation+CoreDataProperties.swift in Sources */,
 				C24CDCB71B5A18D200348941 /* Pass+CoreDataProperties.swift in Sources */,
 				C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */,
 				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
@@ -576,6 +588,7 @@
 				C24CDCFD1B5AC86D00348941 /* VertexAttribute.swift in Sources */,
 				C24CDCF71B5AC44000348941 /* RenderPass.swift in Sources */,
 				C24CDCBB1B5A18D200348941 /* Buffer+CoreDataProperties.swift in Sources */,
+				C2EC39B41B78653B00FFD859 /* Invocation.swift in Sources */,
 				C24CDCF51B5AC44000348941 /* RenderPipelineState.swift in Sources */,
 				C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */,
 				C24CDCB81B5A18D200348941 /* Pass.swift in Sources */,
@@ -738,11 +751,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MetalEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Litherum.MetalEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -750,6 +765,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MetalEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

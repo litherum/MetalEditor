@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="InvocationViewController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="box" destination="HQi-PX-cGb" id="lNi-Hb-TXT"/>
+                <outlet property="nameTextField" destination="ogA-1f-5me" id="V7R-4R-TPV"/>
                 <outlet property="view" destination="c22-O7-iKe" id="O9q-wm-LyL"/>
             </connections>
         </customObject>
@@ -31,6 +32,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="removeInvocation:" target="-2" id="qWT-3K-J3l"/>
+                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ogA-1f-5me">
                                 <rect key="frame" x="20" y="49" width="117" height="22"/>
@@ -40,6 +44,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="nameChanged:" target="-2" id="pxz-c9-8go"/>
+                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X1N-zD-a36">
                                 <rect key="frame" x="14" y="13" width="172" height="32"/>
@@ -48,6 +55,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="showDetails:" target="-2" id="sa1-7a-XU9"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>

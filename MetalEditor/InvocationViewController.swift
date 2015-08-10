@@ -11,13 +11,15 @@ import Cocoa
 class InvocationViewController: NSViewController {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
-    weak var removeObserver: RenderPipelineStateRemoveObserver!
-    var invocation: NSManagedObject!
+    weak var removeObserver: InvocationRemoveObserver!
+    var invocation: Invocation!
     @IBOutlet var box: NSBox!
+    @IBOutlet var nameTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, invocation: NSManagedObject) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: InvocationRemoveObserver, invocation: Invocation) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
+        self.removeObserver = removeObserver
         self.invocation = invocation
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -28,6 +30,7 @@ class InvocationViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameTextField.stringValue = invocation.name
 
         if let _ = invocation as? ComputeInvocation {
             box.fillColor = NSColor.redColor()
@@ -36,5 +39,17 @@ class InvocationViewController: NSViewController {
         } else {
             fatalError()
         }
+    }
+
+    @IBAction func nameChanged(sender: NSTextField) {
+        invocation.name = sender.stringValue
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func removeInvocation(sender: NSButton) {
+        removeObserver.removeInvocation(self)
+    }
+
+    @IBAction func showDetails(sender: NSButton) {
     }
 }

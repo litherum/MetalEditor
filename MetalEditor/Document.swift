@@ -12,7 +12,11 @@ protocol ModelObserver: class {
     func modelDidChange()
 }
 
-class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver {
+protocol PassRemoveObserver: class {
+    func removePass(controller: InvocationsViewController);
+}
+
+class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver, PassRemoveObserver {
     @IBOutlet var detailViewController: DetailViewController!
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
@@ -26,6 +30,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     var frame: Frame!
     var library: Library!
     var metalState: MetalState!
+    var invocationMap: [InvocationsViewController : Pass] = [:]
     
     func setupFrame() {
         let fetchRequest = NSFetchRequest(entityName: "Frame")
@@ -57,6 +62,36 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         }
     }
 
+    func addRenderPassView(pass: RenderPass) {
+        guard let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass) else {
+            fatalError()
+        }
+        controller.loadView()
+        for i in pass.invocations {
+            guard let invocation = i as? RenderInvocation else {
+                fatalError()
+            }
+            controller.addRenderInvocationView(invocation)
+        }
+        invocationsStackView.addArrangedSubview(controller.view)
+        invocationMap[controller] = pass
+    }
+
+    func addComputePassView(pass: ComputePass) {
+        guard let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass) else {
+            fatalError()
+        }
+        controller.loadView()
+        for i in pass.invocations {
+            guard let invocation = i as? ComputeInvocation else {
+                fatalError()
+            }
+            controller.addComputeInvocationView(invocation)
+        }
+        invocationsStackView.addArrangedSubview(controller.view)
+        invocationMap[controller] = pass
+    }
+
     override func windowControllerDidLoadNib(aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
 
@@ -78,35 +113,9 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
 
         for p in frame.passes {
             if let pass = p as? ComputePass {
-                guard let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, pass: pass) else {
-                    fatalError()
-                }
-                controller.loadView()
-                for i in pass.invocations {
-                    guard let invocation = i as? ComputeInvocation else {
-                        fatalError()
-                    }
-                    guard let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, invocation: invocation) else {
-                        fatalError()
-                    }
-                    controller.addSubController(subController)
-                }
-                invocationsStackView.addArrangedSubview(controller.view)
+                addComputePassView(pass)
             } else if let pass = p as? RenderPass {
-                guard let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, pass: pass) else {
-                    fatalError()
-                }
-                controller.loadView()
-                for i in pass.invocations {
-                    guard let invocation = i as? RenderInvocation else {
-                        fatalError()
-                    }
-                    guard let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, invocation: invocation) else {
-                        fatalError()
-                    }
-                    controller.addSubController(subController)
-                }
-                invocationsStackView.addArrangedSubview(controller.view)
+                addRenderPassView(pass)
             } else {
                 fatalError()
             }
@@ -117,7 +126,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         
         metalState = MetalState()
         metalState.delegate = self
-        metalState.populate(managedObjectContext!, device: device, view: previewController.metalView)
+        modelDidChange()
         
         previewController.initializeWithDevice(device, commandQueue: commandQueue, frame: frame, metalState: metalState)
 
@@ -143,7 +152,29 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         } else {
             library.source = ""
         }
-        metalState.populate(managedObjectContext!, device: device, view: previewController.metalView)
+        modelDidChange()
+    }
+
+    @IBAction func addRenderPass(sender: NSButton) {
+        let renderPass = NSEntityDescription.insertNewObjectForEntityForName("RenderPass", inManagedObjectContext: managedObjectContext!) as! RenderPass
+        frame.mutableOrderedSetValueForKey("passes").addObject(renderPass)
+        addRenderPassView(renderPass)
+        modelDidChange()
+    }
+
+    @IBAction func addComputePass(sender: NSButton) {
+        let computePass = NSEntityDescription.insertNewObjectForEntityForName("ComputePass", inManagedObjectContext: managedObjectContext!) as! ComputePass
+        frame.mutableOrderedSetValueForKey("passes").addObject(computePass)
+        addComputePassView(computePass)
+        modelDidChange()
+    }
+
+    func removePass(controller: InvocationsViewController) {
+        frame.mutableOrderedSetValueForKey("passes").removeObject(controller.pass)
+        managedObjectContext!.deleteObject(controller.pass)
+        controller.view.removeFromSuperview()
+        invocationMap.removeValueForKey(controller)
+        modelDidChange()
     }
 
     func modelDidChange() {

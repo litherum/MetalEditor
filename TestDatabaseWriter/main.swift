@@ -87,6 +87,8 @@ func main() {
     vertexBufferBinding.buffer = buffer
 
     let renderInvocation = NSEntityDescription.insertNewObjectForEntityForName("RenderInvocation", inManagedObjectContext: managedObjectContext) as! RenderInvocation
+    
+    renderInvocation.name = "Render"
     renderInvocation.mutableOrderedSetValueForKey("vertexBufferBindings").addObject(vertexBufferBinding)
     renderInvocation.state = renderPipelineState
     renderInvocation.primitive = MTLPrimitiveType.Triangle.rawValue
@@ -115,6 +117,7 @@ func main() {
     threadsPerThreadgroup.depth = 1
 
     let computeInvocation = NSEntityDescription.insertNewObjectForEntityForName("ComputeInvocation", inManagedObjectContext: managedObjectContext) as! ComputeInvocation
+    computeInvocation.name = "Movement"
     computeInvocation.mutableOrderedSetValueForKey("bufferBindings").addObject(bufferBinding)
     computeInvocation.state = computePipelineState
     computeInvocation.threadgroupsPerGrid = threadgroupsPerGrid

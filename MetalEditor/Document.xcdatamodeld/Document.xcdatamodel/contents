@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8166.2" systemVersion="15A235d" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8175.2" systemVersion="15A244d" minimumToolsVersion="Automatic">
     <entity name="Buffer" representedClassName=".Buffer" syncable="YES">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="initialData" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -9,10 +9,10 @@
     <entity name="BufferBinding" representedClassName=".BufferBinding" syncable="YES">
         <relationship name="buffer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Buffer" syncable="YES"/>
     </entity>
-    <entity name="ComputeInvocation" representedClassName=".ComputeInvocation" syncable="YES">
+    <entity name="ComputeInvocation" representedClassName=".ComputeInvocation" parentEntity="Invocation" syncable="YES">
         <relationship name="bufferBindings" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BufferBinding" syncable="YES"/>
         <relationship name="pass" maxCount="1" deletionRule="Nullify" destinationEntity="ComputePass" inverseName="invocations" inverseEntity="ComputePass" syncable="YES"/>
-        <relationship name="state" maxCount="1" deletionRule="Nullify" destinationEntity="ComputePipelineState" inverseName="invocations" inverseEntity="ComputePipelineState" syncable="YES"/>
+        <relationship name="state" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ComputePipelineState" inverseName="invocations" inverseEntity="ComputePipelineState" syncable="YES"/>
         <relationship name="threadgroupsPerGrid" maxCount="1" deletionRule="Nullify" destinationEntity="Size" syncable="YES"/>
         <relationship name="threadsPerThreadgroup" maxCount="1" deletionRule="Nullify" destinationEntity="Size" syncable="YES"/>
     </entity>
@@ -28,16 +28,19 @@
     <entity name="Frame" representedClassName=".Frame" syncable="YES">
         <relationship name="passes" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Pass" syncable="YES"/>
     </entity>
+    <entity name="Invocation" representedClassName=".Invocation" isAbstract="YES" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Library" representedClassName=".Library" syncable="YES">
         <attribute name="source" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Pass" representedClassName=".Pass" isAbstract="YES" syncable="YES"/>
-    <entity name="RenderInvocation" representedClassName=".RenderInvocation" syncable="YES">
+    <entity name="RenderInvocation" representedClassName=".RenderInvocation" parentEntity="Invocation" syncable="YES">
         <attribute name="primitive" attributeType="Integer 16" syncable="YES"/>
         <attribute name="vertexCount" attributeType="Integer 32" syncable="YES"/>
         <attribute name="vertexStart" attributeType="Integer 32" syncable="YES"/>
         <relationship name="fragmentBufferBindings" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BufferBinding" syncable="YES"/>
-        <relationship name="state" maxCount="1" deletionRule="Nullify" destinationEntity="RenderPipelineState" syncable="YES"/>
+        <relationship name="state" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RenderPipelineState" syncable="YES"/>
         <relationship name="vertexBufferBindings" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BufferBinding" syncable="YES"/>
     </entity>
     <entity name="RenderPass" representedClassName=".RenderPass" parentEntity="Pass" syncable="YES">
@@ -92,5 +95,6 @@
         <element name="Size" positionX="18" positionY="90" width="128" height="90"/>
         <element name="VertexAttribute" positionX="0" positionY="108" width="128" height="105"/>
         <element name="VertexBufferLayout" positionX="9" positionY="117" width="128" height="105"/>
+        <element name="Invocation" positionX="-9" positionY="135" width="128" height="60"/>
     </elements>
 </model>

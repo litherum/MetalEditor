@@ -17,7 +17,7 @@ extension RenderInvocation {
     @NSManaged var primitive: NSNumber
     @NSManaged var vertexStart: NSNumber
     @NSManaged var vertexCount: NSNumber
-    @NSManaged var state: RenderPipelineState
+    @NSManaged var state: RenderPipelineState?
     @NSManaged var vertexBufferBindings: NSOrderedSet
     @NSManaged var fragmentBufferBindings: NSOrderedSet
 

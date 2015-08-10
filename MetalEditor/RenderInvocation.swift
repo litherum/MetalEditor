@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class RenderInvocation: NSManagedObject {
+class RenderInvocation: Invocation {
 
 // Insert code here to add functionality to your managed object subclass
 

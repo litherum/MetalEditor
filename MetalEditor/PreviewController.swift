@@ -19,6 +19,8 @@ class PreviewController: NSViewController, MTKViewDelegate {
     var startDate = NSDate()
     var lock = NSLock()
 
+    // FIXME: We might be destroyed in the middle of our frame. We should wait for the lock to unlock.
+
     override func viewDidLoad() {
         super.viewDidLoad()
         metalView = view as! MTKView
@@ -88,8 +90,13 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 let computeCommandEncoder = commandBuffer.computeCommandEncoder()
                 computeCommandEncoder.setBuffer(metalState.builtInBuffer, offset: 0, atIndex: 1)
                 for invocationObject in computePass.invocations {
-                    let invocation = invocationObject as! ComputeInvocation
-                    guard let metalComputePipelineState = metalState.computePipelineStates[invocation.state] else {
+                    guard let invocation = invocationObject as? ComputeInvocation else {
+                        fatalError()
+                    }
+                    guard let invocationState = invocation.state else {
+                        continue
+                    }
+                    guard let metalComputePipelineState = metalState.computePipelineStates[invocationState] else {
                         continue
                     }
                     computeCommandEncoder.setComputePipelineState(metalComputePipelineState)
@@ -113,8 +120,13 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 renderCommandEncoder.setVertexBuffer(metalState.builtInBuffer, offset: 0, atIndex: 1)
                 renderCommandEncoder.setFragmentBuffer(metalState.builtInBuffer, offset: 0, atIndex: 1)
                 for invocationObject in renderPass.invocations {
-                    let invocation = invocationObject as! RenderInvocation
-                    guard let metalRenderPipelineState = metalState.renderPipelineStates[invocation.state] else {
+                    guard let invocation = invocationObject as? RenderInvocation else {
+                        fatalError()
+                    }
+                    guard let invocationState = invocation.state else {
+                        continue
+                    }
+                    guard let metalRenderPipelineState = metalState.renderPipelineStates[invocationState] else {
                         continue
                     }
                     renderCommandEncoder.setRenderPipelineState(metalRenderPipelineState)
