@@ -19,16 +19,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mB-2F-rpR">
-                    <rect key="frame" x="27" y="20" width="388" height="232"/>
+                    <rect key="frame" x="0.0" y="0.0" width="435" height="272"/>
                     <clipView key="contentView" id="UXW-nI-V5i">
-                        <rect key="frame" x="1" y="1" width="386" height="230"/>
+                        <rect key="frame" x="1" y="1" width="418" height="255"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view translatesAutoresizingMaskIntoConstraints="NO" id="4BU-15-3Tf">
-                                <rect key="frame" x="0.0" y="0.0" width="211" height="148"/>
+                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="255"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-Ef-eBj">
-                                        <rect key="frame" x="0.0" y="0.0" width="211" height="148"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="255"/>
                                         <animations/>
                                     </stackView>
                                 </subviews>
@@ -42,27 +42,26 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="4BU-15-3Tf" secondAttribute="trailing" constant="175" id="Fg6-9x-cqY"/>
-                            <constraint firstItem="4BU-15-3Tf" firstAttribute="top" secondItem="UXW-nI-V5i" secondAttribute="top" constant="82" id="QL2-fw-2KY"/>
+                            <constraint firstItem="4BU-15-3Tf" firstAttribute="top" secondItem="UXW-nI-V5i" secondAttribute="top" id="QL2-fw-2KY"/>
                             <constraint firstItem="4BU-15-3Tf" firstAttribute="leading" secondItem="UXW-nI-V5i" secondAttribute="leading" id="YUL-G1-Qjd"/>
-                            <constraint firstAttribute="bottom" secondItem="4BU-15-3Tf" secondAttribute="bottom" id="koo-CQ-J8Q"/>
+                            <constraint firstItem="4BU-15-3Tf" firstAttribute="height" secondItem="UXW-nI-V5i" secondAttribute="height" id="lZX-C4-vdk"/>
                         </constraints>
                         <animations/>
                     </clipView>
                     <animations/>
                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="L2I-g7-Jgg">
-                        <rect key="frame" x="1" y="215" width="386" height="16"/>
+                        <rect key="frame" x="1" y="256" width="418" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
                     <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cWx-mq-5o8">
-                        <rect key="frame" x="371" y="1" width="16" height="230"/>
+                        <rect key="frame" x="419" y="1" width="15" height="255"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
                 </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ldf-10-gOx">
-                    <rect key="frame" x="417" y="118.5" width="49" height="32"/>
+                    <rect key="frame" x="437" y="118" width="49" height="32"/>
                     <animations/>
                     <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="C5M-f9-8Me">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -71,11 +70,11 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="ldf-10-gOx" secondAttribute="trailing" constant="20" symbolic="YES" id="Dnq-rH-yJ6"/>
-                <constraint firstAttribute="bottom" secondItem="2mB-2F-rpR" secondAttribute="bottom" constant="20" symbolic="YES" id="Ppx-za-Cpr"/>
-                <constraint firstItem="2mB-2F-rpR" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="27" id="ayL-1n-8Kh"/>
+                <constraint firstAttribute="trailing" secondItem="ldf-10-gOx" secondAttribute="trailing" id="Dnq-rH-yJ6"/>
+                <constraint firstAttribute="bottom" secondItem="2mB-2F-rpR" secondAttribute="bottom" id="Ppx-za-Cpr"/>
+                <constraint firstItem="2mB-2F-rpR" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="ayL-1n-8Kh"/>
                 <constraint firstItem="ldf-10-gOx" firstAttribute="leading" secondItem="2mB-2F-rpR" secondAttribute="trailing" constant="8" symbolic="YES" id="kpx-e5-sBW"/>
-                <constraint firstItem="2mB-2F-rpR" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="oA5-4E-uno"/>
+                <constraint firstItem="2mB-2F-rpR" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="oA5-4E-uno"/>
                 <constraint firstItem="ldf-10-gOx" firstAttribute="centerY" secondItem="2mB-2F-rpR" secondAttribute="centerY" id="sgs-UV-65u"/>
             </constraints>
             <animations/>

@@ -10,7 +10,7 @@ import CoreData
 import Metal
 
 func main() {
-    let mom = NSManagedObjectModel(contentsOfURL: NSURL(fileURLWithPath: "/Users/litherum/Build/Products/Debug/Document.momd"))
+    let mom = NSManagedObjectModel(contentsOfURL: NSURL(fileURLWithPath: "/Users/litherum/Library/Developer/Xcode/DerivedData/MetalEditor-bpwxukjcviolgzdbcmryveldworl/Build/Products/Debug/Document.momd"))
     guard let managedObjectModel = mom else {
         fatalError()
     }
@@ -29,6 +29,15 @@ func main() {
         try persistentStoreCoordinator.addPersistentStoreWithType(NSXMLStoreType, configuration: nil, URL: databaseURL, options: nil)
     } catch {
         fatalError()
+    }
+
+    var classListCount = UInt32(0)
+    let classList = objc_copyClassList(&classListCount)
+    for i in 0 ..< classListCount {
+        guard let c = classList[Int(i)] else {
+            continue
+        }
+        print("\(c)")
     }
 
     let library = NSEntityDescription.insertNewObjectForEntityForName("Library", inManagedObjectContext: managedObjectContext) as! Library

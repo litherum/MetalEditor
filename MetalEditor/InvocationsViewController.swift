@@ -26,7 +26,7 @@ class InvocationsViewController: NSViewController {
         fatalError()
     }
 
-    func addSubController(subController: InvocationViewController) {
+    func addSubController(subController: NSViewController) {
         addChildViewController(subController)
         stackView.addArrangedSubview(subController.view)
     }

@@ -19,12 +19,6 @@ class PreviewController: NSViewController, MTKViewDelegate {
     var startDate = NSDate()
     var lock = NSLock()
 
-    deinit {
-        // Wait for the latest frame to complete
-        lock.lock()
-        lock.unlock()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         metalView = view as! MTKView
