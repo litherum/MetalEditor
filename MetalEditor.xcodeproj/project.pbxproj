@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C204C9881B79C82C008057D3 /* RenderInvocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C204C9871B79C82C008057D3 /* RenderInvocationViewController.swift */; };
+		C204C98A1B79D042008057D3 /* BufferBindingTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C204C9891B79D042008057D3 /* BufferBindingTableViewDelegate.swift */; };
+		C204C98C1B79D2AE008057D3 /* BufferBindingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C204C98B1B79D2AE008057D3 /* BufferBindingsView.xib */; };
 		C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2205E181B5A0E0A0046F04D /* DetailViewController.swift */; };
 		C23492BB1B75E62B00712575 /* VertexAttributesTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */; };
 		C23492BD1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */; };
@@ -102,6 +105,7 @@
 		C2EC39B81B78664300FFD859 /* Invocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */; };
 		C2EC39BA1B786F8200FFD859 /* ComputeInvocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2EC39B91B786F8200FFD859 /* ComputeInvocationView.xib */; };
 		C2EC39BC1B7874AA00FFD859 /* ComputeInvocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2EC39BB1B7874AA00FFD859 /* ComputeInvocationViewController.swift */; };
+		C2EC39BE1B79C21500FFD859 /* RenderInvocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2EC39BD1B79C21500FFD859 /* RenderInvocationView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +138,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C204C9871B79C82C008057D3 /* RenderInvocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderInvocationViewController.swift; sourceTree = "<group>"; };
+		C204C9891B79D042008057D3 /* BufferBindingTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferBindingTableViewDelegate.swift; sourceTree = "<group>"; };
+		C204C98B1B79D2AE008057D3 /* BufferBindingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BufferBindingsView.xib; sourceTree = "<group>"; };
 		C2205E181B5A0E0A0046F04D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexAttributesTableDelegate.swift; sourceTree = "<group>"; };
 		C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexBufferLayoutTableDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +209,7 @@
 		C2EC39B51B78656C00FFD859 /* Invocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Invocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C2EC39B91B786F8200FFD859 /* ComputeInvocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComputeInvocationView.xib; sourceTree = "<group>"; };
 		C2EC39BB1B7874AA00FFD859 /* ComputeInvocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeInvocationViewController.swift; sourceTree = "<group>"; };
+		C2EC39BD1B79C21500FFD859 /* RenderInvocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderInvocationView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +326,8 @@
 				C26B3C841B76B6C20073EACF /* InvocationSequence.xib */,
 				C26B3C881B76BD1F0073EACF /* Invocation.xib */,
 				C2EC39B91B786F8200FFD859 /* ComputeInvocationView.xib */,
+				C2EC39BD1B79C21500FFD859 /* RenderInvocationView.xib */,
+				C204C98B1B79D2AE008057D3 /* BufferBindingsView.xib */,
 				C2BF78521B58BC8A004535BC /* Assets.xcassets */,
 				C2BF78541B58BC8A004535BC /* MainMenu.xib */,
 				C2BF78571B58BC8A004535BC /* Info.plist */,
@@ -336,6 +346,8 @@
 				C26B3C861B76B9570073EACF /* InvocationsViewController.swift */,
 				C26B3C8A1B76BF290073EACF /* InvocationViewController.swift */,
 				C2EC39BB1B7874AA00FFD859 /* ComputeInvocationViewController.swift */,
+				C204C9871B79C82C008057D3 /* RenderInvocationViewController.swift */,
+				C204C9891B79D042008057D3 /* BufferBindingTableViewDelegate.swift */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -489,7 +501,9 @@
 				C2BF78531B58BC8A004535BC /* Assets.xcassets in Resources */,
 				C26B3C891B76BD1F0073EACF /* Invocation.xib in Resources */,
 				C2BF784E1B58BC8A004535BC /* Document.xib in Resources */,
+				C2EC39BE1B79C21500FFD859 /* RenderInvocationView.xib in Resources */,
 				C2BF78561B58BC8A004535BC /* MainMenu.xib in Resources */,
+				C204C98C1B79D2AE008057D3 /* BufferBindingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +573,7 @@
 			files = (
 				C2EC39B61B78656C00FFD859 /* Invocation+CoreDataProperties.swift in Sources */,
 				C24CDCB71B5A18D200348941 /* Pass+CoreDataProperties.swift in Sources */,
+				C204C98A1B79D042008057D3 /* BufferBindingTableViewDelegate.swift in Sources */,
 				C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */,
 				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
 				C2CA03121B6F0EFF00BA6AA1 /* ComputeStateUIController.swift in Sources */,
@@ -599,6 +614,7 @@
 				C24CDCF51B5AC44000348941 /* RenderPipelineState.swift in Sources */,
 				C2205E191B5A0E0A0046F04D /* DetailViewController.swift in Sources */,
 				C24CDCB81B5A18D200348941 /* Pass.swift in Sources */,
+				C204C9881B79C82C008057D3 /* RenderInvocationViewController.swift in Sources */,
 				C2EC39BC1B7874AA00FFD859 /* ComputeInvocationViewController.swift in Sources */,
 				C24CDCF41B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */,
 				C24CDCB31B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */,
