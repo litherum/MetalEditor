@@ -48,7 +48,7 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, Bu
             result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
             for state in states {
                 let item = NSMenuItem(title: state.name, action: nil, keyEquivalent: "")
-                item.representedObject = state.id
+                item.representedObject = state
                 result.addItem(item)
                 if let computeInvocationState = computeInvocation.state {
                     if computeInvocationState == state {

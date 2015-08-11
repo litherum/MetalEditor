@@ -21,13 +21,13 @@
                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2mB-2F-rpR">
                     <rect key="frame" x="0.0" y="0.0" width="435" height="272"/>
                     <clipView key="contentView" id="UXW-nI-V5i">
-                        <rect key="frame" x="1" y="1" width="418" height="255"/>
+                        <rect key="frame" x="1" y="1" width="433" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view translatesAutoresizingMaskIntoConstraints="NO" id="4BU-15-3Tf">
-                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="255"/>
+                            <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4BU-15-3Tf">
+                                <rect key="frame" x="0.0" y="15" width="0.0" height="255"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-Ef-eBj">
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-Ef-eBj">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="255"/>
                                         <animations/>
                                     </stackView>
@@ -48,14 +48,17 @@
                         </constraints>
                         <animations/>
                     </clipView>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="vqI-5v-pzZ"/>
+                    </constraints>
                     <animations/>
                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="L2I-g7-Jgg">
-                        <rect key="frame" x="1" y="256" width="418" height="15"/>
+                        <rect key="frame" x="1" y="255" width="433" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
                     <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cWx-mq-5o8">
-                        <rect key="frame" x="419" y="1" width="15" height="255"/>
+                        <rect key="frame" x="418" y="1" width="16" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
