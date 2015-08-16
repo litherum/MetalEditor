@@ -76,6 +76,18 @@
         <relationship name="computeInvocationTPG" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ComputeInvocation" inverseName="threadgroupsPerGrid" inverseEntity="ComputeInvocation" syncable="YES"/>
         <relationship name="computeInvocationTPT" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ComputeInvocation" inverseName="threadsPerThreadgroup" inverseEntity="ComputeInvocation" syncable="YES"/>
     </entity>
+    <entity name="Texture" representedClassName=".Texture" syncable="YES">
+        <attribute name="arrayLength" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="depth" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="height" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="mipmapLevelCount" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="pixelFormat" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="sampleCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="textureType" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="width" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="VertexAttribute" representedClassName=".VertexAttribute" syncable="YES">
         <attribute name="bufferIndex" attributeType="Integer 32" syncable="YES"/>
         <attribute name="format" attributeType="Integer 32" syncable="YES"/>
@@ -105,6 +117,7 @@
         <element name="RenderPipelineColorAttachment" positionX="-9" positionY="63" width="128" height="90"/>
         <element name="RenderPipelineState" positionX="45" positionY="117" width="128" height="210"/>
         <element name="Size" positionX="18" positionY="90" width="128" height="120"/>
+        <element name="Texture" positionX="-9" positionY="135" width="128" height="195"/>
         <element name="VertexAttribute" positionX="0" positionY="108" width="128" height="120"/>
         <element name="VertexBufferLayout" positionX="9" positionY="117" width="128" height="120"/>
     </elements>

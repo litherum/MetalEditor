@@ -19,7 +19,8 @@ protocol PassRemoveObserver: class {
 class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver, PassRemoveObserver {
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
-    @IBOutlet var buffersUIController: BuffersUIController!
+    @IBOutlet var buffersTableViewDelegate: BuffersTableViewDelegate!
+    @IBOutlet var texturesTableViewDelegate: TexturesTableViewDelegate!
     @IBOutlet var renderStateUIController: RenderStateUIController!
     @IBOutlet var splitView: NSSplitView!
     @IBOutlet var invocationsStackView: NSStackView!
@@ -95,8 +96,10 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         setupFrame()
         setupLibrary()
 
-        buffersUIController.managedObjectContext = managedObjectContext
-        buffersUIController.modelObserver = self
+        buffersTableViewDelegate.managedObjectContext = managedObjectContext
+        buffersTableViewDelegate.modelObserver = self
+        texturesTableViewDelegate.managedObjectContext = managedObjectContext
+        texturesTableViewDelegate.modelObserver = self
         renderStateUIController.managedObjectContext = managedObjectContext
         renderStateUIController.modelObserver = self
 

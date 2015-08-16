@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
+class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     @IBOutlet var tableView: NSTableView!

@@ -1,5 +1,5 @@
 //
-//  Size
+//  Size.swift
 //  MetalEditor
 //
 //  Created by Litherum on 8/15/15.

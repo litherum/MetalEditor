@@ -16,6 +16,7 @@ protocol MetalStateDelegate: class {
 class MetalState {
     weak var delegate: MetalStateDelegate?
     var buffers: [Buffer: MTLBuffer] = [:]
+    var textures: [Texture: MTLTexture] = [:]
     var computePipelineStates: [ComputePipelineState: MTLComputePipelineState] = [:]
     var renderPipelineStates: [RenderPipelineState: MTLRenderPipelineState] = [:]
 
@@ -282,6 +283,7 @@ class MetalState {
         var library: MTLLibrary!
         var functions: [String: MTLFunction] = [:]
         buffers = [:]
+        textures = [:]
         computePipelineStates = [:]
         renderPipelineStates = [:]
 
@@ -310,6 +312,20 @@ class MetalState {
             } else {
                 buffers[buffer] = device.newBufferWithLength(buffer.initialLength!.integerValue, options: .StorageModePrivate)
             }
+        }
+
+        for texture in MetalState.fetchAll(managedObjectContext, entityName: "Texture") as! [Texture] {
+            let descriptor = MTLTextureDescriptor()
+            descriptor.textureType = MTLTextureType(rawValue: texture.textureType.unsignedLongValue)!
+            descriptor.pixelFormat = MTLPixelFormat(rawValue: texture.pixelFormat.unsignedLongValue)!
+            descriptor.width = texture.width.integerValue
+            descriptor.height = texture.height.integerValue
+            descriptor.depth = texture.depth.integerValue
+            descriptor.mipmapLevelCount = texture.mipmapLevelCount.integerValue
+            descriptor.sampleCount = texture.sampleCount.integerValue
+            descriptor.arrayLength = texture.arrayLength.integerValue
+            descriptor.storageMode = .Managed
+            textures[texture] = device.newTextureWithDescriptor(descriptor)
         }
         
         for computePipelineState in MetalState.fetchAll(managedObjectContext, entityName: "ComputePipelineState") as! [ComputePipelineState] {

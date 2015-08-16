@@ -38,8 +38,6 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         return numberOfColorAttachments()
     }
 
-    // FIXME: Every reference to RenderStateViewController in here is a layering violation.
-
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let column = tableColumn!
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
@@ -47,10 +45,10 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let result = tableView.makeViewWithIdentifier("PixelFormatPopUp", owner: self) as! NSTableCellView
         assert(result.subviews.count == 1)
         let popUp = result.subviews[0] as! NSPopUpButton
-        popUp.menu = RenderStateViewController.pixelFormatMenu(true)
+        popUp.menu = pixelFormatMenu(true)
         if let attachmentPixelFormat = colorAttachment.pixelFormat {
             let pixelFormat = MTLPixelFormat(rawValue: attachmentPixelFormat.unsignedLongValue)!
-            popUp.selectItemAtIndex(RenderStateViewController.pixelFormatToIndex(pixelFormat) + 1)
+            popUp.selectItemAtIndex(pixelFormatToIndex(pixelFormat) + 1)
         } else {
             popUp.selectItemAtIndex(0)
         }
@@ -65,7 +63,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
             colorAttachment.pixelFormat = nil
             return
         }
-        let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1)!
+        let format = indexToPixelFormat(sender.indexOfSelectedItem - 1)!
         colorAttachment.pixelFormat = format.rawValue
         modelObserver.modelDidChange()
     }

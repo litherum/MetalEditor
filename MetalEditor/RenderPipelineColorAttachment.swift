@@ -12,17 +12,11 @@ import CoreData
 class RenderPipelineColorAttachment: NSManagedObject {
     override func validateForInsert() throws {
         try super.validateForInsert()
-        guard let context = managedObjectContext else {
-            return
-        }
-        try validateUnique("RenderPipelineColorAttachment", managedObjectContext: context, id: id, probe: self)
+        try validateUnique("RenderPipelineColorAttachment", managedObjectContext: managedObjectContext!, id: id, probe: self)
     }
 
     override func validateForUpdate() throws {
         try super.validateForUpdate()
-        guard let context = managedObjectContext else {
-            return
-        }
-        try validateUnique("RenderPipelineColorAttachment", managedObjectContext: context, id: id, probe: self)
+        try validateUnique("RenderPipelineColorAttachment", managedObjectContext: managedObjectContext!, id: id, probe: self)
     }
 }
