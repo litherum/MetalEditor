@@ -15,7 +15,6 @@ import CoreData
 extension ComputeInvocation {
 
     @NSManaged var bufferBindings: NSOrderedSet
-    @NSManaged var pass: ComputePass?
     @NSManaged var state: ComputePipelineState?
     @NSManaged var threadgroupsPerGrid: Size
     @NSManaged var threadsPerThreadgroup: Size

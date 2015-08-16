@@ -21,7 +21,6 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
     @IBOutlet var buffersUIController: BuffersUIController!
-    @IBOutlet var computeStateUIController: ComputeStateUIController!
     @IBOutlet var renderStateUIController: RenderStateUIController!
     @IBOutlet var splitView: NSSplitView!
     @IBOutlet var invocationsStackView: NSStackView!
@@ -106,8 +105,6 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
 
         buffersUIController.managedObjectContext = managedObjectContext
         buffersUIController.modelObserver = self
-        computeStateUIController.managedObjectContext = managedObjectContext
-        computeStateUIController.modelObserver = self
         renderStateUIController.managedObjectContext = managedObjectContext
         renderStateUIController.modelObserver = self
 

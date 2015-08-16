@@ -103,8 +103,6 @@ func main() {
 
     let computePipelineState = NSEntityDescription.insertNewObjectForEntityForName("ComputePipelineState", inManagedObjectContext: managedObjectContext) as! ComputePipelineState
     computePipelineState.functionName = "increment"
-    computePipelineState.name = "Compute State"
-    computePipelineState.id = 0
 
     let threadgroupsPerGrid = NSEntityDescription.insertNewObjectForEntityForName("Size", inManagedObjectContext: managedObjectContext) as! Size
     threadgroupsPerGrid.width = 1

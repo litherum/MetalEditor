@@ -10,15 +10,4 @@ import Foundation
 import CoreData
 
 class ComputePipelineState: NSManagedObject {
-    override func validateForInsert() throws {
-        try super.validateForInsert()
-        guard let context = managedObjectContext else {
-            return
-        }
-        try validateUnique("ComputePipelineState", managedObjectContext: context, name: name, id: id, probe: self)
-    }
-
-    override func validateForUpdate() throws {
-        try super.validateForUpdate()
-    }
 }

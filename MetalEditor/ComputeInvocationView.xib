@@ -7,7 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ComputeInvocationViewController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
-                <outlet property="statePopUp" destination="aaW-R5-pXK" id="Z5J-W6-eSH"/>
+                <outlet property="pipelineStateNameTextField" destination="Lzy-Fd-vUi" id="j6W-aJ-CDJ"/>
                 <outlet property="tableViewPlaceholder" destination="b2E-7K-9Gf" id="cQm-NN-PBq"/>
                 <outlet property="threadgroupsPerGridXTextField" destination="ciN-Wy-Q8o" id="e3p-tf-2Eo"/>
                 <outlet property="threadgroupsPerGridYTextField" destination="bD6-7h-dre" id="uEm-61-sag"/>
@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="blb-JJ-nTJ">
-                    <rect key="frame" x="278" y="130" width="317" height="131"/>
+                    <rect key="frame" x="278" y="129" width="317" height="132"/>
                     <subviews>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xjb-eV-GHt">
                             <rect key="frame" x="217" y="55" width="100" height="22"/>
@@ -102,7 +102,7 @@
                             </textFieldCell>
                         </textField>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Xba-qe-J6j">
-                            <rect key="frame" x="48" y="110" width="222" height="21"/>
+                            <rect key="frame" x="8" y="110" width="301" height="22"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4hH-ht-9v0">
                                     <rect key="frame" x="-2" y="3" width="147" height="17"/>
@@ -113,32 +113,29 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aaW-R5-pXK">
-                                    <rect key="frame" x="149" y="-3" width="76" height="26"/>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lzy-Fd-vUi">
+                                    <rect key="frame" x="151" y="0.0" width="150" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="150" id="Sqt-Rf-ZKG"/>
+                                    </constraints>
                                     <animations/>
-                                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="blA-5g-OOC" id="UyL-gs-1vy">
-                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="menu"/>
-                                        <menu key="menu" id="T9w-TD-gDn">
-                                            <items>
-                                                <menuItem title="Item 1" state="on" id="blA-5g-OOC"/>
-                                                <menuItem title="Item 2" id="dEE-PX-v4i"/>
-                                                <menuItem title="Item 3" id="0v6-Vh-0ts"/>
-                                            </items>
-                                        </menu>
-                                    </popUpButtonCell>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="yiJ-0P-lAt">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
                                     <connections>
-                                        <action selector="stateSelected:" target="-2" id="IN2-Wb-M44"/>
+                                        <action selector="setPipelineStateFunctionName:" target="-2" id="oXN-Km-X0g"/>
                                     </connections>
-                                </popUpButton>
+                                </textField>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="aaW-R5-pXK" firstAttribute="top" secondItem="Xba-qe-J6j" secondAttribute="top" id="2k7-ka-L0T"/>
-                                <constraint firstAttribute="trailing" secondItem="aaW-R5-pXK" secondAttribute="trailing" id="ACg-7w-4Of"/>
-                                <constraint firstItem="aaW-R5-pXK" firstAttribute="leading" secondItem="4hH-ht-9v0" secondAttribute="trailing" constant="8" symbolic="YES" id="VA8-Tr-i1f"/>
-                                <constraint firstAttribute="bottom" secondItem="aaW-R5-pXK" secondAttribute="bottom" id="d67-Ah-XrY"/>
+                                <constraint firstItem="Lzy-Fd-vUi" firstAttribute="baseline" secondItem="4hH-ht-9v0" secondAttribute="baseline" id="2kl-XX-XE4"/>
+                                <constraint firstAttribute="trailing" secondItem="Lzy-Fd-vUi" secondAttribute="trailing" id="3dx-VI-MYd"/>
+                                <constraint firstItem="Lzy-Fd-vUi" firstAttribute="leading" secondItem="4hH-ht-9v0" secondAttribute="trailing" constant="8" symbolic="YES" id="FSy-MD-g9O"/>
+                                <constraint firstItem="Lzy-Fd-vUi" firstAttribute="top" secondItem="Xba-qe-J6j" secondAttribute="top" id="HrA-j1-laU"/>
+                                <constraint firstAttribute="bottom" secondItem="Lzy-Fd-vUi" secondAttribute="bottom" id="LTC-e3-dng"/>
                                 <constraint firstItem="4hH-ht-9v0" firstAttribute="leading" secondItem="Xba-qe-J6j" secondAttribute="leading" id="kFZ-ys-S11"/>
-                                <constraint firstItem="aaW-R5-pXK" firstAttribute="baseline" secondItem="4hH-ht-9v0" secondAttribute="baseline" id="mSh-0B-nSI"/>
                             </constraints>
                             <animations/>
                         </customView>

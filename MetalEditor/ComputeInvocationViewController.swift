@@ -14,7 +14,7 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, Bu
     var computeInvocation: ComputeInvocation!
     var bufferBindingsViewController: BufferBindingsViewController!
     @IBOutlet var tableViewPlaceholder: NSView!
-    @IBOutlet var statePopUp: NSPopUpButton!
+    @IBOutlet var pipelineStateNameTextField: NSTextField!
     @IBOutlet var threadgroupsPerGridXTextField: NSTextField!
     @IBOutlet var threadgroupsPerGridYTextField: NSTextField!
     @IBOutlet var threadgroupsPerGridZTextField: NSTextField!
@@ -37,31 +37,6 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, Bu
         computeInvocation.mutableOrderedSetValueForKey("bufferBindings").removeObject(binding)
     }
 
-    func createStateMenu() -> (NSMenu, NSMenuItem?) {
-        let fetchRequest = NSFetchRequest(entityName: "ComputePipelineState")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-
-        var selectedItem: NSMenuItem?
-        do {
-            let states = try managedObjectContext.executeFetchRequest(fetchRequest) as! [ComputePipelineState]
-            let result = NSMenu()
-            result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
-            for state in states {
-                let item = NSMenuItem(title: state.name, action: nil, keyEquivalent: "")
-                item.representedObject = state
-                result.addItem(item)
-                if let computeInvocationState = computeInvocation.state {
-                    if computeInvocationState == state {
-                        selectedItem = item
-                    }
-                }
-            }
-            return (result, selectedItem)
-        } catch {
-            fatalError()
-        }
-    }
-
     override func viewDidLoad() {
         bufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, removeObserver: self, bufferBindings: computeInvocation.bufferBindings)
         addChildViewController(bufferBindingsViewController)
@@ -69,12 +44,8 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, Bu
         tableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : bufferBindingsViewController.view]))
         tableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : bufferBindingsViewController.view]))
 
-        let (menu, selectedItem) = createStateMenu()
-        statePopUp.menu = menu
-        if let toSelect = selectedItem {
-            statePopUp.selectItem(toSelect)
-        } else {
-            statePopUp.selectItemAtIndex(0)
+        if let state = computeInvocation.state {
+            pipelineStateNameTextField.stringValue = state.functionName
         }
 
         threadgroupsPerGridXTextField.integerValue = computeInvocation.threadgroupsPerGrid.width.integerValue
@@ -94,21 +65,14 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, Bu
         return false
     }
 
-    @IBAction func stateSelected(sender: NSPopUpButton) {
-        guard let selectedItem = sender.selectedItem else {
-            return
+    @IBAction func setPipelineStateFunctionName(sender: NSTextField) {
+        let newState = NSEntityDescription.insertNewObjectForEntityForName("ComputePipelineState", inManagedObjectContext: managedObjectContext) as! ComputePipelineState
+        newState.functionName = sender.stringValue
+        let oldState = computeInvocation.state
+        computeInvocation.state = newState
+        if let oldStateObject = oldState {
+            managedObjectContext.deleteObject(oldStateObject)
         }
-
-        guard let selectionObject = selectedItem.representedObject else {
-            computeInvocation.state = nil
-            return
-        }
-
-        guard let selection = selectionObject as? ComputePipelineState else {
-            fatalError()
-        }
-
-        computeInvocation.state = selection
         modelObserver.modelDidChange()
     }
 
