@@ -24,6 +24,9 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     }
 
     func removeSelectedColorAttachment() {
+        guard tableView.selectedRow >= 0 else {
+            return
+        }
         managedObjectContext.deleteObject(state.colorAttachments[tableView.selectedRow] as! NSManagedObject)
     }
 

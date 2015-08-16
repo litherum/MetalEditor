@@ -59,6 +59,9 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     }
 
     func removeSelectedVertexAttribute() {
+        guard tableView.selectedRow >= 0 else {
+            return
+        }
         managedObjectContext.deleteObject(state.vertexAttributes[tableView.selectedRow] as! NSManagedObject)
     }
 

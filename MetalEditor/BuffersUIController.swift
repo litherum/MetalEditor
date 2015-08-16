@@ -133,6 +133,9 @@ class BuffersUIController: NSObject, NSTableViewDelegate, NSTableViewDataSource,
             buffer.id = bufferCount
         } else { // Remove
             assert(sender.selectedSegment == 1)
+            guard tableView.selectedRow >= 0 else {
+                return
+            }
             managedObjectContext.deleteObject(getBuffer(tableView.selectedRow))
         }
         tableView.reloadData()

@@ -28,6 +28,9 @@ class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableVie
     }
 
     func removeSelectedVertexBufferLayout() {
+        guard tableView.selectedRow >= 0 else {
+            return
+        }
         managedObjectContext.deleteObject(state.vertexBufferLayouts[tableView.selectedRow] as! NSManagedObject)
     }
 
