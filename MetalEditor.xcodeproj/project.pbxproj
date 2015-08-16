@@ -316,7 +316,6 @@
 			children = (
 				C2205E1A1B5A15A70046F04D /* Managed Objects */,
 				C2BF78481B58BC8A004535BC /* AppDelegate.swift */,
-				C2BF784A1B58BC8A004535BC /* Document.swift */,
 				C2BF784C1B58BC8A004535BC /* Document.xib */,
 				C2A9391C1B707A7900449A95 /* RenderStateViewController.xib */,
 				C26B3C841B76B6C20073EACF /* InvocationSequence.xib */,
@@ -328,6 +327,7 @@
 				C2BF78541B58BC8A004535BC /* MainMenu.xib */,
 				C2BF78571B58BC8A004535BC /* Info.plist */,
 				C2BF784F1B58BC8A004535BC /* Document.xcdatamodeld */,
+				C2BF784A1B58BC8A004535BC /* Document.swift */,
 				C2BF78791B58C09B004535BC /* PreviewController.swift */,
 				C24CDC9D1B5A17BF00348941 /* MetalState.swift */,
 				C285B2521B5E1FAB00671A58 /* BuffersUIController.swift */,

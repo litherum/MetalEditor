@@ -77,7 +77,7 @@
                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                 <prototypeCellViews>
                                     <tableCellView identifier="Pop Up" id="mfS-rU-qg9">
-                                        <rect key="frame" x="46" y="1" width="116" height="17"/>
+                                        <rect key="frame" x="46" y="1" width="116" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vv4-M4-KA3">

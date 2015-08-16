@@ -59,6 +59,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         
         if library == nil {
             library = NSEntityDescription.insertNewObjectForEntityForName("Library", inManagedObjectContext: managedObjectContext!) as! Library
+            library.source = ""
         }
     }
 

@@ -24,11 +24,11 @@
                         <rect key="frame" x="1" y="1" width="433" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4BU-15-3Tf">
-                                <rect key="frame" x="0.0" y="15" width="0.0" height="255"/>
+                            <view translatesAutoresizingMaskIntoConstraints="NO" id="4BU-15-3Tf">
+                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="270"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-Ef-eBj">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="255"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LR5-Ef-eBj">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="270"/>
                                         <animations/>
                                     </stackView>
                                 </subviews>
@@ -57,8 +57,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
-                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="cWx-mq-5o8">
-                        <rect key="frame" x="419" y="1" width="15" height="270"/>
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="cWx-mq-5o8">
+                        <rect key="frame" x="418" y="1" width="16" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
