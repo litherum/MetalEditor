@@ -13,19 +13,16 @@ class PreviewController: NSViewController, MTKViewDelegate {
     var metalView: MTKView!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
+    var builtInBuffers: [MTLBuffer] = []
     var metalState: MetalState!
     var frame: Frame!
     var size: CGSize = CGSizeMake(0, 0)
     var startDate = NSDate()
-    var lock = NSLock()
-
-    // FIXME: We might be destroyed in the middle of our frame. We should wait for the lock to unlock.
 
     override func viewDidLoad() {
         super.viewDidLoad()
         metalView = view as! MTKView
         metalView.delegate = self
-        //metalView.enableSetNeedsDisplay = true
     }
 
     func initializeWithDevice(device: MTLDevice, commandQueue: MTLCommandQueue, frame: Frame, metalState: MetalState) {
@@ -67,28 +64,32 @@ class PreviewController: NSViewController, MTKViewDelegate {
         guard frame != nil else {
             return
         }
-        guard lock.tryLock() else {
-            return
-        }
         // FIXME: Support render-to-texture
         guard let renderPassDescriptor = metalView.currentRenderPassDescriptor else {
             fatalError()
         }
-        // | time | width | height | padding |
-        let builtInPointer = UnsafeMutablePointer<Float>(metalState.builtInBuffer.contents())
+        let builtInBuffer: MTLBuffer!
+        if builtInBuffers.count > 0 {
+            builtInBuffer = builtInBuffers.removeLast()
+        } else {
+            // | time | width | height | padding |
+            builtInBuffer = device.newBufferWithLength(16, options: .StorageModeManaged)
+        }
+        assert(builtInBuffer != nil)
+        let builtInPointer = UnsafeMutablePointer<Float>(builtInBuffer.contents())
         builtInPointer[0] = Float(NSDate().timeIntervalSinceDate(startDate))
         builtInPointer[1] = Float(size.width)
         builtInPointer[2] = Float(size.height)
         builtInPointer[3] = 0
-        if metalState.builtInBuffer.storageMode == .Managed {
-            metalState.builtInBuffer.didModifyRange(NSMakeRange(0, 16))
+        if builtInBuffer.storageMode == .Managed {
+            builtInBuffer.didModifyRange(NSMakeRange(0, 16))
         }
         for passObject in frame.passes {
             let pass = passObject as! Pass
             let commandBuffer = commandQueue.commandBuffer()
             if let computePass = pass as? ComputePass {
                 let computeCommandEncoder = commandBuffer.computeCommandEncoder()
-                computeCommandEncoder.setBuffer(metalState.builtInBuffer, offset: 0, atIndex: 1)
+                computeCommandEncoder.setBuffer(builtInBuffer, offset: 0, atIndex: 1)
                 for invocationObject in computePass.invocations {
                     guard let invocation = invocationObject as? ComputeInvocation else {
                         fatalError()
@@ -117,8 +118,8 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 computeCommandEncoder.endEncoding()
             } else if let renderPass = pass as? RenderPass {
                 let renderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor)
-                renderCommandEncoder.setVertexBuffer(metalState.builtInBuffer, offset: 0, atIndex: 1)
-                renderCommandEncoder.setFragmentBuffer(metalState.builtInBuffer, offset: 0, atIndex: 1)
+                renderCommandEncoder.setVertexBuffer(builtInBuffer, offset: 0, atIndex: 1)
+                renderCommandEncoder.setFragmentBuffer(builtInBuffer, offset: 0, atIndex: 1)
                 for invocationObject in renderPass.invocations {
                     guard let invocation = invocationObject as? RenderInvocation else {
                         fatalError()
@@ -155,7 +156,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
             if pass == frame.passes[frame.passes.count - 1] as! Pass {
                 commandBuffer.addCompletedHandler() {(commandBuffer) in
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.lock.unlock()
+                        self.builtInBuffers.append(builtInBuffer)
                     }
                 }
                 if metalView.currentDrawable != nil {

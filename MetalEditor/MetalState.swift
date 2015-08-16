@@ -15,7 +15,6 @@ protocol MetalStateDelegate: class {
 
 class MetalState {
     weak var delegate: MetalStateDelegate?
-    var builtInBuffer: MTLBuffer!
     var buffers: [Buffer: MTLBuffer] = [:]
     var computePipelineStates: [ComputePipelineState: MTLComputePipelineState] = [:]
     var renderPipelineStates: [RenderPipelineState: MTLRenderPipelineState] = [:]
@@ -313,9 +312,6 @@ class MetalState {
                 }
             }
         }
-
-        // | time | width | height | padding |
-        builtInBuffer = device.newBufferWithLength(16, options: .StorageModeManaged)
 
         for buffer in MetalState.fetchAll(managedObjectContext, entityName: "Buffer") as! [Buffer] {
             if let initialData = buffer.initialData {
