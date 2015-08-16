@@ -9,7 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="buffersUIController" destination="E1I-gG-L0F" id="cvd-AV-XQb"/>
-                <outlet property="detailViewController" destination="OBd-FQ-Sir" id="3Sd-3f-cmx"/>
                 <outlet property="invocationsStackView" destination="noD-ak-m2E" id="YXW-u4-Wfz"/>
                 <outlet property="librarySourceView" destination="mxX-b9-wAo" id="fTN-1f-n8V"/>
                 <outlet property="previewController" destination="AIC-WQ-HpF" id="zql-ep-a1g"/>
@@ -531,7 +530,6 @@
                 <outlet property="view" destination="wVZ-en-TXA" id="cED-R8-In6"/>
             </connections>
         </viewController>
-        <viewController id="OBd-FQ-Sir" userLabel="Detail View Controller" customClass="DetailViewController" customModule="MetalEditor" customModuleProvider="target"/>
         <customObject id="E1I-gG-L0F" userLabel="Buffers UI Controller" customClass="BuffersUIController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="fileColumn" destination="UeQ-tk-MrM" id="Uwu-9l-dsr"/>

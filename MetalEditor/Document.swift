@@ -123,7 +123,6 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
 
     func compilationCompleted(success: Bool) {
         if !success {
-            print("Library creation failed.")
             librarySourceView.backgroundColor = NSColor.redColor()
         } else {
             librarySourceView.backgroundColor = NSColor.whiteColor()
