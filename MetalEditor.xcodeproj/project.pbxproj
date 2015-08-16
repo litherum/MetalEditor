@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C204C9881B79C82C008057D3 /* RenderInvocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C204C9871B79C82C008057D3 /* RenderInvocationViewController.swift */; };
-		C204C98A1B79D042008057D3 /* BufferBindingTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C204C9891B79D042008057D3 /* BufferBindingTableViewDelegate.swift */; };
-		C204C98C1B79D2AE008057D3 /* BufferBindingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C204C98B1B79D2AE008057D3 /* BufferBindingsView.xib */; };
+		C204C98A1B79D042008057D3 /* BindingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C204C9891B79D042008057D3 /* BindingsViewController.swift */; };
+		C204C98C1B79D2AE008057D3 /* BindingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C204C98B1B79D2AE008057D3 /* BindingsView.xib */; };
 		C23492BB1B75E62B00712575 /* VertexAttributesTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */; };
 		C23492BD1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */; };
 		C23492BF1B75E66800712575 /* ColorAttachmentsTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BE1B75E66800712575 /* ColorAttachmentsTableDelegate.swift */; };
@@ -88,6 +88,8 @@
 		C26C8DA11B8145100097180D /* TextureBinding+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8DA01B8145100097180D /* TextureBinding+CoreDataProperties.swift */; };
 		C26C8DA21B8145140097180D /* TextureBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8D9E1B8144FB0097180D /* TextureBinding.swift */; };
 		C26C8DA31B8145170097180D /* TextureBinding+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8DA01B8145100097180D /* TextureBinding+CoreDataProperties.swift */; };
+		C26C8DA51B8153080097180D /* BufferBindingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8DA41B8153080097180D /* BufferBindingsViewController.swift */; };
+		C26C8DA71B81542D0097180D /* TextureBindingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8DA61B81542D0097180D /* TextureBindingsViewController.swift */; };
 		C285B2531B5E1FAB00671A58 /* BuffersTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C285B2521B5E1FAB00671A58 /* BuffersTableViewDelegate.swift */; };
 		C2877EBB1B80615C000FD5DC /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2877EBA1B80615C000FD5DC /* Size.swift */; };
 		C2877EBD1B806198000FD5DC /* Size+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2877EBC1B806198000FD5DC /* Size+CoreDataProperties.swift */; };
@@ -147,8 +149,8 @@
 
 /* Begin PBXFileReference section */
 		C204C9871B79C82C008057D3 /* RenderInvocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderInvocationViewController.swift; sourceTree = "<group>"; };
-		C204C9891B79D042008057D3 /* BufferBindingTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferBindingTableViewDelegate.swift; sourceTree = "<group>"; };
-		C204C98B1B79D2AE008057D3 /* BufferBindingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BufferBindingsView.xib; sourceTree = "<group>"; };
+		C204C9891B79D042008057D3 /* BindingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingsViewController.swift; sourceTree = "<group>"; };
+		C204C98B1B79D2AE008057D3 /* BindingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsView.xib; sourceTree = "<group>"; };
 		C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexAttributesTableDelegate.swift; sourceTree = "<group>"; };
 		C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexBufferLayoutTableDelegate.swift; sourceTree = "<group>"; };
 		C23492BE1B75E66800712575 /* ColorAttachmentsTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorAttachmentsTableDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,8 @@
 		C26C8D9C1B8131CE0097180D /* PixelFormatUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelFormatUtilities.swift; sourceTree = "<group>"; };
 		C26C8D9E1B8144FB0097180D /* TextureBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureBinding.swift; sourceTree = "<group>"; };
 		C26C8DA01B8145100097180D /* TextureBinding+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextureBinding+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C26C8DA41B8153080097180D /* BufferBindingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferBindingsViewController.swift; sourceTree = "<group>"; };
+		C26C8DA61B81542D0097180D /* TextureBindingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureBindingsViewController.swift; sourceTree = "<group>"; };
 		C285B2521B5E1FAB00671A58 /* BuffersTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuffersTableViewDelegate.swift; sourceTree = "<group>"; };
 		C2877EBA1B80615C000FD5DC /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		C2877EBC1B806198000FD5DC /* Size+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Size+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -342,7 +346,7 @@
 				C26B3C881B76BD1F0073EACF /* Invocation.xib */,
 				C2EC39B91B786F8200FFD859 /* ComputeInvocationView.xib */,
 				C2EC39BD1B79C21500FFD859 /* RenderInvocationView.xib */,
-				C204C98B1B79D2AE008057D3 /* BufferBindingsView.xib */,
+				C204C98B1B79D2AE008057D3 /* BindingsView.xib */,
 				C2BF78521B58BC8A004535BC /* Assets.xcassets */,
 				C2BF78541B58BC8A004535BC /* MainMenu.xib */,
 				C2BF78571B58BC8A004535BC /* Info.plist */,
@@ -363,7 +367,9 @@
 				C26B3C8A1B76BF290073EACF /* InvocationViewController.swift */,
 				C2EC39BB1B7874AA00FFD859 /* ComputeInvocationViewController.swift */,
 				C204C9871B79C82C008057D3 /* RenderInvocationViewController.swift */,
-				C204C9891B79D042008057D3 /* BufferBindingTableViewDelegate.swift */,
+				C204C9891B79D042008057D3 /* BindingsViewController.swift */,
+				C26C8DA41B8153080097180D /* BufferBindingsViewController.swift */,
+				C26C8DA61B81542D0097180D /* TextureBindingsViewController.swift */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -519,7 +525,7 @@
 				C2BF784E1B58BC8A004535BC /* Document.xib in Resources */,
 				C2EC39BE1B79C21500FFD859 /* RenderInvocationView.xib in Resources */,
 				C2BF78561B58BC8A004535BC /* MainMenu.xib in Resources */,
-				C204C98C1B79D2AE008057D3 /* BufferBindingsView.xib in Resources */,
+				C204C98C1B79D2AE008057D3 /* BindingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,8 +598,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2EC39B61B78656C00FFD859 /* Invocation+CoreDataProperties.swift in Sources */,
+				C26C8DA51B8153080097180D /* BufferBindingsViewController.swift in Sources */,
 				C24CDCB71B5A18D200348941 /* Pass+CoreDataProperties.swift in Sources */,
-				C204C98A1B79D042008057D3 /* BufferBindingTableViewDelegate.swift in Sources */,
+				C204C98A1B79D042008057D3 /* BindingsViewController.swift in Sources */,
 				C2BF787A1B58C09B004535BC /* PreviewController.swift in Sources */,
 				C2877EBB1B80615C000FD5DC /* Size.swift in Sources */,
 				C2BF78511B58BC8A004535BC /* Document.xcdatamodeld in Sources */,
@@ -636,6 +643,7 @@
 				C24CDCF71B5AC44000348941 /* RenderPass.swift in Sources */,
 				C24CDCBB1B5A18D200348941 /* Buffer+CoreDataProperties.swift in Sources */,
 				C2EC39B41B78653B00FFD859 /* Invocation.swift in Sources */,
+				C26C8DA71B81542D0097180D /* TextureBindingsViewController.swift in Sources */,
 				C24CDCF51B5AC44000348941 /* RenderPipelineState.swift in Sources */,
 				C24CDCB81B5A18D200348941 /* Pass.swift in Sources */,
 				C204C9881B79C82C008057D3 /* RenderInvocationViewController.swift in Sources */,

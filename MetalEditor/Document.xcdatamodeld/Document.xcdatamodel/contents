@@ -49,7 +49,7 @@
         <relationship name="pass" maxCount="1" deletionRule="Nullify" destinationEntity="RenderPass" inverseName="invocations" inverseEntity="RenderPass" syncable="YES"/>
         <relationship name="state" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RenderPipelineState" inverseName="invocations" inverseEntity="RenderPipelineState" syncable="YES"/>
         <relationship name="vertexBufferBindings" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BufferBinding" inverseName="renderInvocationVertex" inverseEntity="BufferBinding" syncable="YES"/>
-        <relationship name="vertexTextureBindings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TextureBinding" inverseName="renderInvocationVertex" inverseEntity="TextureBinding" syncable="YES"/>
+        <relationship name="vertexTextureBindings" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TextureBinding" inverseName="renderInvocationVertex" inverseEntity="TextureBinding" syncable="YES"/>
     </entity>
     <entity name="RenderPass" representedClassName=".RenderPass" parentEntity="Pass" syncable="YES">
         <relationship name="invocations" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="RenderInvocation" inverseName="pass" inverseEntity="RenderInvocation" syncable="YES"/>
@@ -129,8 +129,8 @@
         <element name="RenderPipelineState" positionX="45" positionY="117" width="128" height="210"/>
         <element name="Size" positionX="18" positionY="90" width="128" height="120"/>
         <element name="Texture" positionX="-9" positionY="135" width="128" height="225"/>
+        <element name="TextureBinding" positionX="-9" positionY="135" width="128" height="105"/>
         <element name="VertexAttribute" positionX="0" positionY="108" width="128" height="120"/>
         <element name="VertexBufferLayout" positionX="9" positionY="117" width="128" height="120"/>
-        <element name="TextureBinding" positionX="-9" positionY="135" width="128" height="105"/>
     </elements>
 </model>

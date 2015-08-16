@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8173.3"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="BufferBindingsViewController" customModule="MetalEditor" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="BindingsViewController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="numberTableColumn" destination="biH-1q-HbM" id="YLn-El-JfH"/>
                 <outlet property="popUpTableColumn" destination="Tz2-qn-W67" id="7Fp-iK-8e5"/>
@@ -95,7 +95,7 @@
                                                     </menu>
                                                 </popUpButtonCell>
                                                 <connections>
-                                                    <action selector="bufferSelected:" target="-2" id="M6p-Vd-2Lf"/>
+                                                    <action selector="itemSelected:" target="-2" id="QfJ-h3-MMT"/>
                                                 </connections>
                                             </popUpButton>
                                         </subviews>

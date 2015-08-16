@@ -8,7 +8,11 @@
 
 import Cocoa
 
-class InvocationViewController: NSViewController {
+protocol DismissObserver: class {
+    func dismiss(controller: NSViewController)
+}
+
+class InvocationViewController: NSViewController, DismissObserver {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     weak var removeObserver: InvocationRemoveObserver!
@@ -51,12 +55,16 @@ class InvocationViewController: NSViewController {
 
     @IBAction func showDetails(sender: NSButton) {
         if let renderInvocation = invocation as? RenderInvocation {
-            let controller = RenderInvocationViewController(nibName: "RenderInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, renderInvocation: renderInvocation)!
-            presentViewController(controller, asPopoverRelativeToRect: self.view.bounds, ofView: self.view, preferredEdge: .MaxX, behavior: .Transient)
+            let controller = RenderInvocationViewController(nibName: "RenderInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, renderInvocation: renderInvocation)!
+            presentViewControllerAsSheet(controller)
         } else {
             let computeInvocation = invocation as! ComputeInvocation
-            let controller = ComputeInvocationViewController(nibName: "ComputeInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, computeInvocation: computeInvocation)!
-            presentViewController(controller, asPopoverRelativeToRect: self.view.bounds, ofView: self.view, preferredEdge: .MaxX, behavior: .Transient)
+            let controller = ComputeInvocationViewController(nibName: "ComputeInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, computeInvocation: computeInvocation)!
+            presentViewControllerAsSheet(controller)
         }
+    }
+
+    func dismiss(controller: NSViewController) {
+        dismissViewController(controller)
     }
 }

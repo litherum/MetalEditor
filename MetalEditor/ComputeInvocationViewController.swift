@@ -11,9 +11,12 @@ import Cocoa
 class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
+    weak var dismissObserver: DismissObserver!
     var computeInvocation: ComputeInvocation!
     var bufferBindingsViewController: BufferBindingsViewController!
-    @IBOutlet var tableViewPlaceholder: NSView!
+    var textureBindingsViewController: TextureBindingsViewController!
+    @IBOutlet var bufferTableViewPlaceholder: NSView!
+    @IBOutlet var textureTableViewPlaceholder: NSView!
     @IBOutlet var pipelineStateNameTextField: NSTextField!
     @IBOutlet var threadgroupsPerGridXTextField: NSTextField!
     @IBOutlet var threadgroupsPerGridYTextField: NSTextField!
@@ -22,9 +25,10 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet var threadsPerThreadgroupYTextField: NSTextField!
     @IBOutlet var threadsPerThreadgroupZTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, computeInvocation: ComputeInvocation) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, dismissObserver: DismissObserver, computeInvocation: ComputeInvocation) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
+        self.dismissObserver = dismissObserver
         self.computeInvocation = computeInvocation
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -34,11 +38,17 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate {
     }
 
     override func viewDidLoad() {
-        bufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bufferBindings: computeInvocation.bufferBindings)
+        bufferBindingsViewController = BufferBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: computeInvocation.bufferBindings)
         addChildViewController(bufferBindingsViewController)
-        tableViewPlaceholder.addSubview(bufferBindingsViewController.view)
-        tableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : bufferBindingsViewController.view]))
-        tableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : bufferBindingsViewController.view]))
+        bufferTableViewPlaceholder.addSubview(bufferBindingsViewController.view)
+        bufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : bufferBindingsViewController.view]))
+        bufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : bufferBindingsViewController.view]))
+
+        textureBindingsViewController = TextureBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: computeInvocation.textureBindings)
+        addChildViewController(textureBindingsViewController)
+        textureTableViewPlaceholder.addSubview(textureBindingsViewController.view)
+        textureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : textureBindingsViewController.view]))
+        textureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : textureBindingsViewController.view]))
 
         if let state = computeInvocation.state {
             pipelineStateNameTextField.stringValue = state.functionName
@@ -114,5 +124,9 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate {
         bufferBindingsViewController.reloadData()
         modelObserver.modelDidChange()
         sender.selectedSegment = -1
+    }
+
+    @IBAction func dismiss(sender: NSButton) {
+        dismissObserver.dismiss(self)
     }
 }

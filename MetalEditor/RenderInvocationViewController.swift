@@ -11,19 +11,25 @@ import Cocoa
 class RenderInvocationViewController: NSViewController, NSTextFieldDelegate {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
+    weak var dismissObserver: DismissObserver!
     var renderInvocation: RenderInvocation!
     var vertexBufferBindingsViewController: BufferBindingsViewController!
     var fragmentBufferBindingsViewController: BufferBindingsViewController!
-    @IBOutlet var vertexTableViewPlaceholder: NSView!
-    @IBOutlet var fragmentTableViewPlaceholder: NSView!
+    var vertexTextureBindingsViewController: TextureBindingsViewController!
+    var fragmentTextureBindingsViewController: TextureBindingsViewController!
+    @IBOutlet var vertexBufferTableViewPlaceholder: NSView!
+    @IBOutlet var fragmentBufferTableViewPlaceholder: NSView!
+    @IBOutlet var vertexTextureTableViewPlaceholder: NSView!
+    @IBOutlet var fragmentTextureTableViewPlaceholder: NSView!
     @IBOutlet var statePopUp: NSPopUpButton!
     @IBOutlet var primitivePopUp: NSPopUpButton!
     @IBOutlet var vertexStartTextField: NSTextField!
     @IBOutlet var vertexCountTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, renderInvocation: RenderInvocation) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, dismissObserver: DismissObserver, renderInvocation: RenderInvocation) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
+        self.dismissObserver = dismissObserver
         self.renderInvocation = renderInvocation
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -58,17 +64,29 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate {
     }
 
     override func viewDidLoad() {
-        vertexBufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bufferBindings: renderInvocation.vertexBufferBindings)
+        vertexBufferBindingsViewController = BufferBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.vertexBufferBindings)
         addChildViewController(vertexBufferBindingsViewController)
-        vertexTableViewPlaceholder.addSubview(vertexBufferBindingsViewController.view)
-        vertexTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
-        vertexTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
+        vertexBufferTableViewPlaceholder.addSubview(vertexBufferBindingsViewController.view)
+        vertexBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
+        vertexBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
 
-        fragmentBufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bufferBindings: renderInvocation.fragmentBufferBindings)
+        fragmentBufferBindingsViewController = BufferBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.fragmentBufferBindings)
         addChildViewController(fragmentBufferBindingsViewController)
-        fragmentTableViewPlaceholder.addSubview(fragmentBufferBindingsViewController.view)
-        fragmentTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
-        fragmentTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
+        fragmentBufferTableViewPlaceholder.addSubview(fragmentBufferBindingsViewController.view)
+        fragmentBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
+        fragmentBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
+
+        vertexTextureBindingsViewController = TextureBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.vertexTextureBindings)
+        addChildViewController(vertexTextureBindingsViewController)
+        vertexTextureTableViewPlaceholder.addSubview(vertexTextureBindingsViewController.view)
+        vertexTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexTextureBindingsViewController.view]))
+        vertexTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexTextureBindingsViewController.view]))
+
+        fragmentTextureBindingsViewController = TextureBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.fragmentTextureBindings)
+        addChildViewController(fragmentTextureBindingsViewController)
+        fragmentTextureTableViewPlaceholder.addSubview(fragmentTextureBindingsViewController.view)
+        fragmentTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentTextureBindingsViewController.view]))
+        fragmentTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentTextureBindingsViewController.view]))
 
         let (menu, selectedItem) = createStateMenu()
         statePopUp.menu = menu
@@ -155,4 +173,7 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate {
         modelObserver.modelDidChange()
     }
 
+    @IBAction func dismiss(sender: NSButton) {
+        dismissObserver.dismiss(self)
+    }
 }
