@@ -117,7 +117,7 @@ class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSo
             }
             return result
         case fileColumn:
-            return tableView.makeViewWithIdentifier("FileButton", owner: self)
+            return tableView.makeViewWithIdentifier("FileButton", owner: self) as! NSTableCellView
         default:
             return nil
         }

@@ -7,12 +7,15 @@
 //
 
 import Cocoa
+import MetalKit
 
 class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
+    var device: MTLDevice! // Only needed because MTKTextureLoader can't directly give us a MTLTextureDescriptor
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var nameColumn: NSTableColumn!
+    @IBOutlet var specifiedColumn: NSTableColumn!
     @IBOutlet var typeColumn: NSTableColumn!
     @IBOutlet var pixelFormatColumn: NSTableColumn!
     @IBOutlet var widthColumn: NSTableColumn!
@@ -21,6 +24,7 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
     @IBOutlet var mipmapLevelCountColumn: NSTableColumn!
     @IBOutlet var sampleCountColumn: NSTableColumn!
     @IBOutlet var arrayLengthColumn: NSTableColumn!
+    @IBOutlet var imageFileColumn: NSTableColumn!
 
     private func numberOfTextures() -> Int {
         let fetchRequest = NSFetchRequest(entityName: "Texture")
@@ -65,6 +69,8 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let row = tableView.rowForView(sender)
         let texture = getTexture(row)
         texture.textureType = sender.indexOfSelectedItem
+        texture.initialData = nil
+        tableView.reloadData()
         modelObserver.modelDidChange()
     }
 
@@ -73,6 +79,8 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let texture = getTexture(row)
         let format = indexToPixelFormat(sender.indexOfSelectedItem)!
         texture.pixelFormat = format.rawValue
+        texture.initialData = nil
+        tableView.reloadData()
         modelObserver.modelDidChange()
     }
 
@@ -80,6 +88,8 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let row = tableView.rowForView(sender)
         let texture = getTexture(row)
         texture.width = sender.integerValue
+        texture.initialData = nil
+        tableView.reloadData()
         modelObserver.modelDidChange()
     }
 
@@ -87,6 +97,8 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let row = tableView.rowForView(sender)
         let texture = getTexture(row)
         texture.height = sender.integerValue
+        texture.initialData = nil
+        tableView.reloadData()
         modelObserver.modelDidChange()
     }
 
@@ -94,6 +106,8 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let row = tableView.rowForView(sender)
         let texture = getTexture(row)
         texture.depth = sender.integerValue
+        texture.initialData = nil
+        tableView.reloadData()
         modelObserver.modelDidChange()
     }
 
@@ -101,6 +115,8 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let row = tableView.rowForView(sender)
         let texture = getTexture(row)
         texture.mipmapLevelCount = sender.integerValue
+        texture.initialData = nil
+        tableView.reloadData()
         modelObserver.modelDidChange()
     }
 
@@ -108,6 +124,8 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let row = tableView.rowForView(sender)
         let texture = getTexture(row)
         texture.sampleCount = sender.integerValue
+        texture.initialData = nil
+        tableView.reloadData()
         modelObserver.modelDidChange()
     }
 
@@ -115,17 +133,63 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         let row = tableView.rowForView(sender)
         let texture = getTexture(row)
         texture.arrayLength = sender.integerValue
+        texture.initialData = nil
+        tableView.reloadData()
         modelObserver.modelDidChange()
+    }
+
+    @IBAction func setData(sender: NSButton) {
+        let row = tableView.rowForView(sender)
+        let texture = getTexture(row)
+        let window = tableView.window!
+        let openPanel = NSOpenPanel()
+        openPanel.allowsMultipleSelection = false
+        openPanel.beginSheetModalForWindow(window) {(selected: Int) in
+            guard selected == NSFileHandlingPanelOKButton else {
+                return
+            }
+            guard let url = openPanel.URL else {
+                return
+            }
+            guard let contents = NSData(contentsOfURL: url) else {
+                return
+            }
+            do {
+                let loader = MTKTextureLoader(device: self.device)
+                let newTexture = try loader.newTextureWithContentsOfURL(url, options: nil)
+                texture.initialData = contents
+                texture.arrayLength = newTexture.arrayLength
+                texture.depth = newTexture.depth
+                texture.height = newTexture.height
+                texture.width = newTexture.width
+                texture.mipmapLevelCount = newTexture.mipmapLevelCount
+                texture.pixelFormat = newTexture.pixelFormat.rawValue
+                texture.sampleCount = newTexture.sampleCount
+                texture.textureType = newTexture.textureType.rawValue
+            } catch {
+                return
+            }
+            self.tableView.reloadData()
+            self.modelObserver.modelDidChange()
+        }
     }
 
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let texture = getTexture(row)
         switch tableColumn! {
-        case widthColumn:
+        case nameColumn:
             let result = tableView.makeViewWithIdentifier("Name", owner: self) as! NSTableCellView
             let textField = result.textField!
             textField.editable = true
             textField.stringValue = texture.name
+            return result
+        case specifiedColumn:
+            let result = tableView.makeViewWithIdentifier("Specified", owner: self) as! NSTableCellView
+            if texture.initialData != nil {
+                result.textField!.stringValue = "Initial data"
+            } else {
+                result.textField!.stringValue = "No initial data"
+            }
             return result
         case typeColumn:
             let result = tableView.makeViewWithIdentifier("Type", owner: self) as! NSTableCellView
@@ -177,6 +241,8 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
             textField.editable = true
             textField.integerValue = texture.arrayLength.integerValue
             return result
+        case imageFileColumn:
+            return tableView.makeViewWithIdentifier("Image File", owner: self) as! NSTableCellView
         default:
             return nil
         }
@@ -188,6 +254,7 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
             let texture = NSEntityDescription.insertNewObjectForEntityForName("Texture", inManagedObjectContext: managedObjectContext) as! Texture
             texture.name = "Texture"
             texture.id = textureCount
+            texture.initialData = nil
             texture.arrayLength = 1
             texture.width = 1
             texture.height = 1

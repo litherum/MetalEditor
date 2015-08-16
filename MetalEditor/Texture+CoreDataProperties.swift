@@ -16,6 +16,7 @@ extension Texture {
 
     @NSManaged var name: String
     @NSManaged var id: NSNumber
+    @NSManaged var initialData: NSData?
     @NSManaged var arrayLength: NSNumber
     @NSManaged var depth: NSNumber
     @NSManaged var height: NSNumber

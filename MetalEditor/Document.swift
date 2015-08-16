@@ -100,6 +100,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         buffersTableViewDelegate.modelObserver = self
         texturesTableViewDelegate.managedObjectContext = managedObjectContext
         texturesTableViewDelegate.modelObserver = self
+        texturesTableViewDelegate.device = device
         renderStateUIController.managedObjectContext = managedObjectContext
         renderStateUIController.modelObserver = self
 

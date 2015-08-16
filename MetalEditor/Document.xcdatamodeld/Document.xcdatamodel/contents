@@ -81,6 +81,7 @@
         <attribute name="depth" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="height" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="initialData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="mipmapLevelCount" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="pixelFormat" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -117,7 +118,7 @@
         <element name="RenderPipelineColorAttachment" positionX="-9" positionY="63" width="128" height="90"/>
         <element name="RenderPipelineState" positionX="45" positionY="117" width="128" height="210"/>
         <element name="Size" positionX="18" positionY="90" width="128" height="120"/>
-        <element name="Texture" positionX="-9" positionY="135" width="128" height="195"/>
+        <element name="Texture" positionX="-9" positionY="135" width="128" height="210"/>
         <element name="VertexAttribute" positionX="0" positionY="108" width="128" height="120"/>
         <element name="VertexBufferLayout" positionX="9" positionY="117" width="128" height="120"/>
     </elements>
