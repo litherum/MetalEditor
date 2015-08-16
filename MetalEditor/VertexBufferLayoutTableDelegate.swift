@@ -28,9 +28,6 @@ class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableVie
     }
 
     func removeSelectedVertexBufferLayout() {
-        guard tableView.selectedRow >= 0 && tableView.selectedRow < state.vertexBufferLayouts.count else {
-            return
-        }
         managedObjectContext.deleteObject(state.vertexBufferLayouts[tableView.selectedRow] as! NSManagedObject)
     }
 
@@ -43,45 +40,24 @@ class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableVie
     }
 
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn else {
-            return nil
-        }
-        guard let vertexBufferLayout = state.vertexBufferLayouts[row] as? VertexBufferLayout else {
-            return nil
-        }
-        switch column {
+        let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
+        switch tableColumn! {
         case stepFunctionColumn:
-            guard let result = tableView.makeViewWithIdentifier("StepFunctionPopUp", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard result.subviews.count == 1 else {
-                return nil
-            }
-            guard let popUp = result.subviews[0] as? NSPopUpButton else {
-                return nil
-            }
-            guard let function = MTLVertexStepFunction(rawValue: vertexBufferLayout.stepFunction.unsignedLongValue) else {
-                return nil
-            }
+            let result = tableView.makeViewWithIdentifier("StepFunctionPopUp", owner: self) as! NSTableCellView
+            assert(result.subviews.count == 1)
+            let popUp = result.subviews[0] as! NSPopUpButton
+            let function = MTLVertexStepFunction(rawValue: vertexBufferLayout.stepFunction.unsignedLongValue)!
             popUp.selectItemAtIndex(Int(function.rawValue))
             return result
         case stepRateColumn:
-            guard let result = tableView.makeViewWithIdentifier("StepRateField", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard let textField = result.textField else {
-                return nil
-            }
+            let result = tableView.makeViewWithIdentifier("StepRateField", owner: self) as! NSTableCellView
+            let textField = result.textField!
             textField.editable = true
             textField.integerValue = vertexBufferLayout.stepRate.integerValue
             return result
         case strideColumn:
-            guard let result = tableView.makeViewWithIdentifier("StrideField", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard let textField = result.textField else {
-                return nil
-            }
+            let result = tableView.makeViewWithIdentifier("StrideField", owner: self) as! NSTableCellView
+            let textField = result.textField!
             textField.editable = true
             textField.integerValue = vertexBufferLayout.stride.integerValue
             return result
@@ -91,52 +67,27 @@ class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableVie
     }
 
     func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        if let s = obj as? String {
-            if Int(s) != nil {
-                return true
-            }
-        }
-        return false
+        return Int(obj as! String) != nil
     }
 
     @IBAction func stepFunctionSelected(sender: NSPopUpButton) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            return
-        }
-        guard sender.indexOfSelectedItem >= 0 else {
-            return
-        }
-        guard let vertexBufferLayout = state.vertexBufferLayouts[row] as? VertexBufferLayout else {
-            return
-        }
-        guard let stepFunction = MTLVertexStepFunction(rawValue: UInt(sender.indexOfSelectedItem)) else {
-            return
-        }
+        let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
+        let stepFunction = MTLVertexStepFunction(rawValue: UInt(sender.indexOfSelectedItem))!
         vertexBufferLayout.stepFunction = stepFunction.rawValue
         modelObserver.modelDidChange()
     }
 
     @IBAction func setStepRate(sender: NSTextField) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            return
-        }
-        guard let vertexBufferLayout = state.vertexBufferLayouts[row] as? VertexBufferLayout else {
-            return
-        }
+        let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
         vertexBufferLayout.stepRate = sender.integerValue
         modelObserver.modelDidChange()
     }
 
     @IBAction func setStride(sender: NSTextField) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            return
-        }
-        guard let vertexBufferLayout = state.vertexBufferLayouts[row] as? VertexBufferLayout else {
-            return
-        }
+        let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
         vertexBufferLayout.stride = sender.integerValue
         modelObserver.modelDidChange()
     }

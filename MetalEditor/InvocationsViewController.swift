@@ -32,17 +32,13 @@ class InvocationsViewController: NSViewController, InvocationRemoveObserver {
     }
 
     func addRenderInvocationView(invocation: RenderInvocation) {
-        guard let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: modelObserver, removeObserver: self, invocation: invocation) else {
-            fatalError()
-        }
+        let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: modelObserver, removeObserver: self, invocation: invocation)!
         addChildViewController(subController)
         stackView.addArrangedSubview(subController.view)
     }
 
     func addComputeInvocationView(invocation: ComputeInvocation) {
-        guard let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: modelObserver, removeObserver: self, invocation: invocation) else {
-            fatalError()
-        }
+        let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: modelObserver, removeObserver: self, invocation: invocation)!
         addChildViewController(subController)
         stackView.addArrangedSubview(subController.view)
     }
@@ -59,7 +55,8 @@ class InvocationsViewController: NSViewController, InvocationRemoveObserver {
             renderPass.mutableOrderedSetValueForKey("invocations").addObject(renderInvocation)
             addRenderInvocationView(renderInvocation)
             modelObserver.modelDidChange()
-        } else if let computePass = pass as? ComputePass {
+        } else {
+            let computePass = pass as! ComputePass
             let threadgroupsPerGrid = NSEntityDescription.insertNewObjectForEntityForName("Size", inManagedObjectContext: managedObjectContext) as! Size
             threadgroupsPerGrid.width = 0
             threadgroupsPerGrid.height = 0
@@ -79,18 +76,15 @@ class InvocationsViewController: NSViewController, InvocationRemoveObserver {
             computePass.mutableOrderedSetValueForKey("invocations").addObject(computeInvocation)
             addComputeInvocationView(computeInvocation)
             modelObserver.modelDidChange()
-        } else {
-            fatalError()
         }
     }
 
     func removeInvocation(controller: InvocationViewController) {
         if let renderPass = pass as? RenderPass {
             renderPass.mutableOrderedSetValueForKey("invocations").removeObject(controller.invocation)
-        } else if let computePass = pass as? ComputePass {
-            computePass.mutableOrderedSetValueForKey("invocations").removeObject(controller.invocation)
         } else {
-            fatalError()
+            let computePass = pass as! ComputePass
+            computePass.mutableOrderedSetValueForKey("invocations").removeObject(controller.invocation)
         }
         managedObjectContext.deleteObject(controller.invocation)
 

@@ -34,10 +34,9 @@ class InvocationViewController: NSViewController {
 
         if let _ = invocation as? ComputeInvocation {
             box.fillColor = NSColor.redColor()
-        } else if let _ = invocation as? RenderInvocation {
-            box.fillColor = NSColor.blueColor()
         } else {
-            fatalError()
+            assert(invocation as? RenderInvocation != nil)
+            box.fillColor = NSColor.blueColor()
         }
     }
 
@@ -52,17 +51,12 @@ class InvocationViewController: NSViewController {
 
     @IBAction func showDetails(sender: NSButton) {
         if let renderInvocation = invocation as? RenderInvocation {
-            guard let controller = RenderInvocationViewController(nibName: "RenderInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, renderInvocation: renderInvocation) else {
-                fatalError()
-            }
-            presentViewController(controller, asPopoverRelativeToRect: self.view.bounds, ofView: self.view, preferredEdge: .MaxX, behavior: .Transient)
-        } else if let computeInvocation = invocation as? ComputeInvocation {
-            guard let controller = ComputeInvocationViewController(nibName: "ComputeInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, computeInvocation: computeInvocation) else {
-                fatalError()
-            }
+            let controller = RenderInvocationViewController(nibName: "RenderInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, renderInvocation: renderInvocation)!
             presentViewController(controller, asPopoverRelativeToRect: self.view.bounds, ofView: self.view, preferredEdge: .MaxX, behavior: .Transient)
         } else {
-            fatalError()
+            let computeInvocation = invocation as! ComputeInvocation
+            let controller = ComputeInvocationViewController(nibName: "ComputeInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, computeInvocation: computeInvocation)!
+            presentViewController(controller, asPopoverRelativeToRect: self.view.bounds, ofView: self.view, preferredEdge: .MaxX, behavior: .Transient)
         }
     }
 }

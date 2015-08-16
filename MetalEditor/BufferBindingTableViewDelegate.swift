@@ -44,34 +44,20 @@ class BufferBindingsViewController: NSViewController, NSTableViewDelegate, NSTab
 
     @IBAction func bufferSelected(sender: NSPopUpButton) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            fatalError()
-        }
-        guard let binding = bufferBindings[row] as? BufferBinding else {
-            fatalError()
-        }
-
-        guard let selectedItem = sender.selectedItem else {
-            return
-        }
+        let binding = bufferBindings[row] as! BufferBinding
+        let selectedItem = sender.selectedItem!
 
         guard let selectionObject = selectedItem.representedObject else {
             binding.buffer = nil
             return
         }
 
-        guard let selection = selectionObject as? Buffer else {
-            fatalError()
-        }
-
-        binding.buffer = selection
+        binding.buffer = (selectionObject as! Buffer)
         modelObserver.modelDidChange()
     }
 
     func generateBufferPopUp(index: Int) -> (NSMenu, NSMenuItem?) {
-        guard let currentBinding = bufferBindings[index] as? BufferBinding else {
-            fatalError()
-        }
+        let currentBinding = bufferBindings[index] as! BufferBinding
 
         let fetchRequest = NSFetchRequest(entityName: "Buffer")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
@@ -99,12 +85,7 @@ class BufferBindingsViewController: NSViewController, NSTableViewDelegate, NSTab
     
     @IBAction func removeBuffer(sender: NSButton) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            fatalError()
-        }
-        guard let binding = bufferBindings[row] as? BufferBinding else {
-            fatalError()
-        }
+        let binding = bufferBindings[row] as! BufferBinding
         removeObserver.removeBufferBinding(self, binding: binding)
         managedObjectContext.deleteObject(binding)
         tableView.reloadData()
@@ -112,39 +93,26 @@ class BufferBindingsViewController: NSViewController, NSTableViewDelegate, NSTab
     }
 
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn else {
-            return nil
-        }
-        switch column {
+        switch tableColumn! {
         case numberTableColumn:
-            if let result = tableView.makeViewWithIdentifier("Number", owner: self) as? NSTableCellView {
-                if let textField = result.textField {
-                    textField.integerValue = row
-                    return result
-                }
-            }
-            fatalError()
+            let result = tableView.makeViewWithIdentifier("Number", owner: self) as! NSTableCellView
+            let textField = result.textField!
+            textField.integerValue = row
+            return result
         case popUpTableColumn:
-            if let result = tableView.makeViewWithIdentifier("Pop Up", owner: self) as? NSTableCellView {
-                assert(result.subviews.count == 1)
-                guard let popUp = result.subviews[0] as? NSPopUpButton else {
-                    fatalError()
-                }
-                let (menu, selectedItem) = generateBufferPopUp(row)
-                popUp.menu = menu
-                if let toSelect = selectedItem {
-                    popUp.selectItem(toSelect)
-                } else {
-                    popUp.selectItemAtIndex(0)
-                }
-                return result
+            let result = tableView.makeViewWithIdentifier("Pop Up", owner: self) as! NSTableCellView
+            assert(result.subviews.count == 1)
+            let popUp = result.subviews[0] as! NSPopUpButton
+            let (menu, selectedItem) = generateBufferPopUp(row)
+            popUp.menu = menu
+            if let toSelect = selectedItem {
+                popUp.selectItem(toSelect)
+            } else {
+                popUp.selectItemAtIndex(0)
             }
-            fatalError()
+            return result
         case removeTableColumn:
-            if let result = tableView.makeViewWithIdentifier("Remove", owner: self) as? NSTableCellView {
-                return result
-            }
-            fatalError()
+            return tableView.makeViewWithIdentifier("Remove", owner: self) as! NSTableCellView
         default:
             fatalError()
         }

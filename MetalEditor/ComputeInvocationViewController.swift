@@ -57,12 +57,7 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, Bu
     }
 
     func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        if let s = obj as? String {
-            if Int(s) != nil {
-                return true
-            }
-        }
-        return false
+        return Int(obj as! String) != nil
     }
 
     @IBAction func setPipelineStateFunctionName(sender: NSTextField) {

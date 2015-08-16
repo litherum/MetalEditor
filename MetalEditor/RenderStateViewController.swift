@@ -85,9 +85,7 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
 
         depthAttachmentPopUp.menu = RenderStateViewController.pixelFormatMenu(true)
         if let depthAttachmentPixelFormat = state.depthAttachmentPixelFormat {
-            guard let pixelFormat = MTLPixelFormat(rawValue: depthAttachmentPixelFormat.unsignedLongValue) else {
-                fatalError()
-            }
+            let pixelFormat = MTLPixelFormat(rawValue: depthAttachmentPixelFormat.unsignedLongValue)!
             depthAttachmentPopUp.selectItemAtIndex(RenderStateViewController.pixelFormatToIndex(pixelFormat) + 1)
         } else {
             depthAttachmentPopUp.selectItemAtIndex(0)
@@ -178,31 +176,23 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     }
 
     @IBAction func depthAttachmentSelected(sender: NSPopUpButton) {
-        guard sender.indexOfSelectedItem >= 0 else {
-            return
-        }
+        assert(sender.indexOfSelectedItem >= 0)
         guard sender.indexOfSelectedItem > 0 else {
             state.depthAttachmentPixelFormat = nil
             return
         }
-        guard let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1) else {
-            fatalError()
-        }
+        let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1)!
         state.depthAttachmentPixelFormat = format.rawValue
         modelObserver.modelDidChange()
     }
 
     @IBAction func stencilAttachmentSelected(sender: NSPopUpButton) {
-        guard sender.indexOfSelectedItem >= 0 else {
-            return
-        }
+        assert(sender.indexOfSelectedItem >= 0)
         guard sender.indexOfSelectedItem > 0 else {
             state.depthAttachmentPixelFormat = nil
             return
         }
-        guard let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1) else {
-            return
-        }
+        let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1)!
         state.stencilAttachmentPixelFormat = format.rawValue
         modelObserver.modelDidChange()
     }
@@ -222,12 +212,7 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     }
 
     func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        if let s = obj as? String {
-            if Int(s) != nil {
-                return true
-            }
-        }
-        return false
+        return Int(obj as! String) != nil
     }
 
     @IBAction func sampleCountSet(sender: NSTextField) {

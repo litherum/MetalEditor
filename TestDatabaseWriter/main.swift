@@ -11,9 +11,7 @@ import Metal
 
 func main() {
     let mom = NSManagedObjectModel(contentsOfURL: NSURL(fileURLWithPath: "/Users/litherum/Library/Developer/Xcode/DerivedData/MetalEditor-bpwxukjcviolgzdbcmryveldworl/Build/Products/Debug/Document.momd"))
-    guard let managedObjectModel = mom else {
-        fatalError()
-    }
+    let managedObjectModel = mom!
     let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
     let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
     managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator

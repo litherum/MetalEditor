@@ -35,10 +35,9 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate, Buf
     func removeBufferBinding(controller: BufferBindingsViewController, binding: BufferBinding) {
         if controller == vertexBufferBindingsViewController {
             renderInvocation.mutableOrderedSetValueForKey("vertexBufferBindings").removeObject(binding)
-        } else if controller == fragmentBufferBindingsViewController {
-            renderInvocation.mutableOrderedSetValueForKey("fragmentBufferBindings").removeObject(binding)
         } else {
-            fatalError()
+            assert(controller == fragmentBufferBindingsViewController)
+            renderInvocation.mutableOrderedSetValueForKey("fragmentBufferBindings").removeObject(binding)
         }
     }
 
@@ -88,9 +87,7 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate, Buf
             statePopUp.selectItemAtIndex(0)
         }
 
-        guard renderInvocation.primitive.integerValue >= 0 && renderInvocation.primitive.integerValue <= 4 else {
-            fatalError()
-        }
+        assert(renderInvocation.primitive.integerValue >= 0 && renderInvocation.primitive.integerValue <= 4)
         primitivePopUp.selectItemAtIndex(renderInvocation.primitive.integerValue)
 
         vertexStartTextField.integerValue = renderInvocation.vertexStart.integerValue
@@ -98,12 +95,7 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate, Buf
     }
 
     func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        if let s = obj as? String {
-            if Int(s) != nil {
-                return true
-            }
-        }
-        return false
+        return Int(obj as! String) != nil
     }
 
     @IBAction func addVertexBufferBinding(sender: NSButton) {
@@ -123,27 +115,19 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate, Buf
     }
 
     @IBAction func stateSelected(sender: NSPopUpButton) {
-        guard let selectedItem = sender.selectedItem else {
-            return
-        }
+        let selectedItem = sender.selectedItem!
 
         guard let selectionObject = selectedItem.representedObject else {
             renderInvocation.state = nil
             return
         }
 
-        guard let selection = selectionObject as? RenderPipelineState else {
-            fatalError()
-        }
-
-        renderInvocation.state = selection
+        renderInvocation.state = (selectionObject as! RenderPipelineState)
         modelObserver.modelDidChange()
     }
 
     @IBAction func primitiveSelected(sender: NSPopUpButton) {
-        guard sender.indexOfSelectedItem >= 0 else {
-            fatalError()
-        }
+        assert(sender.indexOfSelectedItem >= 0)
         renderInvocation.primitive = sender.indexOfSelectedItem
         modelObserver.modelDidChange()
     }

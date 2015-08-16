@@ -17,7 +17,6 @@ protocol PassRemoveObserver: class {
 }
 
 class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver, PassRemoveObserver {
-    @IBOutlet var detailViewController: DetailViewController!
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
     @IBOutlet var buffersUIController: BuffersUIController!
@@ -35,7 +34,8 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         let fetchRequest = NSFetchRequest(entityName: "Frame")
         do {
             let frames = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [Frame]
-            if frames.count != 0 {
+            assert(frames.count == 0 || frames.count == 1)
+            if frames.count == 1 {
                 frame = frames[0]
             }
         } catch {
@@ -50,7 +50,8 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         let fetchRequest = NSFetchRequest(entityName: "Library")
         do {
             let libraries = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [Library]
-            if libraries.count != 0 {
+            assert(libraries.count == 0 || libraries.count == 1)
+            if libraries.count == 1 {
                 library = libraries[0]
             }
         } catch {
@@ -62,30 +63,20 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     }
 
     func addRenderPassView(pass: RenderPass) {
-        guard let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass) else {
-            fatalError()
-        }
+        let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
         controller.loadView()
         for i in pass.invocations {
-            guard let invocation = i as? RenderInvocation else {
-                fatalError()
-            }
-            controller.addRenderInvocationView(invocation)
+            controller.addRenderInvocationView(i as! RenderInvocation)
         }
         invocationsStackView.addArrangedSubview(controller.view)
         invocationMap[controller] = pass
     }
 
     func addComputePassView(pass: ComputePass) {
-        guard let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass) else {
-            fatalError()
-        }
+        let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
         controller.loadView()
         for i in pass.invocations {
-            guard let invocation = i as? ComputeInvocation else {
-                fatalError()
-            }
-            controller.addComputeInvocationView(invocation)
+            controller.addComputeInvocationView(i as! ComputeInvocation)
         }
         invocationsStackView.addArrangedSubview(controller.view)
         invocationMap[controller] = pass
@@ -95,7 +86,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         super.windowControllerDidLoadNib(aController)
 
         guard let device = MTLCreateSystemDefaultDevice() else {
-            fatalError()
+            exit(EXIT_FAILURE)
         }
         self.device = device
         commandQueue = device.newCommandQueue()
@@ -111,10 +102,8 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         for p in frame.passes {
             if let pass = p as? ComputePass {
                 addComputePassView(pass)
-            } else if let pass = p as? RenderPass {
-                addRenderPassView(pass)
             } else {
-                fatalError()
+                addRenderPassView(p as! RenderPass)
             }
         }
 
@@ -127,11 +116,9 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         
         previewController.initializeWithDevice(device, commandQueue: commandQueue, frame: frame, metalState: metalState)
 
-        if windowControllers.count == 1 {
-            if let window = windowControllers[0].window {
-                splitView.setPosition(window.frame.width / 2, ofDividerAtIndex: 0)
-            }
-        }
+        assert(windowControllers.count == 1)
+        let window = windowControllers[0].window!
+        splitView.setPosition(window.frame.width / 2, ofDividerAtIndex: 0)
     }
 
     func compilationCompleted(success: Bool) {

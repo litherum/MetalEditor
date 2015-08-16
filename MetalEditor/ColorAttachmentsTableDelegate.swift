@@ -24,9 +24,6 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     }
 
     func removeSelectedColorAttachment() {
-        guard tableView.selectedRow >= 0 && tableView.selectedRow < state.colorAttachments.count else {
-            return
-        }
         managedObjectContext.deleteObject(state.colorAttachments[tableView.selectedRow] as! NSManagedObject)
     }
 
@@ -41,56 +38,31 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     // FIXME: Every reference to RenderStateViewController in here is a layering violation.
 
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn else {
-            return nil
+        let column = tableColumn!
+        let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
+        assert(column == pixelFormatColumn)
+        let result = tableView.makeViewWithIdentifier("PixelFormatPopUp", owner: self) as! NSTableCellView
+        assert(result.subviews.count == 1)
+        let popUp = result.subviews[0] as! NSPopUpButton
+        popUp.menu = RenderStateViewController.pixelFormatMenu(true)
+        if let attachmentPixelFormat = colorAttachment.pixelFormat {
+            let pixelFormat = MTLPixelFormat(rawValue: attachmentPixelFormat.unsignedLongValue)!
+            popUp.selectItemAtIndex(RenderStateViewController.pixelFormatToIndex(pixelFormat) + 1)
+        } else {
+            popUp.selectItemAtIndex(0)
         }
-        guard let colorAttachment = state.colorAttachments[row] as? RenderPipelineColorAttachment else {
-            return nil
-        }
-        switch column {
-        case pixelFormatColumn:
-            guard let result = tableView.makeViewWithIdentifier("PixelFormatPopUp", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard result.subviews.count == 1 else {
-                return nil
-            }
-            guard let popUp = result.subviews[0] as? NSPopUpButton else {
-                return nil
-            }
-            popUp.menu = RenderStateViewController.pixelFormatMenu(true)
-            if let attachmentPixelFormat = colorAttachment.pixelFormat {
-                guard let pixelFormat = MTLPixelFormat(rawValue: attachmentPixelFormat.unsignedLongValue) else {
-                    fatalError()
-                }
-                popUp.selectItemAtIndex(RenderStateViewController.pixelFormatToIndex(pixelFormat) + 1)
-            } else {
-                popUp.selectItemAtIndex(0)
-            }
-            return result
-        default:
-            fatalError()
-        }
+        return result
     }
 
     @IBAction func pixelFormatSelected(sender: NSPopUpButton) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            return
-        }
-        guard sender.indexOfSelectedItem >= 0 else {
-            return
-        }
-        guard let colorAttachment = state.colorAttachments[row] as? RenderPipelineColorAttachment else {
-            return
-        }
+        assert(sender.indexOfSelectedItem >= 0)
+        let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         guard sender.indexOfSelectedItem > 0 else {
             colorAttachment.pixelFormat = nil
             return
         }
-        guard let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1) else {
-            fatalError()
-        }
+        let format = RenderStateViewController.indexToPixelFormat(sender.indexOfSelectedItem - 1)!
         colorAttachment.pixelFormat = format.rawValue
         modelObserver.modelDidChange()
     }

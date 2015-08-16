@@ -42,18 +42,12 @@ class PreviewController: NSViewController, MTKViewDelegate {
     }
 
     private class func toMetalPrimitiveType(i: NSNumber) -> MTLPrimitiveType {
-        guard let result = MTLPrimitiveType(rawValue: UInt(i)) else {
-            fatalError()
-        }
-        return result
+        return MTLPrimitiveType(rawValue: UInt(i))!
     }
 
     private class func bufferIndex(i: Int) -> Int {
         // FIXME: Should be able to put uniforms in buffer 0
-        if i == 0 {
-            return 0
-        }
-        return i + 1
+        return i == 0 ? 0 : i + 1
     }
 
     func drawInMTKView(view: MTKView) {
@@ -66,7 +60,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
         }
         // FIXME: Support render-to-texture
         guard let renderPassDescriptor = metalView.currentRenderPassDescriptor else {
-            fatalError()
+            return
         }
         let builtInBuffer: MTLBuffer!
         if builtInBuffers.count > 0 {
@@ -91,15 +85,9 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 let computeCommandEncoder = commandBuffer.computeCommandEncoder()
                 computeCommandEncoder.setBuffer(builtInBuffer, offset: 0, atIndex: 1)
                 for invocationObject in computePass.invocations {
-                    guard let invocation = invocationObject as? ComputeInvocation else {
-                        fatalError()
-                    }
-                    guard let invocationState = invocation.state else {
-                        continue
-                    }
-                    guard let metalComputePipelineState = metalState.computePipelineStates[invocationState] else {
-                        continue
-                    }
+                    let invocation = invocationObject as! ComputeInvocation
+                    let invocationState = invocation.state!
+                    let metalComputePipelineState = metalState.computePipelineStates[invocationState]!
                     computeCommandEncoder.setComputePipelineState(metalComputePipelineState)
                     for i in 0 ..< invocation.bufferBindings.count {
                         let bufferOptional = (invocation.bufferBindings[i] as! BufferBinding).buffer
@@ -121,15 +109,9 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 renderCommandEncoder.setVertexBuffer(builtInBuffer, offset: 0, atIndex: 1)
                 renderCommandEncoder.setFragmentBuffer(builtInBuffer, offset: 0, atIndex: 1)
                 for invocationObject in renderPass.invocations {
-                    guard let invocation = invocationObject as? RenderInvocation else {
-                        fatalError()
-                    }
-                    guard let invocationState = invocation.state else {
-                        continue
-                    }
-                    guard let metalRenderPipelineState = metalState.renderPipelineStates[invocationState] else {
-                        continue
-                    }
+                    let invocation = invocationObject as! RenderInvocation
+                    let invocationState = invocation.state!
+                    let metalRenderPipelineState = metalState.renderPipelineStates[invocationState]!
                     renderCommandEncoder.setRenderPipelineState(metalRenderPipelineState)
                     for i in 0 ..< invocation.vertexBufferBindings.count {
                         let bufferOptional = (invocation.vertexBufferBindings[i] as! BufferBinding).buffer

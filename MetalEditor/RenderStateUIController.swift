@@ -30,7 +30,7 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         return numberOfStates()
     }
 
-    private func getState(index: Int) -> RenderPipelineState? {
+    private func getState(index: Int) -> RenderPipelineState {
         let fetchRequest = NSFetchRequest(entityName: "RenderPipelineState")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         // <rdar://problem/22108925> managedObjectContext.executeFetchRequest() crashes if you add two objects.
@@ -40,30 +40,19 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         
         do {
             let states = try managedObjectContext.executeFetchRequest(fetchRequest) as! [RenderPipelineState]
-            if states.count < index {
-                return nil
-            }
             return states[index]
         } catch {
-            return nil
+            fatalError()
         }
     }
 
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn else {
-            return nil
-        }
-        guard let state = getState(row) else {
-            return nil
-        }
-        guard column == detailColumn else {
-            fatalError()
-        }
+        let column = tableColumn!
+        let state = getState(row)
+        assert(column == detailColumn)
         // FIXME: Seems silly to keep these all around in memory at once
         while childViewControllers.count <= row {
-            guard let controller = RenderStateViewController(nibName: "RenderStateViewController", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: state, removeObserver: self) else {
-                fatalError()
-            }
+            let controller = RenderStateViewController(nibName: "RenderStateViewController", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: state, removeObserver: self)!
             childViewControllers.append(controller)
         }
         return childViewControllers[row].view

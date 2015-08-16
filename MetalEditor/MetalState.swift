@@ -24,29 +24,20 @@ class MetalState {
         do {
             return try managedObjectContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
         } catch {
-            return []
+            fatalError()
         }
     }
 
     private class func toMetalPixelFormat(i: NSNumber) -> MTLPixelFormat {
-        guard let result = MTLPixelFormat(rawValue: UInt(i)) else {
-            fatalError()
-        }
-        return result
+        return MTLPixelFormat(rawValue: UInt(i))!
     }
 
     private class func toMetalVertexFormat(i: NSNumber) -> MTLVertexFormat {
-        guard let result = MTLVertexFormat(rawValue: UInt(i)) else {
-            fatalError()
-        }
-        return result
+        return MTLVertexFormat(rawValue: UInt(i))!
     }
 
     private class func toMetalVertexStepFunction(i: NSNumber) -> MTLVertexStepFunction {
-        guard let result = MTLVertexStepFunction(rawValue: UInt(i)) else {
-            fatalError()
-        }
-        return result
+        return MTLVertexStepFunction(rawValue: UInt(i))!
     }
     
     private class func printArrayType(type: MTLArrayType, space: Int) {
@@ -316,17 +307,13 @@ class MetalState {
         for buffer in MetalState.fetchAll(managedObjectContext, entityName: "Buffer") as! [Buffer] {
             if let initialData = buffer.initialData {
                 buffers[buffer] = device.newBufferWithBytes(initialData.bytes, length: initialData.length, options: .StorageModeManaged)
-            } else if let initialLength = buffer.initialLength {
-                buffers[buffer] = device.newBufferWithLength(initialLength.integerValue, options: .StorageModePrivate)
             } else {
-                fatalError()
+                buffers[buffer] = device.newBufferWithLength(buffer.initialLength!.integerValue, options: .StorageModePrivate)
             }
         }
         
         for computePipelineState in MetalState.fetchAll(managedObjectContext, entityName: "ComputePipelineState") as! [ComputePipelineState] {
-            guard let function = functions[computePipelineState.functionName] else {
-                continue
-            }
+            let function = functions[computePipelineState.functionName]
             let descriptor = MTLComputePipelineDescriptor()
             descriptor.computeFunction = function
             var reflection: MTLComputePipelineReflection?
@@ -337,16 +324,13 @@ class MetalState {
                     MetalState.printArguments(reflection.arguments)
                 }*/
             } catch {
+                fatalError()
             }
         }
         
         for renderPipelineState in MetalState.fetchAll(managedObjectContext, entityName: "RenderPipelineState") as! [RenderPipelineState] {
-            guard let vertexFunction = functions[renderPipelineState.vertexFunction] else {
-                continue
-            }
-            guard let fragmentFunction = functions[renderPipelineState.fragmentFunction] else {
-                continue
-            }
+            let vertexFunction = functions[renderPipelineState.vertexFunction]
+            let fragmentFunction = functions[renderPipelineState.fragmentFunction]
             let descriptor = MTLRenderPipelineDescriptor()
             descriptor.vertexFunction = vertexFunction
             descriptor.fragmentFunction = fragmentFunction

@@ -21,10 +21,7 @@ func vertexFormatToIndex(vertexFormat: MTLVertexFormat) -> Int {
     return 0
 }
 
-func indexToVertexFormat(i: Int) -> MTLVertexFormat? {
-    guard i >= 0 && i < vertexFormatMenuOrder.count else {
-        return nil
-    }
+func indexToVertexFormat(i: Int) -> MTLVertexFormat {
     return vertexFormatMenuOrder[i]
 }
 
@@ -62,9 +59,6 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     }
 
     func removeSelectedVertexAttribute() {
-        guard tableView.selectedRow >= 0 && tableView.selectedRow < state.vertexAttributes.count else {
-            return
-        }
         managedObjectContext.deleteObject(state.vertexAttributes[tableView.selectedRow] as! NSManagedObject)
     }
 
@@ -77,46 +71,25 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     }
 
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let column = tableColumn else {
-            return nil
-        }
-        guard let vertexAttribute = state.vertexAttributes[row] as? VertexAttribute else {
-            return nil
-        }
-        switch column {
+        let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
+        switch tableColumn! {
         case formatColumn:
-            guard let result = tableView.makeViewWithIdentifier("FormatPopUp", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard result.subviews.count == 1 else {
-                return nil
-            }
-            guard let popUp = result.subviews[0] as? NSPopUpButton else {
-                return nil
-            }
-            guard let format = MTLVertexFormat(rawValue: vertexAttribute.format.unsignedLongValue) else {
-                return nil
-            }
+            let result = tableView.makeViewWithIdentifier("FormatPopUp", owner: self) as! NSTableCellView
+            assert(result.subviews.count == 1)
+            let popUp = result.subviews[0] as! NSPopUpButton
+            let format = MTLVertexFormat(rawValue: vertexAttribute.format.unsignedLongValue)!
             popUp.menu = vertexFormatMenu()
             popUp.selectItemAtIndex(vertexFormatToIndex(format))
             return result
         case offsetColumn:
-            guard let result = tableView.makeViewWithIdentifier("OffsetField", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard let textField = result.textField else {
-                return nil
-            }
+            let result = tableView.makeViewWithIdentifier("OffsetField", owner: self) as! NSTableCellView
+            let textField = result.textField!
             textField.editable = true
             textField.integerValue = vertexAttribute.offset.integerValue
             return result
         case bufferIndexColumn:
-            guard let result = tableView.makeViewWithIdentifier("BufferIndexField", owner: self) as? NSTableCellView else {
-                return nil
-            }
-            guard let textField = result.textField else {
-                return nil
-            }
+            let result = tableView.makeViewWithIdentifier("BufferIndexField", owner: self) as! NSTableCellView
+            let textField = result.textField!
             textField.editable = true
             textField.integerValue = vertexAttribute.bufferIndex.integerValue
             return result
@@ -126,52 +99,27 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     }
 
     func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        if let s = obj as? String {
-            if Int(s) != nil {
-                return true
-            }
-        }
-        return false
+        return Int(obj as! String) != nil
     }
 
     @IBAction func formatSelected(sender: NSPopUpButton) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            return
-        }
-        guard sender.indexOfSelectedItem >= 0 else {
-            return
-        }
-        guard let vertexAttribute = state.vertexAttributes[row] as? VertexAttribute else {
-            return
-        }
-        guard let format = indexToVertexFormat(sender.indexOfSelectedItem) else {
-            return
-        }
+        let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
+        let format = indexToVertexFormat(sender.indexOfSelectedItem)
         vertexAttribute.format = format.rawValue
         modelObserver.modelDidChange()
     }
 
     @IBAction func setOffset(sender: NSTextField) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            return
-        }
-        guard let vertexAttribute = state.vertexAttributes[row] as? VertexAttribute else {
-            return
-        }
+        let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
         vertexAttribute.offset = sender.integerValue
         modelObserver.modelDidChange()
     }
     
     @IBAction func setBufferIndex(sender: NSTextField) {
         let row = tableView.rowForView(sender)
-        guard row >= 0 else {
-            return
-        }
-        guard let vertexAttribute = state.vertexAttributes[row] as? VertexAttribute else {
-            return
-        }
+        let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
         vertexAttribute.bufferIndex = sender.integerValue
         modelObserver.modelDidChange()
     }
