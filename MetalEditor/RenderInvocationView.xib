@@ -25,10 +25,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="CPw-ep-9OT">
-                    <rect key="frame" x="763" y="587" width="298" height="75"/>
+                    <rect key="frame" x="719" y="587" width="342" height="75"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="3ih-92-RKV">
-                            <rect key="frame" x="45" y="54" width="209" height="21"/>
+                            <rect key="frame" x="67" y="54" width="209" height="21"/>
                             <subviews>
                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UYo-ff-bds">
                                     <rect key="frame" x="136" y="-3" width="76" height="26"/>
@@ -69,7 +69,7 @@
                             <animations/>
                         </customView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rwz-wy-TKm">
-                            <rect key="frame" x="212" y="29" width="88" height="17"/>
+                            <rect key="frame" x="234" y="29" width="110" height="17"/>
                             <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Vertex Count" id="3Vt-vA-3oO">
                                 <font key="font" metaFont="system"/>
@@ -117,7 +117,7 @@
                             </connections>
                         </popUpButton>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="keJ-DG-9gq">
-                            <rect key="frame" x="120" y="29" width="88" height="17"/>
+                            <rect key="frame" x="120" y="29" width="110" height="17"/>
                             <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Vertex Start" id="QEJ-Bk-UFw">
                                 <font key="font" metaFont="system"/>
@@ -126,7 +126,7 @@
                             </textFieldCell>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zAz-J3-dMg">
-                            <rect key="frame" x="214" y="0.0" width="84" height="22"/>
+                            <rect key="frame" x="236" y="0.0" width="106" height="22"/>
                             <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="dxY-cg-J6v">
                                 <font key="font" metaFont="system"/>
@@ -139,7 +139,7 @@
                             </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2UM-u5-2Af">
-                            <rect key="frame" x="122" y="0.0" width="84" height="22"/>
+                            <rect key="frame" x="122" y="0.0" width="106" height="22"/>
                             <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="gJ4-DU-Bc4">
                                 <font key="font" metaFont="system"/>
@@ -178,15 +178,15 @@
                     <animations/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yZJ-w7-KjB">
-                    <rect key="frame" x="20" y="395" width="364" height="267"/>
+                    <rect key="frame" x="20" y="395" width="342" height="267"/>
                     <animations/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="735-ef-v67">
-                    <rect key="frame" x="392" y="395" width="363" height="267"/>
+                    <rect key="frame" x="370" y="395" width="341" height="267"/>
                     <animations/>
                 </customView>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1hF-kY-DCR">
-                    <rect key="frame" x="315" y="364" width="71" height="24"/>
+                    <rect key="frame" x="293" y="364" width="71" height="24"/>
                     <animations/>
                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="OVF-cK-v1Y">
                         <font key="font" metaFont="system"/>
@@ -200,7 +200,7 @@
                     </connections>
                 </segmentedControl>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4mF-QL-iyc">
-                    <rect key="frame" x="686" y="364" width="71" height="24"/>
+                    <rect key="frame" x="642" y="364" width="71" height="24"/>
                     <animations/>
                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="4S4-Sh-Ir9">
                         <font key="font" metaFont="system"/>
@@ -214,11 +214,11 @@
                     </connections>
                 </segmentedControl>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="lXx-iQ-iNb">
-                    <rect key="frame" x="20" y="90" width="364" height="268"/>
+                    <rect key="frame" x="20" y="90" width="342" height="268"/>
                     <animations/>
                 </customView>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CC7-W7-1YA">
-                    <rect key="frame" x="315" y="59" width="71" height="24"/>
+                    <rect key="frame" x="293" y="59" width="71" height="24"/>
                     <animations/>
                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="gAl-io-F1T">
                         <font key="font" metaFont="system"/>
@@ -229,7 +229,7 @@
                     </segmentedCell>
                 </segmentedControl>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H7p-pz-FIh">
-                    <rect key="frame" x="686" y="59" width="71" height="24"/>
+                    <rect key="frame" x="642" y="59" width="71" height="24"/>
                     <animations/>
                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="egI-Qo-NMx">
                         <font key="font" metaFont="system"/>
@@ -254,7 +254,7 @@ Gw
                     </connections>
                 </button>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="xuk-5I-XNq">
-                    <rect key="frame" x="392" y="90" width="363" height="268"/>
+                    <rect key="frame" x="370" y="90" width="341" height="268"/>
                     <animations/>
                 </customView>
             </subviews>
@@ -262,12 +262,14 @@ Gw
                 <constraint firstItem="4mF-QL-iyc" firstAttribute="top" secondItem="735-ef-v67" secondAttribute="bottom" constant="8" symbolic="YES" id="21I-qC-TaF"/>
                 <constraint firstItem="xuk-5I-XNq" firstAttribute="leading" secondItem="735-ef-v67" secondAttribute="leading" id="2XD-8N-SBQ"/>
                 <constraint firstItem="CPw-ep-9OT" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="3Us-BK-eES"/>
+                <constraint firstItem="nvL-9F-AOd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CPw-ep-9OT" secondAttribute="bottom" constant="20" symbolic="YES" id="6kW-Rx-LHH"/>
                 <constraint firstItem="nvL-9F-AOd" firstAttribute="top" secondItem="CC7-W7-1YA" secondAttribute="bottom" constant="20" symbolic="YES" id="9cB-p5-LM0"/>
                 <constraint firstItem="735-ef-v67" firstAttribute="width" secondItem="yZJ-w7-KjB" secondAttribute="width" id="DJs-Be-TEr"/>
                 <constraint firstItem="1hF-kY-DCR" firstAttribute="trailing" secondItem="yZJ-w7-KjB" secondAttribute="trailing" id="FzH-UE-3QW"/>
                 <constraint firstItem="735-ef-v67" firstAttribute="leading" secondItem="yZJ-w7-KjB" secondAttribute="trailing" constant="8" symbolic="YES" id="HKh-rX-Nxg"/>
                 <constraint firstItem="CPw-ep-9OT" firstAttribute="leading" secondItem="735-ef-v67" secondAttribute="trailing" constant="8" symbolic="YES" id="Hlk-sT-QGr"/>
                 <constraint firstItem="H7p-pz-FIh" firstAttribute="top" secondItem="xuk-5I-XNq" secondAttribute="bottom" constant="8" symbolic="YES" id="J9D-F2-Xhs"/>
+                <constraint firstItem="CPw-ep-9OT" firstAttribute="width" secondItem="yZJ-w7-KjB" secondAttribute="width" id="Jjw-mH-AEi"/>
                 <constraint firstItem="lXx-iQ-iNb" firstAttribute="height" secondItem="yZJ-w7-KjB" secondAttribute="height" id="Kfv-3C-ubA"/>
                 <constraint firstItem="735-ef-v67" firstAttribute="top" secondItem="yZJ-w7-KjB" secondAttribute="top" id="MiR-kp-y7k"/>
                 <constraint firstItem="CC7-W7-1YA" firstAttribute="trailing" secondItem="lXx-iQ-iNb" secondAttribute="trailing" id="Sho-9o-f3p"/>

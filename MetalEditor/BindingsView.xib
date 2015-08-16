@@ -117,10 +117,6 @@
                 <animations/>
                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
             </clipView>
-            <constraints>
-                <constraint firstAttribute="width" constant="250" id="i1x-zc-EZl"/>
-                <constraint firstAttribute="height" constant="200" id="s6f-Gp-1NC"/>
-            </constraints>
             <animations/>
             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="0Q8-JY-lfU">
                 <rect key="frame" x="1" y="74" width="238" height="15"/>
