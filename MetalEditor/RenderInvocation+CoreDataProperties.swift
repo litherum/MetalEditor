@@ -20,5 +20,7 @@ extension RenderInvocation {
     @NSManaged var state: RenderPipelineState?
     @NSManaged var vertexBufferBindings: NSOrderedSet
     @NSManaged var fragmentBufferBindings: NSOrderedSet
+    @NSManaged var vertexTextureBindings: NSOrderedSet
+    @NSManaged var fragmentTextureBindings: NSOrderedSet
 
 }

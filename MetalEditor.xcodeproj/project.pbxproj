@@ -84,6 +84,10 @@
 		C26C8D9A1B8127320097180D /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8D961B8126D30097180D /* Texture.swift */; };
 		C26C8D9B1B8127350097180D /* Texture+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8D981B8126DF0097180D /* Texture+CoreDataProperties.swift */; };
 		C26C8D9D1B8131CE0097180D /* PixelFormatUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8D9C1B8131CE0097180D /* PixelFormatUtilities.swift */; };
+		C26C8D9F1B8144FB0097180D /* TextureBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8D9E1B8144FB0097180D /* TextureBinding.swift */; };
+		C26C8DA11B8145100097180D /* TextureBinding+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8DA01B8145100097180D /* TextureBinding+CoreDataProperties.swift */; };
+		C26C8DA21B8145140097180D /* TextureBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8D9E1B8144FB0097180D /* TextureBinding.swift */; };
+		C26C8DA31B8145170097180D /* TextureBinding+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C8DA01B8145100097180D /* TextureBinding+CoreDataProperties.swift */; };
 		C285B2531B5E1FAB00671A58 /* BuffersTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C285B2521B5E1FAB00671A58 /* BuffersTableViewDelegate.swift */; };
 		C2877EBB1B80615C000FD5DC /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2877EBA1B80615C000FD5DC /* Size.swift */; };
 		C2877EBD1B806198000FD5DC /* Size+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2877EBC1B806198000FD5DC /* Size+CoreDataProperties.swift */; };
@@ -189,6 +193,8 @@
 		C26C8D961B8126D30097180D /* Texture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		C26C8D981B8126DF0097180D /* Texture+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Texture+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C26C8D9C1B8131CE0097180D /* PixelFormatUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelFormatUtilities.swift; sourceTree = "<group>"; };
+		C26C8D9E1B8144FB0097180D /* TextureBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureBinding.swift; sourceTree = "<group>"; };
+		C26C8DA01B8145100097180D /* TextureBinding+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextureBinding+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C285B2521B5E1FAB00671A58 /* BuffersTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuffersTableViewDelegate.swift; sourceTree = "<group>"; };
 		C2877EBA1B80615C000FD5DC /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		C2877EBC1B806198000FD5DC /* Size+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Size+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -288,6 +294,8 @@
 				C2877EBC1B806198000FD5DC /* Size+CoreDataProperties.swift */,
 				C26C8D961B8126D30097180D /* Texture.swift */,
 				C26C8D981B8126DF0097180D /* Texture+CoreDataProperties.swift */,
+				C26C8D9E1B8144FB0097180D /* TextureBinding.swift */,
+				C26C8DA01B8145100097180D /* TextureBinding+CoreDataProperties.swift */,
 			);
 			name = "Managed Objects";
 			sourceTree = "<group>";
@@ -555,11 +563,13 @@
 				C24CDD0B1B5AD9CC00348941 /* Document.xcdatamodeld in Sources */,
 				C24CDD3D1B5ADE0F00348941 /* ComputePass+CoreDataProperties.swift in Sources */,
 				C24CDD2E1B5ADE0100348941 /* VertexAttribute.swift in Sources */,
+				C26C8DA21B8145140097180D /* TextureBinding.swift in Sources */,
 				C24CDD481B5ADE0F00348941 /* Library.swift in Sources */,
 				C2EC39B81B78664300FFD859 /* Invocation+CoreDataProperties.swift in Sources */,
 				C2C1F3751B70AAAB0092726F /* ManagedObjectHelpers.swift in Sources */,
 				C26C8D9B1B8127350097180D /* Texture+CoreDataProperties.swift in Sources */,
 				C24CDD411B5ADE0F00348941 /* Frame+CoreDataProperties.swift in Sources */,
+				C26C8DA31B8145170097180D /* TextureBinding+CoreDataProperties.swift in Sources */,
 				C24CDD381B5ADE0F00348941 /* RenderPass.swift in Sources */,
 				C24CDD3F1B5ADE0F00348941 /* Pass+CoreDataProperties.swift in Sources */,
 				C24CDD531B5AFB7D00348941 /* RenderInvocation.swift in Sources */,
@@ -599,12 +609,14 @@
 				C2BF784B1B58BC8A004535BC /* Document.swift in Sources */,
 				C26C8D911B8124710097180D /* TexturesTableViewDelegate.swift in Sources */,
 				C2877EBD1B806198000FD5DC /* Size+CoreDataProperties.swift in Sources */,
+				C26C8D9F1B8144FB0097180D /* TextureBinding.swift in Sources */,
 				C24CDCB61B5A18D200348941 /* ComputePass.swift in Sources */,
 				C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */,
 				C26B3C871B76B9570073EACF /* InvocationsViewController.swift in Sources */,
 				C24CDCB41B5A18D200348941 /* ComputeInvocation.swift in Sources */,
 				C26B3C8B1B76BF290073EACF /* InvocationViewController.swift in Sources */,
 				C23492BD1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift in Sources */,
+				C26C8DA11B8145100097180D /* TextureBinding+CoreDataProperties.swift in Sources */,
 				C24CDCBA1B5A18D200348941 /* Frame.swift in Sources */,
 				C24CDC9E1B5A17BF00348941 /* MetalState.swift in Sources */,
 				C24CDCFF1B5AC86D00348941 /* VertexBufferLayout.swift in Sources */,

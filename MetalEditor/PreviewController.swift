@@ -97,6 +97,14 @@ class PreviewController: NSViewController, MTKViewDelegate {
                             computeCommandEncoder.setBuffer(nil, offset: 0, atIndex: PreviewController.bufferIndex(i))
                         }
                     }
+                    for i in 0 ..< invocation.textureBindings.count {
+                        let textureOptional = (invocation.textureBindings[i] as! TextureBinding).texture
+                        if let texture = textureOptional {
+                            computeCommandEncoder.setTexture(metalState.textures[texture], atIndex: i)
+                        } else {
+                            computeCommandEncoder.setTexture(nil, atIndex: i)
+                        }
+                    }
                     let threadgroupsPerGrid = invocation.threadgroupsPerGrid
                     let threadsPerThreadgroup = invocation.threadsPerThreadgroup
                     let metalThreadgroupsPerGrid = MTLSizeMake(Int(threadgroupsPerGrid.width), Int(threadgroupsPerGrid.height), Int(threadgroupsPerGrid.depth))
@@ -127,6 +135,22 @@ class PreviewController: NSViewController, MTKViewDelegate {
                             renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, atIndex: PreviewController.bufferIndex(i))
                         } else {
                             renderCommandEncoder.setVertexBuffer(nil, offset: 0, atIndex: PreviewController.bufferIndex(i))
+                        }
+                    }
+                    for i in 0 ..< invocation.vertexTextureBindings.count {
+                        let textureOptional = (invocation.vertexTextureBindings[i] as! TextureBinding).texture
+                        if let texture = textureOptional {
+                            renderCommandEncoder.setVertexTexture(metalState.textures[texture], atIndex: i)
+                        } else {
+                            renderCommandEncoder.setVertexTexture(nil, atIndex: i)
+                        }
+                    }
+                    for i in 0 ..< invocation.fragmentTextureBindings.count {
+                        let textureOptional = (invocation.fragmentTextureBindings[i] as! TextureBinding).texture
+                        if let texture = textureOptional {
+                            renderCommandEncoder.setFragmentTexture(metalState.textures[texture], atIndex: i)
+                        } else {
+                            renderCommandEncoder.setFragmentTexture(nil, atIndex: i)
                         }
                     }
                     renderCommandEncoder.drawPrimitives(PreviewController.toMetalPrimitiveType(invocation.primitive), vertexStart: Int(invocation.vertexStart), vertexCount: Int(invocation.vertexCount))
