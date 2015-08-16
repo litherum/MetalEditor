@@ -176,54 +176,60 @@
                     </constraints>
                     <animations/>
                 </customView>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i94-mb-cfQ">
-                    <rect key="frame" x="227" y="13" width="49" height="32"/>
-                    <animations/>
-                    <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xBe-Bo-tqf">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="addVertexBufferBinding:" target="-2" id="b3t-s5-yNa"/>
-                    </connections>
-                </button>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yZJ-w7-KjB">
-                    <rect key="frame" x="20" y="61" width="250" height="200"/>
+                    <rect key="frame" x="20" y="49" width="250" height="212"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="250" placeholder="YES" id="8dM-De-vTq"/>
                     </constraints>
                     <animations/>
                 </customView>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Xd-UG-H0E">
-                    <rect key="frame" x="509" y="13" width="49" height="32"/>
-                    <animations/>
-                    <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n6r-vJ-D7r">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="addFragmentBufferBinding:" target="-2" id="ziz-bT-CfW"/>
-                    </connections>
-                </button>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="735-ef-v67">
-                    <rect key="frame" x="278" y="61" width="274" height="200"/>
+                    <rect key="frame" x="278" y="49" width="274" height="212"/>
                     <animations/>
                 </customView>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1hF-kY-DCR">
+                    <rect key="frame" x="201" y="18" width="71" height="24"/>
+                    <animations/>
+                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="OVF-cK-v1Y">
+                        <font key="font" metaFont="system"/>
+                        <segments>
+                            <segment label="+" width="32"/>
+                            <segment label="-" width="32" selected="YES" tag="1"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <action selector="addRemoveVertexBufferBinding:" target="-2" id="9Th-0J-2qd"/>
+                    </connections>
+                </segmentedControl>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4mF-QL-iyc">
+                    <rect key="frame" x="483" y="18" width="71" height="24"/>
+                    <animations/>
+                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="4S4-Sh-Ir9">
+                        <font key="font" metaFont="system"/>
+                        <segments>
+                            <segment label="+" width="32"/>
+                            <segment label="-" width="32" selected="YES" tag="1"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <action selector="addRemoveFragmentBufferBinding:" target="-2" id="EHC-2Z-xBa"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <constraints>
+                <constraint firstItem="4mF-QL-iyc" firstAttribute="top" secondItem="735-ef-v67" secondAttribute="bottom" constant="8" symbolic="YES" id="21I-qC-TaF"/>
                 <constraint firstItem="CPw-ep-9OT" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="3Us-BK-eES"/>
-                <constraint firstAttribute="bottom" secondItem="i94-mb-cfQ" secondAttribute="bottom" constant="20" symbolic="YES" id="5fk-8Y-Omg"/>
-                <constraint firstItem="i94-mb-cfQ" firstAttribute="trailing" secondItem="yZJ-w7-KjB" secondAttribute="trailing" id="9mH-eF-TAe"/>
+                <constraint firstAttribute="bottom" secondItem="1hF-kY-DCR" secondAttribute="bottom" constant="20" symbolic="YES" id="7oL-uo-KCc"/>
+                <constraint firstItem="1hF-kY-DCR" firstAttribute="trailing" secondItem="yZJ-w7-KjB" secondAttribute="trailing" id="FzH-UE-3QW"/>
                 <constraint firstItem="735-ef-v67" firstAttribute="leading" secondItem="yZJ-w7-KjB" secondAttribute="trailing" constant="8" symbolic="YES" id="HKh-rX-Nxg"/>
                 <constraint firstItem="CPw-ep-9OT" firstAttribute="leading" secondItem="735-ef-v67" secondAttribute="trailing" constant="8" symbolic="YES" id="Hlk-sT-QGr"/>
-                <constraint firstItem="i94-mb-cfQ" firstAttribute="top" secondItem="yZJ-w7-KjB" secondAttribute="bottom" constant="20" symbolic="YES" id="Kik-7i-Lyz"/>
-                <constraint firstItem="3Xd-UG-H0E" firstAttribute="trailing" secondItem="735-ef-v67" secondAttribute="trailing" id="aAM-95-FsI"/>
+                <constraint firstItem="1hF-kY-DCR" firstAttribute="top" secondItem="yZJ-w7-KjB" secondAttribute="bottom" constant="8" symbolic="YES" id="arN-os-cQP"/>
                 <constraint firstAttribute="trailing" secondItem="CPw-ep-9OT" secondAttribute="trailing" constant="20" symbolic="YES" id="gxc-da-poj"/>
                 <constraint firstItem="735-ef-v67" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="m9E-vw-eV3"/>
-                <constraint firstItem="3Xd-UG-H0E" firstAttribute="top" secondItem="735-ef-v67" secondAttribute="bottom" constant="20" symbolic="YES" id="nIf-r8-qoS"/>
                 <constraint firstItem="yZJ-w7-KjB" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="rkd-Ad-H99"/>
                 <constraint firstItem="yZJ-w7-KjB" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="tGB-wy-EHj"/>
-                <constraint firstAttribute="bottom" secondItem="3Xd-UG-H0E" secondAttribute="bottom" constant="20" symbolic="YES" id="zfe-YY-5ta"/>
+                <constraint firstItem="4mF-QL-iyc" firstAttribute="trailing" secondItem="735-ef-v67" secondAttribute="trailing" id="twr-TQ-kse"/>
+                <constraint firstAttribute="bottom" secondItem="4mF-QL-iyc" secondAttribute="bottom" constant="20" symbolic="YES" id="wlq-QL-gC4"/>
             </constraints>
             <animations/>
             <point key="canvasLocation" x="639" y="376.5"/>

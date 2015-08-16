@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, BufferBindingRemoveObserver {
+class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     var computeInvocation: ComputeInvocation!
@@ -33,12 +33,8 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, Bu
         fatalError()
     }
 
-    func removeBufferBinding(controller: BufferBindingsViewController, binding: BufferBinding) {
-        computeInvocation.mutableOrderedSetValueForKey("bufferBindings").removeObject(binding)
-    }
-
     override func viewDidLoad() {
-        bufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, removeObserver: self, bufferBindings: computeInvocation.bufferBindings)
+        bufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bufferBindings: computeInvocation.bufferBindings)
         addChildViewController(bufferBindingsViewController)
         tableViewPlaceholder.addSubview(bufferBindingsViewController.view)
         tableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : bufferBindingsViewController.view]))
@@ -101,11 +97,22 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate, Bu
         modelObserver.modelDidChange()
     }
 
-    @IBAction func addBufferBinding(sender: NSButton) {
-        let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
-        bufferBinding.buffer = nil
-        computeInvocation.mutableOrderedSetValueForKey("bufferBindings").addObject(bufferBinding)
+    @IBAction func addRemoveBufferBinding(sender: NSSegmentedControl) {
+        if sender.selectedSegment == 0 { // Add
+            let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
+            bufferBinding.buffer = nil
+            computeInvocation.mutableOrderedSetValueForKey("bufferBindings").addObject(bufferBinding)
+        } else { // Remove
+            assert(sender.selectedSegment == 1)
+            guard let row = bufferBindingsViewController.selectedRow() else {
+                return
+            }
+            let binding = computeInvocation.bufferBindings[row] as! BufferBinding
+            computeInvocation.mutableOrderedSetValueForKey("bufferBindings").removeObject(binding)
+            managedObjectContext.deleteObject(binding)
+        }
         bufferBindingsViewController.reloadData()
         modelObserver.modelDidChange()
+        sender.selectedSegment = -1
     }
 }

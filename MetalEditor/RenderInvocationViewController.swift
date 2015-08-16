@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RenderInvocationViewController: NSViewController, NSTextFieldDelegate, BufferBindingRemoveObserver {
+class RenderInvocationViewController: NSViewController, NSTextFieldDelegate {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     var renderInvocation: RenderInvocation!
@@ -30,15 +30,6 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate, Buf
 
     required init?(coder: NSCoder) {
         fatalError()
-    }
-
-    func removeBufferBinding(controller: BufferBindingsViewController, binding: BufferBinding) {
-        if controller == vertexBufferBindingsViewController {
-            renderInvocation.mutableOrderedSetValueForKey("vertexBufferBindings").removeObject(binding)
-        } else {
-            assert(controller == fragmentBufferBindingsViewController)
-            renderInvocation.mutableOrderedSetValueForKey("fragmentBufferBindings").removeObject(binding)
-        }
     }
 
     func createStateMenu() -> (NSMenu, NSMenuItem?) {
@@ -67,13 +58,13 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate, Buf
     }
 
     override func viewDidLoad() {
-        vertexBufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, removeObserver: self, bufferBindings: renderInvocation.vertexBufferBindings)
+        vertexBufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bufferBindings: renderInvocation.vertexBufferBindings)
         addChildViewController(vertexBufferBindingsViewController)
         vertexTableViewPlaceholder.addSubview(vertexBufferBindingsViewController.view)
         vertexTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
         vertexTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
 
-        fragmentBufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, removeObserver: self, bufferBindings: renderInvocation.fragmentBufferBindings)
+        fragmentBufferBindingsViewController = BufferBindingsViewController(nibName: "BufferBindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bufferBindings: renderInvocation.fragmentBufferBindings)
         addChildViewController(fragmentBufferBindingsViewController)
         fragmentTableViewPlaceholder.addSubview(fragmentBufferBindingsViewController.view)
         fragmentTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
@@ -98,20 +89,42 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate, Buf
         return Int(obj as! String) != nil
     }
 
-    @IBAction func addVertexBufferBinding(sender: NSButton) {
-        let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
-        bufferBinding.buffer = nil
-        renderInvocation.mutableOrderedSetValueForKey("vertexBufferBindings").addObject(bufferBinding)
+    @IBAction func addRemoveVertexBufferBinding(sender: NSSegmentedControl) {
+        if sender.selectedSegment == 0 { // Add
+            let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
+            bufferBinding.buffer = nil
+            renderInvocation.mutableOrderedSetValueForKey("vertexBufferBindings").addObject(bufferBinding)
+        } else { // Remove
+            assert(sender.selectedSegment == 1)
+            guard let row = vertexBufferBindingsViewController.selectedRow() else {
+                return
+            }
+            let binding = renderInvocation.vertexBufferBindings[row] as! BufferBinding
+            renderInvocation.mutableOrderedSetValueForKey("vertexBufferBindings").removeObject(binding)
+            managedObjectContext.deleteObject(binding)
+        }
         vertexBufferBindingsViewController.reloadData()
         modelObserver.modelDidChange()
+        sender.selectedSegment = -1
     }
 
-    @IBAction func addFragmentBufferBinding(sender: NSButton) {
-        let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
-        bufferBinding.buffer = nil
-        renderInvocation.mutableOrderedSetValueForKey("fragmentBufferBindings").addObject(bufferBinding)
+    @IBAction func addRemoveFragmentBufferBinding(sender: NSSegmentedControl) {
+        if sender.selectedSegment == 0 { // Add
+            let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
+            bufferBinding.buffer = nil
+            renderInvocation.mutableOrderedSetValueForKey("fragmentBufferBindings").addObject(bufferBinding)
+        } else { // Remove
+            assert(sender.selectedSegment == 1)
+            guard let row = fragmentBufferBindingsViewController.selectedRow() else {
+                return
+            }
+            let binding = renderInvocation.fragmentBufferBindings[row] as! BufferBinding
+            renderInvocation.mutableOrderedSetValueForKey("fragmentBufferBindings").removeObject(binding)
+            managedObjectContext.deleteObject(binding)
+        }
         fragmentBufferBindingsViewController.reloadData()
         modelObserver.modelDidChange()
+        sender.selectedSegment = -1
     }
 
     @IBAction func stateSelected(sender: NSPopUpButton) {

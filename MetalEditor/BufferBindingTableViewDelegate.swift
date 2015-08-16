@@ -8,24 +8,17 @@
 
 import Cocoa
 
-protocol BufferBindingRemoveObserver: class {
-    func removeBufferBinding(controller: BufferBindingsViewController, binding: BufferBinding)
-}
-
 class BufferBindingsViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
-    weak var removeObserver: BufferBindingRemoveObserver!
     var bufferBindings: NSOrderedSet!
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var numberTableColumn: NSTableColumn!
     @IBOutlet var popUpTableColumn: NSTableColumn!
-    @IBOutlet var removeTableColumn: NSTableColumn!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: BufferBindingRemoveObserver, bufferBindings: NSOrderedSet) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, bufferBindings: NSOrderedSet) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
-        self.removeObserver = removeObserver
         self.bufferBindings = bufferBindings
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -36,6 +29,11 @@ class BufferBindingsViewController: NSViewController, NSTableViewDelegate, NSTab
 
     func reloadData() {
         tableView.reloadData()
+    }
+
+    func selectedRow() -> Int? {
+        let selected = tableView.selectedRow
+        return selected == -1 ? nil : selected
     }
 
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
@@ -82,15 +80,6 @@ class BufferBindingsViewController: NSViewController, NSTableViewDelegate, NSTab
             fatalError()
         }
     }
-    
-    @IBAction func removeBuffer(sender: NSButton) {
-        let row = tableView.rowForView(sender)
-        let binding = bufferBindings[row] as! BufferBinding
-        removeObserver.removeBufferBinding(self, binding: binding)
-        managedObjectContext.deleteObject(binding)
-        tableView.reloadData()
-        modelObserver.modelDidChange()
-    }
 
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         switch tableColumn! {
@@ -111,8 +100,6 @@ class BufferBindingsViewController: NSViewController, NSTableViewDelegate, NSTab
                 popUp.selectItemAtIndex(0)
             }
             return result
-        case removeTableColumn:
-            return tableView.makeViewWithIdentifier("Remove", owner: self) as! NSTableCellView
         default:
             fatalError()
         }

@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="numberTableColumn" destination="biH-1q-HbM" id="YLn-El-JfH"/>
                 <outlet property="popUpTableColumn" destination="Tz2-qn-W67" id="7Fp-iK-8e5"/>
-                <outlet property="removeTableColumn" destination="9dW-B8-EhL" id="pLH-Ia-e13"/>
                 <outlet property="tableView" destination="14s-Gg-NED" id="Sab-PB-hHS"/>
                 <outlet property="view" destination="ruQ-PO-sJH" id="XIu-78-vdF"/>
             </connections>
@@ -19,7 +18,7 @@
         <scrollView autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruQ-PO-sJH">
             <rect key="frame" x="0.0" y="0.0" width="250" height="200"/>
             <clipView key="contentView" id="OxB-fX-Zj4">
-                <rect key="frame" x="1" y="23" width="248" height="176"/>
+                <rect key="frame" x="1" y="0.0" width="248" height="199"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="21" headerView="vvU-gp-HAS" viewBased="YES" id="14s-Gg-NED">
@@ -78,7 +77,7 @@
                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                 <prototypeCellViews>
                                     <tableCellView identifier="Pop Up" id="mfS-rU-qg9">
-                                        <rect key="frame" x="46.5" y="1" width="116" height="17"/>
+                                        <rect key="frame" x="46" y="1" width="116" height="17"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vv4-M4-KA3">
@@ -103,43 +102,6 @@
                                         <constraints>
                                             <constraint firstItem="vv4-M4-KA3" firstAttribute="leading" secondItem="mfS-rU-qg9" secondAttribute="leading" id="JhB-XD-qO8"/>
                                             <constraint firstAttribute="bottom" secondItem="vv4-M4-KA3" secondAttribute="bottom" id="Kv2-Cn-pW8"/>
-                                        </constraints>
-                                        <animations/>
-                                    </tableCellView>
-                                </prototypeCellViews>
-                            </tableColumn>
-                            <tableColumn width="65.9765625" minWidth="10" maxWidth="3.4028234663852886e+38" id="9dW-B8-EhL">
-                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </tableHeaderCell>
-                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Id2-z2-29Q">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                <prototypeCellViews>
-                                    <tableCellView identifier="Remove" id="cl5-yy-Imn">
-                                        <rect key="frame" x="165.5" y="1" width="66" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LV1-Bj-t0Q">
-                                                <rect key="frame" x="-6" y="-7" width="47" height="32"/>
-                                                <animations/>
-                                                <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZcU-f6-Hds">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="removeBuffer:" target="-2" id="KBU-o1-Amv"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="LV1-Bj-t0Q" firstAttribute="leading" secondItem="cl5-yy-Imn" secondAttribute="leading" id="EEj-Ih-tg5"/>
-                                            <constraint firstAttribute="bottom" secondItem="LV1-Bj-t0Q" secondAttribute="bottom" id="h2g-qT-bcx"/>
                                         </constraints>
                                         <animations/>
                                     </tableCellView>

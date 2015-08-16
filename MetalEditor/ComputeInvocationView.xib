@@ -195,31 +195,34 @@
                     </constraints>
                     <animations/>
                 </customView>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cVY-Ln-shV">
-                    <rect key="frame" x="227" y="13" width="49" height="32"/>
-                    <animations/>
-                    <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4HJ-42-MFg">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="addBufferBinding:" target="-2" id="WHR-kR-NOp"/>
-                    </connections>
-                </button>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="b2E-7K-9Gf">
-                    <rect key="frame" x="20" y="61" width="250" height="200"/>
+                    <rect key="frame" x="20" y="49" width="250" height="212"/>
                     <animations/>
                 </customView>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="idN-3l-cXH">
+                    <rect key="frame" x="201" y="18" width="71" height="24"/>
+                    <animations/>
+                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="NA7-nR-V0x">
+                        <font key="font" metaFont="system"/>
+                        <segments>
+                            <segment label="+" width="32"/>
+                            <segment label="-" width="32" selected="YES" tag="1"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <action selector="addRemoveBufferBinding:" target="-2" id="Fj8-ak-k5g"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <constraints>
                 <constraint firstItem="blb-JJ-nTJ" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="9Qm-Br-xfe"/>
-                <constraint firstItem="cVY-Ln-shV" firstAttribute="trailing" secondItem="b2E-7K-9Gf" secondAttribute="trailing" id="Od8-2B-KIS"/>
+                <constraint firstAttribute="bottom" secondItem="idN-3l-cXH" secondAttribute="bottom" constant="20" symbolic="YES" id="Bai-lx-95Z"/>
                 <constraint firstAttribute="trailing" secondItem="blb-JJ-nTJ" secondAttribute="trailing" constant="20" symbolic="YES" id="Ous-9x-7Aw"/>
-                <constraint firstItem="cVY-Ln-shV" firstAttribute="top" secondItem="b2E-7K-9Gf" secondAttribute="bottom" constant="20" symbolic="YES" id="TEL-zn-o1H"/>
                 <constraint firstItem="blb-JJ-nTJ" firstAttribute="leading" secondItem="b2E-7K-9Gf" secondAttribute="trailing" constant="8" symbolic="YES" id="bZ7-P3-C4c"/>
                 <constraint firstItem="b2E-7K-9Gf" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="fjv-Ow-E6Y"/>
                 <constraint firstItem="b2E-7K-9Gf" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="hxZ-pt-YTG"/>
-                <constraint firstAttribute="bottom" secondItem="cVY-Ln-shV" secondAttribute="bottom" constant="20" symbolic="YES" id="zmI-0x-cGZ"/>
+                <constraint firstItem="idN-3l-cXH" firstAttribute="top" secondItem="b2E-7K-9Gf" secondAttribute="bottom" constant="8" symbolic="YES" id="x3K-u7-AqH"/>
+                <constraint firstItem="idN-3l-cXH" firstAttribute="trailing" secondItem="b2E-7K-9Gf" secondAttribute="trailing" id="yyB-6T-Efn"/>
             </constraints>
             <animations/>
             <point key="canvasLocation" x="453" y="286.5"/>
