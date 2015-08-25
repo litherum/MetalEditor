@@ -1,0 +1,12 @@
+Differences between Metal and Metal Editor:
+
+1. Compute pipeline state has a bool in it
+2. Textures have a few extra options
+3. Metal Editor has no concept of sampler states
+4. Cannot set threadgroup memory length for compute shaders
+5. Metal Editor does not support rendering to textures (or the entire MTLRenderPassDescriptor class)
+6. There are all sorts of state pointers you can set before a render invocation. There are a lot of variables here.
+7. Metal Editor does not support indexed draws or instancing
+8. Color attachments have all sorts of blending variables which can be set
+
+Metal asserts all over the place under the covers

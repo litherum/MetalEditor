@@ -937,17 +937,17 @@
                                     </tabViewItem>
                                     <tabViewItem label="Invocations" identifier="" id="z16-kk-ECa">
                                         <view key="view" id="QCI-Rs-iTm">
-                                            <rect key="frame" x="32" y="7" width="370" height="523"/>
+                                            <rect key="frame" x="32" y="7" width="370" height="601"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Rl-SA-UOf">
-                                                    <rect key="frame" x="0.0" y="61" width="370" height="462"/>
+                                                    <rect key="frame" x="0.0" y="61" width="370" height="540"/>
                                                     <clipView key="contentView" id="A97-xc-coI">
-                                                        <rect key="frame" x="1" y="1" width="368" height="460"/>
+                                                        <rect key="frame" x="1" y="1" width="368" height="538"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <view translatesAutoresizingMaskIntoConstraints="NO" id="Hi9-Ie-bKj" customClass="FlippedView" customModule="MetalEditor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="176" width="368" height="16"/>
+                                                                <rect key="frame" x="0.0" y="254" width="368" height="16"/>
                                                                 <subviews>
                                                                     <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="noD-ak-m2E">
                                                                         <rect key="frame" x="0.0" y="0.0" width="368" height="16"/>
@@ -973,12 +973,12 @@
                                                     </clipView>
                                                     <animations/>
                                                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="6ia-fF-7yw">
-                                                        <rect key="frame" x="1" y="445" width="368" height="16"/>
+                                                        <rect key="frame" x="1" y="523" width="368" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <animations/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="uM7-MM-5EH">
-                                                        <rect key="frame" x="353" y="1" width="16" height="460"/>
+                                                        <rect key="frame" x="354" y="1" width="15" height="538"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <animations/>
                                                     </scroller>
