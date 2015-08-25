@@ -26,6 +26,10 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet var stencilAttachmentPopUp: NSPopUpButton!
     @IBOutlet var sampleCountCheckBox: NSButton!
     @IBOutlet var sampleCountTextField: NSTextField!
+    @IBOutlet var alphaToCoveragePopUp: NSButton!
+    @IBOutlet var alphaToOnePopUp: NSButton!
+    @IBOutlet var rasterizesPopUp: NSButton!
+    @IBOutlet var inputPrimitiveTopologyPopUp: NSPopUpButton!
 
     init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, state: RenderPipelineState, removeObserver: RenderPipelineStateRemoveObserver) {
         self.managedObjectContext = managedObjectContext
@@ -85,6 +89,11 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
         colorAttachmentsTableDelegate.managedObjectContext = managedObjectContext
         colorAttachmentsTableDelegate.modelObserver = modelObserver
         colorAttachmentsTableDelegate.state = state
+
+        alphaToCoveragePopUp.state = state.alphaToCoverageEnabled.boolValue ? NSOnState : NSOffState
+        alphaToOnePopUp.state = state.alphaToOneEnabled.boolValue ? NSOnState : NSOffState
+        rasterizesPopUp.state = state.rasterizationEnabled.boolValue ? NSOnState : NSOffState
+        inputPrimitiveTopologyPopUp.selectItemAtIndex(state.inputPrimitiveTopology.integerValue)
     }
 
     @IBAction func setName(sender: NSTextField) {
@@ -149,6 +158,27 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
 
     @IBAction func remove(sender: NSButton) {
         removeObserver.removeRenderPipelineState(self)
+    }
+
+    @IBAction func setAlphaToCoverage(sender: NSButton) {
+        state.alphaToCoverageEnabled = sender.state == NSOnState
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func setAlphaToOne(sender: NSButton) {
+        state.alphaToOneEnabled = sender.state == NSOnState
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func setRasterizes(sender: NSButton) {
+        state.rasterizationEnabled = sender.state == NSOnState
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func inputPrimitiveTopologySelected(sender: NSPopUpButton) {
+        state.inputPrimitiveTopology = sender.indexOfSelectedItem
+        assert(state.inputPrimitiveTopology.integerValue >= 0 && state.inputPrimitiveTopology.integerValue <= 3)
+        modelObserver.modelDidChange()
     }
 
 }

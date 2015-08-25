@@ -403,6 +403,12 @@ class MetalState {
                 vertexDescriptor.layouts[i].stride = Int(vertexBufferLayout.stride)
             }
             descriptor.vertexDescriptor = vertexDescriptor
+            descriptor.alphaToCoverageEnabled = renderPipelineState.alphaToCoverageEnabled.boolValue
+            descriptor.alphaToOneEnabled = renderPipelineState.alphaToOneEnabled.boolValue
+            descriptor.rasterizationEnabled = renderPipelineState.rasterizationEnabled.boolValue
+            if let inputPrimitiveTopology = MTLPrimitiveTopologyClass(rawValue: renderPipelineState.inputPrimitiveTopology.unsignedLongValue) {
+                descriptor.inputPrimitiveTopology = inputPrimitiveTopology
+            }
             var reflection: MTLRenderPipelineReflection?
             do {
                 try renderPipelineStates[renderPipelineState] = device.newRenderPipelineStateWithDescriptor(descriptor, options: MTLPipelineOption(), reflection: &reflection)
@@ -416,8 +422,8 @@ class MetalState {
                         MetalState.printArguments(fragmentArguments)
                     }
                 }*/
-            } catch {
-                fatalError()
+            } catch let error {
+                print("Could not compile render pipeline state \"\(renderPipelineState.name)\": \(error)")
             }
         }
     }

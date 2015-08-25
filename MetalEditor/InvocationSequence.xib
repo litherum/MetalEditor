@@ -57,8 +57,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
-                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="cWx-mq-5o8">
-                        <rect key="frame" x="419" y="1" width="15" height="270"/>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="cWx-mq-5o8">
+                        <rect key="frame" x="418" y="1" width="16" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>

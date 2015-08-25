@@ -79,6 +79,10 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         renderPipelineState.name = "Render State \(stateCount)"
         renderPipelineState.vertexFunction = "vertexIdentity"
         renderPipelineState.fragmentFunction = "fragmentRed"
+        renderPipelineState.alphaToCoverageEnabled = false
+        renderPipelineState.alphaToOneEnabled = false
+        renderPipelineState.rasterizationEnabled = true
+        renderPipelineState.inputPrimitiveTopology = MTLPrimitiveTopologyClass.Unspecified.rawValue
         renderPipelineState.mutableOrderedSetValueForKey("colorAttachments").addObject(colorAttachment)
         renderPipelineState.mutableOrderedSetValueForKey("vertexAttributes").addObject(vertexAttribute)
         renderPipelineState.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(vertexBufferLayout)

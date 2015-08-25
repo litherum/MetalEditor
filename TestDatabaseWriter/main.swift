@@ -77,6 +77,10 @@ func main() {
     renderPipelineState.name = "Render State"
     renderPipelineState.vertexFunction = "vertexIdentity"
     renderPipelineState.fragmentFunction = "fragmentRed"
+    renderPipelineState.alphaToCoverageEnabled = false
+    renderPipelineState.alphaToOneEnabled = false
+    renderPipelineState.rasterizationEnabled = true
+    renderPipelineState.inputPrimitiveTopology = MTLPrimitiveTopologyClass.Unspecified.rawValue
     renderPipelineState.mutableOrderedSetValueForKey("colorAttachments").addObject(colorAttachment)
     renderPipelineState.mutableOrderedSetValueForKey("vertexAttributes").addObject(vertexAttribute)
     renderPipelineState.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(vertexBufferLayout)

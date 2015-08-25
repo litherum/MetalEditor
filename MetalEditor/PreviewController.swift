@@ -119,7 +119,9 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 for invocationObject in renderPass.invocations {
                     let invocation = invocationObject as! RenderInvocation
                     let invocationState = invocation.state!
-                    let metalRenderPipelineState = metalState.renderPipelineStates[invocationState]!
+                    guard let metalRenderPipelineState = metalState.renderPipelineStates[invocationState] else {
+                        continue
+                    }
                     renderCommandEncoder.setRenderPipelineState(metalRenderPipelineState)
                     for i in 0 ..< invocation.vertexBufferBindings.count {
                         let bufferOptional = (invocation.vertexBufferBindings[i] as! BufferBinding).buffer
