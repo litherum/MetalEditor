@@ -15,19 +15,23 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var pixelFormatColumn: NSTableColumn!
 
-    func addColorAttachment() {
+    @IBAction func addColorAttachment(sender: NSButton) {
         let attachmentCount = numberOfColorAttachments()
         let attachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
         attachment.pixelFormat = nil
         attachment.id = attachmentCount
         state.mutableOrderedSetValueForKey("colorAttachments").addObject(attachment)
+        tableView.reloadData()
+        modelObserver.modelDidChange()
     }
 
-    func removeSelectedColorAttachment() {
+    @IBAction func removeSelectedColorAttachment(sender: NSButton) {
         guard tableView.selectedRow >= 0 else {
             return
         }
         managedObjectContext.deleteObject(state.colorAttachments[tableView.selectedRow] as! NSManagedObject)
+        tableView.reloadData()
+        modelObserver.modelDidChange()
     }
 
     func numberOfColorAttachments() -> Int {

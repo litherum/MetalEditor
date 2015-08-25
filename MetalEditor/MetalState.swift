@@ -44,11 +44,11 @@ class MetalState {
     private class func printArrayType(type: MTLArrayType, space: Int) {
         let printSpace: () -> () = {
             for _ in 0 ..< space {
-                print("  ", appendNewline: false)
+                print("  ", terminator: "")
             }
         }
         for _ in 0 ..< space - 1 {
-            print("  ", appendNewline: false)
+            print("  ", terminator: "")
         }
         print("Type: Array:")
         printSpace()
@@ -73,11 +73,11 @@ class MetalState {
     private class func printStructType(type: MTLStructType, space: Int) {
         let printSpace: () -> () = {
             for _ in 0 ..< space {
-                print("  ", appendNewline: false)
+                print("  ", terminator: "")
             }
         }
         for _ in 0 ..< space - 1 {
-            print("  ", appendNewline: false)
+            print("  ", terminator: "")
         }
         // FIXME: There always seems to be 0 members
         print("Type: Struct (\(type.members.count) members):")

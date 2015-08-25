@@ -48,7 +48,7 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     @IBOutlet var offsetColumn: NSTableColumn!
     @IBOutlet var bufferIndexColumn: NSTableColumn!
 
-    func addVertexAttribute() {
+    @IBAction func addVertexAttribute(sender: NSButton) {
         let attributeCount = numberOfVertexAttributes()
         let attribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
         attribute.format = MTLVertexFormat.Float2.rawValue
@@ -56,13 +56,17 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         attribute.bufferIndex = 0
         attribute.id = attributeCount
         state.mutableOrderedSetValueForKey("vertexAttributes").addObject(attribute)
+        tableView.reloadData()
+        modelObserver.modelDidChange()
     }
 
-    func removeSelectedVertexAttribute() {
+    @IBAction func removeSelectedVertexAttribute(sender: NSButton) {
         guard tableView.selectedRow >= 0 else {
             return
         }
         managedObjectContext.deleteObject(state.vertexAttributes[tableView.selectedRow] as! NSManagedObject)
+        tableView.reloadData()
+        modelObserver.modelDidChange()
     }
 
     func numberOfVertexAttributes() -> Int {

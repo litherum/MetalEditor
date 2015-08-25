@@ -102,42 +102,6 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
         modelObserver.modelDidChange()
     }
 
-    @IBAction func addRemoveVertexAttribute(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 { // Add
-            vertexAttributesTableDelegate.addVertexAttribute()
-        } else { // Remove
-            assert(sender.selectedSegment == 1)
-            vertexAttributesTableDelegate.removeSelectedVertexAttribute()
-        }
-        vertexAttributesTableView.reloadData()
-        modelObserver.modelDidChange()
-        sender.selectedSegment = -1
-    }
-
-    @IBAction func addRemoveVertexBufferLayout(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 { // Add
-            vertexBufferLayoutTableDelegate.addVertexBufferLayout()
-        } else { // Remove
-            assert(sender.selectedSegment == 1)
-            vertexBufferLayoutTableDelegate.removeSelectedVertexBufferLayout()
-        }
-        vertexBufferLayoutTableView.reloadData()
-        modelObserver.modelDidChange()
-        sender.selectedSegment = -1
-    }
-
-    @IBAction func addRemoveColorAttachment(sender: NSSegmentedControl) {
-        if sender.selectedSegment == 0 { // Add
-            colorAttachmentsTableDelegate.addColorAttachment()
-        } else { // Remove
-            assert(sender.selectedSegment == 1)
-            colorAttachmentsTableDelegate.removeSelectedColorAttachment()
-        }
-        colorAttachmentsTableView.reloadData()
-        modelObserver.modelDidChange()
-        sender.selectedSegment = -1
-    }
-
     @IBAction func depthAttachmentSelected(sender: NSPopUpButton) {
         assert(sender.indexOfSelectedItem >= 0)
         guard sender.indexOfSelectedItem > 0 else {
