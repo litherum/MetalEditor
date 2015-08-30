@@ -81,7 +81,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
             let result = tableView.makeViewWithIdentifier("BlendingEnabled", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSButton
-            popUp.state = colorAttachment.blendingEnabled ? NSOnState : NSOffState
+            popUp.state = colorAttachment.blendingEnabled.boolValue ? NSOnState : NSOffState
             return result
         case rgbaColumn:
             let result = tableView.makeViewWithIdentifier("RGBA", owner: self) as! NSTableCellView
@@ -90,10 +90,10 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
             let green = result.subviews[1] as! NSButton
             let blue = result.subviews[2] as! NSButton
             let alpha = result.subviews[3] as! NSButton
-            red.state = colorAttachment.writeRed ? NSOnState : NSOffState
-            green.state = colorAttachment.writeGreen ? NSOnState : NSOffState
-            blue.state = colorAttachment.writeBlue ? NSOnState : NSOffState
-            alpha.state = colorAttachment.writeAlpha ? NSOnState : NSOffState
+            red.state = colorAttachment.writeRed.boolValue ? NSOnState : NSOffState
+            green.state = colorAttachment.writeGreen.boolValue ? NSOnState : NSOffState
+            blue.state = colorAttachment.writeBlue.boolValue ? NSOnState : NSOffState
+            alpha.state = colorAttachment.writeAlpha.boolValue ? NSOnState : NSOffState
             return result
         case rgbBlendOpColumn:
             let result = tableView.makeViewWithIdentifier("RGB Blend Op", owner: self) as! NSTableCellView
@@ -131,6 +131,8 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
             let popUp = result.subviews[0] as! NSPopUpButton
             popUp.selectItemAtIndex(colorAttachment.destinationAlphaBlendFactor.integerValue)
             return result
+        default:
+            fatalError()
         }
     }
 
@@ -150,30 +152,35 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let row = tableView.rowForView(sender)
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         colorAttachment.blendingEnabled = sender.state == NSOnState
+        modelObserver.modelDidChange()
     }
 
     @IBAction func redToggled(sender: NSButton) {
         let row = tableView.rowForView(sender)
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         colorAttachment.writeRed = sender.state == NSOnState
+        modelObserver.modelDidChange()
     }
 
     @IBAction func greenToggled(sender: NSButton) {
         let row = tableView.rowForView(sender)
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         colorAttachment.writeGreen = sender.state == NSOnState
+        modelObserver.modelDidChange()
     }
 
     @IBAction func blueToggled(sender: NSButton) {
         let row = tableView.rowForView(sender)
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         colorAttachment.writeBlue = sender.state == NSOnState
+        modelObserver.modelDidChange()
     }
 
     @IBAction func alphaToggled(sender: NSButton) {
         let row = tableView.rowForView(sender)
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         colorAttachment.writeAlpha = sender.state == NSOnState
+        modelObserver.modelDidChange()
     }
 
     @IBAction func rgbBlendOpSelected(sender: NSPopUpButton) {
@@ -181,6 +188,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         assert(sender.indexOfSelectedItem >= 0)
         colorAttachment.rgbBlendOperation = sender.indexOfSelectedItem
+        modelObserver.modelDidChange()
     }
 
     @IBAction func alphaBlendOpSelected(sender: NSPopUpButton) {
@@ -188,6 +196,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         assert(sender.indexOfSelectedItem >= 0)
         colorAttachment.alphaBlendOperation = sender.indexOfSelectedItem
+        modelObserver.modelDidChange()
     }
 
     @IBAction func sourceRGBFactorSelected(sender: NSPopUpButton) {
@@ -195,6 +204,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         assert(sender.indexOfSelectedItem >= 0)
         colorAttachment.sourceRGBBlendFactor = sender.indexOfSelectedItem
+        modelObserver.modelDidChange()
     }
 
     @IBAction func sourceAlphaFactorSelected(sender: NSPopUpButton) {
@@ -202,6 +212,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         assert(sender.indexOfSelectedItem >= 0)
         colorAttachment.sourceAlphaBlendFactor = sender.indexOfSelectedItem
+        modelObserver.modelDidChange()
     }
 
     @IBAction func destinationRGBFactorSelected(sender: NSPopUpButton) {
@@ -209,6 +220,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         assert(sender.indexOfSelectedItem >= 0)
         colorAttachment.destinationRGBBlendFactor = sender.indexOfSelectedItem
+        modelObserver.modelDidChange()
     }
 
     @IBAction func destinationAlphaFactorSelected(sender: NSPopUpButton) {
@@ -216,6 +228,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         assert(sender.indexOfSelectedItem >= 0)
         colorAttachment.destinationAlphaBlendFactor = sender.indexOfSelectedItem
+        modelObserver.modelDidChange()
     }
 }
 

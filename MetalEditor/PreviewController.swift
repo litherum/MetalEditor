@@ -87,7 +87,9 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 for invocationObject in computePass.invocations {
                     let invocation = invocationObject as! ComputeInvocation
                     let invocationState = invocation.state!
-                    let metalComputePipelineState = metalState.computePipelineStates[invocationState]!
+                    guard let metalComputePipelineState = metalState.computePipelineStates[invocationState] else {
+                        continue
+                    }
                     computeCommandEncoder.setComputePipelineState(metalComputePipelineState)
                     for i in 0 ..< invocation.bufferBindings.count {
                         let bufferOptional = (invocation.bufferBindings[i] as! BufferBinding).buffer

@@ -345,7 +345,9 @@ class MetalState {
         }
         
         for computePipelineState in MetalState.fetchAll(managedObjectContext, entityName: "ComputePipelineState") as! [ComputePipelineState] {
-            let function = functions[computePipelineState.functionName]
+            guard let function = functions[computePipelineState.functionName] else {
+                continue
+            }
             let descriptor = MTLComputePipelineDescriptor()
             descriptor.computeFunction = function
             var reflection: MTLComputePipelineReflection?
@@ -361,8 +363,12 @@ class MetalState {
         }
         
         for renderPipelineState in MetalState.fetchAll(managedObjectContext, entityName: "RenderPipelineState") as! [RenderPipelineState] {
-            let vertexFunction = functions[renderPipelineState.vertexFunction]
-            let fragmentFunction = functions[renderPipelineState.fragmentFunction]
+            guard let vertexFunction = functions[renderPipelineState.vertexFunction] else {
+                continue
+            }
+            guard let fragmentFunction = functions[renderPipelineState.fragmentFunction] else {
+                continue
+            }
             let descriptor = MTLRenderPipelineDescriptor()
             descriptor.vertexFunction = vertexFunction
             descriptor.fragmentFunction = fragmentFunction
@@ -373,6 +379,19 @@ class MetalState {
                 } else {
                     descriptor.colorAttachments[i].pixelFormat = view.colorPixelFormat
                 }
+                descriptor.colorAttachments[i].blendingEnabled = colorAttachment.blendingEnabled.boolValue
+                var colorWriteMask = MTLColorWriteMask.None.rawValue
+                colorWriteMask |= colorAttachment.writeRed.boolValue ? MTLColorWriteMask.Red.rawValue : 0
+                colorWriteMask |= colorAttachment.writeGreen.boolValue ? MTLColorWriteMask.Green.rawValue : 0
+                colorWriteMask |= colorAttachment.writeBlue.boolValue ? MTLColorWriteMask.Blue.rawValue : 0
+                colorWriteMask |= colorAttachment.writeAlpha.boolValue ? MTLColorWriteMask.Alpha.rawValue : 0
+                descriptor.colorAttachments[i].writeMask = MTLColorWriteMask(rawValue: colorWriteMask)
+                descriptor.colorAttachments[i].rgbBlendOperation = MTLBlendOperation(rawValue: colorAttachment.rgbBlendOperation.unsignedLongValue)!
+                descriptor.colorAttachments[i].alphaBlendOperation = MTLBlendOperation(rawValue: colorAttachment.alphaBlendOperation.unsignedLongValue)!
+                descriptor.colorAttachments[i].sourceRGBBlendFactor = MTLBlendFactor(rawValue: colorAttachment.sourceRGBBlendFactor.unsignedLongValue)!
+                descriptor.colorAttachments[i].sourceAlphaBlendFactor = MTLBlendFactor(rawValue: colorAttachment.sourceAlphaBlendFactor.unsignedLongValue)!
+                descriptor.colorAttachments[i].destinationRGBBlendFactor = MTLBlendFactor(rawValue: colorAttachment.destinationRGBBlendFactor.unsignedLongValue)!
+                descriptor.colorAttachments[i].destinationAlphaBlendFactor = MTLBlendFactor(rawValue: colorAttachment.destinationAlphaBlendFactor.unsignedLongValue)!
             }
             if let depthAttachmentPixelFormat = renderPipelineState.depthAttachmentPixelFormat {
                 descriptor.depthAttachmentPixelFormat = MetalState.toMetalPixelFormat(depthAttachmentPixelFormat)
