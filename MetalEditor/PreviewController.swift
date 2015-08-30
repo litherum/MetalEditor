@@ -162,9 +162,14 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     renderCommandEncoder.setCullMode(MTLCullMode(rawValue: invocation.cullMode.unsignedLongValue)!)
                     renderCommandEncoder.setDepthBias(invocation.depthBias.floatValue, slopeScale: invocation.depthSlopeScale.floatValue, clamp: invocation.depthClamp.floatValue)
                     renderCommandEncoder.setDepthClipMode(MTLDepthClipMode(rawValue: invocation.depthClipMode.unsignedLongValue)!)
+
+                    let depthStencilDescriptor = MTLDepthStencilDescriptor()
+                    
                     renderCommandEncoder.setFrontFacingWinding(MTLWinding(rawValue: invocation.frontFacingWinding.unsignedLongValue)!)
                     if let scissorRect = invocation.scissorRect {
-                        renderCommandEncoder.setScissorRect(MTLScissorRect(x: scissorRect.x.integerValue, y: scissorRect.y.integerValue, width: scissorRect.width.integerValue, height: scissorRect.height.integerValue))
+                        if scissorRect.width.integerValue > 0 && scissorRect.height.integerValue > 0 {
+                            renderCommandEncoder.setScissorRect(MTLScissorRect(x: scissorRect.x.integerValue, y: scissorRect.y.integerValue, width: scissorRect.width.integerValue, height: scissorRect.height.integerValue))
+                        }
                     }
                     renderCommandEncoder.setStencilFrontReferenceValue(invocation.stencilFrontReferenceValue.unsignedIntValue, backReferenceValue: invocation.stencilBackReferenceValue.unsignedIntValue)
                     renderCommandEncoder.setTriangleFillMode(MTLTriangleFillMode(rawValue: invocation.triangleFillMode.unsignedLongValue)!)
