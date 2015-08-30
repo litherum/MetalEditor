@@ -1,5 +1,5 @@
 //
-//  RenderInvocationViewController.swift
+//  RenderInvocationDetailsViewController.swift
 //  MetalEditor
 //
 //  Created by Litherum on 8/10/15.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RenderInvocationViewController: NSViewController {
+class RenderInvocationDetailsViewController: NSViewController {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     weak var dismissObserver: DismissObserver!

@@ -983,7 +983,7 @@
                             <animations/>
                         </customView>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FiX-k6-FX0">
-                            <rect key="frame" x="543" y="35" width="42" height="32"/>
+                            <rect key="frame" x="543" y="13" width="42" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="dc4-mq-F0g"/>
                             </constraints>
@@ -1084,7 +1084,6 @@
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="byl-9S-eKA" secondAttribute="trailing" id="LTm-AS-0a9"/>
                         <constraint firstItem="Wif-th-nfY" firstAttribute="bottom" secondItem="X2V-yE-96O" secondAttribute="bottom" id="NGp-BO-hGR"/>
                         <constraint firstItem="N4y-yF-7yv" firstAttribute="baseline" secondItem="TeT-RB-8wu" secondAttribute="baseline" id="NHt-lc-x1s"/>
-                        <constraint firstItem="FiX-k6-FX0" firstAttribute="bottom" secondItem="X2V-yE-96O" secondAttribute="bottom" id="Odb-S8-WHp"/>
                         <constraint firstItem="ktZ-UL-gWM" firstAttribute="bottom" secondItem="X2V-yE-96O" secondAttribute="bottom" id="UZb-hb-Upg"/>
                         <constraint firstItem="Wt2-nZ-512" firstAttribute="trailing" secondItem="ktZ-UL-gWM" secondAttribute="trailing" id="alS-mK-ohY"/>
                         <constraint firstItem="N3a-aD-XpR" firstAttribute="leading" secondItem="aTG-DU-wmF" secondAttribute="leading" id="bLd-q0-LVP"/>
@@ -1094,6 +1093,7 @@
                         <constraint firstItem="X2V-yE-96O" firstAttribute="leading" secondItem="TeT-RB-8wu" secondAttribute="leading" id="gIa-6n-Qo0"/>
                         <constraint firstItem="Jdr-eU-3ts" firstAttribute="baseline" secondItem="N3a-aD-XpR" secondAttribute="baseline" id="jkS-wv-Fn3"/>
                         <constraint firstAttribute="bottom" secondItem="N3a-aD-XpR" secondAttribute="bottom" constant="20" symbolic="YES" id="n4T-b7-B8n"/>
+                        <constraint firstAttribute="bottom" secondItem="FiX-k6-FX0" secondAttribute="bottom" constant="20" symbolic="YES" id="pFL-93-23n"/>
                         <constraint firstItem="N3a-aD-XpR" firstAttribute="top" secondItem="X2V-yE-96O" secondAttribute="bottom" constant="8" symbolic="YES" id="rJx-5w-TlJ"/>
                         <constraint firstItem="Jdr-eU-3ts" firstAttribute="leading" secondItem="N3a-aD-XpR" secondAttribute="trailing" constant="8" symbolic="YES" id="u4n-dm-B2H"/>
                         <constraint firstItem="X2V-yE-96O" firstAttribute="top" secondItem="TeT-RB-8wu" secondAttribute="bottom" constant="8" symbolic="YES" id="v4g-7i-OtN"/>

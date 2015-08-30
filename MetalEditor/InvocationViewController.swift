@@ -55,11 +55,11 @@ class InvocationViewController: NSViewController, DismissObserver {
 
     @IBAction func showDetails(sender: NSButton) {
         if let renderInvocation = invocation as? RenderInvocation {
-            let controller = RenderInvocationViewController(nibName: "RenderInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, renderInvocation: renderInvocation)!
+            let controller = RenderInvocationDetailsViewController(nibName: "RenderInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, renderInvocation: renderInvocation)!
             presentViewControllerAsSheet(controller)
         } else {
             let computeInvocation = invocation as! ComputeInvocation
-            let controller = ComputeInvocationViewController(nibName: "ComputeInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, computeInvocation: computeInvocation)!
+            let controller = ComputeInvocationDetailsViewController(nibName: "ComputeInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, computeInvocation: computeInvocation)!
             presentViewControllerAsSheet(controller)
         }
     }

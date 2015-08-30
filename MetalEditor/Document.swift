@@ -13,7 +13,7 @@ protocol ModelObserver: class {
 }
 
 protocol PassRemoveObserver: class {
-    func removePass(controller: InvocationsViewController)
+    func removePass(controller: InvocationsViewController, pass: Pass)
 }
 
 protocol DepthStencilStateRemoveObserver: class {
@@ -72,7 +72,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     }
 
     func addRenderPassView(pass: RenderPass) {
-        let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
+        let controller = RenderInvocationsViewController(nibName: "RenderInvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
         controller.loadView()
         for i in pass.invocations {
             controller.addRenderInvocationView(i as! RenderInvocation)
@@ -82,7 +82,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     }
 
     func addComputePassView(pass: ComputePass) {
-        let controller = InvocationsViewController(nibName: "InvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
+        let controller = ComputeInvocationsViewController(nibName: "ComputeInvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
         controller.loadView()
         for i in pass.invocations {
             controller.addComputeInvocationView(i as! ComputeInvocation)
@@ -215,9 +215,9 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         modelDidChange()
     }
 
-    func removePass(controller: InvocationsViewController) {
-        frame.mutableOrderedSetValueForKey("passes").removeObject(controller.pass)
-        managedObjectContext!.deleteObject(controller.pass)
+    func removePass(controller: InvocationsViewController, pass: Pass) {
+        frame.mutableOrderedSetValueForKey("passes").removeObject(pass)
+        managedObjectContext!.deleteObject(pass)
         controller.view.removeFromSuperview()
         invocationMap.removeValueForKey(controller)
         modelDidChange()

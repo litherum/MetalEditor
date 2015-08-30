@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ComputeInvocationViewController" customModule="MetalEditor" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ComputeInvocationDetailsViewController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="bufferTableViewPlaceholder" destination="b2E-7K-9Gf" id="TV4-w9-Hgc"/>
                 <outlet property="pipelineStateNameTextField" destination="Lzy-Fd-vUi" id="j6W-aJ-CDJ"/>

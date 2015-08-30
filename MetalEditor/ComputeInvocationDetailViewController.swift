@@ -1,5 +1,5 @@
 //
-//  ComputeInvocationViewController.swift
+//  ComputeInvocationDetailsViewController.swift
 //  MetalEditor
 //
 //  Created by Litherum on 8/9/15.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ComputeInvocationViewController: NSViewController {
+class ComputeInvocationDetailsViewController: NSViewController {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     weak var dismissObserver: DismissObserver!

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A263e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="RenderInvocationsViewController" customModule="MetalEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="renderToTextureButton" destination="kkB-KG-Svs" id="Ona-zp-i0B"/>
+                <outlet property="stackView" destination="5ho-T4-cED" id="bnp-Mn-2Zi"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTO-4e-uhw">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="272"/>
+                    <clipView key="contentView" id="mem-Pf-hGO">
+                        <rect key="frame" x="1" y="1" width="341" height="270"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view translatesAutoresizingMaskIntoConstraints="NO" id="aYw-Pq-ClM">
+                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="270"/>
+                                <subviews>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ho-T4-cED">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="270"/>
+                                        <animations/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5ho-T4-cED" firstAttribute="leading" secondItem="aYw-Pq-ClM" secondAttribute="leading" id="AA3-PP-vqt"/>
+                                    <constraint firstAttribute="bottom" secondItem="5ho-T4-cED" secondAttribute="bottom" id="SgH-oF-nMe"/>
+                                    <constraint firstAttribute="trailing" secondItem="5ho-T4-cED" secondAttribute="trailing" id="TMA-vF-CKw"/>
+                                    <constraint firstItem="5ho-T4-cED" firstAttribute="top" secondItem="aYw-Pq-ClM" secondAttribute="top" id="nm6-zx-SOP"/>
+                                </constraints>
+                                <animations/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="aYw-Pq-ClM" firstAttribute="height" secondItem="mem-Pf-hGO" secondAttribute="height" id="Hl0-zp-7ou"/>
+                            <constraint firstItem="aYw-Pq-ClM" firstAttribute="top" secondItem="mem-Pf-hGO" secondAttribute="top" id="s34-Fx-hr1"/>
+                            <constraint firstItem="aYw-Pq-ClM" firstAttribute="leading" secondItem="mem-Pf-hGO" secondAttribute="leading" id="zrj-NE-JcU"/>
+                        </constraints>
+                        <animations/>
+                    </clipView>
+                    <animations/>
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Hn5-if-4Xm">
+                        <rect key="frame" x="1" y="255" width="341" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrf-nm-ftY">
+                        <rect key="frame" x="326" y="1" width="16" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </scroller>
+                </scrollView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="vtS-dn-y6o">
+                    <rect key="frame" x="351" y="92" width="129" height="88"/>
+                    <subviews>
+                        <button translatesAutoresizingMaskIntoConstraints="NO" id="kkB-KG-Svs">
+                            <rect key="frame" x="-2" y="72" width="133" height="18"/>
+                            <animations/>
+                            <buttonCell key="cell" type="check" title="Render To Texture" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dct-hc-HGj">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="renderToTextureChecked:" target="-2" id="MHW-Md-MYs"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vna-b6-7tW">
+                            <rect key="frame" x="-6" y="-7" width="141" height="32"/>
+                            <animations/>
+                            <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yiQ-mi-elE">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="addInvocation:" target="-2" id="IZf-XV-uYL"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="10i-TV-1W2">
+                            <rect key="frame" x="-6" y="26" width="141" height="32"/>
+                            <animations/>
+                            <buttonCell key="cell" type="push" title="Details..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="75a-ta-n8w">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="detailsPushed:" target="-2" id="PdA-Im-z3c"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="kkB-KG-Svs" firstAttribute="leading" secondItem="vtS-dn-y6o" secondAttribute="leading" id="64x-ZT-PAS"/>
+                        <constraint firstAttribute="trailing" secondItem="Vna-b6-7tW" secondAttribute="trailing" id="EaE-FP-5lx"/>
+                        <constraint firstItem="Vna-b6-7tW" firstAttribute="top" secondItem="10i-TV-1W2" secondAttribute="bottom" constant="12" symbolic="YES" id="Hsi-0f-Skr"/>
+                        <constraint firstAttribute="trailing" secondItem="10i-TV-1W2" secondAttribute="trailing" id="IKx-wn-8Rn"/>
+                        <constraint firstItem="kkB-KG-Svs" firstAttribute="top" secondItem="vtS-dn-y6o" secondAttribute="top" id="b4f-Md-qhN"/>
+                        <constraint firstAttribute="bottom" secondItem="Vna-b6-7tW" secondAttribute="bottom" id="cdi-SH-dBa"/>
+                        <constraint firstItem="10i-TV-1W2" firstAttribute="leading" secondItem="vtS-dn-y6o" secondAttribute="leading" id="ged-Iq-uDM"/>
+                        <constraint firstAttribute="trailing" secondItem="kkB-KG-Svs" secondAttribute="trailing" id="oFS-6k-o0G"/>
+                        <constraint firstItem="Vna-b6-7tW" firstAttribute="leading" secondItem="vtS-dn-y6o" secondAttribute="leading" id="qJj-wE-a4f"/>
+                        <constraint firstItem="10i-TV-1W2" firstAttribute="top" secondItem="kkB-KG-Svs" secondAttribute="bottom" constant="20" symbolic="YES" id="rG2-nY-rXN"/>
+                    </constraints>
+                    <animations/>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="vtS-dn-y6o" firstAttribute="leading" secondItem="fTO-4e-uhw" secondAttribute="trailing" constant="8" symbolic="YES" id="1Nj-PK-mol"/>
+                <constraint firstItem="fTO-4e-uhw" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="6t5-hI-eGk"/>
+                <constraint firstItem="fTO-4e-uhw" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="7aP-Gd-Uhd"/>
+                <constraint firstItem="vtS-dn-y6o" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="M66-qp-U0T"/>
+                <constraint firstAttribute="trailing" secondItem="vtS-dn-y6o" secondAttribute="trailing" id="kYB-gg-RKc"/>
+                <constraint firstAttribute="bottom" secondItem="fTO-4e-uhw" secondAttribute="bottom" id="wQR-Fz-IAp"/>
+            </constraints>
+            <animations/>
+        </customView>
+    </objects>
+</document>

@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="RenderInvocationViewController" customModule="MetalEditor" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="RenderInvocationDetailsViewController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="blendAlphaSlider" destination="Bj3-qz-sm6" id="jcJ-1d-rLR"/>
                 <outlet property="blendAlphaTextField" destination="QL3-8g-MxK" id="Hzt-Y5-Jtq"/>
