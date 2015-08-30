@@ -385,7 +385,7 @@ class MetalState {
             frontFaceStencil.stencilCompareFunction = MTLCompareFunction(rawValue: depthStencilState.frontFaceStencil.stencilCompareFunction.unsignedLongValue)!
             frontFaceStencil.readMask = depthStencilState.frontFaceStencil.readMask.unsignedIntValue
             frontFaceStencil.writeMask = depthStencilState.frontFaceStencil.writeMask.unsignedIntValue
-            descriptor.backFaceStencil = backFaceStencil
+            descriptor.frontFaceStencil = frontFaceStencil
 
             depthStencilStates[depthStencilState] = device.newDepthStencilStateWithDescriptor(descriptor)
         }
