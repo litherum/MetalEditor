@@ -25,6 +25,37 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet var primitivePopUp: NSPopUpButton!
     @IBOutlet var vertexStartTextField: NSTextField!
     @IBOutlet var vertexCountTextField: NSTextField!
+    @IBOutlet var blendRedSlider: NSSlider!
+    @IBOutlet var blendGreenSlider: NSSlider!
+    @IBOutlet var blendBlueSlider: NSSlider!
+    @IBOutlet var blendAlphaSlider: NSSlider!
+    @IBOutlet var blendRedTextField: NSTextField!
+    @IBOutlet var blendGreenTextField: NSTextField!
+    @IBOutlet var blendBlueTextField: NSTextField!
+    @IBOutlet var blendAlphaTextField: NSTextField!
+    @IBOutlet var cullModePopUp: NSPopUpButton!
+    @IBOutlet var depthBiasTextField: NSTextField!
+    @IBOutlet var depthSlopeScaleTextField: NSTextField!
+    @IBOutlet var depthClampTextField: NSTextField!
+    @IBOutlet var depthClipModePopUp: NSPopUpButton!
+    @IBOutlet var windingOrderPopUp: NSPopUpButton!
+    @IBOutlet var scissorRectCheckBox: NSButton!
+    @IBOutlet var scissorRectXTextField: NSTextField!
+    @IBOutlet var scissorRectYTextField: NSTextField!
+    @IBOutlet var scissorRectWidthTextField: NSTextField!
+    @IBOutlet var scissorRectHeightTextField: NSTextField!
+    @IBOutlet var stencilFrontReferenceValueTextField: NSTextField!
+    @IBOutlet var stencilBackReferenceValueTextField: NSTextField!
+    @IBOutlet var triangleFillModePopUp: NSPopUpButton!
+    @IBOutlet var viewportCheckBox: NSButton!
+    @IBOutlet var viewportOriginXTextField: NSTextField!
+    @IBOutlet var viewportOriginYTextField: NSTextField!
+    @IBOutlet var viewportWidthTextField: NSTextField!
+    @IBOutlet var viewportHeightTextField: NSTextField!
+    @IBOutlet var viewportZNearTextField: NSTextField!
+    @IBOutlet var viewportZFarTextField: NSTextField!
+    @IBOutlet var visibilityResultModePopUp: NSPopUpButton!
+    @IBOutlet var visibilityResultOffsetTextField: NSTextField!
 
     init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, dismissObserver: DismissObserver, renderInvocation: RenderInvocation) {
         self.managedObjectContext = managedObjectContext
@@ -101,6 +132,56 @@ class RenderInvocationViewController: NSViewController, NSTextFieldDelegate {
 
         vertexStartTextField.integerValue = renderInvocation.vertexStart.integerValue
         vertexCountTextField.integerValue = renderInvocation.vertexCount.integerValue
+
+        blendRedSlider.doubleValue = renderInvocation.blendColorRed.doubleValue
+        blendGreenSlider.doubleValue = renderInvocation.blendColorGreen.doubleValue
+        blendBlueSlider.doubleValue = renderInvocation.blendColorBlue.doubleValue
+        blendAlphaSlider.doubleValue = renderInvocation.blendColorAlpha.doubleValue
+        blendRedTextField.doubleValue = renderInvocation.blendColorRed.doubleValue
+        blendGreenTextField.doubleValue = renderInvocation.blendColorGreen.doubleValue
+        blendBlueTextField.doubleValue = renderInvocation.blendColorBlue.doubleValue
+        blendAlphaTextField.doubleValue = renderInvocation.blendColorAlpha.doubleValue
+        cullModePopUp.selectItemAtIndex(renderInvocation.cullMode.integerValue)
+        depthBiasTextField.doubleValue = renderInvocation.depthBias.doubleValue
+        depthSlopeScaleTextField.doubleValue = renderInvocation.depthSlopeScale.doubleValue
+        depthClampTextField.doubleValue = renderInvocation.depthClamp.doubleValue
+        depthClipModePopUp.selectItemAtIndex(renderInvocation.depthClipMode.integerValue)
+        windingOrderPopUp.selectItemAtIndex(renderInvocation.frontFacingWinding.integerValue)
+        if let scissorRect = renderInvocation.scissorRect {
+            scissorRectCheckBox.state = NSOnState
+            scissorRectXTextField.integerValue = scissorRect.x.integerValue
+            scissorRectYTextField.integerValue = scissorRect.y.integerValue
+            scissorRectWidthTextField.integerValue = scissorRect.width.integerValue
+            scissorRectHeightTextField.integerValue = scissorRect.height.integerValue
+        } else {
+            scissorRectCheckBox.state = NSOffState
+            scissorRectXTextField.enabled = false
+            scissorRectYTextField.enabled = false
+            scissorRectWidthTextField.enabled = false
+            scissorRectHeightTextField.enabled = false
+        }
+        stencilFrontReferenceValueTextField.integerValue = renderInvocation.stencilFrontReferenceValue.integerValue
+        stencilBackReferenceValueTextField.integerValue = renderInvocation.stencilBackReferenceValue.integerValue
+        triangleFillModePopUp.selectItemAtIndex(renderInvocation.triangleFillMode.integerValue)
+        if let viewport = renderInvocation.viewport {
+            viewportCheckBox.state = NSOnState
+            viewportOriginXTextField.doubleValue = viewport.originX.doubleValue
+            viewportOriginYTextField.doubleValue = viewport.originY.doubleValue
+            viewportWidthTextField.doubleValue = viewport.width.doubleValue
+            viewportHeightTextField.doubleValue = viewport.height.doubleValue
+            viewportZNearTextField.doubleValue = viewport.zNear.doubleValue
+            viewportZFarTextField.doubleValue = viewport.zFar.doubleValue
+        } else {
+            viewportCheckBox.state = NSOffState
+            viewportOriginXTextField.enabled = false
+            viewportOriginYTextField.enabled = false
+            viewportWidthTextField.enabled = false
+            viewportHeightTextField.enabled = false
+            viewportZNearTextField.enabled = false
+            viewportZFarTextField.enabled = false
+        }
+        visibilityResultModePopUp.selectItemAtIndex(renderInvocation.visibilityResultMode.integerValue)
+        visibilityResultOffsetTextField.integerValue = renderInvocation.visibilityResultOffset.integerValue
     }
 
     func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
