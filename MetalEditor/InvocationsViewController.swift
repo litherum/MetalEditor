@@ -60,6 +60,7 @@ class InvocationsViewController: NSViewController, InvocationRemoveObserver {
             renderInvocation.depthSlopeScale = 0
             renderInvocation.depthClamp = 0
             renderInvocation.depthClipMode = MTLDepthClipMode.Clip.rawValue
+            renderInvocation.depthStencilState = nil
             renderInvocation.frontFacingWinding = MTLWinding.Clockwise.rawValue
             renderInvocation.scissorRect = nil
             renderInvocation.stencilFrontReferenceValue = 0

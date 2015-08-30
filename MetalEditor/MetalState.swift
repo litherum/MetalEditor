@@ -19,6 +19,7 @@ class MetalState {
     var textures: [Texture: MTLTexture] = [:]
     var computePipelineStates: [ComputePipelineState: MTLComputePipelineState] = [:]
     var renderPipelineStates: [RenderPipelineState: MTLRenderPipelineState] = [:]
+    var depthStencilStates: [DepthStencilState: MTLDepthStencilState] = [:]
 
     private class func fetchAll(managedObjectContext: NSManagedObjectContext, entityName: String) -> [NSManagedObject] {
         let fetchRequest = NSFetchRequest(entityName: entityName)
@@ -286,6 +287,7 @@ class MetalState {
         textures = [:]
         computePipelineStates = [:]
         renderPipelineStates = [:]
+        depthStencilStates = [:]
 
         let libraries = MetalState.fetchAll(managedObjectContext, entityName: "Library") as! [Library]
         if libraries.count != 0 {
@@ -343,7 +345,7 @@ class MetalState {
             assert(newTexture != nil)
             textures[texture] = newTexture
         }
-        
+
         for computePipelineState in MetalState.fetchAll(managedObjectContext, entityName: "ComputePipelineState") as! [ComputePipelineState] {
             guard let function = functions[computePipelineState.functionName] else {
                 continue
@@ -361,7 +363,33 @@ class MetalState {
                 fatalError()
             }
         }
-        
+
+        for depthStencilState in MetalState.fetchAll(managedObjectContext, entityName: "DepthStencilState") as! [DepthStencilState] {
+            let descriptor = MTLDepthStencilDescriptor()
+            descriptor.depthCompareFunction = MTLCompareFunction(rawValue: depthStencilState.depthCompareFunction.unsignedLongValue)!
+            descriptor.depthWriteEnabled = depthStencilState.depthWriteEnabled.boolValue
+
+            let backFaceStencil = MTLStencilDescriptor()
+            backFaceStencil.stencilFailureOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.stencilFailureOperation.unsignedLongValue)!
+            backFaceStencil.depthFailureOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.depthFailureOperation.unsignedLongValue)!
+            backFaceStencil.depthStencilPassOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.depthStencilPassOperation.unsignedLongValue)!
+            backFaceStencil.stencilCompareFunction = MTLCompareFunction(rawValue: depthStencilState.backFaceStencil.stencilCompareFunction.unsignedLongValue)!
+            backFaceStencil.readMask = depthStencilState.backFaceStencil.readMask.unsignedIntValue
+            backFaceStencil.writeMask = depthStencilState.backFaceStencil.writeMask.unsignedIntValue
+            descriptor.backFaceStencil = backFaceStencil
+
+            let frontFaceStencil = MTLStencilDescriptor()
+            frontFaceStencil.stencilFailureOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.stencilFailureOperation.unsignedLongValue)!
+            frontFaceStencil.depthFailureOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.depthFailureOperation.unsignedLongValue)!
+            frontFaceStencil.depthStencilPassOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.depthStencilPassOperation.unsignedLongValue)!
+            frontFaceStencil.stencilCompareFunction = MTLCompareFunction(rawValue: depthStencilState.frontFaceStencil.stencilCompareFunction.unsignedLongValue)!
+            frontFaceStencil.readMask = depthStencilState.frontFaceStencil.readMask.unsignedIntValue
+            frontFaceStencil.writeMask = depthStencilState.frontFaceStencil.writeMask.unsignedIntValue
+            descriptor.backFaceStencil = backFaceStencil
+
+            depthStencilStates[depthStencilState] = device.newDepthStencilStateWithDescriptor(descriptor)
+        }
+
         for renderPipelineState in MetalState.fetchAll(managedObjectContext, entityName: "RenderPipelineState") as! [RenderPipelineState] {
             guard let vertexFunction = functions[renderPipelineState.vertexFunction] else {
                 continue

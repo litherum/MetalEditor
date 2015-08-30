@@ -163,7 +163,14 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     renderCommandEncoder.setDepthBias(invocation.depthBias.floatValue, slopeScale: invocation.depthSlopeScale.floatValue, clamp: invocation.depthClamp.floatValue)
                     renderCommandEncoder.setDepthClipMode(MTLDepthClipMode(rawValue: invocation.depthClipMode.unsignedLongValue)!)
 
-                    let depthStencilDescriptor = MTLDepthStencilDescriptor()
+                    if let depthStencilState = invocation.depthStencilState {
+                        guard let metalDepthStencilState = metalState.depthStencilStates[depthStencilState] else {
+                            continue
+                        }
+                        renderCommandEncoder.setDepthStencilState(metalDepthStencilState)
+                    } else {
+                        renderCommandEncoder.setDepthStencilState(nil)
+                    }
                     
                     renderCommandEncoder.setFrontFacingWinding(MTLWinding(rawValue: invocation.frontFacingWinding.unsignedLongValue)!)
                     if let scissorRect = invocation.scissorRect {

@@ -31,7 +31,7 @@ extension RenderInvocation {
     @NSManaged var depthSlopeScale: NSNumber
     @NSManaged var depthClamp: NSNumber
     @NSManaged var depthClipMode: NSNumber
-    @NSManaged var depthStencilState: DepthStencilState
+    @NSManaged var depthStencilState: DepthStencilState?
     @NSManaged var frontFacingWinding: NSNumber
     @NSManaged var scissorRect: ScissorRect?
     @NSManaged var stencilFrontReferenceValue: NSNumber
