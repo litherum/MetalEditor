@@ -124,6 +124,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     guard let metalRenderPipelineState = metalState.renderPipelineStates[invocationState] else {
                         continue
                     }
+                    // FIXME: See which state is already active and don't touch if it matches the requested state.
                     renderCommandEncoder.setRenderPipelineState(metalRenderPipelineState)
                     for i in 0 ..< invocation.vertexBufferBindings.count {
                         let bufferOptional = (invocation.vertexBufferBindings[i] as! BufferBinding).buffer
@@ -157,6 +158,20 @@ class PreviewController: NSViewController, MTKViewDelegate {
                             renderCommandEncoder.setFragmentTexture(nil, atIndex: i)
                         }
                     }
+                    renderCommandEncoder.setBlendColorRed(invocation.blendColorRed.floatValue, green: invocation.blendColorGreen.floatValue, blue: invocation.blendColorBlue.floatValue, alpha: invocation.blendColorAlpha.floatValue)
+                    renderCommandEncoder.setCullMode(MTLCullMode(rawValue: invocation.cullMode.unsignedLongValue)!)
+                    renderCommandEncoder.setDepthBias(invocation.depthBias.floatValue, slopeScale: invocation.depthSlopeScale.floatValue, clamp: invocation.depthClamp.floatValue)
+                    renderCommandEncoder.setDepthClipMode(MTLDepthClipMode(rawValue: invocation.depthClipMode.unsignedLongValue)!)
+                    renderCommandEncoder.setFrontFacingWinding(MTLWinding(rawValue: invocation.frontFacingWinding.unsignedLongValue)!)
+                    if let scissorRect = invocation.scissorRect {
+                        renderCommandEncoder.setScissorRect(MTLScissorRect(x: scissorRect.x.integerValue, y: scissorRect.y.integerValue, width: scissorRect.width.integerValue, height: scissorRect.height.integerValue))
+                    }
+                    renderCommandEncoder.setStencilFrontReferenceValue(invocation.stencilFrontReferenceValue.unsignedIntValue, backReferenceValue: invocation.stencilBackReferenceValue.unsignedIntValue)
+                    renderCommandEncoder.setTriangleFillMode(MTLTriangleFillMode(rawValue: invocation.triangleFillMode.unsignedLongValue)!)
+                    if let viewport = invocation.viewport {
+                        renderCommandEncoder.setViewport(MTLViewport(originX: viewport.originX.doubleValue, originY: viewport.originY.doubleValue, width: viewport.width.doubleValue, height: viewport.height.doubleValue, znear: viewport.zNear.doubleValue, zfar: viewport.zFar.doubleValue))
+                    }
+                    renderCommandEncoder.setVisibilityResultMode(MTLVisibilityResultMode(rawValue: invocation.visibilityResultMode.unsignedLongValue)!, offset: invocation.visibilityResultOffset.integerValue)
                     renderCommandEncoder.drawPrimitives(PreviewController.toMetalPrimitiveType(invocation.primitive), vertexStart: Int(invocation.vertexStart), vertexCount: Int(invocation.vertexCount))
                 }
                 renderCommandEncoder.endEncoding()

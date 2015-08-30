@@ -107,6 +107,23 @@ func main() {
     renderInvocation.primitive = MTLPrimitiveType.Triangle.rawValue
     renderInvocation.vertexStart = 0
     renderInvocation.vertexCount = 3
+    renderInvocation.blendColorRed = 0
+    renderInvocation.blendColorGreen = 0
+    renderInvocation.blendColorBlue = 0
+    renderInvocation.blendColorAlpha = 0
+    renderInvocation.cullMode = MTLCullMode.None.rawValue
+    renderInvocation.depthBias = 0
+    renderInvocation.depthSlopeScale = 0
+    renderInvocation.depthClamp = 0
+    renderInvocation.depthClipMode = MTLDepthClipMode.Clip.rawValue
+    renderInvocation.frontFacingWinding = MTLWinding.Clockwise.rawValue
+    renderInvocation.scissorRect = nil
+    renderInvocation.stencilFrontReferenceValue = 0
+    renderInvocation.stencilBackReferenceValue = 0
+    renderInvocation.triangleFillMode = MTLTriangleFillMode.Fill.rawValue
+    renderInvocation.viewport = nil
+    renderInvocation.visibilityResultMode = MTLVisibilityResultMode.Disabled.rawValue
+    renderInvocation.visibilityResultOffset = 0
 
     let renderPass = NSEntityDescription.insertNewObjectForEntityForName("RenderPass", inManagedObjectContext: managedObjectContext) as! RenderPass
     renderPass.mutableOrderedSetValueForKey("invocations").addObject(renderInvocation)

@@ -22,5 +22,23 @@ extension RenderInvocation {
     @NSManaged var fragmentBufferBindings: NSOrderedSet
     @NSManaged var vertexTextureBindings: NSOrderedSet
     @NSManaged var fragmentTextureBindings: NSOrderedSet
+    @NSManaged var blendColorRed: NSNumber
+    @NSManaged var blendColorGreen: NSNumber
+    @NSManaged var blendColorBlue: NSNumber
+    @NSManaged var blendColorAlpha: NSNumber
+    @NSManaged var cullMode: NSNumber
+    @NSManaged var depthBias: NSNumber
+    @NSManaged var depthSlopeScale: NSNumber
+    @NSManaged var depthClamp: NSNumber
+    @NSManaged var depthClipMode: NSNumber
+    // FIXME: Need depth / stencil state
+    @NSManaged var frontFacingWinding: NSNumber
+    @NSManaged var scissorRect: ScissorRect?
+    @NSManaged var stencilFrontReferenceValue: NSNumber
+    @NSManaged var stencilBackReferenceValue: NSNumber
+    @NSManaged var triangleFillMode: NSNumber
+    @NSManaged var viewport: Viewport?
+    @NSManaged var visibilityResultMode: NSNumber
+    @NSManaged var visibilityResultOffset: NSNumber
 
 }
