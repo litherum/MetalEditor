@@ -100,36 +100,42 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSPopUpButton
             popUp.selectItemAtIndex(colorAttachment.rgbBlendOperation.integerValue)
+            popUp.enabled = colorAttachment.blendingEnabled.boolValue
             return result
         case alphaBlendOpColumn:
             let result = tableView.makeViewWithIdentifier("Alpha Blend Op", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSPopUpButton
             popUp.selectItemAtIndex(colorAttachment.alphaBlendOperation.integerValue)
+            popUp.enabled = colorAttachment.blendingEnabled.boolValue
             return result
         case sourceRGBFactorColumn:
             let result = tableView.makeViewWithIdentifier("Source RGB Factor", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSPopUpButton
             popUp.selectItemAtIndex(colorAttachment.sourceRGBBlendFactor.integerValue)
+            popUp.enabled = colorAttachment.blendingEnabled.boolValue
             return result
         case sourceAlphaFactorColumn:
             let result = tableView.makeViewWithIdentifier("Source Alpha Factor", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSPopUpButton
             popUp.selectItemAtIndex(colorAttachment.sourceAlphaBlendFactor.integerValue)
+            popUp.enabled = colorAttachment.blendingEnabled.boolValue
             return result
         case destinationRGBFactorColumn:
             let result = tableView.makeViewWithIdentifier("Destination RGB Factor", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSPopUpButton
             popUp.selectItemAtIndex(colorAttachment.destinationRGBBlendFactor.integerValue)
+            popUp.enabled = colorAttachment.blendingEnabled.boolValue
             return result
         case destinationAlphaFactorColumn:
             let result = tableView.makeViewWithIdentifier("Destination Alpha Factor", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSPopUpButton
             popUp.selectItemAtIndex(colorAttachment.destinationAlphaBlendFactor.integerValue)
+            popUp.enabled = colorAttachment.blendingEnabled.boolValue
             return result
         default:
             fatalError()
@@ -153,6 +159,7 @@ class ColorAttachmentsTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         let colorAttachment = state.colorAttachments[row] as! RenderPipelineColorAttachment
         colorAttachment.blendingEnabled = sender.state == NSOnState
         modelObserver.modelDidChange()
+        tableView.reloadData()
     }
 
     @IBAction func redToggled(sender: NSButton) {
