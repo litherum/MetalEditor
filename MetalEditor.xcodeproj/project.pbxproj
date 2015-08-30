@@ -104,6 +104,14 @@
 		C2877EBD1B806198000FD5DC /* Size+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2877EBC1B806198000FD5DC /* Size+CoreDataProperties.swift */; };
 		C2877EBE1B806268000FD5DC /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2877EBA1B80615C000FD5DC /* Size.swift */; };
 		C2877EBF1B80626B000FD5DC /* Size+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2877EBC1B806198000FD5DC /* Size+CoreDataProperties.swift */; };
+		C29C37611B92E66F00F85D61 /* StencilState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29C375D1B92E66F00F85D61 /* StencilState+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		C29C37621B92E66F00F85D61 /* StencilState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29C375D1B92E66F00F85D61 /* StencilState+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		C29C37631B92E66F00F85D61 /* StencilState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29C375E1B92E66F00F85D61 /* StencilState.swift */; settings = {ASSET_TAGS = (); }; };
+		C29C37641B92E66F00F85D61 /* StencilState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29C375E1B92E66F00F85D61 /* StencilState.swift */; settings = {ASSET_TAGS = (); }; };
+		C29C37651B92E66F00F85D61 /* DepthStencilState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29C375F1B92E66F00F85D61 /* DepthStencilState+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		C29C37661B92E66F00F85D61 /* DepthStencilState+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29C375F1B92E66F00F85D61 /* DepthStencilState+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		C29C37671B92E66F00F85D61 /* DepthStencilState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29C37601B92E66F00F85D61 /* DepthStencilState.swift */; settings = {ASSET_TAGS = (); }; };
+		C29C37681B92E66F00F85D61 /* DepthStencilState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29C37601B92E66F00F85D61 /* DepthStencilState.swift */; settings = {ASSET_TAGS = (); }; };
 		C2A9391D1B707A7900449A95 /* RenderStateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A9391C1B707A7900449A95 /* RenderStateViewController.xib */; };
 		C2BF78491B58BC8A004535BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF78481B58BC8A004535BC /* AppDelegate.swift */; };
 		C2BF784B1B58BC8A004535BC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BF784A1B58BC8A004535BC /* Document.swift */; };
@@ -216,6 +224,10 @@
 		C285B2521B5E1FAB00671A58 /* BuffersTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuffersTableViewDelegate.swift; sourceTree = "<group>"; };
 		C2877EBA1B80615C000FD5DC /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		C2877EBC1B806198000FD5DC /* Size+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Size+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C29C375D1B92E66F00F85D61 /* StencilState+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StencilState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C29C375E1B92E66F00F85D61 /* StencilState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StencilState.swift; sourceTree = "<group>"; };
+		C29C375F1B92E66F00F85D61 /* DepthStencilState+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DepthStencilState+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C29C37601B92E66F00F85D61 /* DepthStencilState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthStencilState.swift; sourceTree = "<group>"; };
 		C2A9391C1B707A7900449A95 /* RenderStateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderStateViewController.xib; sourceTree = "<group>"; };
 		C2BF78451B58BC8A004535BC /* MetalEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2BF78481B58BC8A004535BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -278,6 +290,10 @@
 		C2205E1A1B5A15A70046F04D /* Managed Objects */ = {
 			isa = PBXGroup;
 			children = (
+				C29C375D1B92E66F00F85D61 /* StencilState+CoreDataProperties.swift */,
+				C29C375E1B92E66F00F85D61 /* StencilState.swift */,
+				C29C375F1B92E66F00F85D61 /* DepthStencilState+CoreDataProperties.swift */,
+				C29C37601B92E66F00F85D61 /* DepthStencilState.swift */,
 				C227E94E1B9299850012B8B8 /* Viewport+CoreDataProperties.swift */,
 				C227E94F1B9299850012B8B8 /* Viewport.swift */,
 				C227E9481B92968B0012B8B8 /* ScissorRect+CoreDataProperties.swift */,
@@ -575,6 +591,7 @@
 				C2877EBE1B806268000FD5DC /* Size.swift in Sources */,
 				C24CDD301B5ADE0800348941 /* VertexBufferLayout.swift in Sources */,
 				C24CDD4A1B5ADE0F00348941 /* BufferBinding.swift in Sources */,
+				C29C37621B92E66F00F85D61 /* StencilState+CoreDataProperties.swift in Sources */,
 				C24CDD341B5ADE0F00348941 /* RenderPipelineColorAttachment.swift in Sources */,
 				C26C8D9A1B8127320097180D /* Texture.swift in Sources */,
 				C24CDD351B5ADE0F00348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */,
@@ -583,6 +600,7 @@
 				C24CDD2D1B5ADDFD00348941 /* VertexAttribute+CoreDataProperties.swift in Sources */,
 				C24CDD3B1B5ADE0F00348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */,
 				C24CDD401B5ADE0F00348941 /* Pass.swift in Sources */,
+				C29C37681B92E66F00F85D61 /* DepthStencilState.swift in Sources */,
 				C24CDD471B5ADE0F00348941 /* Library+CoreDataProperties.swift in Sources */,
 				C2EC39B71B78664000FFD859 /* Invocation.swift in Sources */,
 				C24CDD421B5ADE0F00348941 /* Frame.swift in Sources */,
@@ -597,6 +615,7 @@
 				C2C1F3751B70AAAB0092726F /* ManagedObjectHelpers.swift in Sources */,
 				C26C8D9B1B8127350097180D /* Texture+CoreDataProperties.swift in Sources */,
 				C227E9511B9299850012B8B8 /* Viewport+CoreDataProperties.swift in Sources */,
+				C29C37641B92E66F00F85D61 /* StencilState.swift in Sources */,
 				C24CDD411B5ADE0F00348941 /* Frame+CoreDataProperties.swift in Sources */,
 				C227E94B1B92968B0012B8B8 /* ScissorRect+CoreDataProperties.swift in Sources */,
 				C26C8DA31B8145170097180D /* TextureBinding+CoreDataProperties.swift in Sources */,
@@ -614,6 +633,7 @@
 				C24CDD071B5AD8E600348941 /* main.swift in Sources */,
 				C227E9531B9299850012B8B8 /* Viewport.swift in Sources */,
 				C24CDD561B5B32BA00348941 /* Shaders.metal in Sources */,
+				C29C37661B92E66F00F85D61 /* DepthStencilState+CoreDataProperties.swift in Sources */,
 				C24CDD491B5ADE0F00348941 /* BufferBinding+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,10 +655,12 @@
 				C24CDCB51B5A18D200348941 /* ComputePass+CoreDataProperties.swift in Sources */,
 				C26C8D9D1B8131CE0097180D /* PixelFormatUtilities.swift in Sources */,
 				C285B2531B5E1FAB00671A58 /* BuffersTableViewDelegate.swift in Sources */,
+				C29C37671B92E66F00F85D61 /* DepthStencilState.swift in Sources */,
 				C24CDCBE1B5A18D200348941 /* ComputePipelineState.swift in Sources */,
 				C24CDCFC1B5AC86D00348941 /* VertexAttribute+CoreDataProperties.swift in Sources */,
 				C24CDCBC1B5A18D200348941 /* Buffer.swift in Sources */,
 				C2BF784B1B58BC8A004535BC /* Document.swift in Sources */,
+				C29C37611B92E66F00F85D61 /* StencilState+CoreDataProperties.swift in Sources */,
 				C26C8D911B8124710097180D /* TexturesTableViewDelegate.swift in Sources */,
 				C2877EBD1B806198000FD5DC /* Size+CoreDataProperties.swift in Sources */,
 				C26C8D9F1B8144FB0097180D /* TextureBinding.swift in Sources */,
@@ -670,6 +692,7 @@
 				C24CDCF71B5AC44000348941 /* RenderPass.swift in Sources */,
 				C24CDCBB1B5A18D200348941 /* Buffer+CoreDataProperties.swift in Sources */,
 				C227E9501B9299850012B8B8 /* Viewport+CoreDataProperties.swift in Sources */,
+				C29C37651B92E66F00F85D61 /* DepthStencilState+CoreDataProperties.swift in Sources */,
 				C2EC39B41B78653B00FFD859 /* Invocation.swift in Sources */,
 				C26C8DA71B81542D0097180D /* TextureBindingsViewController.swift in Sources */,
 				C227E9521B9299850012B8B8 /* Viewport.swift in Sources */,
@@ -680,6 +703,7 @@
 				C2EC39BC1B7874AA00FFD859 /* ComputeInvocationViewController.swift in Sources */,
 				C24CDCF41B5AC44000348941 /* RenderPipelineState+CoreDataProperties.swift in Sources */,
 				C24CDCB31B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */,
+				C29C37631B92E66F00F85D61 /* StencilState.swift in Sources */,
 				C24CDCB91B5A18D200348941 /* Frame+CoreDataProperties.swift in Sources */,
 				C24CDCF01B5AC44000348941 /* RenderPipelineColorAttachment+CoreDataProperties.swift in Sources */,
 				C24CDCC01B5A18D200348941 /* Library.swift in Sources */,

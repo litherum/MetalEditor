@@ -99,6 +99,30 @@ func main() {
     let vertexBufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
     vertexBufferBinding.buffer = buffer
 
+    let backFaceStencil = NSEntityDescription.insertNewObjectForEntityForName("StencilState", inManagedObjectContext: managedObjectContext) as! StencilState
+    backFaceStencil.stencilFailureOperation = MTLStencilOperation.Keep.rawValue
+    backFaceStencil.depthFailureOperation = MTLStencilOperation.Keep.rawValue
+    backFaceStencil.depthStencilPassOperation = MTLStencilOperation.Keep.rawValue
+    backFaceStencil.stencilCompareFunction = MTLCompareFunction.Less.rawValue
+    backFaceStencil.readMask = 0xFFFFFF
+    backFaceStencil.writeMask = 0xFFFFFF
+
+    let frontFaceStencil = NSEntityDescription.insertNewObjectForEntityForName("StencilState", inManagedObjectContext: managedObjectContext) as! StencilState
+    frontFaceStencil.stencilFailureOperation = MTLStencilOperation.Keep.rawValue
+    frontFaceStencil.depthFailureOperation = MTLStencilOperation.Keep.rawValue
+    frontFaceStencil.depthStencilPassOperation = MTLStencilOperation.Keep.rawValue
+    frontFaceStencil.stencilCompareFunction = MTLCompareFunction.Less.rawValue
+    frontFaceStencil.readMask = 0xFFFFFF
+    frontFaceStencil.writeMask = 0xFFFFFF
+
+    let depthStencilState = NSEntityDescription.insertNewObjectForEntityForName("DepthStencilState", inManagedObjectContext: managedObjectContext) as! DepthStencilState
+    depthStencilState.name = "Depth Stencil State"
+    depthStencilState.id = 0
+    depthStencilState.depthCompareFunction = MTLCompareFunction.Always.rawValue
+    depthStencilState.depthWriteEnabled = false
+    depthStencilState.backFaceStencil = backFaceStencil
+    depthStencilState.frontFaceStencil = frontFaceStencil
+
     let renderInvocation = NSEntityDescription.insertNewObjectForEntityForName("RenderInvocation", inManagedObjectContext: managedObjectContext) as! RenderInvocation
     
     renderInvocation.name = "Render"
@@ -116,6 +140,7 @@ func main() {
     renderInvocation.depthSlopeScale = 0
     renderInvocation.depthClamp = 0
     renderInvocation.depthClipMode = MTLDepthClipMode.Clip.rawValue
+    renderInvocation.depthStencilState = depthStencilState
     renderInvocation.frontFacingWinding = MTLWinding.Clockwise.rawValue
     renderInvocation.scissorRect = nil
     renderInvocation.stencilFrontReferenceValue = 0
