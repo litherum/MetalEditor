@@ -38,6 +38,7 @@ class RenderInvocationViewController: NSViewController {
     @IBOutlet var depthSlopeScaleTextField: NSTextField!
     @IBOutlet var depthClampTextField: NSTextField!
     @IBOutlet var depthClipModePopUp: NSPopUpButton!
+    @IBOutlet var depthStencilStatePopUp: NSPopUpButton!
     @IBOutlet var windingOrderPopUp: NSPopUpButton!
     @IBOutlet var scissorRectCheckBox: NSButton!
     @IBOutlet var scissorRectXTextField: NSTextField!
@@ -94,6 +95,31 @@ class RenderInvocationViewController: NSViewController {
         }
     }
 
+    func createDepthStencilStateMenu() -> (NSMenu, NSMenuItem?) {
+        let fetchRequest = NSFetchRequest(entityName: "DepthStencilState")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+
+        var selectedItem: NSMenuItem?
+        do {
+            let states = try managedObjectContext.executeFetchRequest(fetchRequest) as! [DepthStencilState]
+            let result = NSMenu()
+            result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
+            for state in states {
+                let item = NSMenuItem(title: state.name, action: nil, keyEquivalent: "")
+                item.representedObject = state
+                result.addItem(item)
+                if let renderInvocationState = renderInvocation.state {
+                    if renderInvocationState == state {
+                        selectedItem = item
+                    }
+                }
+            }
+            return (result, selectedItem)
+        } catch {
+            fatalError()
+        }
+    }
+
     override func viewDidLoad() {
         vertexBufferBindingsViewController = BufferBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.vertexBufferBindings)
         addChildViewController(vertexBufferBindingsViewController)
@@ -119,9 +145,9 @@ class RenderInvocationViewController: NSViewController {
         fragmentTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentTextureBindingsViewController.view]))
         fragmentTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentTextureBindingsViewController.view]))
 
-        let (menu, selectedItem) = createStateMenu()
-        statePopUp.menu = menu
-        if let toSelect = selectedItem {
+        let (stateMenu, selectedStateItem) = createStateMenu()
+        statePopUp.menu = stateMenu
+        if let toSelect = selectedStateItem {
             statePopUp.selectItem(toSelect)
         } else {
             statePopUp.selectItemAtIndex(0)
@@ -146,6 +172,15 @@ class RenderInvocationViewController: NSViewController {
         depthSlopeScaleTextField.doubleValue = renderInvocation.depthSlopeScale.doubleValue
         depthClampTextField.doubleValue = renderInvocation.depthClamp.doubleValue
         depthClipModePopUp.selectItemAtIndex(renderInvocation.depthClipMode.integerValue)
+
+        let (depthStencilMenu, selectedDepthStencilItem) = createDepthStencilStateMenu()
+        depthStencilStatePopUp.menu = depthStencilMenu
+        if let toSelect = selectedDepthStencilItem {
+            depthStencilStatePopUp.selectItem(toSelect)
+        } else {
+            depthStencilStatePopUp.selectItemAtIndex(0)
+        }
+
         windingOrderPopUp.selectItemAtIndex(renderInvocation.frontFacingWinding.integerValue)
         if let scissorRect = renderInvocation.scissorRect {
             scissorRectCheckBox.state = NSOnState
@@ -264,6 +299,7 @@ class RenderInvocationViewController: NSViewController {
 
         guard let selectionObject = selectedItem.representedObject else {
             renderInvocation.state = nil
+            modelObserver.modelDidChange()
             return
         }
 
@@ -356,6 +392,19 @@ class RenderInvocationViewController: NSViewController {
 
     @IBAction func depthClipModeSelected(sender: NSPopUpButton) {
         renderInvocation.depthClipMode = sender.indexOfSelectedItem
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func depthStencilStateSelected(sender: NSPopUpButton) {
+        let selectedItem = sender.selectedItem!
+
+        guard let selectionObject = selectedItem.representedObject else {
+            renderInvocation.depthStencilState = nil
+            modelObserver.modelDidChange()
+            return
+        }
+
+        renderInvocation.depthStencilState = (selectionObject as! DepthStencilState)
         modelObserver.modelDidChange()
     }
 
