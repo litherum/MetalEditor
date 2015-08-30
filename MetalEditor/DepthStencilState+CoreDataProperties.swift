@@ -17,7 +17,6 @@ extension DepthStencilState {
     @NSManaged var depthCompareFunction: NSNumber
     @NSManaged var depthWriteEnabled: NSNumber
     @NSManaged var name: String
-    @NSManaged var id: NSNumber
     @NSManaged var backFaceStencil: StencilState
     @NSManaged var frontFaceStencil: StencilState
 

@@ -6,32 +6,78 @@
         <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="DepthStencilStateViewController" customModule="MetalEditor" customModuleProvider="target"/>
+        <customObject id="-2" userLabel="File's Owner" customClass="DepthStencilStateViewController" customModule="MetalEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="depthCompareFunctionPopUp" destination="zB2-r3-vje" id="q8v-81-F5G"/>
+                <outlet property="depthFailureOperationBackPopUp" destination="Ptv-Pp-Zil" id="1cF-pY-rhw"/>
+                <outlet property="depthFailureOperationFrontPopUp" destination="tSi-Im-V9i" id="BcP-Jl-8Vm"/>
+                <outlet property="depthStencilPassOperationBackPopUp" destination="xOk-hA-T83" id="fR2-sB-HQh"/>
+                <outlet property="depthStencilPassOperationFrontPopUp" destination="vo1-gC-aAR" id="JeP-JW-QxD"/>
+                <outlet property="depthWriteEnabledCheckBox" destination="dVh-8A-Cw8" id="q5k-qt-Wzt"/>
+                <outlet property="nameTextField" destination="bDu-sU-qlI" id="jLt-n1-k3s"/>
+                <outlet property="readMaskBackTextField" destination="EzP-fn-qwo" id="Xwl-r2-gsd"/>
+                <outlet property="readMaskFrontTextField" destination="YEh-1O-LSf" id="3FL-le-uHi"/>
+                <outlet property="stencilCompareFunctionBackPopUp" destination="STb-pC-4CN" id="kE5-d4-dyX"/>
+                <outlet property="stencilCompareFunctionFrontPopUp" destination="QTg-8u-wmk" id="NXG-r4-VIC"/>
+                <outlet property="stencilFailureOperationBackPopUp" destination="99P-pK-ZNX" id="Ufb-Za-wMe"/>
+                <outlet property="stencilFailureOperationFrontPopUp" destination="1Hm-Im-A7h" id="lvx-OK-EMZ"/>
+                <outlet property="view" destination="c22-O7-iKe" id="wsk-BZ-av3"/>
+                <outlet property="writeMaskBackTextField" destination="h9N-bH-0xl" id="f0A-UR-omB"/>
+                <outlet property="writeMaskFrontTextField" destination="2as-Jm-IQF" id="g0N-i8-rsn"/>
+            </connections>
+        </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="532"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="561"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="inJ-q1-wRA">
-                    <rect key="frame" x="18" y="495" width="156" height="17"/>
-                    <animations/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth Compare Function" id="Rdv-NU-dqM">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="dVh-8A-Cw8">
-                    <rect key="frame" x="18" y="417" width="147" height="72"/>
+                    <rect key="frame" x="18" y="441" width="147" height="52"/>
                     <animations/>
                     <buttonCell key="cell" type="check" title="Depth Write Enabled" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ym8-YW-4Ta">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="depthWriteEnabledChecked:" target="-2" id="Vxb-Ej-rwM"/>
+                    </connections>
                 </button>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zB2-r3-vje">
+                    <rect key="frame" x="178" y="493" width="285" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" title="Never" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="glc-2P-Kny" id="bBm-qQ-H62">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="AEi-le-5Fg">
+                            <items>
+                                <menuItem title="Never" state="on" id="glc-2P-Kny"/>
+                                <menuItem title="Less" id="iFO-CZ-9Zf"/>
+                                <menuItem title="Equal" id="bzE-rE-jqN"/>
+                                <menuItem title="Less Than Or Equal" id="mxL-wd-1EA">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Greater" id="YMn-5P-Btk">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Not Equal" id="KlV-az-esp">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Greater Than Or Equal" id="Bam-zE-eSK">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Always" id="hDV-0c-YLt">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="depthCompareFunctionSelected:" target="-2" id="iwS-zq-GUP"/>
+                    </connections>
+                </popUpButton>
                 <box title="Front Face" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="1oc-BG-2oh">
-                    <rect key="frame" x="17" y="213" width="446" height="198"/>
+                    <rect key="frame" x="17" y="237" width="446" height="198"/>
                     <view key="contentView" id="UVZ-lg-0bc">
                         <rect key="frame" x="1" y="1" width="444" height="182"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,6 +165,9 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="stencilFailureOperationFrontSelected:" target="-2" id="uKL-PN-Gqb"/>
+                                </connections>
                             </popUpButton>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tSi-Im-V9i">
                                 <rect key="frame" x="170" y="114" width="257" height="26"/>
@@ -149,55 +198,10 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="depthFailureOperationFrontSelected:" target="-2" id="ybz-8c-F1T"/>
+                                </connections>
                             </popUpButton>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-8u-wmk">
-                                <rect key="frame" x="182" y="64" width="245" height="26"/>
-                                <animations/>
-                                <popUpButtonCell key="cell" type="push" title="Greater Than Or Equal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="W3h-vR-QLq" id="hJH-wt-9s0">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="qa4-Hf-B3w">
-                                        <items>
-                                            <menuItem title="Never" id="wdM-QJ-baJ"/>
-                                            <menuItem title="Less" id="1cU-7z-gfR"/>
-                                            <menuItem title="Equal" id="TGh-Xg-HJr"/>
-                                            <menuItem title="Less Than Or Equal" id="1VA-Vf-lLE">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                            <menuItem title="Greater" id="VaU-iZ-zYx">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                            <menuItem title="Not Equal" id="EI3-8X-rxh">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                            <menuItem title="Greater Than Or Equal" state="on" id="W3h-vR-QLq">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                            <menuItem title="Always" state="on" id="IBt-ZG-Kxk">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                            </popUpButton>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YEh-1O-LSf">
-                                <rect key="frame" x="95" y="42" width="329" height="22"/>
-                                <animations/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Adm-q8-0YB">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2as-Jm-IQF">
-                                <rect key="frame" x="96" y="17" width="328" height="22"/>
-                                <animations/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="43V-Zr-Q2E">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vo1-gC-aAR">
                                 <rect key="frame" x="204" y="89" width="223" height="26"/>
                                 <animations/>
@@ -227,6 +231,66 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="depthStencilPassOperationFrontSelected:" target="-2" id="7zE-Zb-epl"/>
+                                </connections>
+                            </popUpButton>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YEh-1O-LSf">
+                                <rect key="frame" x="95" y="42" width="329" height="22"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Adm-q8-0YB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="readMaskFrontSet:" target="-2" id="kZf-Pt-A7h"/>
+                                </connections>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2as-Jm-IQF">
+                                <rect key="frame" x="96" y="17" width="328" height="22"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="43V-Zr-Q2E">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="writeMaskFrontSet:" target="-2" id="iWQ-CY-WPQ"/>
+                                </connections>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-8u-wmk">
+                                <rect key="frame" x="182" y="64" width="245" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Greater Than Or Equal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="W3h-vR-QLq" id="hJH-wt-9s0">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="qa4-Hf-B3w">
+                                        <items>
+                                            <menuItem title="Never" id="wdM-QJ-baJ"/>
+                                            <menuItem title="Less" id="1cU-7z-gfR"/>
+                                            <menuItem title="Equal" id="TGh-Xg-HJr"/>
+                                            <menuItem title="Less Than Or Equal" id="1VA-Vf-lLE">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Greater" id="VaU-iZ-zYx">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Not Equal" id="EI3-8X-rxh">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Greater Than Or Equal" state="on" id="W3h-vR-QLq">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Always" state="on" id="IBt-ZG-Kxk">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="stencilCompareFunctionFrontSelected:" target="-2" id="Xts-pe-t2d"/>
+                                </connections>
                             </popUpButton>
                         </subviews>
                         <constraints>
@@ -269,7 +333,7 @@
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
                 <box title="Back Face" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="uQ7-z0-Yib">
-                    <rect key="frame" x="17" y="16" width="446" height="198"/>
+                    <rect key="frame" x="17" y="40" width="446" height="198"/>
                     <view key="contentView" id="eNX-XH-ROX">
                         <rect key="frame" x="1" y="1" width="444" height="182"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -312,6 +376,9 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="depthFailureOperationBackSelected:" target="-2" id="kL2-bf-VMN"/>
+                                </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VCo-Qp-gmV">
                                 <rect key="frame" x="18" y="95" width="182" height="17"/>
@@ -330,6 +397,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="readMaskBackSet:" target="-2" id="IFV-4d-fhf"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OfD-Yp-aft">
                                 <rect key="frame" x="18" y="145" width="153" height="17"/>
@@ -369,6 +439,9 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="stencilCompareFunctionBackSelected:" target="-2" id="4N2-B5-7BO"/>
+                                </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8lQ-WL-ug2">
                                 <rect key="frame" x="18" y="120" width="148" height="17"/>
@@ -387,6 +460,9 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="writeMaskBackSet:" target="-2" id="uNf-T5-OIB"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uZD-8f-6CQ">
                                 <rect key="frame" x="18" y="20" width="72" height="17"/>
@@ -435,6 +511,9 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="depthStencilPassOperationBackSelected:" target="-2" id="Ted-rt-3Gi"/>
+                                </connections>
                             </popUpButton>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99P-pK-ZNX">
                                 <rect key="frame" x="175" y="139" width="252" height="26"/>
@@ -465,6 +544,9 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <action selector="stencilFailureOperationBackSelected:" target="-2" id="weR-sa-Mnp"/>
+                                </connections>
                             </popUpButton>
                         </subviews>
                         <constraints>
@@ -506,55 +588,74 @@
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zB2-r3-vje">
-                    <rect key="frame" x="178" y="489" width="285" height="26"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MHA-Ly-RWW">
+                    <rect key="frame" x="18" y="524" width="40" height="17"/>
                     <animations/>
-                    <popUpButtonCell key="cell" type="push" title="Never" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="glc-2P-Kny" id="bBm-qQ-H62">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="menu"/>
-                        <menu key="menu" id="AEi-le-5Fg">
-                            <items>
-                                <menuItem title="Never" state="on" id="glc-2P-Kny"/>
-                                <menuItem title="Less" id="iFO-CZ-9Zf"/>
-                                <menuItem title="Equal" id="bzE-rE-jqN"/>
-                                <menuItem title="Less Than Or Equal" id="mxL-wd-1EA">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="Greater" id="YMn-5P-Btk">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="Not Equal" id="KlV-az-esp">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="Greater Than Or Equal" id="Bam-zE-eSK">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="Always" id="hDV-0c-YLt">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                            </items>
-                        </menu>
-                    </popUpButtonCell>
-                </popUpButton>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Name" id="e93-KM-piU">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bDu-sU-qlI">
+                    <rect key="frame" x="64" y="521" width="396" height="22"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="oOv-0m-Hsx">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="nameSet:" target="-2" id="Wur-69-2iK"/>
+                    </connections>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="inJ-q1-wRA">
+                    <rect key="frame" x="18" y="499" width="156" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth Compare Function" id="Rdv-NU-dqM">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b7a-fM-lhn">
+                    <rect key="frame" x="419" y="13" width="47" height="32"/>
+                    <animations/>
+                    <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6hX-Ll-2KP">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removePressed:" target="-2" id="3fr-mf-PIs"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="bDu-sU-qlI" firstAttribute="leading" secondItem="MHA-Ly-RWW" secondAttribute="trailing" constant="8" symbolic="YES" id="168-GD-Hrs"/>
+                <constraint firstAttribute="trailing" secondItem="bDu-sU-qlI" secondAttribute="trailing" constant="20" symbolic="YES" id="2Y4-mh-CJZ"/>
                 <constraint firstItem="inJ-q1-wRA" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="2hW-nZ-3jL"/>
                 <constraint firstItem="uQ7-z0-Yib" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="6fs-KQ-KGv"/>
                 <constraint firstItem="dVh-8A-Cw8" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="9yB-5x-6CN"/>
-                <constraint firstItem="inJ-q1-wRA" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="ARu-0O-5Mm"/>
                 <constraint firstItem="dVh-8A-Cw8" firstAttribute="top" secondItem="inJ-q1-wRA" secondAttribute="bottom" constant="8" symbolic="YES" id="EHg-Iu-SA2"/>
                 <constraint firstAttribute="trailing" secondItem="zB2-r3-vje" secondAttribute="trailing" constant="20" symbolic="YES" id="GJL-4C-t5e"/>
                 <constraint firstAttribute="trailing" secondItem="1oc-BG-2oh" secondAttribute="trailing" constant="20" symbolic="YES" id="H2c-dj-aDL"/>
                 <constraint firstItem="zB2-r3-vje" firstAttribute="leading" secondItem="inJ-q1-wRA" secondAttribute="trailing" constant="8" symbolic="YES" id="Mt8-8Z-042"/>
                 <constraint firstItem="1oc-BG-2oh" firstAttribute="top" secondItem="dVh-8A-Cw8" secondAttribute="bottom" constant="8" symbolic="YES" id="NRi-WH-w35"/>
-                <constraint firstAttribute="bottom" secondItem="uQ7-z0-Yib" secondAttribute="bottom" constant="20" symbolic="YES" id="VFG-gH-NcC"/>
+                <constraint firstItem="inJ-q1-wRA" firstAttribute="top" secondItem="MHA-Ly-RWW" secondAttribute="bottom" constant="8" symbolic="YES" id="OjF-g4-Gr3"/>
+                <constraint firstAttribute="bottom" secondItem="b7a-fM-lhn" secondAttribute="bottom" constant="20" symbolic="YES" id="Qrp-9h-Xbl"/>
+                <constraint firstItem="MHA-Ly-RWW" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="WJU-3k-6bE"/>
+                <constraint firstItem="bDu-sU-qlI" firstAttribute="baseline" secondItem="MHA-Ly-RWW" secondAttribute="baseline" id="gFL-rl-6X4"/>
+                <constraint firstItem="b7a-fM-lhn" firstAttribute="top" secondItem="eNX-XH-ROX" secondAttribute="bottom" id="hdc-fR-WPK"/>
+                <constraint firstAttribute="trailing" secondItem="b7a-fM-lhn" secondAttribute="trailing" constant="20" symbolic="YES" id="j6W-Ya-sJq"/>
                 <constraint firstAttribute="trailing" secondItem="uQ7-z0-Yib" secondAttribute="trailing" constant="20" symbolic="YES" id="jOz-jx-GnD"/>
+                <constraint firstItem="MHA-Ly-RWW" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="kDz-Te-2GY"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dVh-8A-Cw8" secondAttribute="trailing" id="kxP-bt-gsU"/>
                 <constraint firstItem="1oc-BG-2oh" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="wkx-9n-Jts"/>
                 <constraint firstItem="uQ7-z0-Yib" firstAttribute="top" secondItem="UVZ-lg-0bc" secondAttribute="bottom" id="yQX-JG-dwr"/>
                 <constraint firstItem="zB2-r3-vje" firstAttribute="baseline" secondItem="inJ-q1-wRA" secondAttribute="baseline" id="yuE-eA-kiV"/>
             </constraints>
             <animations/>
-            <point key="canvasLocation" x="256" y="497"/>
+            <point key="canvasLocation" x="256" y="511.5"/>
         </customView>
     </objects>
 </document>

@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="Document" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="buffersTableViewDelegate" destination="E1I-gG-L0F" id="zd6-pK-Ao1"/>
+                <outlet property="depthStencilStateStackView" destination="Xgw-Ds-0SF" id="3Ad-TN-d33"/>
                 <outlet property="invocationsStackView" destination="noD-ak-m2E" id="YXW-u4-Wfz"/>
                 <outlet property="librarySourceView" destination="mxX-b9-wAo" id="fTN-1f-n8V"/>
                 <outlet property="previewController" destination="AIC-WQ-HpF" id="zql-ep-a1g"/>
@@ -182,8 +183,8 @@
                                                                                         <rect key="frame" x="103.5" y="1" width="111" height="17"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
-                                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X9r-Og-o01">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="99" height="17"/>
+                                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="X9r-Og-o01">
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="17"/>
                                                                                                 <animations/>
                                                                                                 <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="DlQ-tA-4MB">
                                                                                                     <font key="font" metaFont="system"/>
@@ -931,6 +932,76 @@
                                                 <constraint firstAttribute="trailing" secondItem="UbN-C0-MCU" secondAttribute="trailing" constant="20" symbolic="YES" id="bp7-2C-Vvy"/>
                                                 <constraint firstItem="RVU-ZZ-PDG" firstAttribute="top" secondItem="6qP-U5-VmT" secondAttribute="top" id="eAM-MC-lTG"/>
                                                 <constraint firstItem="RVU-ZZ-PDG" firstAttribute="leading" secondItem="6qP-U5-VmT" secondAttribute="leading" id="vhQ-e1-Bvi"/>
+                                            </constraints>
+                                            <animations/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Depth &amp; Stencil State" identifier="" id="tZl-km-5iD">
+                                        <view key="view" id="JD7-n0-feb">
+                                            <rect key="frame" x="32" y="7" width="370" height="601"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6u-0w-z5n">
+                                                    <rect key="frame" x="0.0" y="61" width="370" height="540"/>
+                                                    <clipView key="contentView" id="aOa-dd-UWt">
+                                                        <rect key="frame" x="1" y="1" width="368" height="538"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <view translatesAutoresizingMaskIntoConstraints="NO" id="PrC-U2-IfR" customClass="FlippedView" customModule="MetalEditor" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="538" width="368" height="0.0"/>
+                                                                <subviews>
+                                                                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xgw-Ds-0SF">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="368" height="0.0"/>
+                                                                        <animations/>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="Xgw-Ds-0SF" secondAttribute="bottom" id="0Mh-Qf-XT2"/>
+                                                                    <constraint firstItem="Xgw-Ds-0SF" firstAttribute="leading" secondItem="PrC-U2-IfR" secondAttribute="leading" id="GzO-mo-uxQ"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Xgw-Ds-0SF" secondAttribute="trailing" id="Xc7-u9-bvh"/>
+                                                                    <constraint firstItem="Xgw-Ds-0SF" firstAttribute="top" secondItem="PrC-U2-IfR" secondAttribute="top" id="yGT-yB-5zj"/>
+                                                                </constraints>
+                                                                <animations/>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="PrC-U2-IfR" firstAttribute="top" secondItem="aOa-dd-UWt" secondAttribute="top" id="EvQ-Rs-x7m"/>
+                                                            <constraint firstItem="PrC-U2-IfR" firstAttribute="width" secondItem="aOa-dd-UWt" secondAttribute="width" id="PXa-dC-VgH"/>
+                                                            <constraint firstItem="PrC-U2-IfR" firstAttribute="leading" secondItem="aOa-dd-UWt" secondAttribute="leading" id="z7l-70-poN"/>
+                                                        </constraints>
+                                                        <animations/>
+                                                    </clipView>
+                                                    <animations/>
+                                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="jBe-Ba-Ffk">
+                                                        <rect key="frame" x="1" y="523" width="368" height="16"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <animations/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="T10-VX-M1p">
+                                                        <rect key="frame" x="353" y="1" width="16" height="538"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <animations/>
+                                                    </scroller>
+                                                </scrollView>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fuZ-gZ-CDU">
+                                                    <rect key="frame" x="307" y="13" width="49" height="32"/>
+                                                    <animations/>
+                                                    <buttonCell key="cell" type="push" title="+" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZlA-K6-24K">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="addDepthStencilState:" target="-2" id="HjR-Zu-fyt"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="fuZ-gZ-CDU" secondAttribute="bottom" constant="20" symbolic="YES" id="6iP-rB-2Xd"/>
+                                                <constraint firstAttribute="trailing" secondItem="j6u-0w-z5n" secondAttribute="trailing" id="8LS-yW-ofj"/>
+                                                <constraint firstItem="j6u-0w-z5n" firstAttribute="top" secondItem="JD7-n0-feb" secondAttribute="top" id="A8K-M9-y8o"/>
+                                                <constraint firstAttribute="trailing" secondItem="fuZ-gZ-CDU" secondAttribute="trailing" constant="20" symbolic="YES" id="HDB-4e-dfb"/>
+                                                <constraint firstItem="j6u-0w-z5n" firstAttribute="leading" secondItem="JD7-n0-feb" secondAttribute="leading" id="P2I-z8-9s9"/>
+                                                <constraint firstItem="fuZ-gZ-CDU" firstAttribute="top" secondItem="j6u-0w-z5n" secondAttribute="bottom" constant="20" symbolic="YES" id="mYf-c8-aGr"/>
                                             </constraints>
                                             <animations/>
                                         </view>

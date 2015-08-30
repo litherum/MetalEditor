@@ -422,15 +422,6 @@
                                                     <action selector="windingOrderSelected:" target="-2" id="CQc-Lt-efz"/>
                                                 </connections>
                                             </popUpButton>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JcP-Ua-XWe">
-                                                <rect key="frame" x="18" y="349" width="92" height="17"/>
-                                                <animations/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Winding Order" id="7pt-M1-PXb">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
                                             <button translatesAutoresizingMaskIntoConstraints="NO" id="BSP-Mz-C5P">
                                                 <rect key="frame" x="156" y="325" width="98" height="18"/>
                                                 <animations/>
@@ -842,16 +833,16 @@
                                                 </connections>
                                             </popUpButton>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8X1-4M-u3r">
-                                                <rect key="frame" x="18" y="374" width="130" height="17"/>
+                                                <rect key="frame" x="18" y="374" width="134" height="17"/>
                                                 <animations/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth / Stencil State" id="d37-Ig-hRe">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth &amp; Stencil State" id="d37-Ig-hRe">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kgf-A2-sJu">
-                                                <rect key="frame" x="152" y="368" width="240" height="26"/>
+                                                <rect key="frame" x="156" y="368" width="236" height="26"/>
                                                 <animations/>
                                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="PKM-cO-utA" id="ubd-6v-ieT">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -885,6 +876,15 @@
                                                     <action selector="depthClipModeSelected:" target="-2" id="YJ5-jK-9yh"/>
                                                 </connections>
                                             </popUpButton>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JcP-Ua-XWe">
+                                                <rect key="frame" x="18" y="349" width="92" height="17"/>
+                                                <animations/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Winding Order" id="7pt-M1-PXb">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="hb6-iq-2LK" firstAttribute="baseline" secondItem="y4n-Q1-H3x" secondAttribute="baseline" id="02t-wl-hdx"/>
@@ -896,6 +896,7 @@
                                             <constraint firstItem="KCA-Qk-z1e" firstAttribute="leading" secondItem="IXK-XP-xCN" secondAttribute="leading" id="1jc-gs-oNk"/>
                                             <constraint firstItem="Oua-AA-0V1" firstAttribute="trailing" secondItem="6Kb-Sf-jel" secondAttribute="trailing" id="1sP-bj-NxD"/>
                                             <constraint firstItem="TsC-2m-AC5" firstAttribute="leading" secondItem="6Kb-Sf-jel" secondAttribute="trailing" constant="8" symbolic="YES" id="2Ju-1G-yKs"/>
+                                            <constraint firstItem="JcP-Ua-XWe" firstAttribute="top" secondItem="8X1-4M-u3r" secondAttribute="bottom" constant="8" symbolic="YES" id="2Te-6d-OP9"/>
                                             <constraint firstItem="4dI-AG-fwh" firstAttribute="baseline" secondItem="Dfn-O4-lhK" secondAttribute="baseline" id="3b0-0b-hlb"/>
                                             <constraint firstItem="h03-HH-RId" firstAttribute="top" secondItem="qLs-QT-LIe" secondAttribute="bottom" constant="8" symbolic="YES" id="44r-fg-xSt"/>
                                             <constraint firstItem="mnl-YC-AgL" firstAttribute="baseline" secondItem="OJY-pG-wxS" secondAttribute="baseline" id="56h-X8-fnb"/>
@@ -1048,7 +1049,6 @@
                                             <constraint firstItem="OJY-pG-wxS" firstAttribute="top" secondItem="Oua-AA-0V1" secondAttribute="bottom" constant="8" symbolic="YES" id="qTH-bw-1FA"/>
                                             <constraint firstItem="9f0-6H-Egu" firstAttribute="leading" secondItem="CPw-ep-9OT" secondAttribute="leading" constant="20" symbolic="YES" id="qVm-Jm-FYN"/>
                                             <constraint firstAttribute="trailing" secondItem="rp1-sP-W1u" secondAttribute="trailing" constant="20" symbolic="YES" id="qfd-HF-qQF"/>
-                                            <constraint firstItem="JcP-Ua-XWe" firstAttribute="top" secondItem="8X1-4M-u3r" secondAttribute="bottom" constant="8" symbolic="YES" id="qud-9E-yio"/>
                                             <constraint firstItem="Zg7-0X-j8y" firstAttribute="top" secondItem="c0V-FJ-UVE" secondAttribute="bottom" constant="8" symbolic="YES" id="qwO-xV-x2H"/>
                                             <constraint firstAttribute="trailing" secondItem="kgf-A2-sJu" secondAttribute="trailing" constant="20" symbolic="YES" id="rBP-pU-g6z"/>
                                             <constraint firstItem="BM9-Ik-igL" firstAttribute="top" secondItem="cCA-7E-FKF" secondAttribute="bottom" constant="8" symbolic="YES" id="rQl-jn-dcb"/>
@@ -1107,8 +1107,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.87623762376237624" horizontal="NO" id="Jl8-rY-1aZ">
-                        <rect key="frame" x="395" y="1" width="15" height="567"/>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.99009900990099009" horizontal="NO" id="Jl8-rY-1aZ">
+                        <rect key="frame" x="394" y="1" width="16" height="567"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>

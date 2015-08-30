@@ -169,7 +169,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
                         }
                         renderCommandEncoder.setDepthStencilState(metalDepthStencilState)
                     } else {
-                        renderCommandEncoder.setDepthStencilState(nil)
+                        renderCommandEncoder.setDepthStencilState(device.newDepthStencilStateWithDescriptor(MTLDepthStencilDescriptor()))
                     }
                     
                     renderCommandEncoder.setFrontFacingWinding(MTLWinding(rawValue: invocation.frontFacingWinding.unsignedLongValue)!)

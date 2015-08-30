@@ -13,22 +13,29 @@ protocol ModelObserver: class {
 }
 
 protocol PassRemoveObserver: class {
-    func removePass(controller: InvocationsViewController);
+    func removePass(controller: InvocationsViewController)
 }
 
-class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver, PassRemoveObserver {
+protocol DepthStencilStateRemoveObserver: class {
+    func removeDepthStencilState(controller: DepthStencilStateViewController)
+}
+
+class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver, PassRemoveObserver, DepthStencilStateRemoveObserver {
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
     @IBOutlet var buffersTableViewDelegate: BuffersTableViewDelegate!
     @IBOutlet var texturesTableViewDelegate: TexturesTableViewDelegate!
     @IBOutlet var renderStateUIController: RenderStateUIController!
     @IBOutlet var splitView: NSSplitView!
+    @IBOutlet var depthStencilStateStackView: NSStackView!
     @IBOutlet var invocationsStackView: NSStackView!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var frame: Frame!
     var library: Library!
     var metalState: MetalState!
+    // FIXME: These can just be sets. We have access to the managed objects via the controllers.
+    var depthStencilStateMap: [DepthStencilStateViewController : DepthStencilState] = [:]
     var invocationMap: [InvocationsViewController : Pass] = [:]
     
     func setupFrame() {
@@ -104,6 +111,15 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         renderStateUIController.managedObjectContext = managedObjectContext
         renderStateUIController.modelObserver = self
 
+        let fetchRequest = NSFetchRequest(entityName: "DepthStencilState")
+        do {
+            let states = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [DepthStencilState]
+            for state in states {
+                addDepthStencilStateView(state)
+            }
+        } catch {
+        }
+
         for p in frame.passes {
             if let pass = p as? ComputePass {
                 addComputePassView(pass)
@@ -141,6 +157,48 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
             library.source = ""
         }
         modelDidChange()
+    }
+
+    func addDepthStencilStateView(depthStencilState: DepthStencilState) {
+        let viewController = DepthStencilStateViewController(nibName: "DepthStencilStateView", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, state: depthStencilState, removeObserver: self)!
+        depthStencilStateStackView.addArrangedSubview(viewController.view)
+        depthStencilStateMap[viewController] = depthStencilState
+    }
+
+    @IBAction func addDepthStencilState(sender: NSButton) {
+        let backFaceStencil = NSEntityDescription.insertNewObjectForEntityForName("StencilState", inManagedObjectContext: managedObjectContext!) as! StencilState
+        backFaceStencil.stencilFailureOperation = MTLStencilOperation.Keep.rawValue
+        backFaceStencil.depthFailureOperation = MTLStencilOperation.Keep.rawValue
+        backFaceStencil.depthStencilPassOperation = MTLStencilOperation.Keep.rawValue
+        backFaceStencil.stencilCompareFunction = MTLCompareFunction.Less.rawValue
+        backFaceStencil.readMask = 0xFFFFFF
+        backFaceStencil.writeMask = 0xFFFFFF
+
+        let frontFaceStencil = NSEntityDescription.insertNewObjectForEntityForName("StencilState", inManagedObjectContext: managedObjectContext!) as! StencilState
+        frontFaceStencil.stencilFailureOperation = MTLStencilOperation.Keep.rawValue
+        frontFaceStencil.depthFailureOperation = MTLStencilOperation.Keep.rawValue
+        frontFaceStencil.depthStencilPassOperation = MTLStencilOperation.Keep.rawValue
+        frontFaceStencil.stencilCompareFunction = MTLCompareFunction.Less.rawValue
+        frontFaceStencil.readMask = 0xFFFFFF
+        frontFaceStencil.writeMask = 0xFFFFFF
+
+        let depthStencilState = NSEntityDescription.insertNewObjectForEntityForName("DepthStencilState", inManagedObjectContext: managedObjectContext!) as! DepthStencilState
+        depthStencilState.name = "Depth & Stencil State"
+        depthStencilState.depthCompareFunction = MTLCompareFunction.Always.rawValue
+        depthStencilState.depthWriteEnabled = false
+        depthStencilState.backFaceStencil = backFaceStencil
+        depthStencilState.frontFaceStencil = frontFaceStencil
+
+        addDepthStencilStateView(depthStencilState)
+    }
+
+    func removeDepthStencilState(controller: DepthStencilStateViewController) {
+        let state = depthStencilStateMap[controller]!
+        managedObjectContext!.deleteObject(state.backFaceStencil)
+        managedObjectContext!.deleteObject(state.frontFaceStencil)
+        managedObjectContext!.deleteObject(state)
+        depthStencilStateStackView.removeArrangedSubview(controller.view)
+        depthStencilStateMap.removeValueForKey(controller)
     }
 
     @IBAction func addRenderPass(sender: NSButton) {

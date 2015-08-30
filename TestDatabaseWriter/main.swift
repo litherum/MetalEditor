@@ -117,7 +117,6 @@ func main() {
 
     let depthStencilState = NSEntityDescription.insertNewObjectForEntityForName("DepthStencilState", inManagedObjectContext: managedObjectContext) as! DepthStencilState
     depthStencilState.name = "Depth Stencil State"
-    depthStencilState.id = 0
     depthStencilState.depthCompareFunction = MTLCompareFunction.Always.rawValue
     depthStencilState.depthWriteEnabled = false
     depthStencilState.backFaceStencil = backFaceStencil

@@ -97,7 +97,6 @@ class RenderInvocationViewController: NSViewController {
 
     func createDepthStencilStateMenu() -> (NSMenu, NSMenuItem?) {
         let fetchRequest = NSFetchRequest(entityName: "DepthStencilState")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
 
         var selectedItem: NSMenuItem?
         do {
@@ -108,7 +107,7 @@ class RenderInvocationViewController: NSViewController {
                 let item = NSMenuItem(title: state.name, action: nil, keyEquivalent: "")
                 item.representedObject = state
                 result.addItem(item)
-                if let renderInvocationState = renderInvocation.state {
+                if let renderInvocationState = renderInvocation.depthStencilState {
                     if renderInvocationState == state {
                         selectedItem = item
                     }

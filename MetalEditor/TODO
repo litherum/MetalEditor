@@ -1,4 +1,4 @@
-Differences between Metal and Metal Editor:
+Things to do
 
 1. Compute pipeline state has a bool in it
 2. Textures have a few extra options
@@ -8,5 +8,6 @@ Differences between Metal and Metal Editor:
 6. There are all sorts of state pointers you can set before a render invocation. There are a lot of variables here.
 7. Metal Editor does not support indexed draws or instancing
 8. Inspect shader arguments to create sliders
-
-Metal asserts all over the place under the covers
+9. All single-column table views should migrate to stack views
+10. Int text view delegates don't work with table views
+11. Metal asserts all over the place under the covers
