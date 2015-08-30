@@ -73,6 +73,17 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
 
         let colorAttachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
         colorAttachment.pixelFormat = nil
+        colorAttachment.writeAlpha = true
+        colorAttachment.writeRed = true
+        colorAttachment.writeGreen = true
+        colorAttachment.writeBlue = true
+        colorAttachment.blendingEnabled = true
+        colorAttachment.alphaBlendOperation = MTLBlendOperation.Add.rawValue
+        colorAttachment.rgbBlendOperation = MTLBlendOperation.Add.rawValue
+        colorAttachment.destinationAlphaBlendFactor = MTLBlendFactor.Zero.rawValue
+        colorAttachment.destinationRGBBlendFactor = MTLBlendFactor.Zero.rawValue
+        colorAttachment.sourceAlphaBlendFactor = MTLBlendFactor.One.rawValue
+        colorAttachment.sourceRGBBlendFactor = MTLBlendFactor.One.rawValue
 
         let renderPipelineState = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineState", inManagedObjectContext: managedObjectContext) as! RenderPipelineState
         renderPipelineState.id = stateCount
@@ -83,6 +94,7 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         renderPipelineState.alphaToOneEnabled = false
         renderPipelineState.rasterizationEnabled = true
         renderPipelineState.inputPrimitiveTopology = MTLPrimitiveTopologyClass.Unspecified.rawValue
+        // FIXME: Why do these sets need to start with nonzero size?
         renderPipelineState.mutableOrderedSetValueForKey("colorAttachments").addObject(colorAttachment)
         renderPipelineState.mutableOrderedSetValueForKey("vertexAttributes").addObject(vertexAttribute)
         renderPipelineState.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(vertexBufferLayout)

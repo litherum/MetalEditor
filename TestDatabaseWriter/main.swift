@@ -71,6 +71,17 @@ func main() {
     let colorAttachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
     colorAttachment.id = 0
     colorAttachment.pixelFormat = nil
+    colorAttachment.writeAlpha = true
+    colorAttachment.writeRed = true
+    colorAttachment.writeGreen = true
+    colorAttachment.writeBlue = true
+    colorAttachment.blendingEnabled = true
+    colorAttachment.alphaBlendOperation = MTLBlendOperation.Add.rawValue
+    colorAttachment.rgbBlendOperation = MTLBlendOperation.Add.rawValue
+    colorAttachment.destinationAlphaBlendFactor = MTLBlendFactor.Zero.rawValue
+    colorAttachment.destinationRGBBlendFactor = MTLBlendFactor.Zero.rawValue
+    colorAttachment.sourceAlphaBlendFactor = MTLBlendFactor.One.rawValue
+    colorAttachment.sourceRGBBlendFactor = MTLBlendFactor.One.rawValue
 
     let renderPipelineState = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineState", inManagedObjectContext: managedObjectContext) as! RenderPipelineState
     renderPipelineState.id = 0

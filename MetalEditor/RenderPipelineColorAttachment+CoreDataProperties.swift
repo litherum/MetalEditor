@@ -16,5 +16,16 @@ extension RenderPipelineColorAttachment {
 
     @NSManaged var id: NSNumber
     @NSManaged var pixelFormat: NSNumber?
+    @NSManaged var writeAlpha: NSNumber
+    @NSManaged var writeRed: NSNumber
+    @NSManaged var writeGreen: NSNumber
+    @NSManaged var writeBlue: NSNumber
+    @NSManaged var blendingEnabled: NSNumber
+    @NSManaged var alphaBlendOperation: NSNumber
+    @NSManaged var rgbBlendOperation: NSNumber
+    @NSManaged var destinationAlphaBlendFactor: NSNumber
+    @NSManaged var destinationRGBBlendFactor: NSNumber
+    @NSManaged var sourceAlphaBlendFactor: NSNumber
+    @NSManaged var sourceRGBBlendFactor: NSNumber
 
 }
