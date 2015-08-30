@@ -52,7 +52,7 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         assert(column == detailColumn)
         // FIXME: Seems silly to keep these all around in memory at once
         while childViewControllers.count <= row {
-            let controller = RenderStateViewController(nibName: "RenderStateViewController", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: state, removeObserver: self)!
+            let controller = RenderStateViewController(nibName: "RenderStateView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: state, removeObserver: self)!
             childViewControllers.append(controller)
         }
         return childViewControllers[row].view

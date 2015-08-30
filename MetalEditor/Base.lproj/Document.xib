@@ -978,7 +978,7 @@
                                                         <animations/>
                                                     </scroller>
                                                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="uM7-MM-5EH">
-                                                        <rect key="frame" x="353" y="1" width="16" height="538"/>
+                                                        <rect key="frame" x="354" y="1" width="15" height="538"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <animations/>
                                                     </scroller>

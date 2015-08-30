@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A263e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="DepthStencilStateViewController" customModule="MetalEditor" customModuleProvider="target"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="532"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="inJ-q1-wRA">
+                    <rect key="frame" x="18" y="495" width="156" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth Compare Function" id="Rdv-NU-dqM">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="dVh-8A-Cw8">
+                    <rect key="frame" x="18" y="417" width="147" height="72"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" title="Depth Write Enabled" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ym8-YW-4Ta">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <box title="Front Face" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="1oc-BG-2oh">
+                    <rect key="frame" x="17" y="213" width="446" height="198"/>
+                    <view key="contentView" id="UVZ-lg-0bc">
+                        <rect key="frame" x="1" y="1" width="444" height="182"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vzZ-la-NJt">
+                                <rect key="frame" x="18" y="145" width="153" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Stencil Failure Operation" id="i2N-8e-TRh">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NY1-P1-C4J">
+                                <rect key="frame" x="18" y="120" width="148" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth Failure Operation" id="vjp-Kv-EQv">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6NO-fV-EZA">
+                                <rect key="frame" x="18" y="95" width="182" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth Stencil Pass Operation" id="gUt-w5-TqP">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAl-2s-QBC">
+                                <rect key="frame" x="18" y="70" width="160" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Stencil Compare Function" id="pLR-Wn-omg">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="81G-TA-sRP">
+                                <rect key="frame" x="18" y="45" width="71" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Read Mask" id="n9r-8D-95J">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WLw-sF-jkM">
+                                <rect key="frame" x="18" y="20" width="72" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Write Mask" id="TFA-5M-Nzj">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Hm-Im-A7h">
+                                <rect key="frame" x="175" y="139" width="252" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Keep" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="lqz-ds-d7z" id="EE3-6t-H16">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="g9o-eo-rvX">
+                                        <items>
+                                            <menuItem title="Keep" state="on" id="lqz-ds-d7z"/>
+                                            <menuItem title="Zero" id="qsb-Iz-j6R"/>
+                                            <menuItem title="Replace" id="Z1T-nU-LhL"/>
+                                            <menuItem title="Increment and Clamp" id="prd-fb-fdw">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Clamp" id="b3l-A2-bYV">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Invert" id="TZp-GF-YXU">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Increment and Wrap" id="9da-B8-gEm">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Wrap" id="X5v-ki-nyF">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tSi-Im-V9i">
+                                <rect key="frame" x="170" y="114" width="257" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Keep" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="SHb-Dj-z9d" id="6Oj-R2-X2w">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="yJJ-R6-Rmg">
+                                        <items>
+                                            <menuItem title="Keep" state="on" id="SHb-Dj-z9d"/>
+                                            <menuItem title="Zero" id="iEJ-a7-zed"/>
+                                            <menuItem title="Replace" id="h80-QB-l1Y"/>
+                                            <menuItem title="Increment and Clamp" id="fNb-M1-akf">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Clamp" id="gVt-TI-P0X">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Invert" id="zNB-8s-fwU">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Increment and Wrap" id="0O0-f9-F9r">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Wrap" id="c2m-ch-NuP">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QTg-8u-wmk">
+                                <rect key="frame" x="182" y="64" width="245" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Greater Than Or Equal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="W3h-vR-QLq" id="hJH-wt-9s0">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="qa4-Hf-B3w">
+                                        <items>
+                                            <menuItem title="Never" id="wdM-QJ-baJ"/>
+                                            <menuItem title="Less" id="1cU-7z-gfR"/>
+                                            <menuItem title="Equal" id="TGh-Xg-HJr"/>
+                                            <menuItem title="Less Than Or Equal" id="1VA-Vf-lLE">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Greater" id="VaU-iZ-zYx">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Not Equal" id="EI3-8X-rxh">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Greater Than Or Equal" state="on" id="W3h-vR-QLq">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Always" state="on" id="IBt-ZG-Kxk">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YEh-1O-LSf">
+                                <rect key="frame" x="95" y="42" width="329" height="22"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Adm-q8-0YB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2as-Jm-IQF">
+                                <rect key="frame" x="96" y="17" width="328" height="22"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="43V-Zr-Q2E">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vo1-gC-aAR">
+                                <rect key="frame" x="204" y="89" width="223" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Increment and Wrap" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Mx6-gW-S8s" id="Hvy-mt-ehw">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="Kya-P8-jtc">
+                                        <items>
+                                            <menuItem title="Keep" id="Hh4-np-sNj"/>
+                                            <menuItem title="Zero" id="rid-lL-P5d"/>
+                                            <menuItem title="Replace" id="Z5q-qU-DyF"/>
+                                            <menuItem title="Increment and Clamp" id="zov-7L-RDc">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Clamp" id="gNC-cX-Mib">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Invert" id="yYE-Qw-Db0">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Increment and Wrap" state="on" id="Mx6-gW-S8s">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Wrap" id="ePB-Cd-OIT">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="NY1-P1-C4J" firstAttribute="top" secondItem="vzZ-la-NJt" secondAttribute="bottom" constant="8" symbolic="YES" id="2X6-oa-fpm"/>
+                            <constraint firstAttribute="trailing" secondItem="QTg-8u-wmk" secondAttribute="trailing" constant="20" symbolic="YES" id="5CV-kQ-keZ"/>
+                            <constraint firstItem="vzZ-la-NJt" firstAttribute="leading" secondItem="UVZ-lg-0bc" secondAttribute="leading" constant="20" symbolic="YES" id="5nS-FH-s2w"/>
+                            <constraint firstAttribute="trailing" secondItem="YEh-1O-LSf" secondAttribute="trailing" constant="20" symbolic="YES" id="6vV-o1-y7u"/>
+                            <constraint firstItem="WLw-sF-jkM" firstAttribute="leading" secondItem="UVZ-lg-0bc" secondAttribute="leading" constant="20" symbolic="YES" id="7Sn-QT-xcy"/>
+                            <constraint firstItem="QTg-8u-wmk" firstAttribute="leading" secondItem="cAl-2s-QBC" secondAttribute="trailing" constant="8" symbolic="YES" id="7ih-m0-Xlf"/>
+                            <constraint firstItem="2as-Jm-IQF" firstAttribute="baseline" secondItem="WLw-sF-jkM" secondAttribute="baseline" id="CSo-PQ-Zxp"/>
+                            <constraint firstItem="YEh-1O-LSf" firstAttribute="leading" secondItem="81G-TA-sRP" secondAttribute="trailing" constant="8" symbolic="YES" id="EfU-IC-wbY"/>
+                            <constraint firstItem="6NO-fV-EZA" firstAttribute="leading" secondItem="UVZ-lg-0bc" secondAttribute="leading" constant="20" symbolic="YES" id="G3y-ZE-Dv5"/>
+                            <constraint firstItem="tSi-Im-V9i" firstAttribute="baseline" secondItem="NY1-P1-C4J" secondAttribute="baseline" id="JiW-Xh-f1c"/>
+                            <constraint firstItem="tSi-Im-V9i" firstAttribute="leading" secondItem="NY1-P1-C4J" secondAttribute="trailing" constant="8" symbolic="YES" id="O7o-zn-fjq"/>
+                            <constraint firstItem="WLw-sF-jkM" firstAttribute="top" secondItem="81G-TA-sRP" secondAttribute="bottom" constant="8" symbolic="YES" id="QUc-UG-baS"/>
+                            <constraint firstItem="cAl-2s-QBC" firstAttribute="leading" secondItem="UVZ-lg-0bc" secondAttribute="leading" constant="20" symbolic="YES" id="Rbk-Y4-pVP"/>
+                            <constraint firstAttribute="trailing" secondItem="tSi-Im-V9i" secondAttribute="trailing" constant="20" symbolic="YES" id="TJc-bb-fH3"/>
+                            <constraint firstItem="vo1-gC-aAR" firstAttribute="leading" secondItem="6NO-fV-EZA" secondAttribute="trailing" constant="8" symbolic="YES" id="UN6-qX-LEx"/>
+                            <constraint firstItem="81G-TA-sRP" firstAttribute="leading" secondItem="UVZ-lg-0bc" secondAttribute="leading" constant="20" symbolic="YES" id="X8b-T0-tNM"/>
+                            <constraint firstAttribute="trailing" secondItem="1Hm-Im-A7h" secondAttribute="trailing" constant="20" symbolic="YES" id="ZkT-PK-tVi"/>
+                            <constraint firstItem="vo1-gC-aAR" firstAttribute="baseline" secondItem="6NO-fV-EZA" secondAttribute="baseline" id="c9G-oA-1WS"/>
+                            <constraint firstItem="6NO-fV-EZA" firstAttribute="top" secondItem="NY1-P1-C4J" secondAttribute="bottom" constant="8" symbolic="YES" id="cew-1w-5dh"/>
+                            <constraint firstItem="QTg-8u-wmk" firstAttribute="baseline" secondItem="cAl-2s-QBC" secondAttribute="baseline" id="d89-hB-jJk"/>
+                            <constraint firstAttribute="trailing" secondItem="2as-Jm-IQF" secondAttribute="trailing" constant="20" symbolic="YES" id="iQL-Fj-1A6"/>
+                            <constraint firstAttribute="bottom" secondItem="WLw-sF-jkM" secondAttribute="bottom" constant="20" symbolic="YES" id="iYh-4O-Sau"/>
+                            <constraint firstItem="NY1-P1-C4J" firstAttribute="leading" secondItem="UVZ-lg-0bc" secondAttribute="leading" constant="20" symbolic="YES" id="l6W-P6-MkB"/>
+                            <constraint firstAttribute="trailing" secondItem="vo1-gC-aAR" secondAttribute="trailing" constant="20" symbolic="YES" id="lVr-jZ-1as"/>
+                            <constraint firstItem="vzZ-la-NJt" firstAttribute="top" secondItem="UVZ-lg-0bc" secondAttribute="top" constant="20" symbolic="YES" id="mzN-LR-dOT"/>
+                            <constraint firstItem="YEh-1O-LSf" firstAttribute="baseline" secondItem="81G-TA-sRP" secondAttribute="baseline" id="np5-rl-5q6"/>
+                            <constraint firstItem="1Hm-Im-A7h" firstAttribute="leading" secondItem="vzZ-la-NJt" secondAttribute="trailing" constant="8" symbolic="YES" id="pvZ-E1-jHd"/>
+                            <constraint firstItem="2as-Jm-IQF" firstAttribute="leading" secondItem="WLw-sF-jkM" secondAttribute="trailing" constant="8" symbolic="YES" id="ulN-1O-p63"/>
+                            <constraint firstItem="cAl-2s-QBC" firstAttribute="top" secondItem="6NO-fV-EZA" secondAttribute="bottom" constant="8" symbolic="YES" id="wDd-Br-FXW"/>
+                            <constraint firstItem="1Hm-Im-A7h" firstAttribute="baseline" secondItem="vzZ-la-NJt" secondAttribute="baseline" id="xL6-zX-gXO"/>
+                            <constraint firstItem="81G-TA-sRP" firstAttribute="top" secondItem="cAl-2s-QBC" secondAttribute="bottom" constant="8" symbolic="YES" id="xf5-c3-HuH"/>
+                        </constraints>
+                        <animations/>
+                    </view>
+                    <animations/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+                <box title="Back Face" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="uQ7-z0-Yib">
+                    <rect key="frame" x="17" y="16" width="446" height="198"/>
+                    <view key="contentView" id="eNX-XH-ROX">
+                        <rect key="frame" x="1" y="1" width="444" height="182"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uIh-Z3-41k">
+                                <rect key="frame" x="18" y="70" width="160" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Stencil Compare Function" id="2o2-7N-LeD">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ptv-Pp-Zil">
+                                <rect key="frame" x="170" y="114" width="257" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Keep" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="5cF-ZM-Iai" id="ij0-Og-JfT">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="z4l-ja-duh">
+                                        <items>
+                                            <menuItem title="Keep" state="on" id="5cF-ZM-Iai"/>
+                                            <menuItem title="Zero" id="qer-UQ-a9E"/>
+                                            <menuItem title="Replace" id="Ixm-OS-lvR"/>
+                                            <menuItem title="Increment and Clamp" id="hX1-o0-0fg">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Clamp" id="dWi-Nd-IxJ">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Invert" id="aI9-Qs-KBK">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Increment and Wrap" id="38p-Xo-IEv">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Wrap" id="eSa-ln-T1A">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VCo-Qp-gmV">
+                                <rect key="frame" x="18" y="95" width="182" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth Stencil Pass Operation" id="wty-XW-8HG">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EzP-fn-qwo">
+                                <rect key="frame" x="95" y="42" width="329" height="22"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="CJc-Cv-oR9">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OfD-Yp-aft">
+                                <rect key="frame" x="18" y="145" width="153" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Stencil Failure Operation" id="emf-Xv-x4t">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="STb-pC-4CN">
+                                <rect key="frame" x="182" y="64" width="245" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Greater Than Or Equal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Uhr-6a-etJ" id="Fsr-n9-jvA">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="F1D-kM-F4N">
+                                        <items>
+                                            <menuItem title="Never" id="ceF-tB-NYu"/>
+                                            <menuItem title="Less" id="zdt-TU-OTA"/>
+                                            <menuItem title="Equal" id="RRA-vB-J1A"/>
+                                            <menuItem title="Less Than Or Equal" id="rf9-ub-L2i">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Greater" id="nz3-6r-D8T">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Not Equal" id="M9g-vG-hlg">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Greater Than Or Equal" state="on" id="Uhr-6a-etJ">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Always" state="on" id="QRU-pv-pH8">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8lQ-WL-ug2">
+                                <rect key="frame" x="18" y="120" width="148" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Depth Failure Operation" id="ZYD-qj-UZU">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h9N-bH-0xl">
+                                <rect key="frame" x="96" y="17" width="328" height="22"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Z9d-ak-YC5">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uZD-8f-6CQ">
+                                <rect key="frame" x="18" y="20" width="72" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Write Mask" id="rVx-5K-8z2">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uPv-tb-qJU">
+                                <rect key="frame" x="18" y="45" width="71" height="17"/>
+                                <animations/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Read Mask" id="W5x-g9-A0s">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xOk-hA-T83">
+                                <rect key="frame" x="204" y="89" width="223" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Increment and Wrap" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="rcC-hi-nt9" id="98a-ka-KoT">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="lUx-D2-2Zu">
+                                        <items>
+                                            <menuItem title="Keep" id="rGK-dA-ubf"/>
+                                            <menuItem title="Zero" id="4K3-49-TXa"/>
+                                            <menuItem title="Replace" id="HPX-nx-h1U"/>
+                                            <menuItem title="Increment and Clamp" id="0yQ-rd-Zb0">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Clamp" id="HFs-SR-Mlx">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Invert" id="0RB-5H-pTF">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Increment and Wrap" state="on" id="rcC-hi-nt9">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Wrap" id="YLq-5T-tgt">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99P-pK-ZNX">
+                                <rect key="frame" x="175" y="139" width="252" height="26"/>
+                                <animations/>
+                                <popUpButtonCell key="cell" type="push" title="Keep" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="iDk-3B-zec" id="fzw-UK-Lhb">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="CIm-yi-bu3">
+                                        <items>
+                                            <menuItem title="Keep" state="on" id="iDk-3B-zec"/>
+                                            <menuItem title="Zero" id="FbZ-zV-QOu"/>
+                                            <menuItem title="Replace" id="Pq9-NS-YQt"/>
+                                            <menuItem title="Increment and Clamp" id="aKS-Ks-LYh">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Clamp" id="2vs-KJ-l2T">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Invert" id="Pbb-f1-d9V">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Increment and Wrap" id="VWo-9T-dah">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                            <menuItem title="Decrement and Wrap" id="7dr-t3-LDm">
+                                                <modifierMask key="keyEquivalentModifierMask"/>
+                                            </menuItem>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="EzP-fn-qwo" firstAttribute="baseline" secondItem="uPv-tb-qJU" secondAttribute="baseline" id="0ip-xv-tja"/>
+                            <constraint firstItem="h9N-bH-0xl" firstAttribute="baseline" secondItem="uZD-8f-6CQ" secondAttribute="baseline" id="1lM-Ve-DoV"/>
+                            <constraint firstItem="OfD-Yp-aft" firstAttribute="top" secondItem="eNX-XH-ROX" secondAttribute="top" constant="20" symbolic="YES" id="1mI-fP-8ar"/>
+                            <constraint firstItem="xOk-hA-T83" firstAttribute="baseline" secondItem="VCo-Qp-gmV" secondAttribute="baseline" id="4Ma-ay-zMG"/>
+                            <constraint firstAttribute="trailing" secondItem="xOk-hA-T83" secondAttribute="trailing" constant="20" symbolic="YES" id="6t2-zD-5nz"/>
+                            <constraint firstItem="8lQ-WL-ug2" firstAttribute="leading" secondItem="eNX-XH-ROX" secondAttribute="leading" constant="20" symbolic="YES" id="89N-PJ-mWS"/>
+                            <constraint firstItem="Ptv-Pp-Zil" firstAttribute="baseline" secondItem="8lQ-WL-ug2" secondAttribute="baseline" id="9qv-he-VyX"/>
+                            <constraint firstItem="EzP-fn-qwo" firstAttribute="leading" secondItem="uPv-tb-qJU" secondAttribute="trailing" constant="8" symbolic="YES" id="F3W-26-v0N"/>
+                            <constraint firstItem="uZD-8f-6CQ" firstAttribute="leading" secondItem="eNX-XH-ROX" secondAttribute="leading" constant="20" symbolic="YES" id="GBc-BY-5A8"/>
+                            <constraint firstItem="uPv-tb-qJU" firstAttribute="top" secondItem="uIh-Z3-41k" secondAttribute="bottom" constant="8" symbolic="YES" id="Mp7-GN-Xj9"/>
+                            <constraint firstAttribute="trailing" secondItem="h9N-bH-0xl" secondAttribute="trailing" constant="20" symbolic="YES" id="P9S-bq-cOX"/>
+                            <constraint firstItem="VCo-Qp-gmV" firstAttribute="top" secondItem="8lQ-WL-ug2" secondAttribute="bottom" constant="8" symbolic="YES" id="SUt-aB-0HE"/>
+                            <constraint firstItem="h9N-bH-0xl" firstAttribute="leading" secondItem="uZD-8f-6CQ" secondAttribute="trailing" constant="8" symbolic="YES" id="UVE-pY-3of"/>
+                            <constraint firstAttribute="trailing" secondItem="STb-pC-4CN" secondAttribute="trailing" constant="20" symbolic="YES" id="Waz-IT-7Ve"/>
+                            <constraint firstItem="99P-pK-ZNX" firstAttribute="baseline" secondItem="OfD-Yp-aft" secondAttribute="baseline" id="WbJ-PD-MxT"/>
+                            <constraint firstItem="VCo-Qp-gmV" firstAttribute="leading" secondItem="eNX-XH-ROX" secondAttribute="leading" constant="20" symbolic="YES" id="ZF0-HI-aYu"/>
+                            <constraint firstItem="OfD-Yp-aft" firstAttribute="leading" secondItem="eNX-XH-ROX" secondAttribute="leading" constant="20" symbolic="YES" id="awV-rg-Chr"/>
+                            <constraint firstAttribute="trailing" secondItem="Ptv-Pp-Zil" secondAttribute="trailing" constant="20" symbolic="YES" id="b6G-Sr-6zY"/>
+                            <constraint firstAttribute="trailing" secondItem="99P-pK-ZNX" secondAttribute="trailing" constant="20" symbolic="YES" id="bJm-25-gSZ"/>
+                            <constraint firstItem="uPv-tb-qJU" firstAttribute="leading" secondItem="eNX-XH-ROX" secondAttribute="leading" constant="20" symbolic="YES" id="doY-Aq-GNg"/>
+                            <constraint firstAttribute="trailing" secondItem="EzP-fn-qwo" secondAttribute="trailing" constant="20" symbolic="YES" id="guV-n2-zP4"/>
+                            <constraint firstAttribute="bottom" secondItem="uZD-8f-6CQ" secondAttribute="bottom" constant="20" symbolic="YES" id="hHH-sq-47W"/>
+                            <constraint firstItem="uIh-Z3-41k" firstAttribute="leading" secondItem="eNX-XH-ROX" secondAttribute="leading" constant="20" symbolic="YES" id="hZr-3z-uMu"/>
+                            <constraint firstItem="STb-pC-4CN" firstAttribute="leading" secondItem="uIh-Z3-41k" secondAttribute="trailing" constant="8" symbolic="YES" id="kky-lj-1wp"/>
+                            <constraint firstItem="xOk-hA-T83" firstAttribute="leading" secondItem="VCo-Qp-gmV" secondAttribute="trailing" constant="8" symbolic="YES" id="oOJ-ef-wTg"/>
+                            <constraint firstItem="uIh-Z3-41k" firstAttribute="top" secondItem="VCo-Qp-gmV" secondAttribute="bottom" constant="8" symbolic="YES" id="onU-bQ-Ma3"/>
+                            <constraint firstItem="8lQ-WL-ug2" firstAttribute="top" secondItem="OfD-Yp-aft" secondAttribute="bottom" constant="8" symbolic="YES" id="osF-pu-sQo"/>
+                            <constraint firstItem="99P-pK-ZNX" firstAttribute="leading" secondItem="OfD-Yp-aft" secondAttribute="trailing" constant="8" symbolic="YES" id="sah-xI-0Qb"/>
+                            <constraint firstItem="Ptv-Pp-Zil" firstAttribute="leading" secondItem="8lQ-WL-ug2" secondAttribute="trailing" constant="8" symbolic="YES" id="ti0-fn-zdO"/>
+                            <constraint firstItem="STb-pC-4CN" firstAttribute="baseline" secondItem="uIh-Z3-41k" secondAttribute="baseline" id="vId-9H-3fK"/>
+                            <constraint firstItem="uZD-8f-6CQ" firstAttribute="top" secondItem="uPv-tb-qJU" secondAttribute="bottom" constant="8" symbolic="YES" id="xLO-wZ-MjV"/>
+                        </constraints>
+                        <animations/>
+                    </view>
+                    <animations/>
+                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </box>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zB2-r3-vje">
+                    <rect key="frame" x="178" y="489" width="285" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" title="Never" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="glc-2P-Kny" id="bBm-qQ-H62">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="AEi-le-5Fg">
+                            <items>
+                                <menuItem title="Never" state="on" id="glc-2P-Kny"/>
+                                <menuItem title="Less" id="iFO-CZ-9Zf"/>
+                                <menuItem title="Equal" id="bzE-rE-jqN"/>
+                                <menuItem title="Less Than Or Equal" id="mxL-wd-1EA">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Greater" id="YMn-5P-Btk">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Not Equal" id="KlV-az-esp">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Greater Than Or Equal" id="Bam-zE-eSK">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Always" id="hDV-0c-YLt">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                </popUpButton>
+            </subviews>
+            <constraints>
+                <constraint firstItem="inJ-q1-wRA" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="2hW-nZ-3jL"/>
+                <constraint firstItem="uQ7-z0-Yib" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="6fs-KQ-KGv"/>
+                <constraint firstItem="dVh-8A-Cw8" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="9yB-5x-6CN"/>
+                <constraint firstItem="inJ-q1-wRA" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="ARu-0O-5Mm"/>
+                <constraint firstItem="dVh-8A-Cw8" firstAttribute="top" secondItem="inJ-q1-wRA" secondAttribute="bottom" constant="8" symbolic="YES" id="EHg-Iu-SA2"/>
+                <constraint firstAttribute="trailing" secondItem="zB2-r3-vje" secondAttribute="trailing" constant="20" symbolic="YES" id="GJL-4C-t5e"/>
+                <constraint firstAttribute="trailing" secondItem="1oc-BG-2oh" secondAttribute="trailing" constant="20" symbolic="YES" id="H2c-dj-aDL"/>
+                <constraint firstItem="zB2-r3-vje" firstAttribute="leading" secondItem="inJ-q1-wRA" secondAttribute="trailing" constant="8" symbolic="YES" id="Mt8-8Z-042"/>
+                <constraint firstItem="1oc-BG-2oh" firstAttribute="top" secondItem="dVh-8A-Cw8" secondAttribute="bottom" constant="8" symbolic="YES" id="NRi-WH-w35"/>
+                <constraint firstAttribute="bottom" secondItem="uQ7-z0-Yib" secondAttribute="bottom" constant="20" symbolic="YES" id="VFG-gH-NcC"/>
+                <constraint firstAttribute="trailing" secondItem="uQ7-z0-Yib" secondAttribute="trailing" constant="20" symbolic="YES" id="jOz-jx-GnD"/>
+                <constraint firstItem="1oc-BG-2oh" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="wkx-9n-Jts"/>
+                <constraint firstItem="uQ7-z0-Yib" firstAttribute="top" secondItem="UVZ-lg-0bc" secondAttribute="bottom" id="yQX-JG-dwr"/>
+                <constraint firstItem="zB2-r3-vje" firstAttribute="baseline" secondItem="inJ-q1-wRA" secondAttribute="baseline" id="yuE-eA-kiV"/>
+            </constraints>
+            <animations/>
+            <point key="canvasLocation" x="256" y="497"/>
+        </customView>
+    </objects>
+</document>
