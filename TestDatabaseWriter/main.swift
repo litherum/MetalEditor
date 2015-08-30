@@ -151,6 +151,7 @@ func main() {
 
     let renderPass = NSEntityDescription.insertNewObjectForEntityForName("RenderPass", inManagedObjectContext: managedObjectContext) as! RenderPass
     renderPass.mutableOrderedSetValueForKey("invocations").addObject(renderInvocation)
+    renderPass.descriptor = nil
 
     let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
     bufferBinding.buffer = buffer
