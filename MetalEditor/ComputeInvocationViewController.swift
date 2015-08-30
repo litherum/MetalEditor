@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate {
+class ComputeInvocationViewController: NSViewController {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     weak var dismissObserver: DismissObserver!
@@ -60,10 +60,6 @@ class ComputeInvocationViewController: NSViewController, NSTextFieldDelegate {
         threadsPerThreadgroupXTextField.integerValue = computeInvocation.threadsPerThreadgroup.width.integerValue
         threadsPerThreadgroupYTextField.integerValue = computeInvocation.threadsPerThreadgroup.height.integerValue
         threadsPerThreadgroupZTextField.integerValue = computeInvocation.threadsPerThreadgroup.depth.integerValue
-    }
-
-    func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        return Int(obj as! String) != nil
     }
 
     @IBAction func setPipelineStateFunctionName(sender: NSTextField) {

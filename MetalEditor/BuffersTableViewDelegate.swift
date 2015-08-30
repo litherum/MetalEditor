@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
+class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     @IBOutlet var tableView: NSTableView!
@@ -50,10 +50,6 @@ class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSo
         let buffer = getBuffer(row)
         buffer.name = sender.stringValue
         modelObserver.modelDidChange()
-    }
-
-    func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        return Int(obj as! String) != nil
     }
 
     @IBAction func setLength(sender: NSTextField) {

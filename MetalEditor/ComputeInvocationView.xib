@@ -38,7 +38,7 @@
                             </textFieldCell>
                             <connections>
                                 <action selector="setThreadgroupsPerGridZ:" target="-2" id="yFh-9b-kpq"/>
-                                <outlet property="delegate" destination="-2" id="Wmb-OY-GqU"/>
+                                <outlet property="delegate" destination="qDZ-Hm-2e9" id="myc-3n-18E"/>
                             </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ciN-Wy-Q8o">
@@ -51,7 +51,7 @@
                             </textFieldCell>
                             <connections>
                                 <action selector="setThreadgroupsPerGridX:" target="-2" id="4Dc-hB-c5V"/>
-                                <outlet property="delegate" destination="-2" id="Xrj-M5-8EK"/>
+                                <outlet property="delegate" destination="qDZ-Hm-2e9" id="AWM-a4-NkD"/>
                             </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yam-3l-jTd">
@@ -64,7 +64,7 @@
                             </textFieldCell>
                             <connections>
                                 <action selector="setThreadsPerThreadgroupZ:" target="-2" id="bU4-nb-aYl"/>
-                                <outlet property="delegate" destination="-2" id="CcG-xC-8To"/>
+                                <outlet property="delegate" destination="qDZ-Hm-2e9" id="l1k-0e-mCf"/>
                             </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bTn-PY-cgC">
@@ -77,7 +77,7 @@
                             </textFieldCell>
                             <connections>
                                 <action selector="setThreadsPerThreadgroupY:" target="-2" id="L34-xI-NIV"/>
-                                <outlet property="delegate" destination="-2" id="Tym-Ma-jgg"/>
+                                <outlet property="delegate" destination="qDZ-Hm-2e9" id="vne-2e-r6o"/>
                             </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8jg-Np-uVC">
@@ -90,7 +90,7 @@
                             </textFieldCell>
                             <connections>
                                 <action selector="setThreadsPerThreadgroupX:" target="-2" id="TwK-5j-vCL"/>
-                                <outlet property="delegate" destination="-2" id="J4w-LU-Nt2"/>
+                                <outlet property="delegate" destination="qDZ-Hm-2e9" id="RRZ-ER-kRq"/>
                             </connections>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6bG-6c-twM">
@@ -159,7 +159,7 @@
                             </textFieldCell>
                             <connections>
                                 <action selector="setThreadgroupsPerGridY:" target="-2" id="pX7-m7-YPB"/>
-                                <outlet property="delegate" destination="-2" id="eVg-SZ-Hz8"/>
+                                <outlet property="delegate" destination="qDZ-Hm-2e9" id="Xkn-7U-aUs"/>
                             </connections>
                         </textField>
                     </subviews>
@@ -263,5 +263,6 @@
             <animations/>
             <point key="canvasLocation" x="645.5" y="341.5"/>
         </customView>
+        <customObject id="qDZ-Hm-2e9" customClass="IntTextFieldDelegate" customModule="MetalEditor" customModuleProvider="target"/>
     </objects>
 </document>

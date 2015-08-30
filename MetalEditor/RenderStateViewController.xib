@@ -968,7 +968,7 @@
                                     </textFieldCell>
                                     <connections>
                                         <action selector="sampleCountSet:" target="-2" id="exa-ab-N0V"/>
-                                        <outlet property="delegate" destination="-2" id="Yd2-UF-e83"/>
+                                        <outlet property="delegate" destination="k9j-Zy-dg1" id="LE9-Ni-tM4"/>
                                     </connections>
                                 </textField>
                             </subviews>
@@ -1438,6 +1438,7 @@
             <animations/>
             <point key="canvasLocation" x="262.5" y="510.5"/>
         </tableCellView>
+        <customObject id="k9j-Zy-dg1" customClass="IntTextFieldDelegate" customModule="MetalEditor" customModuleProvider="target"/>
         <customObject id="ynd-9I-4QM" customClass="VertexAttributesTableDelegate" customModule="MetalEditor" customModuleProvider="target">
             <connections>
                 <outlet property="bufferIndexColumn" destination="cp4-kR-wgs" id="RES-hf-KFy"/>

@@ -9,7 +9,7 @@
 import Cocoa
 import MetalKit
 
-class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate {
+class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     var device: MTLDevice! // Only needed because MTKTextureLoader can't directly give us a MTLTextureDescriptor
@@ -52,10 +52,6 @@ class TexturesTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataS
         } catch {
             fatalError()
         }
-    }
-
-    func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        return Int(obj as! String) != nil
     }
 
     @IBAction func setName(sender: NSTextField) {

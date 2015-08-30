@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RenderStateViewController: NSViewController, NSTextFieldDelegate {
+class RenderStateViewController: NSViewController {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     weak var removeObserver: RenderPipelineStateRemoveObserver!
@@ -145,10 +145,6 @@ class RenderStateViewController: NSViewController, NSTextFieldDelegate {
             sampleCountTextField.enabled = false
         }
         modelObserver.modelDidChange()
-    }
-
-    func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
-        return Int(obj as! String) != nil
     }
 
     @IBAction func sampleCountSet(sender: NSTextField) {

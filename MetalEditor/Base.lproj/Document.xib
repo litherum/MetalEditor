@@ -231,7 +231,7 @@
                                                                                                 </textFieldCell>
                                                                                                 <connections>
                                                                                                     <action selector="setLength:" target="E1I-gG-L0F" id="7ru-Pc-wYX"/>
-                                                                                                    <outlet property="delegate" destination="E1I-gG-L0F" id="jrH-59-8w2"/>
+                                                                                                    <outlet property="delegate" destination="Xow-uE-DNN" id="sl2-qL-sd4"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -554,7 +554,7 @@
                                                                                                 </textFieldCell>
                                                                                                 <connections>
                                                                                                     <action selector="setWidth:" target="oVs-Vs-cJd" id="b7e-Eu-dlH"/>
-                                                                                                    <outlet property="delegate" destination="oVs-Vs-cJd" id="30A-nY-1hp"/>
+                                                                                                    <outlet property="delegate" destination="Xow-uE-DNN" id="9b9-xe-LG9"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -592,7 +592,7 @@
                                                                                                 </textFieldCell>
                                                                                                 <connections>
                                                                                                     <action selector="setHeight:" target="oVs-Vs-cJd" id="gIa-5e-gml"/>
-                                                                                                    <outlet property="delegate" destination="oVs-Vs-cJd" id="q54-8z-Lv9"/>
+                                                                                                    <outlet property="delegate" destination="Xow-uE-DNN" id="Tdw-ub-VFR"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -630,7 +630,7 @@
                                                                                                 </textFieldCell>
                                                                                                 <connections>
                                                                                                     <action selector="setDepth:" target="oVs-Vs-cJd" id="poT-es-Ppo"/>
-                                                                                                    <outlet property="delegate" destination="oVs-Vs-cJd" id="h2n-mJ-cNJ"/>
+                                                                                                    <outlet property="delegate" destination="Xow-uE-DNN" id="eyx-Rw-AlT"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -668,7 +668,7 @@
                                                                                                 </textFieldCell>
                                                                                                 <connections>
                                                                                                     <action selector="setMipmapLevelCount:" target="oVs-Vs-cJd" id="xqG-Gz-aOx"/>
-                                                                                                    <outlet property="delegate" destination="oVs-Vs-cJd" id="qd8-8C-bio"/>
+                                                                                                    <outlet property="delegate" destination="Xow-uE-DNN" id="bFB-bz-FtD"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -706,7 +706,7 @@
                                                                                                 </textFieldCell>
                                                                                                 <connections>
                                                                                                     <action selector="setSampleCount:" target="oVs-Vs-cJd" id="9cp-FP-Xhc"/>
-                                                                                                    <outlet property="delegate" destination="oVs-Vs-cJd" id="L24-Y1-PxS"/>
+                                                                                                    <outlet property="delegate" destination="Xow-uE-DNN" id="Z0v-Zd-t5F"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -744,7 +744,7 @@
                                                                                                 </textFieldCell>
                                                                                                 <connections>
                                                                                                     <action selector="setArrayLength:" target="oVs-Vs-cJd" id="BKz-kX-m7j"/>
-                                                                                                    <outlet property="delegate" destination="oVs-Vs-cJd" id="bRG-93-zYS"/>
+                                                                                                    <outlet property="delegate" destination="Xow-uE-DNN" id="CSc-Z8-LiH"/>
                                                                                                 </connections>
                                                                                             </textField>
                                                                                         </subviews>
@@ -977,8 +977,8 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <animations/>
                                                     </scroller>
-                                                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="uM7-MM-5EH">
-                                                        <rect key="frame" x="354" y="1" width="15" height="538"/>
+                                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="uM7-MM-5EH">
+                                                        <rect key="frame" x="353" y="1" width="16" height="538"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <animations/>
                                                     </scroller>
@@ -1087,5 +1087,6 @@
                 <outlet property="view" destination="6qP-U5-VmT" id="H4l-pP-Jtg"/>
             </connections>
         </viewController>
+        <customObject id="Xow-uE-DNN" customClass="IntTextFieldDelegate" customModule="MetalEditor" customModuleProvider="target"/>
     </objects>
 </document>

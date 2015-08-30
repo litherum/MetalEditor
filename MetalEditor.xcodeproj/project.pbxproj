@@ -81,6 +81,7 @@
 		C24CDD531B5AFB7D00348941 /* RenderInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD501B5AFB3900348941 /* RenderInvocation.swift */; };
 		C24CDD541B5AFB8000348941 /* RenderInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD4F1B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift */; };
 		C24CDD561B5B32BA00348941 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C24CDD551B5B32BA00348941 /* Shaders.metal */; };
+		C254E4561B92D23D009559F8 /* NumericTextFieldDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C254E4551B92D23D009559F8 /* NumericTextFieldDelegates.swift */; settings = {ASSET_TAGS = (); }; };
 		C26B3C831B76B3D70073EACF /* FlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26B3C821B76B3D70073EACF /* FlippedView.swift */; };
 		C26B3C851B76B6C20073EACF /* InvocationSequence.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26B3C841B76B6C20073EACF /* InvocationSequence.xib */; };
 		C26B3C871B76B9570073EACF /* InvocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26B3C861B76B9570073EACF /* InvocationsViewController.swift */; };
@@ -198,6 +199,7 @@
 		C24CDD4F1B5AFB3900348941 /* RenderInvocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RenderInvocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C24CDD501B5AFB3900348941 /* RenderInvocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderInvocation.swift; sourceTree = "<group>"; };
 		C24CDD551B5B32BA00348941 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		C254E4551B92D23D009559F8 /* NumericTextFieldDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericTextFieldDelegates.swift; sourceTree = "<group>"; };
 		C26B3C821B76B3D70073EACF /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedView.swift; sourceTree = "<group>"; };
 		C26B3C841B76B6C20073EACF /* InvocationSequence.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvocationSequence.xib; sourceTree = "<group>"; };
 		C26B3C861B76B9570073EACF /* InvocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvocationsViewController.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				C204C9891B79D042008057D3 /* BindingsViewController.swift */,
 				C26C8DA41B8153080097180D /* BufferBindingsViewController.swift */,
 				C26C8DA61B81542D0097180D /* TextureBindingsViewController.swift */,
+				C254E4551B92D23D009559F8 /* NumericTextFieldDelegates.swift */,
 			);
 			path = MetalEditor;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				C26B3C871B76B9570073EACF /* InvocationsViewController.swift in Sources */,
 				C24CDCB41B5A18D200348941 /* ComputeInvocation.swift in Sources */,
 				C26B3C8B1B76BF290073EACF /* InvocationViewController.swift in Sources */,
+				C254E4561B92D23D009559F8 /* NumericTextFieldDelegates.swift in Sources */,
 				C23492BD1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift in Sources */,
 				C26C8DA11B8145100097180D /* TextureBinding+CoreDataProperties.swift in Sources */,
 				C24CDCBA1B5A18D200348941 /* Frame.swift in Sources */,
