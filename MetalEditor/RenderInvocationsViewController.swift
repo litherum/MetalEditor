@@ -25,6 +25,45 @@ class RenderInvocationsViewController: InvocationsViewController, InvocationRemo
     }
 
     @IBAction func renderToTextureChecked(sender: NSButton) {
+        if sender.state == NSOnState {
+            let depthAttachment = NSEntityDescription.insertNewObjectForEntityForName("DepthAttachment", inManagedObjectContext: managedObjectContext) as! DepthAttachment
+            depthAttachment.clearValue = 1.0
+            depthAttachment.texture = nil
+            depthAttachment.level = 0
+            depthAttachment.slice = 0
+            depthAttachment.depthPlane = 0
+            depthAttachment.loadAction = MTLLoadAction.DontCare.rawValue
+            depthAttachment.storeAction = MTLStoreAction.DontCare.rawValue
+            depthAttachment.resolveTexture = nil
+            depthAttachment.resolveLevel = 0
+            depthAttachment.resolveSlice = 0
+            depthAttachment.resolveDepthPlane = 0
+
+            let stencilAttachment = NSEntityDescription.insertNewObjectForEntityForName("StencilAttachment", inManagedObjectContext: managedObjectContext) as! StencilAttachment
+            stencilAttachment.clearValue = 0
+            stencilAttachment.texture = nil
+            stencilAttachment.level = 0
+            stencilAttachment.slice = 0
+            stencilAttachment.depthPlane = 0
+            stencilAttachment.loadAction = MTLLoadAction.DontCare.rawValue
+            stencilAttachment.storeAction = MTLStoreAction.DontCare.rawValue
+            stencilAttachment.resolveTexture = nil
+            stencilAttachment.resolveLevel = 0
+            stencilAttachment.resolveSlice = 0
+            stencilAttachment.resolveDepthPlane = 0
+
+            let renderPassDescriptor = NSEntityDescription.insertNewObjectForEntityForName("RenderPassDescriptor", inManagedObjectContext: managedObjectContext) as! RenderPassDescriptor
+            renderPassDescriptor.depthAttachment = depthAttachment
+            renderPassDescriptor.stencilAttachment = stencilAttachment
+            renderPassDescriptor.visibilityResultBuffer = nil
+            renderPassDescriptor.renderTargetArrayLength = 0
+
+            renderPass.descriptor = renderPassDescriptor
+        } else {
+            renderPass.descriptor = nil
+        }
+        renderToTextureButton.enabled = sender.state == NSOnState
+        modelObserver.modelDidChange()
     }
 
     @IBAction func detailsPushed(sender: NSButton) {

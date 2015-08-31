@@ -54,12 +54,79 @@ class PreviewController: NSViewController, MTKViewDelegate {
         drawInView(view);
     }
 
+    private func generateMetalRenderPassDescriptor(descriptor: RenderPassDescriptor) -> MTLRenderPassDescriptor {
+        let metalRenderPassDescriptor = MTLRenderPassDescriptor()
+        let metalColorAttachments = metalRenderPassDescriptor.colorAttachments
+        for i in 0 ..< descriptor.colorAttachments.count {
+            let colorAttachment = descriptor.colorAttachments[i] as! ColorAttachment
+            let metalColorAttachment = MTLRenderPassColorAttachmentDescriptor()
+            metalColorAttachment.clearColor = MTLClearColorMake(colorAttachment.clearRed.doubleValue, colorAttachment.clearGreen.doubleValue, colorAttachment.clearBlue.doubleValue, colorAttachment.clearAlpha.doubleValue)
+            if let texture = colorAttachment.texture {
+                metalColorAttachment.texture = metalState.textures[texture]
+            } else {
+                metalColorAttachment.texture = nil
+            }
+            metalColorAttachment.level = colorAttachment.level.integerValue
+            metalColorAttachment.slice = colorAttachment.slice.integerValue
+            metalColorAttachment.depthPlane = colorAttachment.depthPlane.integerValue
+            metalColorAttachment.loadAction = MTLLoadAction(rawValue: colorAttachment.loadAction.unsignedLongValue)!
+            metalColorAttachment.storeAction = MTLStoreAction(rawValue: colorAttachment.storeAction.unsignedLongValue)!
+            if let resolveTexture = colorAttachment.resolveTexture {
+                metalColorAttachment.resolveTexture = metalState.textures[resolveTexture]
+            } else {
+                metalColorAttachment.resolveTexture = nil
+            }
+            metalColorAttachment.resolveLevel = colorAttachment.resolveLevel.integerValue
+            metalColorAttachment.resolveSlice = colorAttachment.resolveSlice.integerValue
+            metalColorAttachment.resolveDepthPlane = colorAttachment.resolveDepthPlane.integerValue
+            metalColorAttachments[i] = metalColorAttachment
+        }
+
+        let metalDepthAttachment = metalRenderPassDescriptor.depthAttachment
+        if let texture = descriptor.depthAttachment.texture {
+            metalDepthAttachment.texture = metalState.textures[texture]
+        } else {
+            metalDepthAttachment.texture = nil
+        }
+        metalDepthAttachment.level = descriptor.depthAttachment.level.integerValue
+        metalDepthAttachment.slice = descriptor.depthAttachment.slice.integerValue
+        metalDepthAttachment.depthPlane = descriptor.depthAttachment.depthPlane.integerValue
+        metalDepthAttachment.loadAction = MTLLoadAction(rawValue: descriptor.depthAttachment.loadAction.unsignedLongValue)!
+        metalDepthAttachment.storeAction = MTLStoreAction(rawValue: descriptor.depthAttachment.storeAction.unsignedLongValue)!
+        if let resolveTexture = descriptor.depthAttachment.resolveTexture {
+            metalDepthAttachment.resolveTexture = metalState.textures[resolveTexture]
+        } else {
+            metalDepthAttachment.resolveTexture = nil
+        }
+        metalDepthAttachment.resolveLevel = descriptor.depthAttachment.resolveLevel.integerValue
+        metalDepthAttachment.resolveSlice = descriptor.depthAttachment.resolveSlice.integerValue
+        metalDepthAttachment.resolveDepthPlane = descriptor.depthAttachment.resolveDepthPlane.integerValue
+
+        let metalStencilAttachment = metalRenderPassDescriptor.stencilAttachment
+        if let texture = descriptor.stencilAttachment.texture {
+            metalStencilAttachment.texture = metalState.textures[texture]
+        } else {
+            metalStencilAttachment.texture = nil
+        }
+        metalStencilAttachment.level = descriptor.stencilAttachment.level.integerValue
+        metalStencilAttachment.slice = descriptor.stencilAttachment.slice.integerValue
+        metalStencilAttachment.depthPlane = descriptor.stencilAttachment.depthPlane.integerValue
+        metalStencilAttachment.loadAction = MTLLoadAction(rawValue: descriptor.stencilAttachment.loadAction.unsignedLongValue)!
+        metalStencilAttachment.storeAction = MTLStoreAction(rawValue: descriptor.stencilAttachment.storeAction.unsignedLongValue)!
+        if let resolveTexture = descriptor.stencilAttachment.resolveTexture {
+            metalStencilAttachment.resolveTexture = metalState.textures[resolveTexture]
+        } else {
+            metalStencilAttachment.resolveTexture = nil
+        }
+        metalStencilAttachment.resolveLevel = descriptor.stencilAttachment.resolveLevel.integerValue
+        metalStencilAttachment.resolveSlice = descriptor.stencilAttachment.resolveSlice.integerValue
+        metalStencilAttachment.resolveDepthPlane = descriptor.stencilAttachment.resolveDepthPlane.integerValue
+
+        return metalRenderPassDescriptor
+    }
+
     func drawInView(view: MTKView) {
         guard frame != nil else {
-            return
-        }
-        // FIXME: Support render-to-texture
-        guard let renderPassDescriptor = metalView.currentRenderPassDescriptor else {
             return
         }
         let builtInBuffer: MTLBuffer!
@@ -115,6 +182,15 @@ class PreviewController: NSViewController, MTKViewDelegate {
                 }
                 computeCommandEncoder.endEncoding()
             } else if let renderPass = pass as? RenderPass {
+                var renderPassDescriptor: MTLRenderPassDescriptor!
+                if let descriptor = renderPass.descriptor {
+                    renderPassDescriptor = generateMetalRenderPassDescriptor(descriptor)
+                } else {
+                    guard let descriptor = metalView.currentRenderPassDescriptor else {
+                        continue
+                    }
+                    renderPassDescriptor = descriptor
+                }
                 let renderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor)
                 renderCommandEncoder.setVertexBuffer(builtInBuffer, offset: 0, atIndex: 1)
                 renderCommandEncoder.setFragmentBuffer(builtInBuffer, offset: 0, atIndex: 1)

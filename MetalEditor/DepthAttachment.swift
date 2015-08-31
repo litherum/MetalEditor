@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class DepthAttachment: NSManagedObject {
+class DepthAttachment: RenderPassAttachment {
 
 // Insert code here to add functionality to your managed object subclass
 

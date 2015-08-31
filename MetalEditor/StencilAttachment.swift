@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class StencilAttachment: NSManagedObject {
+class StencilAttachment: RenderPassAttachment {
 
 // Insert code here to add functionality to your managed object subclass
 
