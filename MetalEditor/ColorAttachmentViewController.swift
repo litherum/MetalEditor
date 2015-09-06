@@ -15,6 +15,7 @@ protocol ColorAttachmentRemoveObserver: class {
 class ColorAttachmentViewController: NSViewController {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
+    weak var removeObserver: ColorAttachmentRemoveObserver!
     var colorAttachment: ColorAttachment
     var renderPassAttachmentViewController: RenderPassAttachmentViewController!
     @IBOutlet var redTextField: NSTextField!
@@ -23,9 +24,10 @@ class ColorAttachmentViewController: NSViewController {
     @IBOutlet var alphaTextField: NSTextField!
     @IBOutlet var renderPassAttachmentPlaceholderView: NSView!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, colorAttachment: ColorAttachment) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: ColorAttachmentRemoveObserver, colorAttachment: ColorAttachment) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
+        self.removeObserver = removeObserver
         self.colorAttachment = colorAttachment
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -69,5 +71,6 @@ class ColorAttachmentViewController: NSViewController {
     }
 
     @IBAction func remove(sender: NSButton) {
+        removeObserver.remove(self)
     }
 }

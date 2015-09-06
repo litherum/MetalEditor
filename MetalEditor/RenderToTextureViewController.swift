@@ -52,7 +52,7 @@ class RenderToTextureViewController: NSViewController, ColorAttachmentRemoveObse
     }
 
     func addColorAttachmentView(colorAttachment: ColorAttachment) {
-        let colorAttachmentController = ColorAttachmentViewController(nibName: "ColorAttachmentView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, colorAttachment: colorAttachment)!
+        let colorAttachmentController = ColorAttachmentViewController(nibName: "ColorAttachmentView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, removeObserver: self, colorAttachment: colorAttachment)!
         addChildViewController(colorAttachmentController)
         stackView.addArrangedSubview(colorAttachmentController.view)
     }
@@ -95,6 +95,7 @@ class RenderToTextureViewController: NSViewController, ColorAttachmentRemoveObse
             }
         }
         controller.view.removeFromSuperview()
+        managedObjectContext.deleteObject(controller.colorAttachment)
 
         modelObserver.modelDidChange()
     }

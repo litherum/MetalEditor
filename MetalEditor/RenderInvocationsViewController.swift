@@ -68,7 +68,15 @@ class RenderInvocationsViewController: InvocationsViewController, InvocationRemo
 
             renderPass.descriptor = renderPassDescriptor
         } else {
+            let descriptor = renderPass.descriptor!
             renderPass.descriptor = nil
+            for colorAttachment in descriptor.colorAttachments {
+                descriptor.mutableOrderedSetValueForKey("colorAttachments").removeObject(colorAttachment)
+                managedObjectContext.deleteObject(colorAttachment as! ColorAttachment)
+            }
+            managedObjectContext.deleteObject(descriptor.depthAttachment)
+            managedObjectContext.deleteObject(descriptor.stencilAttachment)
+            managedObjectContext.deleteObject(descriptor)
         }
         detailsButton.enabled = renderPass.descriptor != nil
         modelObserver.modelDidChange()

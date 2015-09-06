@@ -22,18 +22,18 @@
             <rect key="frame" x="0.0" y="0.0" width="854" height="589"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="iaA-Tp-9ar">
-                    <rect key="frame" x="568" y="299" width="266" height="245"/>
+                <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaA-Tp-9ar">
+                    <rect key="frame" x="568" y="279" width="266" height="265"/>
                     <subviews>
                         <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7x5-Aq-gZf">
-                            <rect key="frame" x="0.0" y="0.0" width="266" height="200"/>
+                            <rect key="frame" x="0.0" y="20" width="266" height="200"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="200" placeholder="YES" id="NC2-XR-pMl"/>
                             </constraints>
                             <animations/>
                         </customView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RNx-3p-T3d">
-                            <rect key="frame" x="18" y="208" width="73" height="17"/>
+                            <rect key="frame" x="18" y="228" width="73" height="17"/>
                             <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clear Value" id="lqe-Ge-N95">
                                 <font key="font" metaFont="system"/>
@@ -42,7 +42,7 @@
                             </textFieldCell>
                         </textField>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x3b-OV-XkD">
-                            <rect key="frame" x="97" y="205" width="149" height="22"/>
+                            <rect key="frame" x="97" y="225" width="149" height="22"/>
                             <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="oge-Mi-ZIT">
                                 <font key="font" metaFont="system"/>
@@ -58,7 +58,7 @@
                     <constraints>
                         <constraint firstItem="x3b-OV-XkD" firstAttribute="leading" secondItem="RNx-3p-T3d" secondAttribute="trailing" constant="8" symbolic="YES" id="12U-Ga-gkk"/>
                         <constraint firstItem="7x5-Aq-gZf" firstAttribute="leading" secondItem="iaA-Tp-9ar" secondAttribute="leading" id="7aX-nW-tBf"/>
-                        <constraint firstAttribute="bottom" secondItem="7x5-Aq-gZf" secondAttribute="bottom" id="EMy-J4-Q8l"/>
+                        <constraint firstAttribute="bottom" secondItem="7x5-Aq-gZf" secondAttribute="bottom" constant="20" symbolic="YES" id="EMy-J4-Q8l"/>
                         <constraint firstItem="RNx-3p-T3d" firstAttribute="top" secondItem="iaA-Tp-9ar" secondAttribute="top" constant="20" symbolic="YES" id="GUh-YY-EJb"/>
                         <constraint firstItem="x3b-OV-XkD" firstAttribute="baseline" secondItem="RNx-3p-T3d" secondAttribute="baseline" id="Tmj-Y7-j4O"/>
                         <constraint firstAttribute="trailing" secondItem="x3b-OV-XkD" secondAttribute="trailing" constant="20" symbolic="YES" id="VmA-jj-hDH"/>
@@ -68,16 +68,16 @@
                     </constraints>
                     <animations/>
                 </customView>
-                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqn-8G-atc">
+                <scrollView autoresizesSubviews="NO" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqn-8G-atc">
                     <rect key="frame" x="20" y="61" width="266" height="483"/>
-                    <clipView key="contentView" id="ldm-mp-ao7">
+                    <clipView key="contentView" autoresizesSubviews="NO" id="ldm-mp-ao7">
                         <rect key="frame" x="1" y="1" width="264" height="481"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view translatesAutoresizingMaskIntoConstraints="NO" id="kyy-e0-hsz" customClass="FlippedView" customModule="MetalEditor" customModuleProvider="target">
+                            <view autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyy-e0-hsz" customClass="FlippedView" customModule="MetalEditor" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="481" width="264" height="0.0"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7wI-aw-NPG">
+                                    <stackView autoresizesSubviews="NO" distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7wI-aw-NPG">
                                         <rect key="frame" x="0.0" y="0.0" width="264" height="0.0"/>
                                         <animations/>
                                     </stackView>
@@ -105,7 +105,7 @@
                         <animations/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="SZ0-G7-tn2">
-                        <rect key="frame" x="250" y="1" width="15" height="481"/>
+                        <rect key="frame" x="249" y="1" width="16" height="481"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
@@ -139,11 +139,11 @@
                         <action selector="addColorAttachment:" target="-2" id="ngz-kn-kq7"/>
                     </connections>
                 </button>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="TMU-6V-6do">
-                    <rect key="frame" x="294" y="299" width="266" height="245"/>
+                <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMU-6V-6do">
+                    <rect key="frame" x="294" y="279" width="266" height="265"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eSK-Nh-WpE">
-                            <rect key="frame" x="18" y="208" width="77" height="17"/>
+                            <rect key="frame" x="18" y="228" width="77" height="17"/>
                             <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clear Depth" id="j1B-yC-gLU">
                                 <font key="font" metaFont="system"/>
@@ -152,14 +152,14 @@
                             </textFieldCell>
                         </textField>
                         <customView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyX-3K-PYh">
-                            <rect key="frame" x="0.0" y="0.0" width="266" height="200"/>
+                            <rect key="frame" x="0.0" y="20" width="266" height="200"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="200" placeholder="YES" id="YEC-6p-jOk"/>
                             </constraints>
                             <animations/>
                         </customView>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x5W-Ya-DLR">
-                            <rect key="frame" x="101" y="205" width="145" height="22"/>
+                            <rect key="frame" x="101" y="225" width="145" height="22"/>
                             <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="soe-5f-RVA">
                                 <font key="font" metaFont="system"/>
@@ -173,7 +173,7 @@
                         </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="UyX-3K-PYh" secondAttribute="bottom" id="5Yr-w0-Nkc"/>
+                        <constraint firstAttribute="bottom" secondItem="UyX-3K-PYh" secondAttribute="bottom" constant="20" symbolic="YES" id="5Yr-w0-Nkc"/>
                         <constraint firstAttribute="trailing" secondItem="UyX-3K-PYh" secondAttribute="trailing" id="Fr9-8O-iFF"/>
                         <constraint firstItem="x5W-Ya-DLR" firstAttribute="baseline" secondItem="eSK-Nh-WpE" secondAttribute="baseline" id="H5E-N2-8x1"/>
                         <constraint firstItem="UyX-3K-PYh" firstAttribute="top" secondItem="eSK-Nh-WpE" secondAttribute="bottom" constant="8" symbolic="YES" id="Q3P-Kf-5Vx"/>
