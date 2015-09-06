@@ -77,7 +77,7 @@
                             <view autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyy-e0-hsz" customClass="FlippedView" customModule="MetalEditor" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="481" width="264" height="0.0"/>
                                 <subviews>
-                                    <stackView autoresizesSubviews="NO" distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7wI-aw-NPG">
+                                    <stackView autoresizesSubviews="NO" distribution="fill" orientation="vertical" alignment="trailing" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7wI-aw-NPG">
                                         <rect key="frame" x="0.0" y="0.0" width="264" height="0.0"/>
                                         <animations/>
                                     </stackView>

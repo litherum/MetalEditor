@@ -55,6 +55,8 @@ class RenderToTextureViewController: NSViewController, ColorAttachmentRemoveObse
         let colorAttachmentController = ColorAttachmentViewController(nibName: "ColorAttachmentView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, removeObserver: self, colorAttachment: colorAttachment)!
         addChildViewController(colorAttachmentController)
         stackView.addArrangedSubview(colorAttachmentController.view)
+        print("Width: \(colorAttachmentController.view.translatesAutoresizingMaskIntoConstraints)")
+        print("Width2: \(stackView.constraints)")
     }
 
     @IBAction func addColorAttachment(sender: NSButton) {
