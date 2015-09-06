@@ -73,7 +73,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
 
     func addRenderPassView(pass: RenderPass) {
         let controller = RenderInvocationsViewController(nibName: "RenderInvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
-        controller.loadView()
+        _ = controller.view
         for i in pass.invocations {
             controller.addRenderInvocationView(i as! RenderInvocation)
         }
@@ -83,7 +83,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
 
     func addComputePassView(pass: ComputePass) {
         let controller = ComputeInvocationsViewController(nibName: "ComputeInvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
-        controller.loadView()
+        _ = controller.view
         for i in pass.invocations {
             controller.addComputeInvocationView(i as! ComputeInvocation)
         }

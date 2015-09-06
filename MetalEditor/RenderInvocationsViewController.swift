@@ -8,9 +8,10 @@
 
 import Cocoa
 
-class RenderInvocationsViewController: InvocationsViewController, InvocationRemoveObserver {
+class RenderInvocationsViewController: InvocationsViewController, InvocationRemoveObserver, DismissObserver {
     var renderPass: RenderPass!
-    @IBOutlet var renderToTextureButton: NSButton!
+    @IBOutlet var renderToTextureCheckbox: NSButton!
+    @IBOutlet var detailsButton: NSButton!
 
     init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: PassRemoveObserver, pass: RenderPass) {
         self.renderPass = pass
@@ -22,6 +23,13 @@ class RenderInvocationsViewController: InvocationsViewController, InvocationRemo
 
     required init?(coder: NSCoder) {
         fatalError()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        renderToTextureCheckbox.state = renderPass.descriptor != nil ? NSOnState : NSOffState
+        detailsButton.enabled = renderPass.descriptor != nil
     }
 
     @IBAction func renderToTextureChecked(sender: NSButton) {
@@ -62,11 +70,13 @@ class RenderInvocationsViewController: InvocationsViewController, InvocationRemo
         } else {
             renderPass.descriptor = nil
         }
-        renderToTextureButton.enabled = sender.state == NSOnState
+        detailsButton.enabled = renderPass.descriptor != nil
         modelObserver.modelDidChange()
     }
 
     @IBAction func detailsPushed(sender: NSButton) {
+        let viewController = RenderToTextureViewController(nibName: "RenderToTextureView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, renderPassDescriptor: renderPass.descriptor!)!
+        presentViewControllerAsSheet(viewController)
     }
 
     func addRenderInvocationView(invocation: RenderInvocation) {
@@ -109,5 +119,9 @@ class RenderInvocationsViewController: InvocationsViewController, InvocationRemo
     func removeInvocation(controller: InvocationViewController) {
         renderPass.mutableOrderedSetValueForKey("invocations").removeObject(controller.invocation)
         super.removeInvocation(controller, pass: renderPass)
+    }
+
+    func dismiss(controller: NSViewController) {
+        dismissViewController(controller)
     }
 }

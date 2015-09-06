@@ -54,7 +54,21 @@ class PreviewController: NSViewController, MTKViewDelegate {
         drawInView(view);
     }
 
-    private func generateMetalRenderPassDescriptor(descriptor: RenderPassDescriptor) -> MTLRenderPassDescriptor {
+    private class func emptyRenderPassDescriptor(descriptor: RenderPassDescriptor) -> Bool {
+        for colorAttachment in descriptor.colorAttachments {
+            let c = colorAttachment as! ColorAttachment
+            if c.texture != nil || c.resolveTexture != nil {
+                return false
+            }
+        }
+        return descriptor.depthAttachment.texture == nil && descriptor.depthAttachment.resolveTexture == nil && descriptor.stencilAttachment.texture == nil && descriptor.stencilAttachment.resolveTexture == nil
+    }
+
+    private func generateMetalRenderPassDescriptor(descriptor: RenderPassDescriptor) -> MTLRenderPassDescriptor? {
+        if PreviewController.emptyRenderPassDescriptor(descriptor) {
+            return nil
+        }
+
         let metalRenderPassDescriptor = MTLRenderPassDescriptor()
         let metalColorAttachments = metalRenderPassDescriptor.colorAttachments
         for i in 0 ..< descriptor.colorAttachments.count {
@@ -184,7 +198,10 @@ class PreviewController: NSViewController, MTKViewDelegate {
             } else if let renderPass = pass as? RenderPass {
                 var renderPassDescriptor: MTLRenderPassDescriptor!
                 if let descriptor = renderPass.descriptor {
-                    renderPassDescriptor = generateMetalRenderPassDescriptor(descriptor)
+                    guard let descriptor = generateMetalRenderPassDescriptor(descriptor) else {
+                        continue
+                    }
+                    renderPassDescriptor = descriptor
                 } else {
                     guard let descriptor = metalView.currentRenderPassDescriptor else {
                         continue

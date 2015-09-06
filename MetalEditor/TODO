@@ -9,4 +9,6 @@ Things to do
 8. Inspect shader arguments to create sliders
 9. All single-column table views should migrate to stack views
 10. Int text view delegates don't work with table views
-11. Metal asserts all over the place under the covers
+
+Metal assertions:
+1. MTLCommandBuffer.renderCommandEncoderWithDescriptor() asserts if there are no textures set.

@@ -16,6 +16,7 @@ class BufferBindingsViewController: BindingsViewController {
 
         guard let selectionObject = selectedItem.representedObject else {
             binding.buffer = nil
+            modelObserver.modelDidChange()
             return
         }
 

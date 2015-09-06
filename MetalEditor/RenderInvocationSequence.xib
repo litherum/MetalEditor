@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A263e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A279b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
@@ -8,8 +8,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RenderInvocationsViewController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
-                <outlet property="renderToTextureButton" destination="kkB-KG-Svs" id="Ona-zp-i0B"/>
+                <outlet property="detailsButton" destination="10i-TV-1W2" id="gan-Ey-Orw"/>
+                <outlet property="renderToTextureCheckbox" destination="kkB-KG-Svs" id="tq9-FG-wZC"/>
                 <outlet property="stackView" destination="5ho-T4-cED" id="bnp-Mn-2Zi"/>
+                <outlet property="view" destination="c22-O7-iKe" id="RN4-q5-oce"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -55,7 +57,7 @@
                         <animations/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="lrf-nm-ftY">
-                        <rect key="frame" x="326" y="1" width="16" height="270"/>
+                        <rect key="frame" x="327" y="1" width="15" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
@@ -71,7 +73,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="renderToTextureChecked:" target="-2" id="MHW-Md-MYs"/>
+                                <action selector="renderToTextureChecked:" target="-2" id="iY0-1D-ZhP"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vna-b6-7tW">
