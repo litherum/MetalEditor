@@ -4,11 +4,12 @@ Things to do
 2. Textures have a few extra options
 3. Metal Editor has no concept of sampler states
 4. Cannot set threadgroup memory length for compute shaders
-5. Metal Editor does not support rendering to textures (or the entire MTLRenderPassDescriptor class)
-7. Metal Editor does not support indexed draws or instancing
-8. Inspect shader arguments to create sliders
-9. All single-column table views should migrate to stack views
-10. Int text view delegates don't work with table views
+5. Metal Editor does not support indexed draws or instancing
+6. Create more different kinds of sliders
+7. All single-column table views should migrate to stack views
+8. Int text view delegates don't work with table views
 
 Metal assertions:
 1. MTLCommandBuffer.renderCommandEncoderWithDescriptor() asserts if there are no textures set.
+
+MTLRenderPipelineReflection doesn't give you return types

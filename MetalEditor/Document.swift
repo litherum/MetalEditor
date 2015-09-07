@@ -29,6 +29,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     @IBOutlet var splitView: NSSplitView!
     @IBOutlet var depthStencilStateStackView: NSStackView!
     @IBOutlet var invocationsStackView: NSStackView!
+    @IBOutlet var sliderValues: SliderValues!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
     var frame: Frame!
@@ -197,7 +198,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         managedObjectContext!.deleteObject(state.backFaceStencil)
         managedObjectContext!.deleteObject(state.frontFaceStencil)
         managedObjectContext!.deleteObject(state)
-        depthStencilStateStackView.removeArrangedSubview(controller.view)
+        controller.view.removeFromSuperview()
         depthStencilStateMap.removeValueForKey(controller)
     }
 
@@ -224,7 +225,12 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     }
 
     func modelDidChange() {
+        sliderValues.clear()
         metalState.populate(managedObjectContext!, device: device, view: previewController.metalView)
+    }
+
+    func reflection(reflection: [MTLArgument]) {
+        sliderValues.reflection(reflection)
     }
 
     override class func autosavesInPlace() -> Bool {

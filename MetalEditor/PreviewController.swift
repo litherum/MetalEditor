@@ -10,9 +10,11 @@ import Cocoa
 import MetalKit
 
 class PreviewController: NSViewController, MTKViewDelegate {
+    @IBOutlet var sliderValues: SliderValues!
     var metalView: MTKView!
     var device: MTLDevice!
     var commandQueue: MTLCommandQueue!
+    var builtInBufferLength = 0
     var builtInBuffers: [MTLBuffer] = []
     var metalState: MetalState!
     var frame: Frame!
@@ -139,25 +141,55 @@ class PreviewController: NSViewController, MTKViewDelegate {
         return metalRenderPassDescriptor
     }
 
+    private func populateBuiltInBuffer(ptr: UnsafeMutablePointer<Void>) {
+        guard let uniforms = sliderValues.uniforms else {
+            return
+        }
+        for uniform in uniforms {
+            switch uniform.type {
+            case .Float:
+                assert(uniform.offset % 4 == 0)
+                let floatPtr = UnsafeMutablePointer<Float>(ptr)
+                var toWrite: Float = 0
+                switch uniform.name {
+                case "time":
+                    toWrite = Float(NSDate().timeIntervalSinceDate(startDate))
+                case "width":
+                    toWrite = Float(size.width)
+                case "height":
+                    toWrite = Float(size.height)
+                default:
+                    toWrite = uniform.value.floatValue
+                }
+                floatPtr[uniform.offset / 4] = toWrite
+            case .Int:
+                assert(uniform.offset % 4 == 0)
+                let intPtr = UnsafeMutablePointer<Int32>(ptr)
+                intPtr[uniform.offset / 4] = uniform.value.intValue
+            default:
+                continue
+            }
+        }
+    }
+
     func drawInView(view: MTKView) {
         guard frame != nil else {
             return
         }
+        if builtInBufferLength != sliderValues.length {
+            builtInBuffers = []
+        }
+        builtInBufferLength = max(sliderValues.length, 1)
         let builtInBuffer: MTLBuffer!
         if builtInBuffers.count > 0 {
             builtInBuffer = builtInBuffers.removeLast()
         } else {
-            // | time | width | height | padding |
-            builtInBuffer = device.newBufferWithLength(16, options: .StorageModeManaged)
+            builtInBuffer = device.newBufferWithLength(builtInBufferLength, options: .StorageModeManaged)
         }
         assert(builtInBuffer != nil)
-        let builtInPointer = UnsafeMutablePointer<Float>(builtInBuffer.contents())
-        builtInPointer[0] = Float(NSDate().timeIntervalSinceDate(startDate))
-        builtInPointer[1] = Float(size.width)
-        builtInPointer[2] = Float(size.height)
-        builtInPointer[3] = 0
+        populateBuiltInBuffer(builtInBuffer.contents())
         if builtInBuffer.storageMode == .Managed {
-            builtInBuffer.didModifyRange(NSMakeRange(0, 16))
+            builtInBuffer.didModifyRange(NSMakeRange(0, builtInBufferLength))
         }
         for passObject in frame.passes {
             let pass = passObject as! Pass
@@ -286,7 +318,9 @@ class PreviewController: NSViewController, MTKViewDelegate {
             if pass == frame.passes[frame.passes.count - 1] as! Pass {
                 commandBuffer.addCompletedHandler() {(commandBuffer) in
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.builtInBuffers.append(builtInBuffer)
+                        if self.builtInBufferLength == builtInBuffer.length {
+                            self.builtInBuffers.append(builtInBuffer)
+                        }
                     }
                 }
                 if metalView.currentDrawable != nil {
