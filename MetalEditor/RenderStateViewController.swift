@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RenderStateViewController: NSViewController {
+class RenderStateViewController: NSViewController, RenderStateColorAttachmentRemoveObserver {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     weak var removeObserver: RenderPipelineStateRemoveObserver!
@@ -18,10 +18,9 @@ class RenderStateViewController: NSViewController {
     @IBOutlet var fragmentFunctionTextField: NSTextField!
     @IBOutlet var vertexAttributesTableDelegate: VertexAttributesTableDelegate!
     @IBOutlet var vertexBufferLayoutTableDelegate: VertexBufferLayoutTableDelegate!
-    @IBOutlet var colorAttachmentsTableDelegate: ColorAttachmentsTableDelegate!
     @IBOutlet var vertexAttributesTableView: NSTableView!
     @IBOutlet var vertexBufferLayoutTableView: NSTableView!
-    @IBOutlet var colorAttachmentsTableView: NSTableView!
+    @IBOutlet var colorAttachmentsStackView: NSStackView!
     @IBOutlet var depthAttachmentPopUp: NSPopUpButton!
     @IBOutlet var stencilAttachmentPopUp: NSPopUpButton!
     @IBOutlet var sampleCountCheckBox: NSButton!
@@ -49,6 +48,10 @@ class RenderStateViewController: NSViewController {
         nameTextField.stringValue = state.name
         vertexFunctionTextField.stringValue = state.vertexFunction
         fragmentFunctionTextField.stringValue = state.fragmentFunction
+
+        for attachmentObject in state.colorAttachments {
+            addColorAttachmentView(attachmentObject as! RenderPipelineColorAttachment)
+        }
 
         depthAttachmentPopUp.menu = pixelFormatMenu(true)
         if let depthAttachmentPixelFormat = state.depthAttachmentPixelFormat {
@@ -86,10 +89,6 @@ class RenderStateViewController: NSViewController {
         vertexBufferLayoutTableDelegate.modelObserver = modelObserver
         vertexBufferLayoutTableDelegate.state = state
 
-        colorAttachmentsTableDelegate.managedObjectContext = managedObjectContext
-        colorAttachmentsTableDelegate.modelObserver = modelObserver
-        colorAttachmentsTableDelegate.state = state
-
         alphaToCoveragePopUp.state = state.alphaToCoverageEnabled.boolValue ? NSOnState : NSOffState
         alphaToOnePopUp.state = state.alphaToOneEnabled.boolValue ? NSOnState : NSOffState
         rasterizesPopUp.state = state.rasterizationEnabled.boolValue ? NSOnState : NSOffState
@@ -108,6 +107,44 @@ class RenderStateViewController: NSViewController {
 
     @IBAction func setFragmentFunction(sender: NSTextField) {
         state.fragmentFunction = sender.stringValue
+        modelObserver.modelDidChange()
+    }
+
+    func addColorAttachmentView(colorAttachment: RenderPipelineColorAttachment) {
+        let controller = RenderStateColorAttachmentViewController(nibName: "RenderStateColorAttachmentView", bundle: nil, modelObserver: modelObserver, removeObserver: self, colorAttachment: colorAttachment)!
+        addChildViewController(controller)
+        colorAttachmentsStackView.addArrangedSubview(controller.view)
+    }
+
+    @IBAction func addColorAttachment(sender: NSButton) {
+        let attachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
+        attachment.pixelFormat = nil
+        attachment.writeAlpha = true
+        attachment.writeRed = true
+        attachment.writeGreen = true
+        attachment.writeBlue = true
+        attachment.blendingEnabled = true
+        attachment.alphaBlendOperation = MTLBlendOperation.Add.rawValue
+        attachment.rgbBlendOperation = MTLBlendOperation.Add.rawValue
+        attachment.destinationAlphaBlendFactor = MTLBlendFactor.Zero.rawValue
+        attachment.destinationRGBBlendFactor = MTLBlendFactor.Zero.rawValue
+        attachment.sourceAlphaBlendFactor = MTLBlendFactor.One.rawValue
+        attachment.sourceRGBBlendFactor = MTLBlendFactor.One.rawValue
+        state.mutableOrderedSetValueForKey("colorAttachments").addObject(attachment)
+        addColorAttachmentView(attachment)
+        modelObserver.modelDidChange()
+    }
+
+    func remove(viewController: RenderStateColorAttachmentViewController) {
+        for i in 0 ..< childViewControllers.count {
+            if childViewControllers[i] == viewController {
+                childViewControllers.removeAtIndex(i)
+                break
+            }
+        }
+        viewController.view.removeFromSuperview()
+        state.mutableOrderedSetValueForKey("colorAttachments").removeObject(viewController.colorAttachment)
+        managedObjectContext.deleteObject(viewController.colorAttachment)
         modelObserver.modelDidChange()
     }
 
@@ -152,7 +189,7 @@ class RenderStateViewController: NSViewController {
         modelObserver.modelDidChange()
     }
 
-    @IBAction func remove(sender: NSButton) {
+    @IBAction func removeRenderPipelineState(sender: NSButton) {
         removeObserver.removeRenderPipelineState(self)
     }
 

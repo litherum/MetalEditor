@@ -11,5 +11,7 @@ Things to do
 
 Metal assertions:
 1. MTLCommandBuffer.renderCommandEncoderWithDescriptor() asserts if there are no textures set.
+2. MTLRenderCommandEncoder.setRenderPipelineState() asserts if any of the color attachments have non-invalid pixel format if there is no texture set for that color attachment.
+3. MTLDevice.newRenderPipelineStateWithDescriptor() asserts if there were no valid pixelformats set.
 
 MTLRenderPipelineReflection doesn't give you return types

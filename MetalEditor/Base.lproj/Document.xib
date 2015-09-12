@@ -423,13 +423,13 @@
                                             <rect key="frame" x="32" y="7" width="406" height="734"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="402" horizontalPageScroll="10" verticalLineScroll="402" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVU-ZZ-PDG">
+                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="602" horizontalPageScroll="10" verticalLineScroll="602" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVU-ZZ-PDG">
                                                     <rect key="frame" x="0.0" y="61" width="406" height="673"/>
                                                     <clipView key="contentView" id="9Ng-Zp-LyN">
                                                         <rect key="frame" x="1" y="1" width="404" height="671"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" alternatingRowBackgroundColors="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="400" viewBased="YES" id="HTi-RO-tZ4">
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" alternatingRowBackgroundColors="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="600" viewBased="YES" id="HTi-RO-tZ4">
                                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <animations/>

@@ -20,9 +20,10 @@
 		C227E9531B9299850012B8B8 /* Viewport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C227E94F1B9299850012B8B8 /* Viewport.swift */; settings = {ASSET_TAGS = (); }; };
 		C23492BB1B75E62B00712575 /* VertexAttributesTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */; };
 		C23492BD1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */; };
-		C23492BF1B75E66800712575 /* ColorAttachmentsTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23492BE1B75E66800712575 /* ColorAttachmentsTableDelegate.swift */; };
 		C24AB4C01BA4B6030029915E /* TextureInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24AB4BF1BA4B6030029915E /* TextureInfoView.xib */; settings = {ASSET_TAGS = (); }; };
 		C24AB4C21BA4BED50029915E /* TextureInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24AB4C11BA4BED50029915E /* TextureInfoViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C24AB4C41BA4CF200029915E /* RenderStateColorAttachmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24AB4C31BA4CF200029915E /* RenderStateColorAttachmentView.xib */; settings = {ASSET_TAGS = (); }; };
+		C24AB4C61BA4D6200029915E /* RenderStateColorAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24AB4C51BA4D6200029915E /* RenderStateColorAttachmentViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		C24CDC9E1B5A17BF00348941 /* MetalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDC9D1B5A17BF00348941 /* MetalState.swift */; };
 		C24CDCB31B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA11B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift */; };
 		C24CDCB41B5A18D200348941 /* ComputeInvocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24CDCA21B5A18D200348941 /* ComputeInvocation.swift */; };
@@ -209,9 +210,10 @@
 		C227E94F1B9299850012B8B8 /* Viewport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Viewport.swift; sourceTree = "<group>"; };
 		C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexAttributesTableDelegate.swift; sourceTree = "<group>"; };
 		C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexBufferLayoutTableDelegate.swift; sourceTree = "<group>"; };
-		C23492BE1B75E66800712575 /* ColorAttachmentsTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorAttachmentsTableDelegate.swift; sourceTree = "<group>"; };
 		C24AB4BF1BA4B6030029915E /* TextureInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextureInfoView.xib; sourceTree = "<group>"; };
 		C24AB4C11BA4BED50029915E /* TextureInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureInfoViewController.swift; sourceTree = "<group>"; };
+		C24AB4C31BA4CF200029915E /* RenderStateColorAttachmentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RenderStateColorAttachmentView.xib; sourceTree = "<group>"; };
+		C24AB4C51BA4D6200029915E /* RenderStateColorAttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderStateColorAttachmentViewController.swift; sourceTree = "<group>"; };
 		C24CDC9D1B5A17BF00348941 /* MetalState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalState.swift; sourceTree = "<group>"; };
 		C24CDCA11B5A18D200348941 /* ComputeInvocation+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComputeInvocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C24CDCA21B5A18D200348941 /* ComputeInvocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputeInvocation.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				C2BF784C1B58BC8A004535BC /* Document.xib */,
 				C24AB4BF1BA4B6030029915E /* TextureInfoView.xib */,
 				C2A9391C1B707A7900449A95 /* RenderStateView.xib */,
+				C24AB4C31BA4CF200029915E /* RenderStateColorAttachmentView.xib */,
 				C29C37691B93800F00F85D61 /* DepthStencilStateView.xib */,
 				C26B3C841B76B6C20073EACF /* ComputeInvocationSequence.xib */,
 				C286CF391B93B59000BC7F9D /* RenderInvocationSequence.xib */,
@@ -473,9 +476,9 @@
 				C29C376B1B93802F00F85D61 /* DepthStencilStateViewController.swift */,
 				C2CA03131B6F186300BA6AA1 /* RenderStateUIController.swift */,
 				C2C1F3711B708F590092726F /* RenderStateViewController.swift */,
+				C24AB4C51BA4D6200029915E /* RenderStateColorAttachmentViewController.swift */,
 				C23492BA1B75E62B00712575 /* VertexAttributesTableDelegate.swift */,
 				C23492BC1B75E64B00712575 /* VertexBufferLayoutTableDelegate.swift */,
-				C23492BE1B75E66800712575 /* ColorAttachmentsTableDelegate.swift */,
 				C26B3C821B76B3D70073EACF /* FlippedView.swift */,
 				C26B3C861B76B9570073EACF /* InvocationsViewController.swift */,
 				C286CF3B1B93B7AB00BC7F9D /* RenderInvocationsViewController.swift */,
@@ -646,6 +649,7 @@
 				C2BF78531B58BC8A004535BC /* Assets.xcassets in Resources */,
 				C26B3C891B76BD1F0073EACF /* Invocation.xib in Resources */,
 				C29C376A1B93800F00F85D61 /* DepthStencilStateView.xib in Resources */,
+				C24AB4C41BA4CF200029915E /* RenderStateColorAttachmentView.xib in Resources */,
 				C286CF3A1B93B59000BC7F9D /* RenderInvocationSequence.xib in Resources */,
 				C25A58131B9D0A3100A19FDD /* Slider.xib in Resources */,
 				C286CF621B93D53C00BC7F9D /* RenderPassAttachmentView.xib in Resources */,
@@ -800,11 +804,11 @@
 				C286CF4B1B93C7B000BC7F9D /* RenderPassDescriptor.swift in Sources */,
 				C23492BB1B75E62B00712575 /* VertexAttributesTableDelegate.swift in Sources */,
 				C24CDCC11B5A18D200348941 /* BufferBinding+CoreDataProperties.swift in Sources */,
-				C23492BF1B75E66800712575 /* ColorAttachmentsTableDelegate.swift in Sources */,
 				C24CDCF61B5AC44000348941 /* RenderPass+CoreDataProperties.swift in Sources */,
 				C2C1F3721B708F590092726F /* RenderStateViewController.swift in Sources */,
 				C26C8D991B8126DF0097180D /* Texture+CoreDataProperties.swift in Sources */,
 				C24CDCFD1B5AC86D00348941 /* VertexAttribute.swift in Sources */,
+				C24AB4C61BA4D6200029915E /* RenderStateColorAttachmentViewController.swift in Sources */,
 				C24CDCF71B5AC44000348941 /* RenderPass.swift in Sources */,
 				C24CDCBB1B5A18D200348941 /* Buffer+CoreDataProperties.swift in Sources */,
 				C272D94B1B9CD006001474C0 /* ColorAttachmentViewController.swift in Sources */,

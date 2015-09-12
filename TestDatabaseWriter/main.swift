@@ -69,7 +69,6 @@ func main() {
     vertexBufferLayout.stride = 8
 
     let colorAttachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
-    colorAttachment.id = 0
     colorAttachment.pixelFormat = nil
     colorAttachment.writeAlpha = true
     colorAttachment.writeRed = true

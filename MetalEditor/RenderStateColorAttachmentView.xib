@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A279b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="RenderStateColorAttachmentViewController" customModule="MetalEditor" customModuleProvider="target">
+            <connections>
+                <outlet property="alphaBlendOpCheckBox" destination="DJT-zd-60M" id="Nfq-ui-FKm"/>
+                <outlet property="alphaDestBlendFactorCheckBox" destination="Lt3-Hb-MPz" id="yL2-ZW-iwx"/>
+                <outlet property="alphaSourceBlendFactorCheckBox" destination="aKg-uj-0rQ" id="o35-es-kAE"/>
+                <outlet property="alphaWriteMaskCheckBox" destination="oN6-NA-gc1" id="L9i-jd-ACK"/>
+                <outlet property="blendingCheckBox" destination="atw-uK-3UC" id="4PK-Qc-xlv"/>
+                <outlet property="blueWriteMaskCheckBox" destination="FIk-1Y-QgA" id="lc0-51-zaG"/>
+                <outlet property="greenWriteMaskCheckBox" destination="IqH-5h-yYG" id="FtE-kM-oKF"/>
+                <outlet property="pixelFormatPopUp" destination="7hx-oV-BJG" id="thK-Lj-aSR"/>
+                <outlet property="redWriteMaskCheckBox" destination="9yA-Oa-dfB" id="Otq-Dx-uDb"/>
+                <outlet property="rgbBlendOpCheckBox" destination="VqN-3q-6Yf" id="O7b-Zp-SDd"/>
+                <outlet property="rgbDestBlendFactorCheckBox" destination="1nJ-YP-WHV" id="ak2-78-oxf"/>
+                <outlet property="rgbSourceBlendFactorCheckBox" destination="uwg-NR-Ztj" id="FJ2-m8-BMp"/>
+                <outlet property="view" destination="c22-O7-iKe" id="PlG-UN-PAN"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="285"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PFo-ro-gDx">
+                    <rect key="frame" x="18" y="248" width="79" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Pixel Format" id="Wgk-Le-DnX">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7hx-oV-BJG">
+                    <rect key="frame" x="101" y="242" width="227" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="zzC-br-Li2" id="DBC-lw-Imb">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="IEC-sY-bWR">
+                            <items>
+                                <menuItem title="Item 1" state="on" id="zzC-br-Li2"/>
+                                <menuItem title="Item 2" id="AON-14-59V"/>
+                                <menuItem title="Item 3" id="pBG-r4-uOD"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="pixelFormatSelected:" target="-2" id="mt8-r7-ROO"/>
+                    </connections>
+                </popUpButton>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5DD-0e-jLX">
+                    <rect key="frame" x="331" y="248" width="111" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="RGBA Write Mask" id="c65-el-5Do">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="IqH-5h-yYG">
+                    <rect key="frame" x="464" y="247" width="22" height="18"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="BEe-aK-LLI">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="writeMaskChecked:" target="-2" id="RIX-kM-xWa"/>
+                    </connections>
+                </button>
+                <button horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="FIk-1Y-QgA">
+                    <rect key="frame" x="482" y="247" width="22" height="18"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="D3Y-6j-DMG">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="writeMaskChecked:" target="-2" id="KrD-Oe-Of6"/>
+                    </connections>
+                </button>
+                <button horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="oN6-NA-gc1">
+                    <rect key="frame" x="500" y="247" width="22" height="18"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6Sw-Gh-Ray">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="writeMaskChecked:" target="-2" id="1Is-8q-4ho"/>
+                    </connections>
+                </button>
+                <button horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="9yA-Oa-dfB">
+                    <rect key="frame" x="446" y="247" width="22" height="18"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dl5-Ur-gop">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="writeMaskChecked:" target="-2" id="3I9-XV-G1Z"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="atw-uK-3UC">
+                    <rect key="frame" x="18" y="221" width="75" height="18"/>
+                    <animations/>
+                    <buttonCell key="cell" type="check" title="Blending" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="r4V-Jf-gSI">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="blendingChecked:" target="-2" id="eh8-9T-fZR"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QuV-JL-85o">
+                    <rect key="frame" x="206" y="198" width="128" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Blending Operations" id="sSB-tG-vBN">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kxY-bt-bwn">
+                    <rect key="frame" x="18" y="172" width="31" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="RGB" id="EEA-2M-L68">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kdP-EL-0RY">
+                    <rect key="frame" x="268" y="172" width="39" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Alpha" id="q1o-1B-Wfo">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VqN-3q-6Yf">
+                    <rect key="frame" x="53" y="166" width="142" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="PJk-gz-h7o">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="d1w-90-oT7">
+                            <items>
+                                <menuItem title="Add" id="L3x-th-Eyx"/>
+                                <menuItem title="Subtract" id="ql0-Hf-JhG"/>
+                                <menuItem title="Reverse Subtract" id="nth-B2-iFz"/>
+                                <menuItem title="Min" id="kpa-Fc-iHI">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Max" id="BDM-wO-fgA">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="rgbBlendOpSelected:" target="-2" id="eHb-3y-nKS"/>
+                    </connections>
+                </popUpButton>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DJT-zd-60M">
+                    <rect key="frame" x="311" y="166" width="142" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="thF-cf-V5D" id="tRk-Ip-VvF">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="TOc-45-L38">
+                            <items>
+                                <menuItem title="Add" id="thF-cf-V5D"/>
+                                <menuItem title="Subtract" state="on" id="iBT-aI-b24"/>
+                                <menuItem title="Reverse Subtract" id="g7h-pB-FMt"/>
+                                <menuItem title="Min" id="Ikg-vG-lhb">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Max" id="YdZ-48-0oU">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="alphaBlendOpSelected:" target="-2" id="G8E-UV-DLA"/>
+                    </connections>
+                </popUpButton>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y9f-yf-nye">
+                    <rect key="frame" x="203" y="144" width="134" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Source Blend Factors" id="KBL-gi-ti2">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gKs-tu-Fbb">
+                    <rect key="frame" x="187" y="90" width="166" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Destinations Blend Factors" id="fZl-WF-pbl">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lxp-Yf-oBS">
+                    <rect key="frame" x="18" y="118" width="31" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="RGB" id="kAn-67-ODO">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J3t-0c-MHM">
+                    <rect key="frame" x="18" y="64" width="31" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="RGB" id="UHR-A0-b1y">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vmy-pI-yqh">
+                    <rect key="frame" x="268" y="118" width="39" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Alpha" id="hdt-sL-J39">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZvV-8K-3k2">
+                    <rect key="frame" x="268" y="64" width="39" height="17"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Alpha" id="WS3-5D-xMe">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uwg-NR-Ztj">
+                    <rect key="frame" x="53" y="112" width="212" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" title="Zero" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="BfR-5G-h5N" id="6x9-tS-MXf">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="rsN-4S-B6Z">
+                            <items>
+                                <menuItem title="Zero" state="on" id="BfR-5G-h5N"/>
+                                <menuItem title="One" id="v6H-zh-fJc"/>
+                                <menuItem title="Source Color" id="d0O-LN-0bP"/>
+                                <menuItem title="One Minus Source Color" id="uEe-Cz-EgF">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Source Alpha" id="7M1-5H-dFF">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Source Alpha" id="xAl-IQ-IK1">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Destination Color" id="pXO-xW-hd1">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Destination Color" id="AvK-vX-Zhj">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Destination Alpha" id="Cgk-ja-FSW">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Destination Alpha" id="cOK-RD-kif">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Source Alpha Saturated" id="Gdn-hc-1XD">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Blend Color" id="72W-Rp-ga1">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Blend Color" id="FoT-4S-rq3">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Blend Alpha" id="70y-PM-iwr">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Blend Alpha" id="Eap-n7-vu4">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="rgbSourceBlendFactorSelected:" target="-2" id="JzC-xa-qSM"/>
+                    </connections>
+                </popUpButton>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aKg-uj-0rQ">
+                    <rect key="frame" x="311" y="112" width="212" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" title="Zero" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Pfw-g7-NbT" id="GQ7-Fe-VTK">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="mhQ-1s-Gzf">
+                            <items>
+                                <menuItem title="Zero" id="Pfw-g7-NbT"/>
+                                <menuItem title="One" id="ZBD-Zr-dhs"/>
+                                <menuItem title="Source Color" id="Bty-PQ-hG1"/>
+                                <menuItem title="One Minus Source Color" id="62e-Ty-LpL">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Source Alpha" id="1lM-QH-aWc">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Source Alpha" id="Dc7-CI-k7l">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Destination Color" id="5Od-Oe-ZGd">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Destination Color" id="l1c-nD-S53">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Destination Alpha" id="jvO-fA-3qU">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Destination Alpha" id="D37-SP-jnR">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Source Alpha Saturated" id="fW1-OQ-2aF">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Blend Color" id="9W8-HC-JHq">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Blend Color" state="on" id="djo-GD-Gkw">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Blend Alpha" id="EhN-1G-uin">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Blend Alpha" id="NA9-zZ-yOG">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="alphaSourceBlendFactorSelected:" target="-2" id="ahF-p2-N1s"/>
+                    </connections>
+                </popUpButton>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1nJ-YP-WHV">
+                    <rect key="frame" x="53" y="58" width="212" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" title="Zero" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VV0-sM-GYu" id="zIN-8N-dpu">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="7Br-Vv-7yh">
+                            <items>
+                                <menuItem title="Zero" id="VV0-sM-GYu"/>
+                                <menuItem title="One" id="DLA-vY-tWw"/>
+                                <menuItem title="Source Color" id="2qY-v7-T1L"/>
+                                <menuItem title="One Minus Source Color" id="TOd-rQ-SGn">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Source Alpha" id="9tA-3P-ml2">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Source Alpha" id="tLh-vw-EZH">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Destination Color" id="rxy-Br-cke">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Destination Color" id="9s9-te-2s5">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Destination Alpha" id="6Bk-Ev-PnM">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Destination Alpha" id="MqW-oQ-gPd">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Source Alpha Saturated" id="w42-VO-gYp">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Blend Color" id="gJg-d0-zOP">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Blend Color" state="on" id="js9-Qf-a3e">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Blend Alpha" id="rqJ-Cl-QO3">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Blend Alpha" id="DlH-eF-2kQ">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="rgbDestBlendFactorSelected:" target="-2" id="QXQ-Ll-MUo"/>
+                    </connections>
+                </popUpButton>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lt3-Hb-MPz">
+                    <rect key="frame" x="311" y="58" width="212" height="26"/>
+                    <animations/>
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="wDg-AM-LjK">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="qbS-ou-NCt">
+                            <items>
+                                <menuItem title="Zero" id="VEJ-ai-Qvu"/>
+                                <menuItem title="One" id="ajC-nO-ERJ"/>
+                                <menuItem title="Source Color" id="daN-T2-kCY"/>
+                                <menuItem title="One Minus Source Color" id="7Ce-G8-0rt">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Source Alpha" id="BJV-vS-897">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Source Alpha" id="a0E-Ab-2YA">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Destination Color" id="HNB-gP-PQG">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Destination Color" id="USY-cb-fHN">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Destination Alpha" id="0oY-ZS-jhU">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Destination Alpha" id="ByT-xv-LSs">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Source Alpha Saturated" id="FKl-eq-5bs">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Blend Color" id="fJz-dC-51J">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Blend Color" state="on" id="CGc-dP-Cd6">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Blend Alpha" id="KFp-b7-V2H">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="One Minus Blend Alpha" id="WTD-jB-Ive">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="alphaDestBlendFactorSelected:" target="-2" id="lX5-9b-UhV"/>
+                    </connections>
+                </popUpButton>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o7C-ye-dRx">
+                    <rect key="frame" x="479" y="13" width="47" height="32"/>
+                    <animations/>
+                    <buttonCell key="cell" type="push" title="-" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ebc-Yp-50p">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removePushed:" target="-2" id="UYC-te-Ywq"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="FIk-1Y-QgA" firstAttribute="baseline" secondItem="PFo-ro-gDx" secondAttribute="baseline" id="0gF-7q-Gfo"/>
+                <constraint firstItem="IqH-5h-yYG" firstAttribute="leading" secondItem="9yA-Oa-dfB" secondAttribute="trailing" id="14f-Gg-J9K"/>
+                <constraint firstItem="5DD-0e-jLX" firstAttribute="leading" secondItem="7hx-oV-BJG" secondAttribute="trailing" constant="8" symbolic="YES" id="1KU-xd-ZgI"/>
+                <constraint firstItem="ZvV-8K-3k2" firstAttribute="baseline" secondItem="J3t-0c-MHM" secondAttribute="baseline" id="29d-r1-SuK"/>
+                <constraint firstItem="Vmy-pI-yqh" firstAttribute="baseline" secondItem="Lxp-Yf-oBS" secondAttribute="baseline" id="2Id-8k-kCf"/>
+                <constraint firstAttribute="trailing" secondItem="oN6-NA-gc1" secondAttribute="trailing" constant="20" symbolic="YES" id="2QK-W6-njp"/>
+                <constraint firstItem="VqN-3q-6Yf" firstAttribute="top" secondItem="QuV-JL-85o" secondAttribute="bottom" constant="8" symbolic="YES" id="3zQ-Jg-N8K"/>
+                <constraint firstItem="DJT-zd-60M" firstAttribute="leading" secondItem="kdP-EL-0RY" secondAttribute="trailing" constant="8" symbolic="YES" id="46O-Jx-xZI"/>
+                <constraint firstItem="aKg-uj-0rQ" firstAttribute="leading" secondItem="Vmy-pI-yqh" secondAttribute="trailing" constant="8" symbolic="YES" id="52G-ei-QRz"/>
+                <constraint firstItem="IqH-5h-yYG" firstAttribute="baseline" secondItem="PFo-ro-gDx" secondAttribute="baseline" id="6uV-3B-IzS"/>
+                <constraint firstItem="DJT-zd-60M" firstAttribute="baseline" secondItem="kxY-bt-bwn" secondAttribute="baseline" id="7UR-YD-3ks"/>
+                <constraint firstItem="y9f-yf-nye" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="8Z6-Gg-odV"/>
+                <constraint firstItem="kdP-EL-0RY" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="trailing" multiplier="0.5" id="8ya-Dg-8BM"/>
+                <constraint firstItem="kxY-bt-bwn" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="9PF-u6-LEu"/>
+                <constraint firstItem="9yA-Oa-dfB" firstAttribute="leading" secondItem="5DD-0e-jLX" secondAttribute="trailing" constant="8" symbolic="YES" id="Ahl-e0-dgW"/>
+                <constraint firstItem="oN6-NA-gc1" firstAttribute="baseline" secondItem="PFo-ro-gDx" secondAttribute="baseline" id="CFA-u9-IlN"/>
+                <constraint firstItem="kdP-EL-0RY" firstAttribute="baseline" secondItem="kxY-bt-bwn" secondAttribute="baseline" id="CaV-PZ-duc"/>
+                <constraint firstAttribute="trailing" secondItem="o7C-ye-dRx" secondAttribute="trailing" constant="20" symbolic="YES" id="Cmj-Hf-ksz"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Lt3-Hb-MPz" secondAttribute="trailing" constant="20" symbolic="YES" id="CrE-fN-oEm"/>
+                <constraint firstItem="Lt3-Hb-MPz" firstAttribute="leading" secondItem="ZvV-8K-3k2" secondAttribute="trailing" constant="8" symbolic="YES" id="DXD-jj-Axm"/>
+                <constraint firstItem="QuV-JL-85o" firstAttribute="top" secondItem="atw-uK-3UC" secondAttribute="bottom" constant="8" symbolic="YES" id="G3v-cg-PU2"/>
+                <constraint firstItem="atw-uK-3UC" firstAttribute="top" secondItem="7hx-oV-BJG" secondAttribute="bottom" constant="8" symbolic="YES" id="GYF-cT-axO"/>
+                <constraint firstItem="VqN-3q-6Yf" firstAttribute="leading" secondItem="kxY-bt-bwn" secondAttribute="trailing" constant="8" symbolic="YES" id="JTd-tn-8hf"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aKg-uj-0rQ" secondAttribute="trailing" constant="20" symbolic="YES" id="M4S-NU-ko5"/>
+                <constraint firstItem="FIk-1Y-QgA" firstAttribute="leading" secondItem="IqH-5h-yYG" secondAttribute="trailing" id="Nhw-v2-xXL"/>
+                <constraint firstItem="1nJ-YP-WHV" firstAttribute="leading" secondItem="J3t-0c-MHM" secondAttribute="trailing" constant="8" symbolic="YES" id="OLx-4W-kJs"/>
+                <constraint firstItem="7hx-oV-BJG" firstAttribute="leading" secondItem="PFo-ro-gDx" secondAttribute="trailing" constant="8" symbolic="YES" id="PJh-2K-zBD"/>
+                <constraint firstItem="gKs-tu-Fbb" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="Pbi-aA-WmF"/>
+                <constraint firstItem="9yA-Oa-dfB" firstAttribute="baseline" secondItem="PFo-ro-gDx" secondAttribute="baseline" id="RFk-ws-dgX"/>
+                <constraint firstItem="Vmy-pI-yqh" firstAttribute="leading" secondItem="kdP-EL-0RY" secondAttribute="leading" id="SSi-6j-mqj"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DJT-zd-60M" secondAttribute="trailing" constant="20" symbolic="YES" id="TOx-f2-EDL"/>
+                <constraint firstItem="VqN-3q-6Yf" firstAttribute="baseline" secondItem="kxY-bt-bwn" secondAttribute="baseline" id="Tvu-Pu-GPS"/>
+                <constraint firstItem="oN6-NA-gc1" firstAttribute="leading" secondItem="FIk-1Y-QgA" secondAttribute="trailing" id="VMQ-ZS-FxU"/>
+                <constraint firstItem="ZvV-8K-3k2" firstAttribute="leading" secondItem="kdP-EL-0RY" secondAttribute="leading" id="WA2-Uh-LS0"/>
+                <constraint firstItem="Lt3-Hb-MPz" firstAttribute="baseline" secondItem="J3t-0c-MHM" secondAttribute="baseline" id="WVi-Sn-EA5"/>
+                <constraint firstItem="Lxp-Yf-oBS" firstAttribute="leading" secondItem="kxY-bt-bwn" secondAttribute="leading" id="YXb-tz-KJ6"/>
+                <constraint firstAttribute="bottom" secondItem="o7C-ye-dRx" secondAttribute="bottom" constant="20" symbolic="YES" id="YYF-0V-EuB"/>
+                <constraint firstItem="uwg-NR-Ztj" firstAttribute="top" secondItem="y9f-yf-nye" secondAttribute="bottom" constant="8" symbolic="YES" id="Yh2-xo-Twq"/>
+                <constraint firstItem="atw-uK-3UC" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="bFv-FQ-6Qc"/>
+                <constraint firstItem="uwg-NR-Ztj" firstAttribute="leading" secondItem="Lxp-Yf-oBS" secondAttribute="trailing" constant="8" symbolic="YES" id="bbG-b5-iC7"/>
+                <constraint firstItem="7hx-oV-BJG" firstAttribute="baseline" secondItem="PFo-ro-gDx" secondAttribute="baseline" id="gif-7M-p9v"/>
+                <constraint firstItem="uwg-NR-Ztj" firstAttribute="baseline" secondItem="Lxp-Yf-oBS" secondAttribute="baseline" id="juT-gk-BfK"/>
+                <constraint firstItem="o7C-ye-dRx" firstAttribute="top" secondItem="Lt3-Hb-MPz" secondAttribute="bottom" constant="20" symbolic="YES" id="kKx-5Y-rxn"/>
+                <constraint firstItem="PFo-ro-gDx" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="lPf-Vb-hfW"/>
+                <constraint firstItem="QuV-JL-85o" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="mk8-if-udv"/>
+                <constraint firstItem="1nJ-YP-WHV" firstAttribute="top" secondItem="gKs-tu-Fbb" secondAttribute="bottom" constant="8" symbolic="YES" id="n5M-bX-23F"/>
+                <constraint firstItem="1nJ-YP-WHV" firstAttribute="baseline" secondItem="J3t-0c-MHM" secondAttribute="baseline" id="nlG-fI-jnC"/>
+                <constraint firstItem="kdP-EL-0RY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VqN-3q-6Yf" secondAttribute="trailing" constant="8" symbolic="YES" id="ntN-Mk-Aup"/>
+                <constraint firstItem="ZvV-8K-3k2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1nJ-YP-WHV" secondAttribute="trailing" constant="8" symbolic="YES" id="p2T-0C-kvg"/>
+                <constraint firstItem="Vmy-pI-yqh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uwg-NR-Ztj" secondAttribute="trailing" constant="8" symbolic="YES" id="pj6-Lx-fIh"/>
+                <constraint firstItem="J3t-0c-MHM" firstAttribute="leading" secondItem="kxY-bt-bwn" secondAttribute="leading" id="r3L-rA-izX"/>
+                <constraint firstItem="5DD-0e-jLX" firstAttribute="baseline" secondItem="PFo-ro-gDx" secondAttribute="baseline" id="tUr-8b-LTF"/>
+                <constraint firstItem="PFo-ro-gDx" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="u2U-0n-he9"/>
+                <constraint firstItem="y9f-yf-nye" firstAttribute="top" secondItem="VqN-3q-6Yf" secondAttribute="bottom" constant="8" symbolic="YES" id="u6W-gq-I56"/>
+                <constraint firstItem="gKs-tu-Fbb" firstAttribute="top" secondItem="uwg-NR-Ztj" secondAttribute="bottom" constant="8" symbolic="YES" id="wRd-vF-zrB"/>
+                <constraint firstItem="aKg-uj-0rQ" firstAttribute="baseline" secondItem="Lxp-Yf-oBS" secondAttribute="baseline" id="x2m-ay-Xr5"/>
+            </constraints>
+            <animations/>
+            <point key="canvasLocation" x="355" y="470"/>
+        </customView>
+    </objects>
+</document>
