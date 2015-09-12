@@ -83,7 +83,6 @@ func main() {
     colorAttachment.sourceRGBBlendFactor = MTLBlendFactor.One.rawValue
 
     let renderPipelineState = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineState", inManagedObjectContext: managedObjectContext) as! RenderPipelineState
-    renderPipelineState.id = 0
     renderPipelineState.name = "Render State"
     renderPipelineState.vertexFunction = "vertexIdentity"
     renderPipelineState.fragmentFunction = "fragmentRed"

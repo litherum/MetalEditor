@@ -109,6 +109,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         buffersTableViewDelegate.modelObserver = self
         renderStateUIController.managedObjectContext = managedObjectContext
         renderStateUIController.modelObserver = self
+        renderStateUIController.populate()
 
         let textureFetchRequest = NSFetchRequest(entityName: "Texture")
         do {

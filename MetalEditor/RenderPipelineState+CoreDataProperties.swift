@@ -17,7 +17,6 @@ extension RenderPipelineState {
     @NSManaged var alphaToCoverageEnabled: NSNumber
     @NSManaged var depthAttachmentPixelFormat: NSNumber?
     @NSManaged var fragmentFunction: String
-    @NSManaged var id: NSNumber
     @NSManaged var name: String
     @NSManaged var sampleCount: NSNumber?
     @NSManaged var stencilAttachmentPixelFormat: NSNumber?

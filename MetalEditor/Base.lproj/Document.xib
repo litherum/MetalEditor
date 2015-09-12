@@ -423,51 +423,44 @@
                                             <rect key="frame" x="32" y="7" width="406" height="734"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="602" horizontalPageScroll="10" verticalLineScroll="602" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVU-ZZ-PDG">
+                                                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbV-47-KGV">
                                                     <rect key="frame" x="0.0" y="61" width="406" height="673"/>
-                                                    <clipView key="contentView" id="9Ng-Zp-LyN">
+                                                    <clipView key="contentView" id="CI3-a7-Ys4">
                                                         <rect key="frame" x="1" y="1" width="404" height="671"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" alternatingRowBackgroundColors="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="600" viewBased="YES" id="HTi-RO-tZ4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="404" height="0.0"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
+                                                            <view misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FAy-AK-Blc" customClass="FlippedView" customModule="MetalEditor" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="577" width="181" height="94"/>
+                                                                <subviews>
+                                                                    <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5Q-ap-GCb">
+                                                                        <rect key="frame" x="35" y="-53" width="110" height="200"/>
+                                                                        <animations/>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="j5Q-ap-GCb" secondAttribute="trailing" id="1DI-mD-tkv"/>
+                                                                    <constraint firstItem="j5Q-ap-GCb" firstAttribute="top" secondItem="FAy-AK-Blc" secondAttribute="top" id="Gsg-56-j1V"/>
+                                                                    <constraint firstItem="j5Q-ap-GCb" firstAttribute="leading" secondItem="FAy-AK-Blc" secondAttribute="leading" id="exQ-qk-qV3"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="j5Q-ap-GCb" secondAttribute="bottom" id="vP0-id-cYZ"/>
+                                                                </constraints>
                                                                 <animations/>
-                                                                <size key="intercellSpacing" width="3" height="2"/>
-                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                                                <tableColumns>
-                                                                    <tableColumn width="401" minWidth="40" maxWidth="1000" id="hAQ-7B-AxC">
-                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                                            <font key="font" metaFont="smallSystem"/>
-                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                                        </tableHeaderCell>
-                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="bCq-tZ-skk">
-                                                                            <font key="font" metaFont="system"/>
-                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                        </textFieldCell>
-                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                                    </tableColumn>
-                                                                </tableColumns>
-                                                                <connections>
-                                                                    <outlet property="dataSource" destination="cqf-KK-mFS" id="HxD-y0-E33"/>
-                                                                    <outlet property="delegate" destination="cqf-KK-mFS" id="fPA-p7-pOv"/>
-                                                                </connections>
-                                                            </tableView>
+                                                            </view>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="FAy-AK-Blc" firstAttribute="top" secondItem="CI3-a7-Ys4" secondAttribute="top" id="kpF-9z-bCu"/>
+                                                            <constraint firstItem="FAy-AK-Blc" firstAttribute="width" secondItem="CI3-a7-Ys4" secondAttribute="width" id="n8c-zf-aQj"/>
+                                                            <constraint firstItem="FAy-AK-Blc" firstAttribute="leading" secondItem="CI3-a7-Ys4" secondAttribute="leading" id="r8C-4G-D3t"/>
+                                                        </constraints>
                                                         <animations/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </clipView>
                                                     <animations/>
-                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="jfs-aM-6BR">
-                                                        <rect key="frame" x="-100" y="-100" width="356" height="16"/>
+                                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="NUK-ur-2j1">
+                                                        <rect key="frame" x="1" y="656" width="404" height="16"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <animations/>
                                                     </scroller>
-                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="4jp-fx-OXZ">
-                                                        <rect key="frame" x="353" y="1" width="16" height="260"/>
+                                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="3da-1S-6nL">
+                                                        <rect key="frame" x="389" y="1" width="16" height="671"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <animations/>
                                                     </scroller>
@@ -485,12 +478,12 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="RVU-ZZ-PDG" secondAttribute="trailing" id="M8d-wM-pYb"/>
-                                                <constraint firstItem="UbN-C0-MCU" firstAttribute="top" secondItem="RVU-ZZ-PDG" secondAttribute="bottom" constant="20" symbolic="YES" id="PRQ-dI-TMz"/>
+                                                <constraint firstItem="MbV-47-KGV" firstAttribute="top" secondItem="6qP-U5-VmT" secondAttribute="top" id="8bU-Tf-ICK"/>
                                                 <constraint firstAttribute="bottom" secondItem="UbN-C0-MCU" secondAttribute="bottom" constant="20" symbolic="YES" id="PSI-Tk-q5n"/>
                                                 <constraint firstAttribute="trailing" secondItem="UbN-C0-MCU" secondAttribute="trailing" constant="20" symbolic="YES" id="bp7-2C-Vvy"/>
-                                                <constraint firstItem="RVU-ZZ-PDG" firstAttribute="top" secondItem="6qP-U5-VmT" secondAttribute="top" id="eAM-MC-lTG"/>
-                                                <constraint firstItem="RVU-ZZ-PDG" firstAttribute="leading" secondItem="6qP-U5-VmT" secondAttribute="leading" id="vhQ-e1-Bvi"/>
+                                                <constraint firstItem="UbN-C0-MCU" firstAttribute="top" secondItem="MbV-47-KGV" secondAttribute="bottom" constant="20" symbolic="YES" id="iNJ-z7-mF1"/>
+                                                <constraint firstItem="MbV-47-KGV" firstAttribute="leading" secondItem="6qP-U5-VmT" secondAttribute="leading" id="y9X-U4-xkA"/>
+                                                <constraint firstAttribute="trailing" secondItem="MbV-47-KGV" secondAttribute="trailing" id="zF0-Sh-iZU"/>
                                             </constraints>
                                             <animations/>
                                         </view>
@@ -754,8 +747,7 @@
         </customObject>
         <viewController id="cqf-KK-mFS" userLabel="Render State UI Controller" customClass="RenderStateUIController" customModule="MetalEditor" customModuleProvider="target">
             <connections>
-                <outlet property="detailColumn" destination="hAQ-7B-AxC" id="LhJ-dw-kIi"/>
-                <outlet property="tableView" destination="HTi-RO-tZ4" id="5uh-da-1Gx"/>
+                <outlet property="stackView" destination="j5Q-ap-GCb" id="ylO-O6-PO6"/>
                 <outlet property="view" destination="6qP-U5-VmT" id="H4l-pP-Jtg"/>
             </connections>
         </viewController>

@@ -12,11 +12,10 @@ protocol RenderPipelineStateRemoveObserver: class {
     func removeRenderPipelineState(controller: RenderStateViewController)
 }
 
-class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, RenderPipelineStateRemoveObserver {
+class RenderStateUIController: NSViewController, RenderPipelineStateRemoveObserver {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
-    @IBOutlet var tableView: NSTableView!
-    @IBOutlet var detailColumn: NSTableColumn!
+    @IBOutlet var stackView: NSStackView!
 
     private func numberOfStates() -> Int {
         let fetchRequest = NSFetchRequest(entityName: "RenderPipelineState")
@@ -26,50 +25,52 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         return result
     }
 
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
-        return numberOfStates()
+    private func numberOfVertexAttributes() -> Int {
+        let fetchRequest = NSFetchRequest(entityName: "VertexAttribute")
+        var error: NSError?
+        let result = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
+        assert(error == nil)
+        return result
     }
 
-    private func getState(index: Int) -> RenderPipelineState {
+    private func numberOfVertexBufferLayouts() -> Int {
+        let fetchRequest = NSFetchRequest(entityName: "VertexBufferLayout")
+        var error: NSError?
+        let result = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
+        assert(error == nil)
+        return result
+    }
+
+    func populate() {
         let fetchRequest = NSFetchRequest(entityName: "RenderPipelineState")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        // <rdar://problem/22108925> managedObjectContext.executeFetchRequest() crashes if you add two objects.
-        // FIXME: This is a hack.
-        //fetchRequest.fetchLimit = 1
-        //fetchRequest.fetchOffset = index
-        
         do {
-            let states = try managedObjectContext.executeFetchRequest(fetchRequest) as! [RenderPipelineState]
-            return states[index]
+            let states = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [RenderPipelineState]
+            for state in states {
+                addStateView(state)
+            }
         } catch {
-            fatalError()
         }
     }
 
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let column = tableColumn!
-        let state = getState(row)
-        assert(column == detailColumn)
-        // FIXME: Seems silly to keep these all around in memory at once
-        while childViewControllers.count <= row {
-            let controller = RenderStateViewController(nibName: "RenderStateView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: state, removeObserver: self)!
-            childViewControllers.append(controller)
-        }
-        return childViewControllers[row].view
+    func addStateView(renderPipelineState: RenderPipelineState) {
+        let controller = RenderStateViewController(nibName: "RenderStateView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, state: renderPipelineState, removeObserver: self)!
+        addChildViewController(controller)
+        controller.view.addConstraint(NSLayoutConstraint(item: controller.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: 600))
+        stackView.addArrangedSubview(controller.view)
     }
 
     @IBAction func add(sender: NSButton) {
-        let stateCount = numberOfStates()
-
         let vertexAttribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
         vertexAttribute.format = MTLVertexFormat.Float2.rawValue
         vertexAttribute.offset = 0
         vertexAttribute.bufferIndex = 0
+        vertexAttribute.id = numberOfVertexAttributes()
 
         let vertexBufferLayout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
         vertexBufferLayout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
         vertexBufferLayout.stepRate = 1
         vertexBufferLayout.stride = 8
+        vertexBufferLayout.id = numberOfVertexBufferLayouts()
 
         let colorAttachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
         colorAttachment.pixelFormat = nil
@@ -86,8 +87,7 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         colorAttachment.sourceRGBBlendFactor = MTLBlendFactor.One.rawValue
 
         let renderPipelineState = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineState", inManagedObjectContext: managedObjectContext) as! RenderPipelineState
-        renderPipelineState.id = stateCount
-        renderPipelineState.name = "Render State \(stateCount)"
+        renderPipelineState.name = "Render State \(numberOfStates())"
         renderPipelineState.vertexFunction = "vertexIdentity"
         renderPipelineState.fragmentFunction = "fragmentRed"
         renderPipelineState.alphaToCoverageEnabled = false
@@ -99,7 +99,7 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
         renderPipelineState.mutableOrderedSetValueForKey("vertexAttributes").addObject(vertexAttribute)
         renderPipelineState.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(vertexBufferLayout)
 
-        tableView.reloadData()
+        addStateView(renderPipelineState)
         modelObserver.modelDidChange()
     }
 
@@ -121,7 +121,7 @@ class RenderStateUIController: NSViewController, NSTableViewDelegate, NSTableVie
                 break
             }
         }
-        tableView.reloadData()
+        controller.view.removeFromSuperview()
         modelObserver.modelDidChange()
     }
 }

@@ -132,7 +132,6 @@
         <attribute name="alphaToOneEnabled" attributeType="Boolean" syncable="YES"/>
         <attribute name="depthAttachmentPixelFormat" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="fragmentFunction" attributeType="String" syncable="YES"/>
-        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="inputPrimitiveTopology" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="rasterizationEnabled" attributeType="Boolean" syncable="YES"/>
@@ -235,7 +234,7 @@
         <element name="RenderPassAttachment" positionX="9" positionY="153" width="128" height="195"/>
         <element name="RenderPassDescriptor" positionX="-9" positionY="135" width="128" height="135"/>
         <element name="RenderPipelineColorAttachment" positionX="-9" positionY="63" width="128" height="240"/>
-        <element name="RenderPipelineState" positionX="45" positionY="117" width="128" height="270"/>
+        <element name="RenderPipelineState" positionX="45" positionY="117" width="128" height="255"/>
         <element name="ScissorRect" positionX="-9" positionY="135" width="128" height="120"/>
         <element name="Size" positionX="18" positionY="90" width="128" height="120"/>
         <element name="StencilAttachment" positionX="18" positionY="162" width="128" height="75"/>
