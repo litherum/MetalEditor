@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A263e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A279b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
@@ -213,7 +213,7 @@
                                             </tableCellView>
                                         </prototypeCellViews>
                                     </tableColumn>
-                                    <tableColumn width="290.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="cp4-kR-wgs">
+                                    <tableColumn width="289.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="cp4-kR-wgs">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Buffer Index">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -1077,11 +1077,11 @@
                         <constraint firstItem="ktZ-UL-gWM" firstAttribute="leading" secondItem="Wif-th-nfY" secondAttribute="trailing" constant="8" symbolic="YES" id="8dr-o0-M2C"/>
                         <constraint firstItem="Wt2-nZ-512" firstAttribute="leading" secondItem="ktZ-UL-gWM" secondAttribute="leading" id="9Nh-Xo-bkk"/>
                         <constraint firstAttribute="trailing" secondItem="FiX-k6-FX0" secondAttribute="trailing" id="DNM-uL-gfL"/>
+                        <constraint firstItem="FiX-k6-FX0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="byl-9S-eKA" secondAttribute="trailing" constant="8" symbolic="YES" id="Dkm-CF-vgW"/>
                         <constraint firstItem="Wif-th-nfY" firstAttribute="leading" secondItem="N4y-yF-7yv" secondAttribute="leading" id="E7p-Br-bNY"/>
                         <constraint firstItem="TeT-RB-8wu" firstAttribute="top" secondItem="aTG-DU-wmF" secondAttribute="top" id="FF7-wJ-GlS"/>
                         <constraint firstItem="byl-9S-eKA" firstAttribute="leading" secondItem="gwi-G0-7fi" secondAttribute="trailing" constant="8" symbolic="YES" id="JsK-F0-g2i"/>
                         <constraint firstItem="Wt2-nZ-512" firstAttribute="baseline" secondItem="TeT-RB-8wu" secondAttribute="baseline" id="LCd-eR-HSa"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="byl-9S-eKA" secondAttribute="trailing" id="LTm-AS-0a9"/>
                         <constraint firstItem="Wif-th-nfY" firstAttribute="bottom" secondItem="X2V-yE-96O" secondAttribute="bottom" id="NGp-BO-hGR"/>
                         <constraint firstItem="N4y-yF-7yv" firstAttribute="baseline" secondItem="TeT-RB-8wu" secondAttribute="baseline" id="NHt-lc-x1s"/>
                         <constraint firstItem="ktZ-UL-gWM" firstAttribute="bottom" secondItem="X2V-yE-96O" secondAttribute="bottom" id="UZb-hb-Upg"/>

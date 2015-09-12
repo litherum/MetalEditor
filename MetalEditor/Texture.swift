@@ -12,11 +12,11 @@ import CoreData
 class Texture: NSManagedObject {
     override func validateForInsert() throws {
         try super.validateForInsert()
-        try validateUnique("Texture", managedObjectContext: managedObjectContext!, name: name, id: id, probe: self)
+        try validatePropertyIsUnique("Texture", managedObjectContext: managedObjectContext!, name: "name", value: name, probe: self)
     }
 
     override func validateForUpdate() throws {
         try super.validateForUpdate()
-        try validateUnique("Texture", managedObjectContext: managedObjectContext!, name: name, id: id, probe: self)
+        try validatePropertyIsUnique("Texture", managedObjectContext: managedObjectContext!, name: "name", value: name, probe: self)
     }
 }

@@ -105,7 +105,7 @@
                         <animations/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="SZ0-G7-tn2">
-                        <rect key="frame" x="250" y="1" width="15" height="481"/>
+                        <rect key="frame" x="249" y="1" width="16" height="481"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>

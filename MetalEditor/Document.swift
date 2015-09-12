@@ -20,13 +20,13 @@ protocol DepthStencilStateRemoveObserver: class {
     func removeDepthStencilState(controller: DepthStencilStateViewController)
 }
 
-class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver, PassRemoveObserver, DepthStencilStateRemoveObserver {
+class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver, TextureRemoveObserver, PassRemoveObserver, DepthStencilStateRemoveObserver {
     @IBOutlet var previewController: PreviewController!
     @IBOutlet var librarySourceView: NSTextView!
     @IBOutlet var buffersTableViewDelegate: BuffersTableViewDelegate!
-    @IBOutlet var texturesTableViewDelegate: TexturesTableViewDelegate!
     @IBOutlet var renderStateUIController: RenderStateUIController!
     @IBOutlet var splitView: NSSplitView!
+    @IBOutlet var texturesStackView: NSStackView!
     @IBOutlet var depthStencilStateStackView: NSStackView!
     @IBOutlet var invocationsStackView: NSStackView!
     @IBOutlet var sliderValues: SliderValues!
@@ -35,6 +35,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     var frame: Frame!
     var library: Library!
     var metalState: MetalState!
+    var textureInfoViewControllers: Set<TextureInfoViewController> = Set()
     // FIXME: These can just be sets. We have access to the managed objects via the controllers.
     var depthStencilStateMap: [DepthStencilStateViewController : DepthStencilState] = [:]
     var invocationMap: [InvocationsViewController : Pass] = [:]
@@ -106,15 +107,21 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
 
         buffersTableViewDelegate.managedObjectContext = managedObjectContext
         buffersTableViewDelegate.modelObserver = self
-        texturesTableViewDelegate.managedObjectContext = managedObjectContext
-        texturesTableViewDelegate.modelObserver = self
-        texturesTableViewDelegate.device = device
         renderStateUIController.managedObjectContext = managedObjectContext
         renderStateUIController.modelObserver = self
 
-        let fetchRequest = NSFetchRequest(entityName: "DepthStencilState")
+        let textureFetchRequest = NSFetchRequest(entityName: "Texture")
         do {
-            let states = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [DepthStencilState]
+            let textures = try managedObjectContext!.executeFetchRequest(textureFetchRequest) as! [Texture]
+            for texture in textures {
+                addTextureView(texture)
+            }
+        } catch {
+        }
+
+        let depthStencilFetchRequest = NSFetchRequest(entityName: "DepthStencilState")
+        do {
+            let states = try managedObjectContext!.executeFetchRequest(depthStencilFetchRequest) as! [DepthStencilState]
             for state in states {
                 addDepthStencilStateView(state)
             }
@@ -157,6 +164,34 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         } else {
             library.source = ""
         }
+        modelDidChange()
+    }
+
+    func addTextureView(texture: Texture) {
+        let viewController = TextureInfoViewController(nibName: "TextureInfoView", bundle: nil, modelObserver: self, removeObserver: self, texture: texture, device: device)!
+        texturesStackView.addArrangedSubview(viewController.view)
+        textureInfoViewControllers.insert(viewController)
+    }
+
+    @IBAction func addTexture(sender: NSButton) {
+        let texture = NSEntityDescription.insertNewObjectForEntityForName("Texture", inManagedObjectContext: managedObjectContext!) as! Texture
+        texture.name = "Texture"
+        texture.initialData = nil
+        texture.arrayLength = 1
+        texture.width = 1
+        texture.height = 1
+        texture.depth = 1
+        texture.mipmapLevelCount = 1
+        texture.sampleCount = 1
+        texture.textureType = MTLTextureType.Type2D.rawValue
+        texture.pixelFormat = MTLPixelFormat.Invalid.rawValue
+        addTextureView(texture)
+    }
+
+    func remove(controller: TextureInfoViewController) {
+        textureInfoViewControllers.remove(controller)
+        controller.view.removeFromSuperview()
+        managedObjectContext!.deleteObject(controller.texture)
         modelDidChange()
     }
 
