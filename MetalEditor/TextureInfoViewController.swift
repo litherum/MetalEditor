@@ -99,7 +99,8 @@ class TextureInfoViewController: NSViewController {
                 self.texture.textureType = newTexture.textureType.rawValue
                 self.setFieldsFromTexture()
                 self.modelObserver.modelDidChange()
-            } catch {
+            } catch let e {
+                print("Could not load file \(url): \(e)")
                 return
             }
         }
