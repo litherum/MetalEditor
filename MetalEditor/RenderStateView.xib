@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A279b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -21,9 +21,9 @@
                 <outlet property="sampleCountTextField" destination="8Sx-50-cfD" id="HfD-dQ-NlP"/>
                 <outlet property="stencilAttachmentPopUp" destination="Wif-th-nfY" id="LVs-A3-yjW"/>
                 <outlet property="vertexAttributesTableDelegate" destination="ynd-9I-4QM" id="Ffq-oM-cMj"/>
-                <outlet property="vertexAttributesTableView" destination="Z6n-ZZ-oWE" id="SfZ-kA-qRU"/>
+                <outlet property="vertexAttributesTableView" destination="Z6n-ZZ-oWE" id="R2Q-k7-EYP"/>
                 <outlet property="vertexBufferLayoutTableDelegate" destination="2qw-Qw-le7" id="ojw-5Y-9vc"/>
-                <outlet property="vertexBufferLayoutTableView" destination="Jex-P4-A5y" id="y9p-Jf-Bgv"/>
+                <outlet property="vertexBufferLayoutTableView" destination="Jex-P4-A5y" id="zF7-g0-UVf"/>
                 <outlet property="vertexFunctionTextField" destination="MJm-ly-EZA" id="MQ5-cD-kqM"/>
                 <outlet property="view" destination="bVz-qY-XJI" id="GTd-Fa-2zY"/>
             </connections>
@@ -575,7 +575,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="addVertexBufferLayout:" target="2qw-Qw-le7" id="paW-9N-ES5"/>
+                                <action selector="addVertexBufferLayout:" target="-2" id="VTJ-cC-kSy"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JaR-vl-eN2">
@@ -586,7 +586,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="removeSelectedVertexBufferLayout:" target="2qw-Qw-le7" id="EYJ-aj-gfD"/>
+                                <action selector="removeVertexBufferLayout:" target="-2" id="3Xe-fP-F0h"/>
                             </connections>
                         </button>
                     </subviews>
@@ -612,7 +612,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="addVertexAttribute:" target="ynd-9I-4QM" id="fFg-jP-A7D"/>
+                                <action selector="addVertexAttribute:" target="-2" id="II7-Ri-74c"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kZo-vZ-77N">
@@ -623,7 +623,7 @@
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                             <connections>
-                                <action selector="removeSelectedVertexAttribute:" target="ynd-9I-4QM" id="keu-uy-cAL"/>
+                                <action selector="removeVertexAttribute:" target="-2" id="Rvt-ac-dyV"/>
                             </connections>
                         </button>
                     </subviews>

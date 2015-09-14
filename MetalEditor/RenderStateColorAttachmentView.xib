@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A279b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8187.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -174,13 +174,13 @@
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DJT-zd-60M">
                     <rect key="frame" x="311" y="166" width="142" height="26"/>
                     <animations/>
-                    <popUpButtonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="thF-cf-V5D" id="tRk-Ip-VvF">
+                    <popUpButtonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="thF-cf-V5D" id="tRk-Ip-VvF">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="TOc-45-L38">
                             <items>
-                                <menuItem title="Add" id="thF-cf-V5D"/>
-                                <menuItem title="Subtract" state="on" id="iBT-aI-b24"/>
+                                <menuItem title="Add" state="on" id="thF-cf-V5D"/>
+                                <menuItem title="Subtract" id="iBT-aI-b24"/>
                                 <menuItem title="Reverse Subtract" id="g7h-pB-FMt"/>
                                 <menuItem title="Min" id="Ikg-vG-lhb">
                                     <modifierMask key="keyEquivalentModifierMask"/>
@@ -306,12 +306,12 @@
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aKg-uj-0rQ">
                     <rect key="frame" x="311" y="112" width="212" height="26"/>
                     <animations/>
-                    <popUpButtonCell key="cell" type="push" title="Zero" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Pfw-g7-NbT" id="GQ7-Fe-VTK">
+                    <popUpButtonCell key="cell" type="push" title="Zero" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Pfw-g7-NbT" id="GQ7-Fe-VTK">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="mhQ-1s-Gzf">
                             <items>
-                                <menuItem title="Zero" id="Pfw-g7-NbT"/>
+                                <menuItem title="Zero" state="on" id="Pfw-g7-NbT"/>
                                 <menuItem title="One" id="ZBD-Zr-dhs"/>
                                 <menuItem title="Source Color" id="Bty-PQ-hG1"/>
                                 <menuItem title="One Minus Source Color" id="62e-Ty-LpL">
@@ -341,7 +341,7 @@
                                 <menuItem title="Blend Color" id="9W8-HC-JHq">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="One Minus Blend Color" state="on" id="djo-GD-Gkw">
+                                <menuItem title="One Minus Blend Color" id="djo-GD-Gkw">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="Blend Alpha" id="EhN-1G-uin">
@@ -360,12 +360,12 @@
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1nJ-YP-WHV">
                     <rect key="frame" x="53" y="58" width="212" height="26"/>
                     <animations/>
-                    <popUpButtonCell key="cell" type="push" title="Zero" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VV0-sM-GYu" id="zIN-8N-dpu">
+                    <popUpButtonCell key="cell" type="push" title="Zero" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VV0-sM-GYu" id="zIN-8N-dpu">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="7Br-Vv-7yh">
                             <items>
-                                <menuItem title="Zero" id="VV0-sM-GYu"/>
+                                <menuItem title="Zero" state="on" id="VV0-sM-GYu"/>
                                 <menuItem title="One" id="DLA-vY-tWw"/>
                                 <menuItem title="Source Color" id="2qY-v7-T1L"/>
                                 <menuItem title="One Minus Source Color" id="TOd-rQ-SGn">
@@ -395,7 +395,7 @@
                                 <menuItem title="Blend Color" id="gJg-d0-zOP">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="One Minus Blend Color" state="on" id="js9-Qf-a3e">
+                                <menuItem title="One Minus Blend Color" id="js9-Qf-a3e">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="Blend Alpha" id="rqJ-Cl-QO3">
@@ -449,7 +449,7 @@
                                 <menuItem title="Blend Color" id="fJz-dC-51J">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="One Minus Blend Color" state="on" id="CGc-dP-Cd6">
+                                <menuItem title="One Minus Blend Color" id="CGc-dP-Cd6">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="Blend Alpha" id="KFp-b7-V2H">

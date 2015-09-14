@@ -17,27 +17,6 @@ class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableVie
     @IBOutlet var stepRateColumn: NSTableColumn!
     @IBOutlet weak var strideColumn: NSTableColumn!
 
-    @IBAction func addVertexBufferLayout(sender: NSButton) {
-        let layoutCount = numberOfVertexBufferLayouts()
-        let layout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
-        layout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
-        layout.stepRate = 1
-        layout.stride = 8
-        layout.id = layoutCount
-        state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
-        tableView.reloadData()
-        modelObserver.modelDidChange()
-    }
-
-    @IBAction func removeSelectedVertexBufferLayout(sender: NSButton) {
-        guard tableView.selectedRow >= 0 else {
-            return
-        }
-        managedObjectContext.deleteObject(state.vertexBufferLayouts[tableView.selectedRow] as! NSManagedObject)
-        tableView.reloadData()
-        modelObserver.modelDidChange()
-    }
-
     func numberOfVertexBufferLayouts() -> Int {
         return state.vertexBufferLayouts.count
     }

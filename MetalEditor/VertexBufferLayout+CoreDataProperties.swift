@@ -14,6 +14,7 @@ import CoreData
 
 extension VertexBufferLayout {
 
+    @NSManaged var index: NSNumber
     @NSManaged var id: NSNumber
     @NSManaged var stride: NSNumber
     @NSManaged var stepFunction: NSNumber

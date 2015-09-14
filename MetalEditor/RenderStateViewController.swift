@@ -110,6 +110,111 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         modelObserver.modelDidChange()
     }
 
+    private func insertRawVertexAttribute() -> VertexAttribute {
+        let attributeCount = vertexAttributesTableDelegate.numberOfVertexAttributes()
+        let attribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
+        attribute.format = MTLVertexFormat.Float2.rawValue
+        attribute.offset = 0
+        attribute.bufferIndex = 0
+        attribute.id = attributeCount
+        attribute.index = findNewVertexAttributeIndex()
+        return attribute
+    }
+
+    private func findNewVertexAttributeIndex() -> Int {
+        var index = 0
+        var found = false
+        repeat {
+            found = false
+            for attributeObject in state.vertexAttributes {
+                let attribute = attributeObject as! VertexAttribute
+                if attribute.index == index {
+                    found = true
+                    ++index
+                    break
+                }
+            }
+        } while (found);
+        return index
+    }
+
+    private func insertRawVertexBufferLayout() -> VertexBufferLayout {
+        let layoutCount = vertexBufferLayoutTableDelegate.numberOfVertexBufferLayouts()
+        let layout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
+        layout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
+        layout.stepRate = 1
+        layout.stride = 8
+        layout.id = layoutCount
+        layout.index = findNewVertexBufferLayoutIndex()
+        return layout
+    }
+
+    private func findNewVertexBufferLayoutIndex() -> Int {
+        var index = 0
+        var found = false
+        repeat {
+            found = false
+            for layoutObject in state.vertexBufferLayouts {
+                let layout = layoutObject as! VertexBufferLayout
+                if layout.index == index {
+                    found = true
+                    ++index
+                    break
+                }
+            }
+        } while (found);
+        return index
+    }
+
+    @IBAction func addVertexAttribute(sender: NSButton) {
+        let attribute = insertRawVertexAttribute()
+        if state.vertexBufferLayouts.count == 0 {
+            insertRawVertexBufferLayout()
+        }
+        attribute.bufferIndex = state.vertexBufferLayouts[0].index
+        state.mutableOrderedSetValueForKey("vertexAttributes").addObject(attribute)
+        
+        vertexAttributesTableView.reloadData()
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func removeVertexAttribute(sender: NSButton) {
+        guard vertexAttributesTableView.selectedRow >= 0 else {
+            return
+        }
+        managedObjectContext.deleteObject(state.vertexAttributes[vertexAttributesTableView.selectedRow] as! NSManagedObject)
+        vertexAttributesTableView.reloadData()
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func addVertexBufferLayout(sender: NSButton) {
+        let layout = insertRawVertexBufferLayout()
+        state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
+
+        vertexBufferLayoutTableView.reloadData()
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func removeVertexBufferLayout(sender: NSButton) {
+        guard vertexBufferLayoutTableView.selectedRow >= 0 else {
+            return
+        }
+        let vertexBufferLayout = state.vertexBufferLayouts[vertexBufferLayoutTableView.selectedRow] as! VertexBufferLayout
+        var toRemove: [VertexAttribute] = []
+        for vertexAttributeObject in state.vertexAttributes {
+            let vertexAttribute = vertexAttributeObject as! VertexAttribute
+            if vertexAttribute.bufferIndex.integerValue == vertexBufferLayout.index {
+                toRemove.append(vertexAttribute)
+            }
+        }
+        for attribute in toRemove {
+            managedObjectContext.deleteObject(attribute)
+        }
+        managedObjectContext.deleteObject(vertexBufferLayout)
+        vertexBufferLayoutTableView.reloadData()
+        modelObserver.modelDidChange()
+    }
+
     func addColorAttachmentView(colorAttachment: RenderPipelineColorAttachment) {
         let controller = RenderStateColorAttachmentViewController(nibName: "RenderStateColorAttachmentView", bundle: nil, modelObserver: modelObserver, removeObserver: self, colorAttachment: colorAttachment)!
         addChildViewController(controller)

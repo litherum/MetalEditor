@@ -97,7 +97,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         super.windowControllerDidLoadNib(aController)
 
         guard let device = MTLCreateSystemDefaultDevice() else {
-            exit(EXIT_FAILURE)
+            fatalError()
         }
         self.device = device
         commandQueue = device.newCommandQueue()

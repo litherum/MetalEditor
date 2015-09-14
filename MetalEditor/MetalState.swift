@@ -201,17 +201,19 @@ class MetalState {
                 descriptor.sampleCount = view.sampleCount
             }
             let vertexDescriptor = MTLVertexDescriptor()
-            for i in 0 ..< renderPipelineState.vertexAttributes.count {
-                let vertexAttribute = renderPipelineState.vertexAttributes[i] as! VertexAttribute
-                vertexDescriptor.attributes[i].format = MetalState.toMetalVertexFormat(vertexAttribute.format)
-                vertexDescriptor.attributes[i].offset = Int(vertexAttribute.offset)
-                vertexDescriptor.attributes[i].bufferIndex = Int(vertexAttribute.bufferIndex)
+            for vertexAttributeObject in renderPipelineState.vertexAttributes {
+                let vertexAttribute = vertexAttributeObject as! VertexAttribute
+                let index = vertexAttribute.index.integerValue
+                vertexDescriptor.attributes[index].format = MetalState.toMetalVertexFormat(vertexAttribute.format)
+                vertexDescriptor.attributes[index].offset = Int(vertexAttribute.offset)
+                vertexDescriptor.attributes[index].bufferIndex = Int(vertexAttribute.bufferIndex)
             }
-            for i in 0 ..< renderPipelineState.vertexBufferLayouts.count {
-                let vertexBufferLayout = renderPipelineState.vertexBufferLayouts[i] as! VertexBufferLayout
-                vertexDescriptor.layouts[i].stepFunction = MetalState.toMetalVertexStepFunction(vertexBufferLayout.stepFunction)
-                vertexDescriptor.layouts[i].stepRate = Int(vertexBufferLayout.stepRate)
-                vertexDescriptor.layouts[i].stride = Int(vertexBufferLayout.stride)
+            for vertexBufferLayoutObject in renderPipelineState.vertexBufferLayouts {
+                let vertexBufferLayout = vertexBufferLayoutObject as! VertexBufferLayout
+                let index = vertexBufferLayout.index.integerValue
+                vertexDescriptor.layouts[index].stepFunction = MetalState.toMetalVertexStepFunction(vertexBufferLayout.stepFunction)
+                vertexDescriptor.layouts[index].stepRate = Int(vertexBufferLayout.stepRate)
+                vertexDescriptor.layouts[index].stride = Int(vertexBufferLayout.stride)
             }
             descriptor.vertexDescriptor = vertexDescriptor
             descriptor.alphaToCoverageEnabled = renderPipelineState.alphaToCoverageEnabled.boolValue

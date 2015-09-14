@@ -61,12 +61,14 @@ class RenderStateUIController: NSViewController, RenderPipelineStateRemoveObserv
 
     @IBAction func add(sender: NSButton) {
         let vertexAttribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
+        vertexAttribute.index = 0
         vertexAttribute.format = MTLVertexFormat.Float2.rawValue
         vertexAttribute.offset = 0
         vertexAttribute.bufferIndex = 0
         vertexAttribute.id = numberOfVertexAttributes()
 
         let vertexBufferLayout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
+        vertexBufferLayout.index = 0
         vertexBufferLayout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
         vertexBufferLayout.stepRate = 1
         vertexBufferLayout.stride = 8

@@ -7,11 +7,16 @@ Things to do
 5. Metal Editor does not support indexed draws or instancing
 6. Create more different kinds of sliders
 7. All single-column table views should migrate to stack views
-8. Int text view delegates don't work with table views
+8. Create a design for texture arrays
+9. Focusing text fields causes file to be edited
+10. Make sure that vertexBufferLayouts' indices and vertexAttribute's indices are unique
 
 Metal assertions:
 1. MTLCommandBuffer.renderCommandEncoderWithDescriptor() asserts if there are no textures set.
 2. MTLRenderCommandEncoder.setRenderPipelineState() asserts if any of the color attachments have non-invalid pixel format if there is no texture set for that color attachment.
 3. MTLDevice.newRenderPipelineStateWithDescriptor() asserts if there were no valid pixelformats set.
+4. If you have an extra MTLVertexBufferLayoutDescriptor which is unreferenced inside the render state
+5. If you don't have a MTLVertexBufferLayoutDescriptor for every buffer which is referenced by a MTLVertexAttributeDescriptor
 
+Crash when attribute buffer indices straddle a uniform buffer index
 MTLRenderPipelineReflection doesn't give you return types
