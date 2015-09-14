@@ -164,7 +164,7 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
-                                                            <action selector="setVertexAttributeIndex:" target="-2" id="VG4-t1-krV"/>
+                                                            <action selector="setIndex:" target="ynd-9I-4QM" id="hVL-Km-IYv"/>
                                                             <outlet property="delegate" destination="k9j-Zy-dg1" id="TSK-TN-ngB"/>
                                                         </connections>
                                                     </textField>
@@ -301,7 +301,7 @@
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <animations/>
-                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="GYb-7q-YOW">
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.014925373134328358" horizontal="YES" id="GYb-7q-YOW">
                         <rect key="frame" x="1" y="52" width="532" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
@@ -716,7 +716,7 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                         <connections>
-                                                            <action selector="setVertexBufferLayoutIndex:" target="-2" id="rH2-Ag-nhw"/>
+                                                            <action selector="setIndex:" target="2qw-Qw-le7" id="GKW-DA-7tn"/>
                                                             <outlet property="delegate" destination="k9j-Zy-dg1" id="DsF-GE-NRl"/>
                                                         </connections>
                                                     </textField>
@@ -859,7 +859,7 @@
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <animations/>
-                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="R0w-7p-gsy">
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.014925373134328358" horizontal="YES" id="R0w-7p-gsy">
                         <rect key="frame" x="1" y="53" width="532" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>

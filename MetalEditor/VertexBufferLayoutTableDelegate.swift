@@ -11,6 +11,7 @@ import Cocoa
 class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
+    weak var indexObserver: VertexDescriptorObserver!
     var state: RenderPipelineState!
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var indexColumn: NSTableColumn!
@@ -61,6 +62,12 @@ class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableVie
 
     func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
         return Int(obj as! String) != nil
+    }
+
+    @IBAction func setIndex(sender: NSTextField) {
+        let row = tableView.rowForView(sender)
+        let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
+        indexObserver.setVertexBufferLayoutIndex(sender.integerValue, vertexBufferLayout: vertexBufferLayout)
     }
 
     @IBAction func stepFunctionSelected(sender: NSPopUpButton) {

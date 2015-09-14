@@ -42,6 +42,7 @@ func vertexFormatMenu() -> NSMenu {
 class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
+    weak var indexObserver: VertexDescriptorObserver!
     var state: RenderPipelineState!
     @IBOutlet var tableView: NSTableView!
     @IBOutlet var indexColumn: NSTableColumn!
@@ -95,6 +96,12 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         return Int(obj as! String) != nil
     }
 
+    @IBAction func setIndex(sender: NSTextField) {
+        let row = tableView.rowForView(sender)
+        let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
+        indexObserver.setVertexAttributeIndex(sender.integerValue, vertexAttribute: vertexAttribute)
+    }
+
     @IBAction func formatSelected(sender: NSPopUpButton) {
         let row = tableView.rowForView(sender)
         let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
@@ -113,7 +120,6 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     @IBAction func setBufferIndex(sender: NSTextField) {
         let row = tableView.rowForView(sender)
         let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
-        vertexAttribute.bufferIndex = sender.integerValue
-        modelObserver.modelDidChange()
+        indexObserver.setVertexAttributeBufferIndex(sender.integerValue, vertexAttribute: vertexAttribute)
     }
 }

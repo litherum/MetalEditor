@@ -8,7 +8,13 @@
 
 import Cocoa
 
-class RenderStateViewController: NSViewController, RenderStateColorAttachmentRemoveObserver {
+protocol VertexDescriptorObserver: class {
+    func setVertexAttributeIndex(newValue: Int, vertexAttribute: VertexAttribute)
+    func setVertexBufferLayoutIndex(newValue: Int, vertexBufferLayout: VertexBufferLayout)
+    func setVertexAttributeBufferIndex(newValue: Int, vertexAttribute: VertexAttribute)
+}
+
+class RenderStateViewController: NSViewController, RenderStateColorAttachmentRemoveObserver, VertexDescriptorObserver {
     var managedObjectContext: NSManagedObjectContext!
     weak var modelObserver: ModelObserver!
     weak var removeObserver: RenderPipelineStateRemoveObserver!
@@ -83,10 +89,12 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
 
         vertexAttributesTableDelegate.managedObjectContext = managedObjectContext
         vertexAttributesTableDelegate.modelObserver = modelObserver
+        vertexAttributesTableDelegate.indexObserver = self
         vertexAttributesTableDelegate.state = state
 
         vertexBufferLayoutTableDelegate.managedObjectContext = managedObjectContext
         vertexBufferLayoutTableDelegate.modelObserver = modelObserver
+        vertexBufferLayoutTableDelegate.indexObserver = self
         vertexBufferLayoutTableDelegate.state = state
 
         alphaToCoveragePopUp.state = state.alphaToCoverageEnabled.boolValue ? NSOnState : NSOffState
@@ -244,23 +252,55 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setVertexAttributeIndex(sender: NSTextField) {
-        let row = vertexAttributesTableView.rowForView(sender)
-        let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
-        vertexAttribute.index = sender.integerValue
+    func setVertexAttributeIndex(newValue: Int, vertexAttribute: VertexAttribute) {
+        vertexAttribute.index = newValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setVertexBufferLayoutIndex(sender: NSTextField) {
-        let row = vertexBufferLayoutTableView.rowForView(sender)
-        let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
+    func setVertexAttributeBufferIndex(newValue: Int, vertexAttribute: VertexAttribute) {
+        var found = false
+        for vertexBufferLayoutObject in state.vertexBufferLayouts {
+            let vertexBufferLayout = vertexBufferLayoutObject as! VertexBufferLayout
+            if vertexBufferLayout.index.integerValue == newValue {
+                found = true
+                break
+            }
+        }
+        if !found {
+            let layout = insertRawVertexBufferLayout()
+            layout.index = newValue
+            state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
+            vertexBufferLayoutTableView.reloadData()
+        }
+        found = false
+        for vertexAttributeObject in state.vertexAttributes {
+            let searchVertexAttribute = vertexAttributeObject as! VertexAttribute
+            if searchVertexAttribute != vertexAttribute && searchVertexAttribute.bufferIndex.integerValue == vertexAttribute.bufferIndex.integerValue {
+                found = true
+                break
+            }
+        }
+        if !found {
+            for vertexBufferLayoutObject in state.vertexBufferLayouts {
+                let vertexBufferLayout = vertexBufferLayoutObject as! VertexBufferLayout
+                if vertexBufferLayout.index == vertexAttribute.bufferIndex.integerValue {
+                    managedObjectContext.deleteObject(vertexBufferLayout)
+                    vertexBufferLayoutTableView.reloadData()
+                    break
+                }
+            }
+        }
+        vertexAttribute.bufferIndex = newValue
+    }
+
+    func setVertexBufferLayoutIndex(newValue: Int, vertexBufferLayout: VertexBufferLayout) {
         for vertexAttributeObject in state.vertexAttributes {
             let vertexAttribute = vertexAttributeObject as! VertexAttribute
             if vertexAttribute.bufferIndex.integerValue == vertexBufferLayout.index.integerValue {
-                vertexAttribute.bufferIndex = vertexBufferLayout.index
+                vertexAttribute.bufferIndex = newValue
             }
         }
-        vertexBufferLayout.index = sender.integerValue
+        vertexBufferLayout.index = newValue
         vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
