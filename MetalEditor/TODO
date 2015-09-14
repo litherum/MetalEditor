@@ -10,6 +10,7 @@ Things to do
 8. Create a design for texture arrays
 9. Focusing text fields causes file to be edited
 10. Make sure that vertexBufferLayouts' indices and vertexAttribute's indices are unique
+11. There are a whole bunch of textfield delegates which need to be set
 
 Metal assertions:
 1. MTLCommandBuffer.renderCommandEncoderWithDescriptor() asserts if there are no textures set.

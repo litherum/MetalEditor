@@ -44,6 +44,7 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     weak var modelObserver: ModelObserver!
     var state: RenderPipelineState!
     @IBOutlet var tableView: NSTableView!
+    @IBOutlet var indexColumn: NSTableColumn!
     @IBOutlet var formatColumn: NSTableColumn!
     @IBOutlet var offsetColumn: NSTableColumn!
     @IBOutlet var bufferIndexColumn: NSTableColumn!
@@ -59,6 +60,12 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
         switch tableColumn! {
+        case indexColumn:
+            let result = tableView.makeViewWithIdentifier("Index", owner: self) as! NSTableCellView
+            let textField = result.textField!
+            textField.editable = true
+            textField.integerValue = vertexAttribute.index.integerValue
+            return result
         case formatColumn:
             let result = tableView.makeViewWithIdentifier("FormatPopUp", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)

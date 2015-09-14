@@ -169,7 +169,9 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
     @IBAction func addVertexAttribute(sender: NSButton) {
         let attribute = insertRawVertexAttribute()
         if state.vertexBufferLayouts.count == 0 {
-            insertRawVertexBufferLayout()
+            let layout = insertRawVertexBufferLayout()
+            state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
+            vertexBufferLayoutTableView.reloadData()
         }
         attribute.bufferIndex = state.vertexBufferLayouts[0].index
         state.mutableOrderedSetValueForKey("vertexAttributes").addObject(attribute)
@@ -182,16 +184,42 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         guard vertexAttributesTableView.selectedRow >= 0 else {
             return
         }
-        managedObjectContext.deleteObject(state.vertexAttributes[vertexAttributesTableView.selectedRow] as! NSManagedObject)
+        let vertexAttribute = state.vertexAttributes[vertexAttributesTableView.selectedRow] as! VertexAttribute
+        var found = false
+        for vertexAttributeObject in state.vertexAttributes {
+            let searchVertexAttribute = vertexAttributeObject as! VertexAttribute
+            if searchVertexAttribute == vertexAttribute {
+                continue
+            }
+            if searchVertexAttribute.bufferIndex == vertexAttribute.bufferIndex {
+                found = true
+                break
+            }
+        }
+        if !found {
+            for vertexBufferLayoutObject in state.vertexBufferLayouts {
+                let vertexBufferLayout = vertexBufferLayoutObject as! VertexBufferLayout
+                if vertexBufferLayout.index == vertexAttribute.bufferIndex {
+                    managedObjectContext.deleteObject(vertexBufferLayout)
+                    vertexBufferLayoutTableView.reloadData()
+                    break
+                }
+            }
+        }
+        managedObjectContext.deleteObject(vertexAttribute)
         vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
 
     @IBAction func addVertexBufferLayout(sender: NSButton) {
         let layout = insertRawVertexBufferLayout()
+        let attribute = insertRawVertexAttribute()
+        attribute.bufferIndex = layout.index
         state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
+        state.mutableOrderedSetValueForKey("vertexAttributes").addObject(attribute)
 
         vertexBufferLayoutTableView.reloadData()
+        vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
 
@@ -212,6 +240,28 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         }
         managedObjectContext.deleteObject(vertexBufferLayout)
         vertexBufferLayoutTableView.reloadData()
+        vertexAttributesTableView.reloadData()
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func setVertexAttributeIndex(sender: NSTextField) {
+        let row = vertexAttributesTableView.rowForView(sender)
+        let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
+        vertexAttribute.index = sender.integerValue
+        modelObserver.modelDidChange()
+    }
+
+    @IBAction func setVertexBufferLayoutIndex(sender: NSTextField) {
+        let row = vertexBufferLayoutTableView.rowForView(sender)
+        let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
+        for vertexAttributeObject in state.vertexAttributes {
+            let vertexAttribute = vertexAttributeObject as! VertexAttribute
+            if vertexAttribute.bufferIndex.integerValue == vertexBufferLayout.index.integerValue {
+                vertexAttribute.bufferIndex = vertexBufferLayout.index
+            }
+        }
+        vertexBufferLayout.index = sender.integerValue
+        vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
 

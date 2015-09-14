@@ -13,6 +13,7 @@ class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableVie
     weak var modelObserver: ModelObserver!
     var state: RenderPipelineState!
     @IBOutlet var tableView: NSTableView!
+    @IBOutlet var indexColumn: NSTableColumn!
     @IBOutlet var stepFunctionColumn: NSTableColumn!
     @IBOutlet var stepRateColumn: NSTableColumn!
     @IBOutlet weak var strideColumn: NSTableColumn!
@@ -28,6 +29,12 @@ class VertexBufferLayoutTableDelegate: NSObject, NSTableViewDelegate, NSTableVie
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let vertexBufferLayout = state.vertexBufferLayouts[row] as! VertexBufferLayout
         switch tableColumn! {
+        case indexColumn:
+            let result = tableView.makeViewWithIdentifier("Index", owner: self) as! NSTableCellView
+            let textField = result.textField!
+            textField.editable = true
+            textField.integerValue = vertexBufferLayout.index.integerValue
+            return result
         case stepFunctionColumn:
             let result = tableView.makeViewWithIdentifier("StepFunctionPopUp", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
