@@ -10,7 +10,7 @@ import Cocoa
 
 class TextureBindingsViewController: BindingsViewController {
     override func itemSelected(sender: NSPopUpButton) {
-        let row = tableView.rowForView(sender)
+        let row = tableView.row(for: sender)
         let binding = bindings[row] as! TextureBinding
         let selectedItem = sender.selectedItem!
 
@@ -23,15 +23,15 @@ class TextureBindingsViewController: BindingsViewController {
         modelObserver.modelDidChange()
     }
 
-    override func generatePopUp(index: Int) -> (NSMenu, NSMenuItem?) {
+    override func generatePopUp( index: Int) -> (NSMenu, NSMenuItem?) {
         let currentBinding = bindings[index] as! TextureBinding
 
-        let fetchRequest = NSFetchRequest(entityName: "Texture")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Texture")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
 
         var selectedItem: NSMenuItem?
         do {
-            let textures = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Texture]
+            let textures = try managedObjectContext.fetch(fetchRequest) as! [Texture]
             let result = NSMenu()
             result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
             for texture in textures {

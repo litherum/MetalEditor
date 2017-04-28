@@ -29,7 +29,7 @@ class DepthStencilStateViewController: NSViewController {
     @IBOutlet var readMaskBackTextField: NSTextField!
     @IBOutlet var writeMaskBackTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, state: DepthStencilState, removeObserver: DepthStencilStateRemoveObserver) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, state: DepthStencilState, removeObserver: DepthStencilStateRemoveObserver) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
         self.removeObserver = removeObserver
@@ -45,98 +45,98 @@ class DepthStencilStateViewController: NSViewController {
         super.viewDidLoad()
 
         nameTextField.stringValue = state.name
-        depthCompareFunctionPopUp.selectItemAtIndex(state.depthCompareFunction.integerValue)
+        depthCompareFunctionPopUp.selectItem(at: state.depthCompareFunction.intValue)
         depthWriteEnabledCheckBox.state = state.depthWriteEnabled.boolValue ? NSOnState : NSOffState
-        stencilFailureOperationFrontPopUp.selectItemAtIndex(state.frontFaceStencil.stencilFailureOperation.integerValue)
-        depthFailureOperationFrontPopUp.selectItemAtIndex(state.frontFaceStencil.depthFailureOperation.integerValue)
-        depthStencilPassOperationFrontPopUp.selectItemAtIndex(state.frontFaceStencil.depthStencilPassOperation.integerValue)
-        stencilCompareFunctionFrontPopUp.selectItemAtIndex(state.frontFaceStencil.stencilCompareFunction.integerValue)
-        readMaskFrontTextField.integerValue = state.frontFaceStencil.readMask.integerValue
-        writeMaskFrontTextField.integerValue = state.frontFaceStencil.writeMask.integerValue
-        stencilFailureOperationBackPopUp.selectItemAtIndex(state.backFaceStencil.stencilFailureOperation.integerValue)
-        depthFailureOperationBackPopUp.selectItemAtIndex(state.backFaceStencil.depthFailureOperation.integerValue)
-        depthStencilPassOperationBackPopUp.selectItemAtIndex(state.backFaceStencil.depthStencilPassOperation.integerValue)
-        stencilCompareFunctionBackPopUp.selectItemAtIndex(state.backFaceStencil.stencilCompareFunction.integerValue)
-        readMaskBackTextField.integerValue = state.backFaceStencil.readMask.integerValue
-        writeMaskBackTextField.integerValue = state.backFaceStencil.writeMask.integerValue
+        stencilFailureOperationFrontPopUp.selectItem(at: state.frontFaceStencil.stencilFailureOperation.intValue)
+        depthFailureOperationFrontPopUp.selectItem(at: state.frontFaceStencil.depthFailureOperation.intValue)
+        depthStencilPassOperationFrontPopUp.selectItem(at: state.frontFaceStencil.depthStencilPassOperation.intValue)
+        stencilCompareFunctionFrontPopUp.selectItem(at: state.frontFaceStencil.stencilCompareFunction.intValue)
+        readMaskFrontTextField.integerValue = state.frontFaceStencil.readMask.intValue
+        writeMaskFrontTextField.integerValue = state.frontFaceStencil.writeMask.intValue
+        stencilFailureOperationBackPopUp.selectItem(at: state.backFaceStencil.stencilFailureOperation.intValue)
+        depthFailureOperationBackPopUp.selectItem(at: state.backFaceStencil.depthFailureOperation.intValue)
+        depthStencilPassOperationBackPopUp.selectItem(at: state.backFaceStencil.depthStencilPassOperation.intValue)
+        stencilCompareFunctionBackPopUp.selectItem(at: state.backFaceStencil.stencilCompareFunction.intValue)
+        readMaskBackTextField.integerValue = state.backFaceStencil.readMask.intValue
+        writeMaskBackTextField.integerValue = state.backFaceStencil.writeMask.intValue
     }
 
-    @IBAction func nameSet(sender: NSTextField) {
+    @IBAction func nameSet(_ sender: NSTextField) {
         state.name = sender.stringValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthCompareFunctionSelected(sender: NSPopUpButton) {
-        state.depthCompareFunction = sender.indexOfSelectedItem
+    @IBAction func depthCompareFunctionSelected(_ sender: NSPopUpButton) {
+        state.depthCompareFunction = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthWriteEnabledChecked(sender: NSButton) {
-        state.depthWriteEnabled = sender.state == NSOnState
+    @IBAction func depthWriteEnabledChecked(_ sender: NSButton) {
+        state.depthWriteEnabled = NSNumber(value: sender.state == NSOnState)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func stencilFailureOperationFrontSelected(sender: NSPopUpButton) {
-        state.frontFaceStencil.stencilFailureOperation = sender.indexOfSelectedItem
+    @IBAction func stencilFailureOperationFrontSelected(_ sender: NSPopUpButton) {
+        state.frontFaceStencil.stencilFailureOperation = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthFailureOperationFrontSelected(sender: NSPopUpButton) {
-        state.frontFaceStencil.depthFailureOperation = sender.indexOfSelectedItem
+    @IBAction func depthFailureOperationFrontSelected(_ sender: NSPopUpButton) {
+        state.frontFaceStencil.depthFailureOperation = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthStencilPassOperationFrontSelected(sender: NSPopUpButton) {
-        state.frontFaceStencil.depthStencilPassOperation = sender.indexOfSelectedItem
+    @IBAction func depthStencilPassOperationFrontSelected(_ sender: NSPopUpButton) {
+        state.frontFaceStencil.depthStencilPassOperation = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func stencilCompareFunctionFrontSelected(sender: NSPopUpButton) {
-        state.frontFaceStencil.stencilCompareFunction = sender.indexOfSelectedItem
+    @IBAction func stencilCompareFunctionFrontSelected(_ sender: NSPopUpButton) {
+        state.frontFaceStencil.stencilCompareFunction = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func readMaskFrontSet(sender: NSTextField) {
-        state.frontFaceStencil.readMask = sender.integerValue
+    @IBAction func readMaskFrontSet(_ sender: NSTextField) {
+        state.frontFaceStencil.readMask = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func writeMaskFrontSet(sender: NSTextField) {
-        state.frontFaceStencil.writeMask = sender.integerValue
+    @IBAction func writeMaskFrontSet(_ sender: NSTextField) {
+        state.frontFaceStencil.writeMask = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func stencilFailureOperationBackSelected(sender: NSPopUpButton) {
-        state.backFaceStencil.stencilFailureOperation = sender.indexOfSelectedItem
+    @IBAction func stencilFailureOperationBackSelected(_ sender: NSPopUpButton) {
+        state.backFaceStencil.stencilFailureOperation = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthFailureOperationBackSelected(sender: NSPopUpButton) {
-        state.backFaceStencil.depthFailureOperation = sender.indexOfSelectedItem
+    @IBAction func depthFailureOperationBackSelected(_ sender: NSPopUpButton) {
+        state.backFaceStencil.depthFailureOperation = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthStencilPassOperationBackSelected(sender: NSPopUpButton) {
-        state.backFaceStencil.depthStencilPassOperation = sender.indexOfSelectedItem
+    @IBAction func depthStencilPassOperationBackSelected(_ sender: NSPopUpButton) {
+        state.backFaceStencil.depthStencilPassOperation = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func stencilCompareFunctionBackSelected(sender: NSPopUpButton) {
-        state.backFaceStencil.stencilCompareFunction = sender.indexOfSelectedItem
+    @IBAction func stencilCompareFunctionBackSelected(_ sender: NSPopUpButton) {
+        state.backFaceStencil.stencilCompareFunction = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func readMaskBackSet(sender: NSTextField) {
-        state.backFaceStencil.readMask = sender.integerValue
+    @IBAction func readMaskBackSet(_ sender: NSTextField) {
+        state.backFaceStencil.readMask = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func writeMaskBackSet(sender: NSTextField) {
-        state.backFaceStencil.writeMask = sender.integerValue
+    @IBAction func writeMaskBackSet(_ sender: NSTextField) {
+        state.backFaceStencil.writeMask = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func removePressed(sender: NSButton) {
+    @IBAction func removePressed(_ sender: NSButton) {
         removeObserver.removeDepthStencilState(self)
     }
 }

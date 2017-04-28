@@ -17,20 +17,20 @@ class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSo
     @IBOutlet var lengthColumn: NSTableColumn!
     @IBOutlet var fileColumn: NSTableColumn!
 
-    private func numberOfBuffers() -> Int {
-        let fetchRequest = NSFetchRequest(entityName: "Buffer")
+    fileprivate func numberOfBuffers() -> Int {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Buffer")
         var error: NSError?
-        let result = managedObjectContext.countForFetchRequest(fetchRequest, error: &error)
+        let result = try! managedObjectContext.count(for: fetchRequest)
         assert(error == nil)
         return result
     }
 
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return numberOfBuffers()
     }
 
-    private func getBuffer(index: Int) -> Buffer {
-        let fetchRequest = NSFetchRequest(entityName: "Buffer")
+    fileprivate func getBuffer(_ index: Int) -> Buffer {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Buffer")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         // <rdar://problem/22108925> managedObjectContext.executeFetchRequest() crashes if you add two objects.
         // FIXME: This is a hack.
@@ -38,43 +38,43 @@ class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSo
         //fetchRequest.fetchOffset = index
         
         do {
-            let buffers = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Buffer]
+            let buffers = try managedObjectContext.fetch(fetchRequest) as! [Buffer]
             return buffers[index]
         } catch {
             fatalError()
         }
     }
 
-    @IBAction func setName(sender: NSTextField) {
-        let row = tableView.rowForView(sender)
+    @IBAction func setName(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
         let buffer = getBuffer(row)
         buffer.name = sender.stringValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setLength(sender: NSTextField) {
-        let row = tableView.rowForView(sender)
+    @IBAction func setLength(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
         let buffer = getBuffer(row)
-        buffer.initialLength = sender.integerValue
+        buffer.initialLength = sender.integerValue as NSNumber
         buffer.initialData = nil
         tableView.reloadData()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setData(sender: NSButton) {
-        let row = tableView.rowForView(sender)
+    @IBAction func setData(_ sender: NSButton) {
+        let row = tableView.row(for: sender)
         let buffer = getBuffer(row)
         let window = tableView.window!
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
-        openPanel.beginSheetModalForWindow(window) {(selected: Int) in
+        openPanel.beginSheetModal(for: window) {(selected: Int) in
             guard selected == NSFileHandlingPanelOKButton else {
                 return
             }
-            guard let url = openPanel.URL else {
+            guard let url = openPanel.url else {
                 return
             }
-            guard let contents = NSData(contentsOfURL: url) else {
+            guard let contents = try? Data(contentsOf: url) else {
                 return
             }
             buffer.initialData = contents
@@ -84,17 +84,17 @@ class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSo
         }
     }
 
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let buffer = getBuffer(row)
         switch tableColumn! {
         case nameColumn:
-            let result = tableView.makeViewWithIdentifier("NameTextField", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier: "NameTextField", owner: self) as! NSTableCellView
             let textField = result.textField!
-            textField.editable = true
+            textField.isEditable = true
             textField.stringValue = buffer.name
             return result
         case typeColumn:
-            let result = tableView.makeViewWithIdentifier("TypeTextField", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier: "TypeTextField", owner: self) as! NSTableCellView
             let textField = result.textField!
             if buffer.initialData != nil {
                 textField.stringValue = "Data"
@@ -103,36 +103,36 @@ class BuffersTableViewDelegate: NSObject, NSTableViewDelegate, NSTableViewDataSo
             }
             return result
         case lengthColumn:
-            let result = tableView.makeViewWithIdentifier("LengthTextField", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier: "LengthTextField", owner: self) as! NSTableCellView
             let textField = result.textField!
-            textField.editable = true
+            textField.isEditable = true
             if let data = buffer.initialData {
-                textField.stringValue = "\(data.length)"
+                textField.stringValue = "\(data.count)"
             } else {
-                textField.intValue = buffer.initialLength!.intValue
+                textField.intValue = buffer.initialLength!.int32Value
             }
             return result
         case fileColumn:
-            return tableView.makeViewWithIdentifier("FileButton", owner: self) as! NSTableCellView
+            return tableView.make(withIdentifier: "FileButton", owner: self) as! NSTableCellView
         default:
             return nil
         }
     }
 
-    @IBAction func addRemove(sender: NSSegmentedControl) {
+    @IBAction func addRemove(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 { // Add
             let bufferCount = numberOfBuffers()
-            let buffer = NSEntityDescription.insertNewObjectForEntityForName("Buffer", inManagedObjectContext: managedObjectContext) as! Buffer
+            let buffer = NSEntityDescription.insertNewObject(forEntityName: "Buffer", into: managedObjectContext) as! Buffer
             buffer.initialData = nil
             buffer.initialLength = 0
             buffer.name = "Buffer"
-            buffer.id = bufferCount
+            buffer.id = NSNumber(bufferCount)
         } else { // Remove
             assert(sender.selectedSegment == 1)
             guard tableView.selectedRow >= 0 else {
                 return
             }
-            managedObjectContext.deleteObject(getBuffer(tableView.selectedRow))
+            managedObjectContext.delete(getBuffer(tableView.selectedRow))
         }
         tableView.reloadData()
         modelObserver.modelDidChange()

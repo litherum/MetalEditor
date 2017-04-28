@@ -10,7 +10,7 @@ import Cocoa
 
 class BufferBindingsViewController: BindingsViewController {
     override func itemSelected(sender: NSPopUpButton) {
-        let row = tableView.rowForView(sender)
+        let row = tableView.row(for: sender)
         let binding = bindings[row] as! BufferBinding
         let selectedItem = sender.selectedItem!
 
@@ -27,12 +27,12 @@ class BufferBindingsViewController: BindingsViewController {
     override func generatePopUp(index: Int) -> (NSMenu, NSMenuItem?) {
         let currentBinding = bindings[index] as! BufferBinding
 
-        let fetchRequest = NSFetchRequest(entityName: "Buffer")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Buffer")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
 
         var selectedItem: NSMenuItem?
         do {
-            let buffers = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Buffer]
+            let buffers = try managedObjectContext.fetch(fetchRequest) as! [Buffer]
             let result = NSMenu()
             result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
             for buffer in buffers {

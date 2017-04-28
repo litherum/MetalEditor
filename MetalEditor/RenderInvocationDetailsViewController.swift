@@ -58,7 +58,7 @@ class RenderInvocationDetailsViewController: NSViewController {
     @IBOutlet var visibilityResultModePopUp: NSPopUpButton!
     @IBOutlet var visibilityResultOffsetTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, dismissObserver: DismissObserver, renderInvocation: RenderInvocation) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, dismissObserver: DismissObserver, renderInvocation: RenderInvocation) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
         self.dismissObserver = dismissObserver
@@ -71,12 +71,12 @@ class RenderInvocationDetailsViewController: NSViewController {
     }
 
     func createStateMenu() -> (NSMenu, NSMenuItem?) {
-        let fetchRequest = NSFetchRequest(entityName: "RenderPipelineState")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "RenderPipelineState")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
 
         var selectedItem: NSMenuItem?
         do {
-            let states = try managedObjectContext.executeFetchRequest(fetchRequest) as! [RenderPipelineState]
+            let states = try managedObjectContext.fetch(fetchRequest) as! [RenderPipelineState]
             let result = NSMenu()
             result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
             for state in states {
@@ -96,11 +96,11 @@ class RenderInvocationDetailsViewController: NSViewController {
     }
 
     func createDepthStencilStateMenu() -> (NSMenu, NSMenuItem?) {
-        let fetchRequest = NSFetchRequest(entityName: "DepthStencilState")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DepthStencilState")
 
         var selectedItem: NSMenuItem?
         do {
-            let states = try managedObjectContext.executeFetchRequest(fetchRequest) as! [DepthStencilState]
+            let states = try managedObjectContext.fetch(fetchRequest) as! [DepthStencilState]
             let result = NSMenu()
             result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
             for state in states {
@@ -123,40 +123,40 @@ class RenderInvocationDetailsViewController: NSViewController {
         vertexBufferBindingsViewController = BufferBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.vertexBufferBindings)
         addChildViewController(vertexBufferBindingsViewController)
         vertexBufferTableViewPlaceholder.addSubview(vertexBufferBindingsViewController.view)
-        vertexBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
-        vertexBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
+        vertexBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
+        vertexBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexBufferBindingsViewController.view]))
 
         fragmentBufferBindingsViewController = BufferBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.fragmentBufferBindings)
         addChildViewController(fragmentBufferBindingsViewController)
         fragmentBufferTableViewPlaceholder.addSubview(fragmentBufferBindingsViewController.view)
-        fragmentBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
-        fragmentBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
+        fragmentBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
+        fragmentBufferTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentBufferBindingsViewController.view]))
 
         vertexTextureBindingsViewController = TextureBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.vertexTextureBindings)
         addChildViewController(vertexTextureBindingsViewController)
         vertexTextureTableViewPlaceholder.addSubview(vertexTextureBindingsViewController.view)
-        vertexTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexTextureBindingsViewController.view]))
-        vertexTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexTextureBindingsViewController.view]))
+        vertexTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexTextureBindingsViewController.view]))
+        vertexTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : vertexTextureBindingsViewController.view]))
 
         fragmentTextureBindingsViewController = TextureBindingsViewController(nibName: "BindingsView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, bindings: renderInvocation.fragmentTextureBindings)
         addChildViewController(fragmentTextureBindingsViewController)
         fragmentTextureTableViewPlaceholder.addSubview(fragmentTextureBindingsViewController.view)
-        fragmentTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentTextureBindingsViewController.view]))
-        fragmentTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentTextureBindingsViewController.view]))
+        fragmentTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentTextureBindingsViewController.view]))
+        fragmentTextureTableViewPlaceholder.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[tableView]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["tableView" : fragmentTextureBindingsViewController.view]))
 
         let (stateMenu, selectedStateItem) = createStateMenu()
         statePopUp.menu = stateMenu
         if let toSelect = selectedStateItem {
-            statePopUp.selectItem(toSelect)
+            statePopUp.select(toSelect)
         } else {
-            statePopUp.selectItemAtIndex(0)
+            statePopUp.selectItem(at: 0)
         }
 
-        assert(renderInvocation.primitive.integerValue >= 0 && renderInvocation.primitive.integerValue <= 4)
-        primitivePopUp.selectItemAtIndex(renderInvocation.primitive.integerValue)
+        assert(renderInvocation.primitive.intValue >= 0 && renderInvocation.primitive.intValue <= 4)
+        primitivePopUp.selectItem(at: renderInvocation.primitive.intValue)
 
-        vertexStartTextField.integerValue = renderInvocation.vertexStart.integerValue
-        vertexCountTextField.integerValue = renderInvocation.vertexCount.integerValue
+        vertexStartTextField.integerValue = renderInvocation.vertexStart.intValue
+        vertexCountTextField.integerValue = renderInvocation.vertexCount.intValue
 
         blendRedSlider.doubleValue = renderInvocation.blendColorRed.doubleValue
         blendGreenSlider.doubleValue = renderInvocation.blendColorGreen.doubleValue
@@ -166,37 +166,37 @@ class RenderInvocationDetailsViewController: NSViewController {
         blendGreenTextField.doubleValue = renderInvocation.blendColorGreen.doubleValue
         blendBlueTextField.doubleValue = renderInvocation.blendColorBlue.doubleValue
         blendAlphaTextField.doubleValue = renderInvocation.blendColorAlpha.doubleValue
-        cullModePopUp.selectItemAtIndex(renderInvocation.cullMode.integerValue)
+        cullModePopUp.selectItem(at: renderInvocation.cullMode.intValue)
         depthBiasTextField.doubleValue = renderInvocation.depthBias.doubleValue
         depthSlopeScaleTextField.doubleValue = renderInvocation.depthSlopeScale.doubleValue
         depthClampTextField.doubleValue = renderInvocation.depthClamp.doubleValue
-        depthClipModePopUp.selectItemAtIndex(renderInvocation.depthClipMode.integerValue)
+        depthClipModePopUp.selectItem(at: renderInvocation.depthClipMode.intValue)
 
         let (depthStencilMenu, selectedDepthStencilItem) = createDepthStencilStateMenu()
         depthStencilStatePopUp.menu = depthStencilMenu
         if let toSelect = selectedDepthStencilItem {
-            depthStencilStatePopUp.selectItem(toSelect)
+            depthStencilStatePopUp.select(toSelect)
         } else {
-            depthStencilStatePopUp.selectItemAtIndex(0)
+            depthStencilStatePopUp.selectItem(at: 0)
         }
 
-        windingOrderPopUp.selectItemAtIndex(renderInvocation.frontFacingWinding.integerValue)
+        windingOrderPopUp.selectItem(at: renderInvocation.frontFacingWinding.intValue)
         if let scissorRect = renderInvocation.scissorRect {
             scissorRectCheckBox.state = NSOnState
-            scissorRectXTextField.integerValue = scissorRect.x.integerValue
-            scissorRectYTextField.integerValue = scissorRect.y.integerValue
-            scissorRectWidthTextField.integerValue = scissorRect.width.integerValue
-            scissorRectHeightTextField.integerValue = scissorRect.height.integerValue
+            scissorRectXTextField.integerValue = scissorRect.x.intValue
+            scissorRectYTextField.integerValue = scissorRect.y.intValue
+            scissorRectWidthTextField.integerValue = scissorRect.width.intValue
+            scissorRectHeightTextField.integerValue = scissorRect.height.intValue
         } else {
             scissorRectCheckBox.state = NSOffState
-            scissorRectXTextField.enabled = false
-            scissorRectYTextField.enabled = false
-            scissorRectWidthTextField.enabled = false
-            scissorRectHeightTextField.enabled = false
+            scissorRectXTextField.isEnabled = false
+            scissorRectYTextField.isEnabled = false
+            scissorRectWidthTextField.isEnabled = false
+            scissorRectHeightTextField.isEnabled = false
         }
-        stencilFrontReferenceValueTextField.integerValue = renderInvocation.stencilFrontReferenceValue.integerValue
-        stencilBackReferenceValueTextField.integerValue = renderInvocation.stencilBackReferenceValue.integerValue
-        triangleFillModePopUp.selectItemAtIndex(renderInvocation.triangleFillMode.integerValue)
+        stencilFrontReferenceValueTextField.integerValue = renderInvocation.stencilFrontReferenceValue.intValue
+        stencilBackReferenceValueTextField.integerValue = renderInvocation.stencilBackReferenceValue.intValue
+        triangleFillModePopUp.selectItem(at: renderInvocation.triangleFillMode.intValue)
         if let viewport = renderInvocation.viewport {
             viewportCheckBox.state = NSOnState
             viewportOriginXTextField.doubleValue = viewport.originX.doubleValue
@@ -207,93 +207,93 @@ class RenderInvocationDetailsViewController: NSViewController {
             viewportZFarTextField.doubleValue = viewport.zFar.doubleValue
         } else {
             viewportCheckBox.state = NSOffState
-            viewportOriginXTextField.enabled = false
-            viewportOriginYTextField.enabled = false
-            viewportWidthTextField.enabled = false
-            viewportHeightTextField.enabled = false
-            viewportZNearTextField.enabled = false
-            viewportZFarTextField.enabled = false
+            viewportOriginXTextField.isEnabled = false
+            viewportOriginYTextField.isEnabled = false
+            viewportWidthTextField.isEnabled = false
+            viewportHeightTextField.isEnabled = false
+            viewportZNearTextField.isEnabled = false
+            viewportZFarTextField.isEnabled = false
         }
-        visibilityResultModePopUp.selectItemAtIndex(renderInvocation.visibilityResultMode.integerValue)
-        visibilityResultOffsetTextField.integerValue = renderInvocation.visibilityResultOffset.integerValue
+        visibilityResultModePopUp.selectItem(at: renderInvocation.visibilityResultMode.intValue)
+        visibilityResultOffsetTextField.integerValue = renderInvocation.visibilityResultOffset.intValue
     }
 
-    @IBAction func addRemoveVertexBufferBinding(sender: NSSegmentedControl) {
+    @IBAction func addRemoveVertexBufferBinding(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 { // Add
-            let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
+            let bufferBinding = NSEntityDescription.insertNewObject(forEntityName: "BufferBinding", into: managedObjectContext) as! BufferBinding
             bufferBinding.buffer = nil
-            renderInvocation.mutableOrderedSetValueForKey("vertexBufferBindings").addObject(bufferBinding)
+            renderInvocation.mutableOrderedSetValue(forKey: "vertexBufferBindings").add(bufferBinding)
         } else { // Remove
             assert(sender.selectedSegment == 1)
             guard let row = vertexBufferBindingsViewController.selectedRow() else {
                 return
             }
             let binding = renderInvocation.vertexBufferBindings[row] as! BufferBinding
-            renderInvocation.mutableOrderedSetValueForKey("vertexBufferBindings").removeObject(binding)
-            managedObjectContext.deleteObject(binding)
+            renderInvocation.mutableOrderedSetValue(forKey: "vertexBufferBindings").remove(binding)
+            managedObjectContext.delete(binding)
         }
         vertexBufferBindingsViewController.reloadData()
         modelObserver.modelDidChange()
         sender.selectedSegment = -1
     }
 
-    @IBAction func addRemoveFragmentBufferBinding(sender: NSSegmentedControl) {
+    @IBAction func addRemoveFragmentBufferBinding(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 { // Add
-            let bufferBinding = NSEntityDescription.insertNewObjectForEntityForName("BufferBinding", inManagedObjectContext: managedObjectContext) as! BufferBinding
+            let bufferBinding = NSEntityDescription.insertNewObject(forEntityName: "BufferBinding", into: managedObjectContext) as! BufferBinding
             bufferBinding.buffer = nil
-            renderInvocation.mutableOrderedSetValueForKey("fragmentBufferBindings").addObject(bufferBinding)
+            renderInvocation.mutableOrderedSetValue(forKey: "fragmentBufferBindings").add(bufferBinding)
         } else { // Remove
             assert(sender.selectedSegment == 1)
             guard let row = fragmentBufferBindingsViewController.selectedRow() else {
                 return
             }
             let binding = renderInvocation.fragmentBufferBindings[row] as! BufferBinding
-            renderInvocation.mutableOrderedSetValueForKey("fragmentBufferBindings").removeObject(binding)
-            managedObjectContext.deleteObject(binding)
+            renderInvocation.mutableOrderedSetValue(forKey: "fragmentBufferBindings").remove(binding)
+            managedObjectContext.delete(binding)
         }
         fragmentBufferBindingsViewController.reloadData()
         modelObserver.modelDidChange()
         sender.selectedSegment = -1
     }
 
-    @IBAction func addRemoveVertexTextureBinding(sender: NSSegmentedControl) {
+    @IBAction func addRemoveVertexTextureBinding(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 { // Add
-            let textureBinding = NSEntityDescription.insertNewObjectForEntityForName("TextureBinding", inManagedObjectContext: managedObjectContext) as! TextureBinding
+            let textureBinding = NSEntityDescription.insertNewObject(forEntityName: "TextureBinding", into: managedObjectContext) as! TextureBinding
             textureBinding.texture = nil
-            renderInvocation.mutableOrderedSetValueForKey("vertexTextureBindings").addObject(textureBinding)
+            renderInvocation.mutableOrderedSetValue(forKey: "vertexTextureBindings").add(textureBinding)
         } else { // Remove
             assert(sender.selectedSegment == 1)
             guard let row = vertexTextureBindingsViewController.selectedRow() else {
                 return
             }
             let binding = renderInvocation.vertexTextureBindings[row] as! TextureBinding
-            renderInvocation.mutableOrderedSetValueForKey("vertexTextureBindings").removeObject(binding)
-            managedObjectContext.deleteObject(binding)
+            renderInvocation.mutableOrderedSetValue(forKey: "vertexTextureBindings").remove(binding)
+            managedObjectContext.delete(binding)
         }
         vertexTextureBindingsViewController.reloadData()
         modelObserver.modelDidChange()
         sender.selectedSegment = -1
     }
-    @IBAction func addRemoveFragmentTextureBinding(sender: NSSegmentedControl) {
+    @IBAction func addRemoveFragmentTextureBinding(_ sender: NSSegmentedControl) {
         if sender.selectedSegment == 0 { // Add
-            let textureBinding = NSEntityDescription.insertNewObjectForEntityForName("TextureBinding", inManagedObjectContext: managedObjectContext) as! TextureBinding
+            let textureBinding = NSEntityDescription.insertNewObject(forEntityName: "TextureBinding", into: managedObjectContext) as! TextureBinding
             textureBinding.texture = nil
-            renderInvocation.mutableOrderedSetValueForKey("fragmentTextureBindings").addObject(textureBinding)
+            renderInvocation.mutableOrderedSetValue(forKey: "fragmentTextureBindings").add(textureBinding)
         } else { // Remove
             assert(sender.selectedSegment == 1)
             guard let row = fragmentTextureBindingsViewController.selectedRow() else {
                 return
             }
             let binding = renderInvocation.fragmentTextureBindings[row] as! TextureBinding
-            renderInvocation.mutableOrderedSetValueForKey("fragmentTextureBindings").removeObject(binding)
-            managedObjectContext.deleteObject(binding)
+            renderInvocation.mutableOrderedSetValue(forKey: "fragmentTextureBindings").remove(binding)
+            managedObjectContext.delete(binding)
         }
         fragmentTextureBindingsViewController.reloadData()
         modelObserver.modelDidChange()
         sender.selectedSegment = -1
     }
 
-    @IBAction func stateSelected(sender: NSPopUpButton) {
+    @IBAction func stateSelected(_ sender: NSPopUpButton) {
         let selectedItem = sender.selectedItem!
 
         guard let selectionObject = selectedItem.representedObject else {
@@ -306,95 +306,95 @@ class RenderInvocationDetailsViewController: NSViewController {
         modelObserver.modelDidChange()
     }
 
-    @IBAction func primitiveSelected(sender: NSPopUpButton) {
+    @IBAction func primitiveSelected(_ sender: NSPopUpButton) {
         assert(sender.indexOfSelectedItem >= 0)
-        renderInvocation.primitive = sender.indexOfSelectedItem
+        renderInvocation.primitive = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setVertexStart(sender: NSTextField) {
-        renderInvocation.vertexStart = sender.integerValue
+    @IBAction func setVertexStart(_ sender: NSTextField) {
+        renderInvocation.vertexStart = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setVertexCount(sender: NSTextField) {
-        renderInvocation.vertexCount = sender.integerValue
+    @IBAction func setVertexCount(_ sender: NSTextField) {
+        renderInvocation.vertexCount = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
-    @IBAction func blendColorRedSliderSet(sender: NSSlider) {
-        renderInvocation.blendColorRed = sender.doubleValue
+    @IBAction func blendColorRedSliderSet(_ sender: NSSlider) {
+        renderInvocation.blendColorRed = NSNumber(value: sender.doubleValue)
         blendRedTextField.doubleValue = sender.doubleValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blendColorGreenSliderSet(sender: NSSlider) {
-        renderInvocation.blendColorGreen = sender.doubleValue
+    @IBAction func blendColorGreenSliderSet(_ sender: NSSlider) {
+        renderInvocation.blendColorGreen = NSNumber(value: sender.doubleValue)
         blendGreenTextField.doubleValue = sender.doubleValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blendColorBlueSliderSet(sender: NSSlider) {
-        renderInvocation.blendColorBlue = sender.doubleValue
+    @IBAction func blendColorBlueSliderSet(_ sender: NSSlider) {
+        renderInvocation.blendColorBlue = NSNumber(value: sender.doubleValue)
         blendBlueTextField.doubleValue = sender.doubleValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blendColorAlphaSliderSet(sender: NSSlider) {
-        renderInvocation.blendColorAlpha = sender.doubleValue
+    @IBAction func blendColorAlphaSliderSet(_ sender: NSSlider) {
+        renderInvocation.blendColorAlpha = NSNumber(value: sender.doubleValue)
         blendAlphaTextField.doubleValue = sender.doubleValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blendColorRedTextFieldSet(sender: NSTextField) {
-        renderInvocation.blendColorRed = sender.doubleValue
+    @IBAction func blendColorRedTextFieldSet(_ sender: NSTextField) {
+        renderInvocation.blendColorRed = NSNumber(value: sender.doubleValue)
         blendRedSlider.doubleValue = sender.doubleValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blendColorGreenTextFieldSet(sender: NSTextField) {
-        renderInvocation.blendColorGreen = sender.doubleValue
+    @IBAction func blendColorGreenTextFieldSet(_ sender: NSTextField) {
+        renderInvocation.blendColorGreen = NSNumber(value: sender.doubleValue)
         blendGreenSlider.doubleValue = sender.doubleValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blendColorBlueTextFieldSet(sender: NSTextField) {
-        renderInvocation.blendColorBlue = sender.doubleValue
+    @IBAction func blendColorBlueTextFieldSet(_ sender: NSTextField) {
+        renderInvocation.blendColorBlue = NSNumber(value: sender.doubleValue)
         blendBlueSlider.doubleValue = sender.doubleValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blendColorAlphaTextFieldSet(sender: NSTextField) {
-        renderInvocation.blendColorAlpha = sender.doubleValue
+    @IBAction func blendColorAlphaTextFieldSet(_ sender: NSTextField) {
+        renderInvocation.blendColorAlpha = NSNumber(value: sender.doubleValue)
         blendAlphaSlider.doubleValue = sender.doubleValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func cullModeSelected(sender: NSPopUpButton) {
-        renderInvocation.cullMode = sender.indexOfSelectedItem
+    @IBAction func cullModeSelected(_ sender: NSPopUpButton) {
+        renderInvocation.cullMode = NSNumber(value: sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthBiasSet(sender: NSTextField) {
-        renderInvocation.depthBias = sender.doubleValue
+    @IBAction func depthBiasSet(_ sender: NSTextField) {
+        renderInvocation.depthBias = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthSlopeScaleSet(sender: NSTextField) {
-        renderInvocation.depthSlopeScale = sender.doubleValue
+    @IBAction func depthSlopeScaleSet(_ sender: NSTextField) {
+        renderInvocation.depthSlopeScale = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthClampSet(sender: NSTextField) {
-        renderInvocation.depthClamp = sender.doubleValue
+    @IBAction func depthClampSet(_ sender: NSTextField) {
+        renderInvocation.depthClamp = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthClipModeSelected(sender: NSPopUpButton) {
-        renderInvocation.depthClipMode = sender.indexOfSelectedItem
+    @IBAction func depthClipModeSelected(_ sender: NSPopUpButton) {
+        renderInvocation.depthClipMode = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthStencilStateSelected(sender: NSPopUpButton) {
+    @IBAction func depthStencilStateSelected(_ sender: NSPopUpButton) {
         let selectedItem = sender.selectedItem!
 
         guard let selectionObject = selectedItem.representedObject else {
@@ -407,81 +407,81 @@ class RenderInvocationDetailsViewController: NSViewController {
         modelObserver.modelDidChange()
     }
 
-    @IBAction func windingOrderSelected(sender: NSPopUpButton) {
-        renderInvocation.frontFacingWinding = sender.indexOfSelectedItem
+    @IBAction func windingOrderSelected(_ sender: NSPopUpButton) {
+        renderInvocation.frontFacingWinding = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func scissorRectChecked(sender: NSButton) {
+    @IBAction func scissorRectChecked(_ sender: NSButton) {
         if sender.state == NSOnState {
-            let scissorRect = NSEntityDescription.insertNewObjectForEntityForName("ScissorRect", inManagedObjectContext: managedObjectContext!) as! ScissorRect
+            let scissorRect = NSEntityDescription.insertNewObject(forEntityName: "ScissorRect", into: managedObjectContext!) as! ScissorRect
             scissorRect.x = 0
             scissorRect.y = 0
             scissorRect.width = 0
             scissorRect.height = 0
             renderInvocation.scissorRect = scissorRect
-            scissorRectXTextField.integerValue = scissorRect.x.integerValue
-            scissorRectYTextField.integerValue = scissorRect.y.integerValue
-            scissorRectWidthTextField.integerValue = scissorRect.width.integerValue
-            scissorRectHeightTextField.integerValue = scissorRect.height.integerValue
-            scissorRectXTextField.enabled = true
-            scissorRectYTextField.enabled = true
-            scissorRectWidthTextField.enabled = true
-            scissorRectHeightTextField.enabled = true
+            scissorRectXTextField.integerValue = scissorRect.x.intValue
+            scissorRectYTextField.integerValue = scissorRect.y.intValue
+            scissorRectWidthTextField.integerValue = scissorRect.width.intValue
+            scissorRectHeightTextField.integerValue = scissorRect.height.intValue
+            scissorRectXTextField.isEnabled = true
+            scissorRectYTextField.isEnabled = true
+            scissorRectWidthTextField.isEnabled = true
+            scissorRectHeightTextField.isEnabled = true
         } else {
             let scissorRect = renderInvocation.scissorRect!
             renderInvocation.scissorRect = nil
-            managedObjectContext.deleteObject(scissorRect)
+            managedObjectContext.delete(scissorRect)
             scissorRectXTextField.stringValue = ""
             scissorRectYTextField.stringValue = ""
             scissorRectWidthTextField.stringValue = ""
             scissorRectHeightTextField.stringValue = ""
-            scissorRectXTextField.enabled = false
-            scissorRectYTextField.enabled = false
-            scissorRectWidthTextField.enabled = false
-            scissorRectHeightTextField.enabled = false
+            scissorRectXTextField.isEnabled = false
+            scissorRectYTextField.isEnabled = false
+            scissorRectWidthTextField.isEnabled = false
+            scissorRectHeightTextField.isEnabled = false
         }
         modelObserver.modelDidChange()
     }
 
-    @IBAction func scissorRectXSet(sender: NSTextField) {
-        renderInvocation.scissorRect!.x = sender.integerValue
+    @IBAction func scissorRectXSet(_ sender: NSTextField) {
+        renderInvocation.scissorRect!.x = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func scissorRectYSet(sender: NSTextField) {
-        renderInvocation.scissorRect!.y = sender.integerValue
+    @IBAction func scissorRectYSet(_ sender: NSTextField) {
+        renderInvocation.scissorRect!.y = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func scissorRectWidthSet(sender: NSTextField) {
-        renderInvocation.scissorRect!.width = sender.integerValue
+    @IBAction func scissorRectWidthSet(_ sender: NSTextField) {
+        renderInvocation.scissorRect!.width = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func scissorRectHeightSet(sender: NSTextField) {
-        renderInvocation.scissorRect!.height = sender.integerValue
+    @IBAction func scissorRectHeightSet(_ sender: NSTextField) {
+        renderInvocation.scissorRect!.height = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func stencilFrontReferenceValueSet(sender: NSTextField) {
-        renderInvocation.stencilFrontReferenceValue = sender.integerValue
+    @IBAction func stencilFrontReferenceValueSet(_ sender: NSTextField) {
+        renderInvocation.stencilFrontReferenceValue = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func stencilBackReferenceValueSet(sender: NSTextField) {
-        renderInvocation.stencilBackReferenceValue = sender.integerValue
+    @IBAction func stencilBackReferenceValueSet(_ sender: NSTextField) {
+        renderInvocation.stencilBackReferenceValue = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func triangleFillModeSelected(sender: NSPopUpButton) {
-        renderInvocation.triangleFillMode = sender.indexOfSelectedItem
+    @IBAction func triangleFillModeSelected(_ sender: NSPopUpButton) {
+        renderInvocation.triangleFillMode = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func viewportChecked(sender: NSButton) {
+    @IBAction func viewportChecked(_ sender: NSButton) {
         if sender.state == NSOnState {
-            let viewport = NSEntityDescription.insertNewObjectForEntityForName("Viewport", inManagedObjectContext: managedObjectContext!) as! Viewport
+            let viewport = NSEntityDescription.insertNewObject(forEntityName: "Viewport", into: managedObjectContext!) as! Viewport
             viewport.originX = 0
             viewport.originY = 0
             viewport.width = 0
@@ -495,73 +495,73 @@ class RenderInvocationDetailsViewController: NSViewController {
             viewportHeightTextField.doubleValue = viewport.height.doubleValue
             viewportZNearTextField.doubleValue = viewport.zNear.doubleValue
             viewportZFarTextField.doubleValue = viewport.zFar.doubleValue
-            viewportOriginXTextField.enabled = true
-            viewportOriginYTextField.enabled = true
-            viewportWidthTextField.enabled = true
-            viewportHeightTextField.enabled = true
-            viewportZNearTextField.enabled = true
-            viewportZFarTextField.enabled = true
+            viewportOriginXTextField.isEnabled = true
+            viewportOriginYTextField.isEnabled = true
+            viewportWidthTextField.isEnabled = true
+            viewportHeightTextField.isEnabled = true
+            viewportZNearTextField.isEnabled = true
+            viewportZFarTextField.isEnabled = true
         } else {
             let viewport = renderInvocation.viewport!
             renderInvocation.viewport = nil
-            managedObjectContext.deleteObject(viewport)
+            managedObjectContext.delete(viewport)
             viewportOriginXTextField.stringValue = ""
             viewportOriginYTextField.stringValue = ""
             viewportWidthTextField.stringValue = ""
             viewportHeightTextField.stringValue = ""
             viewportZNearTextField.stringValue = ""
             viewportZFarTextField.stringValue = ""
-            viewportOriginXTextField.enabled = false
-            viewportOriginYTextField.enabled = false
-            viewportWidthTextField.enabled = false
-            viewportHeightTextField.enabled = false
-            viewportZNearTextField.enabled = false
-            viewportZFarTextField.enabled = false
+            viewportOriginXTextField.isEnabled = false
+            viewportOriginYTextField.isEnabled = false
+            viewportWidthTextField.isEnabled = false
+            viewportHeightTextField.isEnabled = false
+            viewportZNearTextField.isEnabled = false
+            viewportZFarTextField.isEnabled = false
         }
         modelObserver.modelDidChange()
     }
 
-    @IBAction func viewportOriginXSet(sender: NSTextField) {
-        renderInvocation.viewport!.originX = sender.doubleValue
+    @IBAction func viewportOriginXSet(_ sender: NSTextField) {
+        renderInvocation.viewport!.originX = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func viewportOriginYSet(sender: NSTextField) {
-        renderInvocation.viewport!.originY = sender.doubleValue
+    @IBAction func viewportOriginYSet(_ sender: NSTextField) {
+        renderInvocation.viewport!.originY = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func viewportWidthSet(sender: NSTextField) {
-        renderInvocation.viewport!.width = sender.doubleValue
+    @IBAction func viewportWidthSet(_ sender: NSTextField) {
+        renderInvocation.viewport!.width = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func viewportHeightSet(sender: NSTextField) {
-        renderInvocation.viewport!.height = sender.doubleValue
+    @IBAction func viewportHeightSet(_ sender: NSTextField) {
+        renderInvocation.viewport!.height = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func viewportZNearSet(sender: NSTextField) {
-        renderInvocation.viewport!.zNear = sender.doubleValue
+    @IBAction func viewportZNearSet(_ sender: NSTextField) {
+        renderInvocation.viewport!.zNear = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func viewportZFarSet(sender: NSTextField) {
-        renderInvocation.viewport!.zFar = sender.doubleValue
+    @IBAction func viewportZFarSet(_ sender: NSTextField) {
+        renderInvocation.viewport!.zFar = NSNumber(value: sender.doubleValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func visibilityResultModeSelected(sender: NSPopUpButton) {
-        renderInvocation.visibilityResultMode = sender.indexOfSelectedItem
+    @IBAction func visibilityResultModeSelected(_ sender: NSPopUpButton) {
+        renderInvocation.visibilityResultMode = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func visibilityResultOffsetSet(sender: NSTextField) {
-        renderInvocation.visibilityResultOffset = sender.integerValue
+    @IBAction func visibilityResultOffsetSet(_ sender: NSTextField) {
+        renderInvocation.visibilityResultOffset = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func dismiss(sender: NSButton) {
+    @IBAction func dismiss(_ sender: NSButton) {
         dismissObserver.dismiss(self)
     }
 }

@@ -9,9 +9,9 @@
 import Cocoa
 
 protocol VertexDescriptorObserver: class {
-    func setVertexAttributeIndex(newValue: Int, vertexAttribute: VertexAttribute)
-    func setVertexBufferLayoutIndex(newValue: Int, vertexBufferLayout: VertexBufferLayout)
-    func setVertexAttributeBufferIndex(newValue: Int, vertexAttribute: VertexAttribute)
+    func setVertexAttributeIndex(_ newValue: Int, vertexAttribute: VertexAttribute)
+    func setVertexBufferLayoutIndex(_ newValue: Int, vertexBufferLayout: VertexBufferLayout)
+    func setVertexAttributeBufferIndex(_ newValue: Int, vertexAttribute: VertexAttribute)
 }
 
 class RenderStateViewController: NSViewController, RenderStateColorAttachmentRemoveObserver, VertexDescriptorObserver {
@@ -36,7 +36,7 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
     @IBOutlet var rasterizesPopUp: NSButton!
     @IBOutlet var inputPrimitiveTopologyPopUp: NSPopUpButton!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, state: RenderPipelineState, removeObserver: RenderPipelineStateRemoveObserver) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, state: RenderPipelineState, removeObserver: RenderPipelineStateRemoveObserver) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
         self.state = state
@@ -61,29 +61,29 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
 
         depthAttachmentPopUp.menu = pixelFormatMenu(true)
         if let depthAttachmentPixelFormat = state.depthAttachmentPixelFormat {
-            let pixelFormat = MTLPixelFormat(rawValue: depthAttachmentPixelFormat.unsignedLongValue)!
-            depthAttachmentPopUp.selectItemAtIndex(pixelFormatToIndex(pixelFormat) + 1)
+            let pixelFormat = MTLPixelFormat(rawValue: depthAttachmentPixelFormat.uintValue)!
+            depthAttachmentPopUp.selectItem(at: pixelFormatToIndex(pixelFormat) + 1)
         } else {
-            depthAttachmentPopUp.selectItemAtIndex(0)
+            depthAttachmentPopUp.selectItem(at: 0)
         }
 
         stencilAttachmentPopUp.menu = pixelFormatMenu(true)
         if let stencilAttachmentPixelFormat = state.stencilAttachmentPixelFormat {
-            if let pixelFormat = MTLPixelFormat(rawValue: stencilAttachmentPixelFormat.unsignedLongValue) {
-                stencilAttachmentPopUp.selectItemAtIndex(pixelFormatToIndex(pixelFormat) + 1)
+            if let pixelFormat = MTLPixelFormat(rawValue: stencilAttachmentPixelFormat.uintValue) {
+                stencilAttachmentPopUp.selectItem(at: pixelFormatToIndex(pixelFormat) + 1)
             } else {
-                stencilAttachmentPopUp.selectItemAtIndex(0)
+                stencilAttachmentPopUp.selectItem(at: 0)
             }
         } else {
-            stencilAttachmentPopUp.selectItemAtIndex(0)
+            stencilAttachmentPopUp.selectItem(at: 0)
         }
 
         if let sampleCount = state.sampleCount {
             sampleCountCheckBox.state = NSOnState
-            sampleCountTextField.integerValue = sampleCount.integerValue
+            sampleCountTextField.integerValue = sampleCount.intValue
         } else {
             sampleCountCheckBox.state = NSOffState
-            sampleCountTextField.enabled = false
+            sampleCountTextField.isEnabled = false
             sampleCountTextField.stringValue = ""
         }
 
@@ -100,45 +100,45 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         alphaToCoveragePopUp.state = state.alphaToCoverageEnabled.boolValue ? NSOnState : NSOffState
         alphaToOnePopUp.state = state.alphaToOneEnabled.boolValue ? NSOnState : NSOffState
         rasterizesPopUp.state = state.rasterizationEnabled.boolValue ? NSOnState : NSOffState
-        inputPrimitiveTopologyPopUp.selectItemAtIndex(state.inputPrimitiveTopology.integerValue)
+        inputPrimitiveTopologyPopUp.selectItem(at: state.inputPrimitiveTopology.intValue)
     }
 
-    @IBAction func setName(sender: NSTextField) {
+    @IBAction func setName(_ sender: NSTextField) {
         state.name = sender.stringValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setVertexFunction(sender: NSTextField) {
+    @IBAction func setVertexFunction(_ sender: NSTextField) {
         state.vertexFunction = sender.stringValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setFragmentFunction(sender: NSTextField) {
+    @IBAction func setFragmentFunction(_ sender: NSTextField) {
         state.fragmentFunction = sender.stringValue
         modelObserver.modelDidChange()
     }
 
-    private func insertRawVertexAttribute() -> VertexAttribute {
+    fileprivate func insertRawVertexAttribute() -> VertexAttribute {
         let attributeCount = vertexAttributesTableDelegate.numberOfVertexAttributes()
-        let attribute = NSEntityDescription.insertNewObjectForEntityForName("VertexAttribute", inManagedObjectContext: managedObjectContext) as! VertexAttribute
-        attribute.format = MTLVertexFormat.Float2.rawValue
+        let attribute = NSEntityDescription.insertNewObject(forEntityName: "VertexAttribute", into: managedObjectContext) as! VertexAttribute
+        attribute.format = NSNumber(value: MTLVertexFormat.float2.rawValue)
         attribute.offset = 0
         attribute.bufferIndex = 0
-        attribute.id = attributeCount
-        attribute.index = findNewVertexAttributeIndex()
+        attribute.id = NSNumber(attributeCount)
+        attribute.index = NSNumber(findNewVertexAttributeIndex())
         return attribute
     }
 
-    private func findNewVertexAttributeIndex() -> Int {
+    fileprivate func findNewVertexAttributeIndex() -> Int {
         var index = 0
         var found = false
         repeat {
             found = false
             for attributeObject in state.vertexAttributes {
                 let attribute = attributeObject as! VertexAttribute
-                if attribute.index == index {
+                if attribute.index.intValue == index {
                     found = true
-                    ++index
+                    index += 1
                     break
                 }
             }
@@ -146,27 +146,27 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         return index
     }
 
-    private func insertRawVertexBufferLayout() -> VertexBufferLayout {
+    fileprivate func insertRawVertexBufferLayout() -> VertexBufferLayout {
         let layoutCount = vertexBufferLayoutTableDelegate.numberOfVertexBufferLayouts()
-        let layout = NSEntityDescription.insertNewObjectForEntityForName("VertexBufferLayout", inManagedObjectContext: managedObjectContext) as! VertexBufferLayout
-        layout.stepFunction = MTLVertexStepFunction.PerVertex.rawValue
+        let layout = NSEntityDescription.insertNewObject(forEntityName: "VertexBufferLayout", into: managedObjectContext) as! VertexBufferLayout
+        layout.stepFunction = NSNumber(value: MTLVertexStepFunction.perVertex.rawValue)
         layout.stepRate = 1
         layout.stride = 8
-        layout.id = layoutCount
-        layout.index = findNewVertexBufferLayoutIndex()
+        layout.id = NSNumber(layoutCount)
+        layout.index = NSNumber(findNewVertexBufferLayoutIndex())
         return layout
     }
 
-    private func findNewVertexBufferLayoutIndex() -> Int {
+    fileprivate func findNewVertexBufferLayoutIndex() -> Int {
         var index = 0
         var found = false
         repeat {
             found = false
             for layoutObject in state.vertexBufferLayouts {
                 let layout = layoutObject as! VertexBufferLayout
-                if layout.index == index {
+                if layout.index.intValue == index {
                     found = true
-                    ++index
+                    index += 1
                     break
                 }
             }
@@ -174,21 +174,21 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         return index
     }
 
-    @IBAction func addVertexAttribute(sender: NSButton) {
+    @IBAction func addVertexAttribute(_ sender: NSButton) {
         let attribute = insertRawVertexAttribute()
         if state.vertexBufferLayouts.count == 0 {
             let layout = insertRawVertexBufferLayout()
-            state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
+            state.mutableOrderedSetValue(forKey: "vertexBufferLayouts").add(layout)
             vertexBufferLayoutTableView.reloadData()
         }
-        attribute.bufferIndex = state.vertexBufferLayouts[0].index
-        state.mutableOrderedSetValueForKey("vertexAttributes").addObject(attribute)
+        attribute.bufferIndex = (state.vertexBufferLayouts[0] as AnyObject).index
+        state.mutableOrderedSetValue(forKey: "vertexAttributes").add(attribute)
         
         vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func removeVertexAttribute(sender: NSButton) {
+    @IBAction func removeVertexAttribute(_ sender: NSButton) {
         guard vertexAttributesTableView.selectedRow >= 0 else {
             return
         }
@@ -208,30 +208,30 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
             for vertexBufferLayoutObject in state.vertexBufferLayouts {
                 let vertexBufferLayout = vertexBufferLayoutObject as! VertexBufferLayout
                 if vertexBufferLayout.index == vertexAttribute.bufferIndex {
-                    managedObjectContext.deleteObject(vertexBufferLayout)
+                    managedObjectContext.delete(vertexBufferLayout)
                     vertexBufferLayoutTableView.reloadData()
                     break
                 }
             }
         }
-        managedObjectContext.deleteObject(vertexAttribute)
+        managedObjectContext.delete(vertexAttribute)
         vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func addVertexBufferLayout(sender: NSButton) {
+    @IBAction func addVertexBufferLayout(_ sender: NSButton) {
         let layout = insertRawVertexBufferLayout()
         let attribute = insertRawVertexAttribute()
         attribute.bufferIndex = layout.index
-        state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
-        state.mutableOrderedSetValueForKey("vertexAttributes").addObject(attribute)
+        state.mutableOrderedSetValue(forKey: "vertexBufferLayouts").add(layout)
+        state.mutableOrderedSetValue(forKey: "vertexAttributes").add(attribute)
 
         vertexBufferLayoutTableView.reloadData()
         vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func removeVertexBufferLayout(sender: NSButton) {
+    @IBAction func removeVertexBufferLayout(_ sender: NSButton) {
         guard vertexBufferLayoutTableView.selectedRow >= 0 else {
             return
         }
@@ -239,43 +239,43 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         var toRemove: [VertexAttribute] = []
         for vertexAttributeObject in state.vertexAttributes {
             let vertexAttribute = vertexAttributeObject as! VertexAttribute
-            if vertexAttribute.bufferIndex.integerValue == vertexBufferLayout.index {
+            if vertexAttribute.bufferIndex == vertexBufferLayout.index {
                 toRemove.append(vertexAttribute)
             }
         }
         for attribute in toRemove {
-            managedObjectContext.deleteObject(attribute)
+            managedObjectContext.delete(attribute)
         }
-        managedObjectContext.deleteObject(vertexBufferLayout)
+        managedObjectContext.delete(vertexBufferLayout)
         vertexBufferLayoutTableView.reloadData()
         vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
 
-    func setVertexAttributeIndex(newValue: Int, vertexAttribute: VertexAttribute) {
-        vertexAttribute.index = newValue
+    func setVertexAttributeIndex(_ newValue: Int, vertexAttribute: VertexAttribute) {
+        vertexAttribute.index = NSNumber(newValue)
         modelObserver.modelDidChange()
     }
 
-    func setVertexAttributeBufferIndex(newValue: Int, vertexAttribute: VertexAttribute) {
+    func setVertexAttributeBufferIndex(_ newValue: Int, vertexAttribute: VertexAttribute) {
         var found = false
         for vertexBufferLayoutObject in state.vertexBufferLayouts {
             let vertexBufferLayout = vertexBufferLayoutObject as! VertexBufferLayout
-            if vertexBufferLayout.index.integerValue == newValue {
+            if vertexBufferLayout.index.intValue == newValue {
                 found = true
                 break
             }
         }
         if !found {
             let layout = insertRawVertexBufferLayout()
-            layout.index = newValue
-            state.mutableOrderedSetValueForKey("vertexBufferLayouts").addObject(layout)
+            layout.index = NSNumber(newValue)
+            state.mutableOrderedSetValue(forKey: "vertexBufferLayouts").add(layout)
             vertexBufferLayoutTableView.reloadData()
         }
         found = false
         for vertexAttributeObject in state.vertexAttributes {
             let searchVertexAttribute = vertexAttributeObject as! VertexAttribute
-            if searchVertexAttribute != vertexAttribute && searchVertexAttribute.bufferIndex.integerValue == vertexAttribute.bufferIndex.integerValue {
+            if searchVertexAttribute != vertexAttribute && searchVertexAttribute.bufferIndex.intValue == vertexAttribute.bufferIndex.intValue {
                 found = true
                 break
             }
@@ -283,129 +283,129 @@ class RenderStateViewController: NSViewController, RenderStateColorAttachmentRem
         if !found {
             for vertexBufferLayoutObject in state.vertexBufferLayouts {
                 let vertexBufferLayout = vertexBufferLayoutObject as! VertexBufferLayout
-                if vertexBufferLayout.index == vertexAttribute.bufferIndex.integerValue {
-                    managedObjectContext.deleteObject(vertexBufferLayout)
+                if vertexBufferLayout.index == vertexAttribute.bufferIndex {
+                    managedObjectContext.delete(vertexBufferLayout)
                     vertexBufferLayoutTableView.reloadData()
                     break
                 }
             }
         }
-        vertexAttribute.bufferIndex = newValue
+        vertexAttribute.bufferIndex = NSNumber(newValue)
     }
 
-    func setVertexBufferLayoutIndex(newValue: Int, vertexBufferLayout: VertexBufferLayout) {
+    func setVertexBufferLayoutIndex(_ newValue: Int, vertexBufferLayout: VertexBufferLayout) {
         for vertexAttributeObject in state.vertexAttributes {
             let vertexAttribute = vertexAttributeObject as! VertexAttribute
-            if vertexAttribute.bufferIndex.integerValue == vertexBufferLayout.index.integerValue {
-                vertexAttribute.bufferIndex = newValue
+            if vertexAttribute.bufferIndex.intValue == vertexBufferLayout.index.intValue {
+                vertexAttribute.bufferIndex = NSNumber(newValue)
             }
         }
-        vertexBufferLayout.index = newValue
+        vertexBufferLayout.index = NSNumber(newValue)
         vertexAttributesTableView.reloadData()
         modelObserver.modelDidChange()
     }
 
-    func addColorAttachmentView(colorAttachment: RenderPipelineColorAttachment) {
+    func addColorAttachmentView(_ colorAttachment: RenderPipelineColorAttachment) {
         let controller = RenderStateColorAttachmentViewController(nibName: "RenderStateColorAttachmentView", bundle: nil, modelObserver: modelObserver, removeObserver: self, colorAttachment: colorAttachment)!
         addChildViewController(controller)
         colorAttachmentsStackView.addArrangedSubview(controller.view)
     }
 
-    @IBAction func addColorAttachment(sender: NSButton) {
-        let attachment = NSEntityDescription.insertNewObjectForEntityForName("RenderPipelineColorAttachment", inManagedObjectContext: managedObjectContext) as! RenderPipelineColorAttachment
+    @IBAction func addColorAttachment(_ sender: NSButton) {
+        let attachment = NSEntityDescription.insertNewObject(forEntityName: "RenderPipelineColorAttachment", into: managedObjectContext) as! RenderPipelineColorAttachment
         attachment.pixelFormat = nil
         attachment.writeAlpha = true
         attachment.writeRed = true
         attachment.writeGreen = true
         attachment.writeBlue = true
         attachment.blendingEnabled = true
-        attachment.alphaBlendOperation = MTLBlendOperation.Add.rawValue
-        attachment.rgbBlendOperation = MTLBlendOperation.Add.rawValue
-        attachment.destinationAlphaBlendFactor = MTLBlendFactor.Zero.rawValue
-        attachment.destinationRGBBlendFactor = MTLBlendFactor.Zero.rawValue
-        attachment.sourceAlphaBlendFactor = MTLBlendFactor.One.rawValue
-        attachment.sourceRGBBlendFactor = MTLBlendFactor.One.rawValue
-        state.mutableOrderedSetValueForKey("colorAttachments").addObject(attachment)
+        attachment.alphaBlendOperation = NSNumber(value: MTLBlendOperation.add.rawValue)
+        attachment.rgbBlendOperation =  NSNumber(value: MTLBlendOperation.add.rawValue)
+        attachment.destinationAlphaBlendFactor =  NSNumber(value: MTLBlendFactor.zero.rawValue)
+        attachment.destinationRGBBlendFactor =  NSNumber(value: MTLBlendFactor.zero.rawValue)
+        attachment.sourceAlphaBlendFactor =  NSNumber(value: MTLBlendFactor.one.rawValue)
+        attachment.sourceRGBBlendFactor =  NSNumber(value: MTLBlendFactor.one.rawValue)
+        state.mutableOrderedSetValue(forKey: "colorAttachments").add(attachment)
         addColorAttachmentView(attachment)
         modelObserver.modelDidChange()
     }
 
-    func remove(viewController: RenderStateColorAttachmentViewController) {
+    func remove(_ viewController: RenderStateColorAttachmentViewController) {
         for i in 0 ..< childViewControllers.count {
             if childViewControllers[i] == viewController {
-                childViewControllers.removeAtIndex(i)
+                childViewControllers.remove(at: i)
                 break
             }
         }
         viewController.view.removeFromSuperview()
-        state.mutableOrderedSetValueForKey("colorAttachments").removeObject(viewController.colorAttachment)
-        managedObjectContext.deleteObject(viewController.colorAttachment)
+        state.mutableOrderedSetValue(forKey: "colorAttachments").remove(viewController.colorAttachment)
+        managedObjectContext.delete(viewController.colorAttachment)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthAttachmentSelected(sender: NSPopUpButton) {
+    @IBAction func depthAttachmentSelected(_ sender: NSPopUpButton) {
         assert(sender.indexOfSelectedItem >= 0)
         guard sender.indexOfSelectedItem > 0 else {
             state.depthAttachmentPixelFormat = nil
             return
         }
         let format = indexToPixelFormat(sender.indexOfSelectedItem - 1)!
-        state.depthAttachmentPixelFormat = format.rawValue
+        state.depthAttachmentPixelFormat =  NSNumber(value: format.rawValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func stencilAttachmentSelected(sender: NSPopUpButton) {
+    @IBAction func stencilAttachmentSelected(_ sender: NSPopUpButton) {
         assert(sender.indexOfSelectedItem >= 0)
         guard sender.indexOfSelectedItem > 0 else {
             state.depthAttachmentPixelFormat = nil
             return
         }
         let format = indexToPixelFormat(sender.indexOfSelectedItem - 1)!
-        state.stencilAttachmentPixelFormat = format.rawValue
+        state.stencilAttachmentPixelFormat =  NSNumber(value: format.rawValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func sampleCountEnabled(sender: NSButton) {
+    @IBAction func sampleCountEnabled(_ sender: NSButton) {
         if sender.state == NSOnState {
             state.sampleCount = 1
             sampleCountTextField.integerValue = 1
-            sampleCountTextField.enabled = true
+            sampleCountTextField.isEnabled = true
         } else {
             assert(sender.state == NSOffState)
             state.sampleCount = nil
             sampleCountTextField.stringValue = ""
-            sampleCountTextField.enabled = false
+            sampleCountTextField.isEnabled = false
         }
         modelObserver.modelDidChange()
     }
 
-    @IBAction func sampleCountSet(sender: NSTextField) {
-        state.sampleCount = sender.integerValue
+    @IBAction func sampleCountSet(_ sender: NSTextField) {
+        state.sampleCount = sender.integerValue as NSNumber
         modelObserver.modelDidChange()
     }
 
-    @IBAction func removeRenderPipelineState(sender: NSButton) {
+    @IBAction func removeRenderPipelineState(_ sender: NSButton) {
         removeObserver.removeRenderPipelineState(self)
     }
 
-    @IBAction func setAlphaToCoverage(sender: NSButton) {
-        state.alphaToCoverageEnabled = sender.state == NSOnState
+    @IBAction func setAlphaToCoverage(_ sender: NSButton) {
+        state.alphaToCoverageEnabled = NSNumber(value: sender.state == NSOnState)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setAlphaToOne(sender: NSButton) {
-        state.alphaToOneEnabled = sender.state == NSOnState
+    @IBAction func setAlphaToOne(_ sender: NSButton) {
+        state.alphaToOneEnabled = NSNumber(value: sender.state == NSOnState)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setRasterizes(sender: NSButton) {
-        state.rasterizationEnabled = sender.state == NSOnState
+    @IBAction func setRasterizes(_ sender: NSButton) {
+        state.rasterizationEnabled = NSNumber(value: sender.state == NSOnState)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func inputPrimitiveTopologySelected(sender: NSPopUpButton) {
-        state.inputPrimitiveTopology = sender.indexOfSelectedItem
-        assert(state.inputPrimitiveTopology.integerValue >= 0 && state.inputPrimitiveTopology.integerValue <= 3)
+    @IBAction func inputPrimitiveTopologySelected(_ sender: NSPopUpButton) {
+        state.inputPrimitiveTopology = NSNumber(sender.indexOfSelectedItem)
+        assert(state.inputPrimitiveTopology.intValue >= 0 && state.inputPrimitiveTopology.intValue <= 3)
         modelObserver.modelDidChange()
     }
 

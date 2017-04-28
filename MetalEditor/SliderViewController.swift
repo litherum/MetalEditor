@@ -16,7 +16,7 @@ class SliderViewController: NSViewController {
     @IBOutlet var maxTextField: NSTextField!
     @IBOutlet var valueTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, uniform: Uniform) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, uniform: Uniform) {
         self.uniform = uniform
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -25,27 +25,27 @@ class SliderViewController: NSViewController {
         fatalError()
     }
 
-    @IBAction func minSet(sender: NSTextField) {
-        slider.minValue = sender.doubleValue
+    @IBAction func minSet(_ sender: NSTextField) {
+        slider.minValue =  Double(sender.integerValue)
         if slider.allowsTickMarkValuesOnly {
             slider.numberOfTickMarks = Int(slider.maxValue - slider.minValue) // FIXME: This math is problematic for large numbers
         }
     }
 
-    @IBAction func sliderSet(sender: NSSlider) {
-        uniform.value = sender.doubleValue
+    @IBAction func sliderSet(_ sender: NSSlider) {
+        uniform.value =   NSNumber(value: sender.integerValue)
         valueTextField.doubleValue = slider.doubleValue
     }
 
-    @IBAction func maxSet(sender: NSTextField) {
-        slider.maxValue = sender.doubleValue
+    @IBAction func maxSet(_ sender: NSTextField) {
+        slider.maxValue =  Double(sender.integerValue)
         if slider.allowsTickMarkValuesOnly {
             slider.numberOfTickMarks = Int(slider.maxValue - slider.minValue)
         }
     }
 
-    @IBAction func valueSet(sender: NSTextField) {
-        uniform.value = sender.doubleValue
+    @IBAction func valueSet(_ sender: NSTextField) {
+        uniform.value =   NSNumber(value: sender.integerValue)
         slider.doubleValue = sender.doubleValue
     }
 

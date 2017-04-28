@@ -11,7 +11,7 @@ import Cocoa
 class ComputeInvocationsViewController: InvocationsViewController, InvocationRemoveObserver {
     var computePass: ComputePass!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: PassRemoveObserver, pass: ComputePass) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: PassRemoveObserver, pass: ComputePass) {
         self.computePass = pass
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.managedObjectContext = managedObjectContext
@@ -23,36 +23,36 @@ class ComputeInvocationsViewController: InvocationsViewController, InvocationRem
         fatalError()
     }
 
-    func addComputeInvocationView(invocation: ComputeInvocation) {
+    func addComputeInvocationView(_ invocation: ComputeInvocation) {
         let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: modelObserver, removeObserver: self, invocation: invocation)!
         addChildViewController(subController)
         stackView.addArrangedSubview(subController.view)
     }
 
-    @IBAction func addInvocation(sender: NSButton) {
-        let threadgroupsPerGrid = NSEntityDescription.insertNewObjectForEntityForName("Size", inManagedObjectContext: managedObjectContext) as! Size
+    @IBAction func addInvocation(_ sender: NSButton) {
+        let threadgroupsPerGrid = NSEntityDescription.insertNewObject(forEntityName: "Size", into: managedObjectContext) as! Size
         threadgroupsPerGrid.width = 0
         threadgroupsPerGrid.height = 0
         threadgroupsPerGrid.depth = 0
 
-        let threadsPerThreadgroup = NSEntityDescription.insertNewObjectForEntityForName("Size", inManagedObjectContext: managedObjectContext) as! Size
+        let threadsPerThreadgroup = NSEntityDescription.insertNewObject(forEntityName: "Size", into: managedObjectContext) as! Size
         threadsPerThreadgroup.width = 0
         threadsPerThreadgroup.height = 0
         threadsPerThreadgroup.depth = 0
 
-        let computeInvocation = NSEntityDescription.insertNewObjectForEntityForName("ComputeInvocation", inManagedObjectContext: managedObjectContext) as! ComputeInvocation
+        let computeInvocation = NSEntityDescription.insertNewObject(forEntityName: "ComputeInvocation", into: managedObjectContext) as! ComputeInvocation
         computeInvocation.name = "New Compute Invocation"
         computeInvocation.state = nil
         computeInvocation.threadgroupsPerGrid = threadgroupsPerGrid
         computeInvocation.threadsPerThreadgroup = threadsPerThreadgroup
 
-        computePass.mutableOrderedSetValueForKey("invocations").addObject(computeInvocation)
+        computePass.mutableOrderedSetValue(forKey: "invocations").add(computeInvocation)
         addComputeInvocationView(computeInvocation)
         modelObserver.modelDidChange()
     }
 
-    func removeInvocation(controller: InvocationViewController) {
-        computePass.mutableOrderedSetValueForKey("invocations").removeObject(controller.invocation)
+    func removeInvocation(_ controller: InvocationViewController) {
+        computePass.mutableOrderedSetValue(forKey: "invocations").remove(controller.invocation)
         super.removeInvocation(controller, pass: computePass)
     }
 }

@@ -8,11 +8,11 @@
 
 import Cocoa
 
-let vertexFormatNameMap: [MTLVertexFormat : String] = [.Invalid: "Invalid", .UChar2: "UChar2", .UChar3: "UChar3", .UChar4: "UChar4", .Char2: "Char2", .Char3: "Char3", .Char4: "Char4", .UChar2Normalized: "UChar2Normalized", .UChar3Normalized: "UChar3Normalized", .UChar4Normalized: "UChar4Normalized", .Char2Normalized: "Char2Normalized", .Char3Normalized: "Char3Normalized", .Char4Normalized: "Char4Normalized", .UShort2: "UShort2", .UShort3: "UShort3", .UShort4: "UShort4", .Short2: "Short2", .Short3: "Short3", .Short4: "Short4", .UShort2Normalized: "UShort2Normalized", .UShort3Normalized: "UShort3Normalized", .UShort4Normalized: "UShort4Normalized", .Short2Normalized: "Short2Normalized", .Short3Normalized: "Short3Normalized", .Short4Normalized: "Short4Normalized", .Half2: "Half2", .Half3: "Half3", .Half4: "Half4", .Float: "Float", .Float2: "Float2", .Float3: "Float3", .Float4: "Float4", .Int: "Int", .Int2: "Int2", .Int3: "Int3", .Int4: "Int4", .UInt: "UInt", .UInt2: "UInt2", .UInt3: "UInt3", .UInt4: "UInt4", .Int1010102Normalized: "Int1010102Normalized", .UInt1010102Normalized: "UInt1010102Normalized"]
+let vertexFormatNameMap: [MTLVertexFormat : String] = [.invalid: "Invalid", .uchar2: "UChar2", .uchar3: "UChar3", .uchar4: "UChar4", .char2: "Char2", .char3: "Char3", .char4: "Char4", .uchar2Normalized: "UChar2Normalized", .uchar3Normalized: "UChar3Normalized", .uchar4Normalized: "UChar4Normalized", .char2Normalized: "Char2Normalized", .char3Normalized: "Char3Normalized", .char4Normalized: "Char4Normalized", .ushort2: "UShort2", .ushort3: "UShort3", .ushort4: "UShort4", .short2: "Short2", .short3: "Short3", .short4: "Short4", .ushort2Normalized: "UShort2Normalized", .ushort3Normalized: "UShort3Normalized", .ushort4Normalized: "UShort4Normalized", .short2Normalized: "Short2Normalized", .short3Normalized: "Short3Normalized", .short4Normalized: "Short4Normalized", .half2: "Half2", .half3: "Half3", .half4: "Half4", .float: "Float", .float2: "Float2", .float3: "Float3", .float4: "Float4", .int: "Int", .int2: "Int2", .int3: "Int3", .int4: "Int4", .uint: "UInt", .uint2: "UInt2", .uint3: "UInt3", .uint4: "UInt4", .int1010102Normalized: "Int1010102Normalized", .uint1010102Normalized: "UInt1010102Normalized"]
 
-let vertexFormatMenuOrder: [MTLVertexFormat] = [.Invalid, .UChar2, .UChar3, .UChar4, .Char2, .Char3, .Char4, .UChar2Normalized, .UChar3Normalized, .UChar4Normalized, .Char2Normalized, .Char3Normalized, .Char4Normalized, .UShort2, .UShort3, .UShort4, .Short2, .Short3, .Short4, .UShort2Normalized, .UShort3Normalized, .UShort4Normalized, .Short2Normalized, .Short3Normalized, .Short4Normalized, .Half2, .Half3, .Half4, .Float, .Float2, .Float3, .Float4, .Int, .Int2, .Int3, .Int4, .UInt, .UInt2, .UInt3, .UInt4, .Int1010102Normalized, .UInt1010102Normalized]
+let vertexFormatMenuOrder: [MTLVertexFormat] = [.invalid, .uchar2, .uchar3, .uchar4, .char2, .char3, .char4, .uchar2Normalized, .uchar3Normalized, .uchar4Normalized, .char2Normalized, .char3Normalized, .char4Normalized, .ushort2, .ushort3, .ushort4, .short2, .short3, .short4, .ushort2Normalized, .ushort3Normalized, .ushort4Normalized, .short2Normalized, .short3Normalized, .short4Normalized, .half2, .half3, .half4, .float, .float2, .float3, .float4, .int, .int2, .int3, .int4, .uint, .uint2, .uint3, .uint4, .int1010102Normalized, .uint1010102Normalized]
 
-func vertexFormatToIndex(vertexFormat: MTLVertexFormat) -> Int {
+func vertexFormatToIndex(_ vertexFormat: MTLVertexFormat) -> Int {
     for i in 0 ..< vertexFormatMenuOrder.count {
         if vertexFormatMenuOrder[i] == vertexFormat {
             return i
@@ -21,13 +21,13 @@ func vertexFormatToIndex(vertexFormat: MTLVertexFormat) -> Int {
     return 0
 }
 
-func indexToVertexFormat(i: Int) -> MTLVertexFormat {
+func indexToVertexFormat(_ i: Int) -> MTLVertexFormat {
     return vertexFormatMenuOrder[i]
 }
 
 func vertexFormatMenu() -> NSMenu {
     let result = NSMenu()
-    for i in MTLVertexFormat.Invalid.rawValue ... MTLVertexFormat.UInt1010102Normalized.rawValue {
+    for i in MTLVertexFormat.invalid.rawValue ... MTLVertexFormat.uint1010102Normalized.rawValue {
         guard let format = MTLVertexFormat(rawValue: i) else {
             continue
         }
@@ -54,71 +54,71 @@ class VertexAttributesTableDelegate: NSObject, NSTableViewDelegate, NSTableViewD
         return state.vertexAttributes.count
     }
 
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return numberOfVertexAttributes()
     }
 
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
         switch tableColumn! {
         case indexColumn:
-            let result = tableView.makeViewWithIdentifier("Index", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier: "Index", owner: self) as! NSTableCellView
             let textField = result.textField!
-            textField.editable = true
-            textField.integerValue = vertexAttribute.index.integerValue
+            textField.isEditable = true
+            textField.integerValue = vertexAttribute.index.intValue
             return result
         case formatColumn:
-            let result = tableView.makeViewWithIdentifier("FormatPopUp", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier: "FormatPopUp", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSPopUpButton
-            let format = MTLVertexFormat(rawValue: vertexAttribute.format.unsignedLongValue)!
+            let format = MTLVertexFormat(rawValue: vertexAttribute.format.uintValue)!
             popUp.menu = vertexFormatMenu()
-            popUp.selectItemAtIndex(vertexFormatToIndex(format))
+            popUp.selectItem(at: vertexFormatToIndex(format))
             return result
         case offsetColumn:
-            let result = tableView.makeViewWithIdentifier("OffsetField", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier: "OffsetField", owner: self) as! NSTableCellView
             let textField = result.textField!
-            textField.editable = true
-            textField.integerValue = vertexAttribute.offset.integerValue
+            textField.isEditable = true
+            textField.integerValue = vertexAttribute.offset.intValue
             return result
         case bufferIndexColumn:
-            let result = tableView.makeViewWithIdentifier("BufferIndexField", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier: "BufferIndexField", owner: self) as! NSTableCellView
             let textField = result.textField!
-            textField.editable = true
-            textField.integerValue = vertexAttribute.bufferIndex.integerValue
+            textField.isEditable = true
+            textField.integerValue = vertexAttribute.bufferIndex.intValue
             return result
         default:
             fatalError()
         }
     }
 
-    func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
+    func control(_ control: NSControl, isValidObject obj: Any?) -> Bool {
         return Int(obj as! String) != nil
     }
 
-    @IBAction func setIndex(sender: NSTextField) {
-        let row = tableView.rowForView(sender)
+    @IBAction func setIndex(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
         let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
         indexObserver.setVertexAttributeIndex(sender.integerValue, vertexAttribute: vertexAttribute)
     }
 
-    @IBAction func formatSelected(sender: NSPopUpButton) {
-        let row = tableView.rowForView(sender)
+    @IBAction func formatSelected(_ sender: NSPopUpButton) {
+        let row = tableView.row(for: sender)
         let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
         let format = indexToVertexFormat(sender.indexOfSelectedItem)
-        vertexAttribute.format = format.rawValue
+        vertexAttribute.format = NSNumber(value: format.rawValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func setOffset(sender: NSTextField) {
-        let row = tableView.rowForView(sender)
+    @IBAction func setOffset(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
         let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
-        vertexAttribute.offset = sender.integerValue
+        vertexAttribute.offset = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
     
-    @IBAction func setBufferIndex(sender: NSTextField) {
-        let row = tableView.rowForView(sender)
+    @IBAction func setBufferIndex(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
         let vertexAttribute = state.vertexAttributes[row] as! VertexAttribute
         indexObserver.setVertexAttributeBufferIndex(sender.integerValue, vertexAttribute: vertexAttribute)
     }

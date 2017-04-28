@@ -12,11 +12,11 @@ import CoreData
 class DepthStencilState: NSManagedObject {
     override func validateForInsert() throws {
         try super.validateForInsert()
-        try validatePropertyIsUnique("DepthStencilState", managedObjectContext: managedObjectContext!, name: "name", value: name, probe: self)
+        try validatePropertyIsUnique("DepthStencilState", managedObjectContext: managedObjectContext!, name: "name", value: name as NSString, probe: self)
     }
 
     override func validateForUpdate() throws {
         try super.validateForUpdate()
-        try validatePropertyIsUnique("DepthStencilState", managedObjectContext: managedObjectContext!, name: "name", value: name, probe: self)
+        try validatePropertyIsUnique("DepthStencilState", managedObjectContext: managedObjectContext!, name: "name", value: name as NSString, probe: self)
     }
 }

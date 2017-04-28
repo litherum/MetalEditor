@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol ColorAttachmentRemoveObserver: class {
-    func remove(controller: ColorAttachmentViewController)
+    func remove(_ controller: ColorAttachmentViewController)
 }
 
 class ColorAttachmentViewController: NSViewController {
@@ -24,7 +24,7 @@ class ColorAttachmentViewController: NSViewController {
     @IBOutlet var alphaTextField: NSTextField!
     @IBOutlet var renderPassAttachmentPlaceholderView: NSView!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: ColorAttachmentRemoveObserver, colorAttachment: ColorAttachment) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: ColorAttachmentRemoveObserver, colorAttachment: ColorAttachment) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
         self.removeObserver = removeObserver
@@ -39,38 +39,38 @@ class ColorAttachmentViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        redTextField.integerValue = colorAttachment.clearRed.integerValue
-        greenTextField.integerValue = colorAttachment.clearGreen.integerValue
-        blueTextField.integerValue = colorAttachment.clearBlue.integerValue
-        alphaTextField.integerValue = colorAttachment.clearAlpha.integerValue
+        redTextField.integerValue = colorAttachment.clearRed.intValue
+        greenTextField.integerValue = colorAttachment.clearGreen.intValue
+        blueTextField.integerValue = colorAttachment.clearBlue.intValue
+        alphaTextField.integerValue = colorAttachment.clearAlpha.intValue
 
         renderPassAttachmentViewController = RenderPassAttachmentViewController(nibName: "RenderPassAttachmentView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, renderPassAttachment: colorAttachment)!
         renderPassAttachmentPlaceholderView.addSubview(renderPassAttachmentViewController.view)
-        renderPassAttachmentPlaceholderView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[controller]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["controller" : renderPassAttachmentViewController.view]))
-        renderPassAttachmentPlaceholderView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[controller]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["controller" : renderPassAttachmentViewController.view]))
+        renderPassAttachmentPlaceholderView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[controller]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["controller" : renderPassAttachmentViewController.view]))
+        renderPassAttachmentPlaceholderView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[controller]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["controller" : renderPassAttachmentViewController.view]))
     }
 
-    @IBAction func redTextFieldSet(sender: NSTextField) {
-        colorAttachment.clearRed = sender.integerValue
+    @IBAction func redTextFieldSet(_ sender: NSTextField) {
+        colorAttachment.clearRed = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func greenTextFieldSet(sender: NSTextField) {
-        colorAttachment.clearGreen = sender.integerValue
+    @IBAction func greenTextFieldSet(_ sender: NSTextField) {
+        colorAttachment.clearGreen = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blueTextFieldSet(sender: NSTextField) {
-        colorAttachment.clearBlue = sender.integerValue
+    @IBAction func blueTextFieldSet(_ sender: NSTextField) {
+        colorAttachment.clearBlue = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func alphaTextFieldSet(sender: NSTextField) {
-        colorAttachment.clearAlpha = sender.integerValue
+    @IBAction func alphaTextFieldSet(_ sender: NSTextField) {
+        colorAttachment.clearAlpha = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func remove(sender: NSButton) {
+    @IBAction func remove(_ sender: NSButton) {
         removeObserver.remove(self)
     }
 }

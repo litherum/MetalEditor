@@ -16,7 +16,7 @@ extension Buffer {
 
     @NSManaged var id: NSNumber
     @NSManaged var name: String
-    @NSManaged var initialData: NSData?
+    @NSManaged var initialData: Data?
     @NSManaged var initialLength: NSNumber?
 
 }

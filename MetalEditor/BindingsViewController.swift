@@ -16,7 +16,7 @@ class BindingsViewController: NSViewController, NSTableViewDelegate, NSTableView
     @IBOutlet var numberTableColumn: NSTableColumn!
     @IBOutlet var popUpTableColumn: NSTableColumn!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, bindings: NSOrderedSet) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, bindings: NSOrderedSet) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
         self.bindings = bindings
@@ -48,23 +48,23 @@ class BindingsViewController: NSViewController, NSTableViewDelegate, NSTableView
         fatalError("Subclasses should override me")
     }
 
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         switch tableColumn! {
         case numberTableColumn:
-            let result = tableView.makeViewWithIdentifier("Number", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier:"Number", owner: self) as! NSTableCellView
             let textField = result.textField!
             textField.integerValue = row
             return result
         case popUpTableColumn:
-            let result = tableView.makeViewWithIdentifier("Pop Up", owner: self) as! NSTableCellView
+            let result = tableView.make(withIdentifier: "Pop Up", owner: self) as! NSTableCellView
             assert(result.subviews.count == 1)
             let popUp = result.subviews[0] as! NSPopUpButton
-            let (menu, selectedItem) = generatePopUp(row)
+            let (menu, selectedItem) = generatePopUp(index: row)
             popUp.menu = menu
             if let toSelect = selectedItem {
-                popUp.selectItem(toSelect)
+                popUp.select(toSelect)
             } else {
-                popUp.selectItemAtIndex(0)
+                popUp.selectItem(at: 0)
             }
             return result
         default:

@@ -15,7 +15,7 @@ import CoreData
 extension Texture {
 
     @NSManaged var name: String
-    @NSManaged var initialData: NSData?
+    @NSManaged var initialData: Data?
     @NSManaged var arrayLength: NSNumber
     @NSManaged var depth: NSNumber
     @NSManaged var height: NSNumber

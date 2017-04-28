@@ -10,7 +10,7 @@ import Cocoa
 import MetalKit
 
 protocol TextureRemoveObserver: class {
-    func remove(controller: TextureInfoViewController)
+    func remove(_ controller: TextureInfoViewController)
 }
 
 class TextureInfoViewController: NSViewController {
@@ -29,7 +29,7 @@ class TextureInfoViewController: NSViewController {
     @IBOutlet var sampleCountTextField: NSTextField!
     @IBOutlet var arrayLengthTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, modelObserver: ModelObserver, removeObserver: TextureRemoveObserver, texture: Texture, device: MTLDevice) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, modelObserver: ModelObserver, removeObserver: TextureRemoveObserver, texture: Texture, device: MTLDevice) {
         self.modelObserver = modelObserver
         self.removeObserver = removeObserver
         self.texture = texture
@@ -44,15 +44,15 @@ class TextureInfoViewController: NSViewController {
     func setFieldsFromTexture() {
         nameTextField.stringValue = texture.name
         initiallyPopulatedCheckBox.state = texture.initialData == nil ? NSOffState : NSOnState
-        typePopUp.selectItemAtIndex(texture.textureType.integerValue)
-        let pixelFormat = MTLPixelFormat(rawValue: texture.pixelFormat.unsignedLongValue)!
-        pixelFormatPopUp.selectItemAtIndex(pixelFormatToIndex(pixelFormat))
-        widthTextField.integerValue = texture.width.integerValue
-        heightTextField.integerValue = texture.height.integerValue
-        depthTextField.integerValue = texture.depth.integerValue
-        mipmapLevelCountTextField.integerValue = texture.mipmapLevelCount.integerValue
-        sampleCountTextField.integerValue = texture.sampleCount.integerValue
-        arrayLengthTextField.integerValue = texture.arrayLength.integerValue
+        typePopUp.selectItem(at: texture.textureType.intValue)
+        let pixelFormat = MTLPixelFormat(rawValue: texture.pixelFormat.uintValue)!
+        pixelFormatPopUp.selectItem(at: pixelFormatToIndex(pixelFormat))
+        widthTextField.integerValue = texture.width.intValue
+        heightTextField.integerValue = texture.height.intValue
+        depthTextField.integerValue = texture.depth.intValue
+        mipmapLevelCountTextField.integerValue = texture.mipmapLevelCount.intValue
+        sampleCountTextField.integerValue = texture.sampleCount.intValue
+        arrayLengthTextField.integerValue = texture.arrayLength.intValue
     }
 
     override func viewDidLoad() {
@@ -62,41 +62,41 @@ class TextureInfoViewController: NSViewController {
         setFieldsFromTexture()
     }
 
-    @IBAction func nameSet(sender: NSTextField) {
+    @IBAction func nameSet(_ sender: NSTextField) {
         texture.name = sender.stringValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func remove(sender: NSButton) {
+    @IBAction func remove(_ sender: NSButton) {
         removeObserver.remove(self)
     }
 
-    @IBAction func setContentsPushed(sender: NSButton) {
+    @IBAction func setContentsPushed(_ sender: NSButton) {
         let window = view.window!
         let openPanel = NSOpenPanel()
         openPanel.allowsMultipleSelection = false
-        openPanel.beginSheetModalForWindow(window) {(selected: Int) in
+        openPanel.beginSheetModal(for: window) {(selected: Int) in
             guard selected == NSFileHandlingPanelOKButton else {
                 return
             }
-            guard let url = openPanel.URL else {
+            guard let url = openPanel.url else {
                 return
             }
-            guard let contents = NSData(contentsOfURL: url) else {
+            guard let contents = try? Data(contentsOf: url) else {
                 return
             }
             do {
                 let loader = MTKTextureLoader(device: self.device)
-                let newTexture = try loader.newTextureWithContentsOfURL(url, options: nil)
+                let newTexture = try loader.newTexture(withContentsOf: url, options: nil)
                 self.texture.initialData = contents
-                self.texture.arrayLength = newTexture.arrayLength
-                self.texture.depth = newTexture.depth
-                self.texture.height = newTexture.height
-                self.texture.width = newTexture.width
-                self.texture.mipmapLevelCount = newTexture.mipmapLevelCount
-                self.texture.pixelFormat = newTexture.pixelFormat.rawValue
-                self.texture.sampleCount = newTexture.sampleCount
-                self.texture.textureType = newTexture.textureType.rawValue
+                self.texture.arrayLength = NSNumber(newTexture.arrayLength)
+                self.texture.depth =  NSNumber(value: newTexture.depth)
+                self.texture.height =  NSNumber(value: newTexture.height)
+                self.texture.width =  NSNumber(value: newTexture.width)
+                self.texture.mipmapLevelCount =  NSNumber(value: newTexture.mipmapLevelCount)
+                self.texture.pixelFormat =  NSNumber(value: newTexture.pixelFormat.rawValue)
+                self.texture.sampleCount = NSNumber(newTexture.sampleCount)
+                self.texture.textureType =  NSNumber(value: newTexture.textureType.rawValue)
                 self.setFieldsFromTexture()
                 self.modelObserver.modelDidChange()
             } catch let e {
@@ -106,58 +106,58 @@ class TextureInfoViewController: NSViewController {
         }
     }
 
-    @IBAction func typeSelected(sender: NSPopUpButton) {
-        texture.textureType = sender.indexOfSelectedItem
+    @IBAction func typeSelected(_ sender: NSPopUpButton) {
+        texture.textureType =  NSNumber(value: sender.indexOfSelectedItem)
         texture.initialData = nil
         setFieldsFromTexture()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func pixelFormatSelected(sender: NSPopUpButton) {
+    @IBAction func pixelFormatSelected(_ sender: NSPopUpButton) {
         let format = indexToPixelFormat(sender.indexOfSelectedItem)!
-        texture.pixelFormat = format.rawValue
+        texture.pixelFormat = NSNumber(value: format.rawValue)
         texture.initialData = nil
         setFieldsFromTexture()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func widthSet(sender: NSTextField) {
-        texture.width = sender.integerValue
+    @IBAction func widthSet(_ sender: NSTextField) {
+        texture.width =  NSNumber(value: sender.integerValue)
         texture.initialData = nil
         setFieldsFromTexture()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func heightSet(sender: NSTextField) {
-        texture.height = sender.integerValue
+    @IBAction func heightSet(_ sender: NSTextField) {
+        texture.height =  NSNumber(value: sender.integerValue)
         texture.initialData = nil
         setFieldsFromTexture()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthSet(sender: NSTextField) {
-        texture.depth = sender.integerValue
+    @IBAction func depthSet(_ sender: NSTextField) {
+        texture.depth =  NSNumber(value: sender.integerValue)
         texture.initialData = nil
         setFieldsFromTexture()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func mipmapLevelCountSet(sender: NSTextField) {
-        texture.mipmapLevelCount = sender.integerValue
+    @IBAction func mipmapLevelCountSet(_ sender: NSTextField) {
+        texture.mipmapLevelCount =  NSNumber(value: sender.integerValue)
         texture.initialData = nil
         setFieldsFromTexture()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func sampleCountSet(sender: NSTextField) {
-        texture.sampleCount = sender.integerValue
+    @IBAction func sampleCountSet(_ sender: NSTextField) {
+        texture.sampleCount =  NSNumber(value: sender.integerValue)
         texture.initialData = nil
         setFieldsFromTexture()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func arrayLengthSet(sender: NSTextField) {
-        texture.arrayLength = sender.integerValue
+    @IBAction func arrayLengthSet(_ sender: NSTextField) {
+        texture.arrayLength =  NSNumber(value: sender.integerValue)
         texture.initialData = nil
         setFieldsFromTexture()
         modelObserver.modelDidChange()

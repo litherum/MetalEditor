@@ -13,11 +13,11 @@ protocol ModelObserver: class {
 }
 
 protocol PassRemoveObserver: class {
-    func removePass(controller: InvocationsViewController, pass: Pass)
+    func removePass(_ controller: InvocationsViewController, pass: Pass)
 }
 
 protocol DepthStencilStateRemoveObserver: class {
-    func removeDepthStencilState(controller: DepthStencilStateViewController)
+    func removeDepthStencilState(_ controller: DepthStencilStateViewController)
 }
 
 class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelObserver, TextureRemoveObserver, PassRemoveObserver, DepthStencilStateRemoveObserver {
@@ -41,9 +41,9 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
     var invocationMap: [InvocationsViewController : Pass] = [:]
     
     func setupFrame() {
-        let fetchRequest = NSFetchRequest(entityName: "Frame")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Frame")
         do {
-            let frames = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [Frame]
+            let frames = try managedObjectContext!.fetch(fetchRequest) as! [Frame]
             assert(frames.count == 0 || frames.count == 1)
             if frames.count == 1 {
                 frame = frames[0]
@@ -52,14 +52,14 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         }
         
         if frame == nil {
-            frame = NSEntityDescription.insertNewObjectForEntityForName("Frame", inManagedObjectContext: managedObjectContext!) as! Frame
+            frame = NSEntityDescription.insertNewObject(forEntityName: "Frame", into: managedObjectContext!) as! Frame
         }
     }
     
     func setupLibrary() {
-        let fetchRequest = NSFetchRequest(entityName: "Library")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Library")
         do {
-            let libraries = try managedObjectContext!.executeFetchRequest(fetchRequest) as! [Library]
+            let libraries = try managedObjectContext!.fetch(fetchRequest) as! [Library]
             assert(libraries.count == 0 || libraries.count == 1)
             if libraries.count == 1 {
                 library = libraries[0]
@@ -68,12 +68,12 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         }
         
         if library == nil {
-            library = NSEntityDescription.insertNewObjectForEntityForName("Library", inManagedObjectContext: managedObjectContext!) as! Library
+            library = NSEntityDescription.insertNewObject(forEntityName: "Library", into: managedObjectContext!) as! Library
             library.source = ""
         }
     }
 
-    func addRenderPassView(pass: RenderPass) {
+    func addRenderPassView(_ pass: RenderPass) {
         let controller = RenderInvocationsViewController(nibName: "RenderInvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
         _ = controller.view
         for i in pass.invocations {
@@ -83,7 +83,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         invocationMap[controller] = pass
     }
 
-    func addComputePassView(pass: ComputePass) {
+    func addComputePassView(_ pass: ComputePass) {
         let controller = ComputeInvocationsViewController(nibName: "ComputeInvocationSequence", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, removeObserver: self, pass: pass)!
         _ = controller.view
         for i in pass.invocations {
@@ -93,14 +93,14 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         invocationMap[controller] = pass
     }
 
-    override func windowControllerDidLoadNib(aController: NSWindowController) {
+    override func windowControllerDidLoadNib(_ aController: NSWindowController) {
         super.windowControllerDidLoadNib(aController)
 
         guard let device = MTLCreateSystemDefaultDevice() else {
             fatalError()
         }
         self.device = device
-        commandQueue = device.newCommandQueue()
+        commandQueue = device.makeCommandQueue()
 
         setupFrame()
         setupLibrary()
@@ -111,18 +111,18 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         renderStateUIController.modelObserver = self
         renderStateUIController.populate()
 
-        let textureFetchRequest = NSFetchRequest(entityName: "Texture")
+        let textureFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Texture")
         do {
-            let textures = try managedObjectContext!.executeFetchRequest(textureFetchRequest) as! [Texture]
+            let textures = try managedObjectContext!.fetch(textureFetchRequest) as! [Texture]
             for texture in textures {
                 addTextureView(texture)
             }
         } catch {
         }
 
-        let depthStencilFetchRequest = NSFetchRequest(entityName: "DepthStencilState")
+        let depthStencilFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "DepthStencilState")
         do {
-            let states = try managedObjectContext!.executeFetchRequest(depthStencilFetchRequest) as! [DepthStencilState]
+            let states = try managedObjectContext!.fetch(depthStencilFetchRequest) as! [DepthStencilState]
             for state in states {
                 addDepthStencilStateView(state)
             }
@@ -138,7 +138,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         }
 
         librarySourceView.string = library.source
-        librarySourceView.font = CTFontCreateWithName("Courier New", 14, nil) // FIXME: Should be able to set this in IB
+        librarySourceView.font = CTFontCreateWithName("Courier New" as CFString, 14, nil) // FIXME: Should be able to set this in IB
         
         metalState = MetalState()
         metalState.delegate = self
@@ -148,18 +148,18 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
 
         assert(windowControllers.count == 1)
         let window = windowControllers[0].window!
-        splitView.setPosition(window.frame.width / 2, ofDividerAtIndex: 0)
+        splitView.setPosition(window.frame.width / 2, ofDividerAt: 0)
     }
 
-    func compilationCompleted(success: Bool) {
+    func compilationCompleted(_ success: Bool) {
         if !success {
-            librarySourceView.backgroundColor = NSColor.redColor()
+            librarySourceView.backgroundColor = NSColor.red
         } else {
-            librarySourceView.backgroundColor = NSColor.whiteColor()
+            librarySourceView.backgroundColor = NSColor.white
         }
     }
 
-    func textDidChange(notification: NSNotification) {
+    func textDidChange(_ notification: Notification) {
         if let source = librarySourceView.string {
             library.source = source
         } else {
@@ -168,14 +168,14 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         modelDidChange()
     }
 
-    func addTextureView(texture: Texture) {
+    func addTextureView(_ texture: Texture) {
         let viewController = TextureInfoViewController(nibName: "TextureInfoView", bundle: nil, modelObserver: self, removeObserver: self, texture: texture, device: device)!
         texturesStackView.addArrangedSubview(viewController.view)
         textureInfoViewControllers.insert(viewController)
     }
 
-    @IBAction func addTexture(sender: NSButton) {
-        let texture = NSEntityDescription.insertNewObjectForEntityForName("Texture", inManagedObjectContext: managedObjectContext!) as! Texture
+    @IBAction func addTexture(_ sender: NSButton) {
+        let texture = NSEntityDescription.insertNewObject(forEntityName: "Texture", into: managedObjectContext!) as! Texture
         texture.name = "Texture"
         texture.initialData = nil
         texture.arrayLength = 1
@@ -184,44 +184,44 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         texture.depth = 1
         texture.mipmapLevelCount = 1
         texture.sampleCount = 1
-        texture.textureType = MTLTextureType.Type2D.rawValue
-        texture.pixelFormat = MTLPixelFormat.Invalid.rawValue
+        texture.textureType =  NSNumber(value: MTLTextureType.type2D.rawValue)
+        texture.pixelFormat =  NSNumber(value: MTLPixelFormat.invalid.rawValue)
         addTextureView(texture)
     }
 
-    func remove(controller: TextureInfoViewController) {
+    func remove(_ controller: TextureInfoViewController) {
         textureInfoViewControllers.remove(controller)
         controller.view.removeFromSuperview()
-        managedObjectContext!.deleteObject(controller.texture)
+        managedObjectContext!.delete(controller.texture)
         modelDidChange()
     }
 
-    func addDepthStencilStateView(depthStencilState: DepthStencilState) {
+    func addDepthStencilStateView(_ depthStencilState: DepthStencilState) {
         let viewController = DepthStencilStateViewController(nibName: "DepthStencilStateView", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: self, state: depthStencilState, removeObserver: self)!
         depthStencilStateStackView.addArrangedSubview(viewController.view)
         depthStencilStateMap[viewController] = depthStencilState
     }
 
-    @IBAction func addDepthStencilState(sender: NSButton) {
-        let backFaceStencil = NSEntityDescription.insertNewObjectForEntityForName("StencilState", inManagedObjectContext: managedObjectContext!) as! StencilState
-        backFaceStencil.stencilFailureOperation = MTLStencilOperation.Keep.rawValue
-        backFaceStencil.depthFailureOperation = MTLStencilOperation.Keep.rawValue
-        backFaceStencil.depthStencilPassOperation = MTLStencilOperation.Keep.rawValue
-        backFaceStencil.stencilCompareFunction = MTLCompareFunction.Less.rawValue
+    @IBAction func addDepthStencilState(_ sender: NSButton) {
+        let backFaceStencil = NSEntityDescription.insertNewObject(forEntityName: "StencilState", into: managedObjectContext!) as! StencilState
+        backFaceStencil.stencilFailureOperation =  NSNumber(value: MTLStencilOperation.keep.rawValue)
+        backFaceStencil.depthFailureOperation =  NSNumber(value: MTLStencilOperation.keep.rawValue)
+        backFaceStencil.depthStencilPassOperation =  NSNumber(value: MTLStencilOperation.keep.rawValue)
+        backFaceStencil.stencilCompareFunction =  NSNumber(value: MTLCompareFunction.less.rawValue)
         backFaceStencil.readMask = 0xFFFFFF
         backFaceStencil.writeMask = 0xFFFFFF
 
-        let frontFaceStencil = NSEntityDescription.insertNewObjectForEntityForName("StencilState", inManagedObjectContext: managedObjectContext!) as! StencilState
-        frontFaceStencil.stencilFailureOperation = MTLStencilOperation.Keep.rawValue
-        frontFaceStencil.depthFailureOperation = MTLStencilOperation.Keep.rawValue
-        frontFaceStencil.depthStencilPassOperation = MTLStencilOperation.Keep.rawValue
-        frontFaceStencil.stencilCompareFunction = MTLCompareFunction.Less.rawValue
+        let frontFaceStencil = NSEntityDescription.insertNewObject(forEntityName: "StencilState", into: managedObjectContext!) as! StencilState
+        frontFaceStencil.stencilFailureOperation =  NSNumber(value: MTLStencilOperation.keep.rawValue)
+        frontFaceStencil.depthFailureOperation =  NSNumber(value: MTLStencilOperation.keep.rawValue)
+        frontFaceStencil.depthStencilPassOperation =  NSNumber(value: MTLStencilOperation.keep.rawValue)
+        frontFaceStencil.stencilCompareFunction =  NSNumber(value: MTLCompareFunction.less.rawValue)
         frontFaceStencil.readMask = 0xFFFFFF
         frontFaceStencil.writeMask = 0xFFFFFF
 
-        let depthStencilState = NSEntityDescription.insertNewObjectForEntityForName("DepthStencilState", inManagedObjectContext: managedObjectContext!) as! DepthStencilState
+        let depthStencilState = NSEntityDescription.insertNewObject(forEntityName: "DepthStencilState", into: managedObjectContext!) as! DepthStencilState
         depthStencilState.name = "Depth & Stencil State"
-        depthStencilState.depthCompareFunction = MTLCompareFunction.Always.rawValue
+        depthStencilState.depthCompareFunction = NSNumber(value: MTLCompareFunction.always.rawValue)
         depthStencilState.depthWriteEnabled = false
         depthStencilState.backFaceStencil = backFaceStencil
         depthStencilState.frontFaceStencil = frontFaceStencil
@@ -229,34 +229,34 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         addDepthStencilStateView(depthStencilState)
     }
 
-    func removeDepthStencilState(controller: DepthStencilStateViewController) {
+    func removeDepthStencilState(_ controller: DepthStencilStateViewController) {
         let state = depthStencilStateMap[controller]!
-        managedObjectContext!.deleteObject(state.backFaceStencil)
-        managedObjectContext!.deleteObject(state.frontFaceStencil)
-        managedObjectContext!.deleteObject(state)
+        managedObjectContext!.delete(state.backFaceStencil)
+        managedObjectContext!.delete(state.frontFaceStencil)
+        managedObjectContext!.delete(state)
         controller.view.removeFromSuperview()
-        depthStencilStateMap.removeValueForKey(controller)
+        depthStencilStateMap.removeValue(forKey: controller)
     }
 
-    @IBAction func addRenderPass(sender: NSButton) {
-        let renderPass = NSEntityDescription.insertNewObjectForEntityForName("RenderPass", inManagedObjectContext: managedObjectContext!) as! RenderPass
-        frame.mutableOrderedSetValueForKey("passes").addObject(renderPass)
+    @IBAction func addRenderPass(_ sender: NSButton) {
+        let renderPass = NSEntityDescription.insertNewObject(forEntityName: "RenderPass", into: managedObjectContext!) as! RenderPass
+        frame.mutableOrderedSetValue(forKey: "passes").add(renderPass)
         addRenderPassView(renderPass)
         modelDidChange()
     }
 
-    @IBAction func addComputePass(sender: NSButton) {
-        let computePass = NSEntityDescription.insertNewObjectForEntityForName("ComputePass", inManagedObjectContext: managedObjectContext!) as! ComputePass
-        frame.mutableOrderedSetValueForKey("passes").addObject(computePass)
+    @IBAction func addComputePass(_ sender: NSButton) {
+        let computePass = NSEntityDescription.insertNewObject(forEntityName: "ComputePass", into: managedObjectContext!) as! ComputePass
+        frame.mutableOrderedSetValue(forKey: "passes").add(computePass)
         addComputePassView(computePass)
         modelDidChange()
     }
 
-    func removePass(controller: InvocationsViewController, pass: Pass) {
-        frame.mutableOrderedSetValueForKey("passes").removeObject(pass)
-        managedObjectContext!.deleteObject(pass)
+    func removePass(_ controller: InvocationsViewController, pass: Pass) {
+        frame.mutableOrderedSetValue(forKey: "passes").remove(pass)
+        managedObjectContext!.delete(pass)
         controller.view.removeFromSuperview()
-        invocationMap.removeValueForKey(controller)
+        invocationMap.removeValue(forKey: controller)
         modelDidChange()
     }
 
@@ -265,7 +265,7 @@ class Document: NSPersistentDocument, NSTextDelegate, MetalStateDelegate, ModelO
         metalState.populate(managedObjectContext!, device: device, view: previewController.metalView)
     }
 
-    func reflection(reflection: [MTLArgument]) {
+    func reflection(_ reflection: [MTLArgument]) {
         sliderValues.reflection(reflection)
     }
 
