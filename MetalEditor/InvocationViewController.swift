@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol DismissObserver: class {
-    func dismiss(controller: NSViewController)
+    func dismiss(_ controller: NSViewController)
 }
 
 class InvocationViewController: NSViewController, DismissObserver {
@@ -20,7 +20,7 @@ class InvocationViewController: NSViewController, DismissObserver {
     @IBOutlet var box: NSBox!
     @IBOutlet var nameTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: InvocationRemoveObserver, invocation: Invocation) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: InvocationRemoveObserver, invocation: Invocation) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
         self.removeObserver = removeObserver
@@ -37,23 +37,23 @@ class InvocationViewController: NSViewController, DismissObserver {
         nameTextField.stringValue = invocation.name
 
         if let _ = invocation as? ComputeInvocation {
-            box.fillColor = NSColor.redColor()
+            box.fillColor = NSColor.red
         } else {
             assert(invocation as? RenderInvocation != nil)
-            box.fillColor = NSColor.blueColor()
+            box.fillColor = NSColor.blue
         }
     }
 
-    @IBAction func nameChanged(sender: NSTextField) {
+    @IBAction func nameChanged(_ sender: NSTextField) {
         invocation.name = sender.stringValue
         modelObserver.modelDidChange()
     }
 
-    @IBAction func removeInvocation(sender: NSButton) {
+    @IBAction func removeInvocation(_ sender: NSButton) {
         removeObserver.removeInvocation(self)
     }
 
-    @IBAction func showDetails(sender: NSButton) {
+    @IBAction func showDetails(_ sender: NSButton) {
         if let renderInvocation = invocation as? RenderInvocation {
             let controller = RenderInvocationDetailsViewController(nibName: "RenderInvocationView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, renderInvocation: renderInvocation)!
             presentViewControllerAsSheet(controller)
@@ -64,7 +64,7 @@ class InvocationViewController: NSViewController, DismissObserver {
         }
     }
 
-    func dismiss(controller: NSViewController) {
+    func dismiss(_ controller: NSViewController) {
         dismissViewController(controller)
     }
 }

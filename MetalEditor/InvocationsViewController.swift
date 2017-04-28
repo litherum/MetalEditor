@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol InvocationRemoveObserver: class {
-    func removeInvocation(controller: InvocationViewController)
+    func removeInvocation(_ controller: InvocationViewController)
 }
 
 class InvocationsViewController: NSViewController {
@@ -18,12 +18,12 @@ class InvocationsViewController: NSViewController {
     weak var removeObserver: PassRemoveObserver!
     @IBOutlet var stackView: NSStackView!
 
-    func removeInvocation(controller: InvocationViewController, pass: Pass) {
-        managedObjectContext.deleteObject(controller.invocation)
+    func removeInvocation(_ controller: InvocationViewController, pass: Pass) {
+        managedObjectContext.delete(controller.invocation)
 
         for i in 0 ..< childViewControllers.count {
             if childViewControllers[i] == controller {
-                removeChildViewControllerAtIndex(i)
+                removeChildViewController(at: i)
                 break
             }
         }

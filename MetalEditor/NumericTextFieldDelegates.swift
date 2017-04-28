@@ -9,13 +9,13 @@
 import Cocoa
 
 class IntTextFieldDelegate: NSObject, NSTextFieldDelegate {
-    func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
+    func control(_ control: NSControl, isValidObject obj: Any?) -> Bool {
         return Int(obj as! String) != nil
     }
 }
 
 class DoubleTextFieldDelegate: NSObject, NSTextFieldDelegate {
-    func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
+    func control(_ control: NSControl, isValidObject obj: Any?) -> Bool {
         return Double(obj as! String) != nil
     }
 }

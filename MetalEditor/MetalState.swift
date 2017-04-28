@@ -10,8 +10,8 @@ import Cocoa
 import MetalKit
 
 protocol MetalStateDelegate: class {
-    func compilationCompleted(success: Bool)
-    func reflection(reflection: [MTLArgument])
+    func compilationCompleted(_ success: Bool)
+    func reflection(_ reflection: [MTLArgument])
 }
 
 class MetalState {
@@ -22,28 +22,28 @@ class MetalState {
     var renderPipelineStates: [RenderPipelineState: MTLRenderPipelineState] = [:]
     var depthStencilStates: [DepthStencilState: MTLDepthStencilState] = [:]
 
-    private class func fetchAll(managedObjectContext: NSManagedObjectContext, entityName: String) -> [NSManagedObject] {
-        let fetchRequest = NSFetchRequest(entityName: entityName)
+    fileprivate class func fetchAll(_ managedObjectContext: NSManagedObjectContext, entityName: String) -> [NSManagedObject] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         do {
-            return try managedObjectContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+            return try managedObjectContext.fetch(fetchRequest) as! [NSManagedObject]
         } catch {
             fatalError()
         }
     }
 
-    private class func toMetalPixelFormat(i: NSNumber) -> MTLPixelFormat {
+    fileprivate class func toMetalPixelFormat(_ i: NSNumber) -> MTLPixelFormat {
         return MTLPixelFormat(rawValue: UInt(i))!
     }
 
-    private class func toMetalVertexFormat(i: NSNumber) -> MTLVertexFormat {
+    fileprivate class func toMetalVertexFormat(_ i: NSNumber) -> MTLVertexFormat {
         return MTLVertexFormat(rawValue: UInt(i))!
     }
 
-    private class func toMetalVertexStepFunction(i: NSNumber) -> MTLVertexStepFunction {
+    fileprivate class func toMetalVertexStepFunction(_ i: NSNumber) -> MTLVertexStepFunction {
         return MTLVertexStepFunction(rawValue: UInt(i))!
     }
 
-    func populate(managedObjectContext: NSManagedObjectContext, device: MTLDevice, view: MTKView) {
+    func populate(_ managedObjectContext: NSManagedObjectContext, device: MTLDevice, view: MTKView) {
         var library: MTLLibrary!
         var functions: [String: MTLFunction] = [:]
         buffers = [:]
@@ -55,7 +55,7 @@ class MetalState {
         let libraries = MetalState.fetchAll(managedObjectContext, entityName: "Library") as! [Library]
         if libraries.count != 0 {
             do {
-                library = try device.newLibraryWithSource(libraries[0].source, options: MTLCompileOptions())
+                library = try device.makeLibrary(source: libraries[0].source, options: MTLCompileOptions())
                 if let delegate = delegate {
                     delegate.compilationCompleted(true)
                 }
@@ -66,16 +66,16 @@ class MetalState {
             }
             if library != nil {
                 for functionName in library.functionNames {
-                    functions[functionName] = library.newFunctionWithName(functionName)
+                    functions[functionName] = library.makeFunction(name: functionName)
                 }
             }
         }
 
         for buffer in MetalState.fetchAll(managedObjectContext, entityName: "Buffer") as! [Buffer] {
             if let initialData = buffer.initialData {
-                buffers[buffer] = device.newBufferWithBytes(initialData.bytes, length: initialData.length, options: .StorageModeManaged)
+                buffers[buffer] = device.makeBuffer(bytes: (initialData as NSData).bytes, length: initialData.count, options: .storageModeManaged)
             } else {
-                buffers[buffer] = device.newBufferWithLength(buffer.initialLength!.integerValue, options: .StorageModePrivate)
+                buffers[buffer] = device.makeBuffer(length: buffer.initialLength!.intValue, options: .storageModePrivate)
             }
         }
 
@@ -84,26 +84,26 @@ class MetalState {
             if let initialData = texture.initialData {
                 do {
                     let loader = MTKTextureLoader(device: device)
-                    try newTexture = loader.newTextureWithData(initialData, options: nil)
+                    try newTexture = loader.newTexture(with: initialData as Data, options: nil)
                 } catch {
                     fatalError()
                 }
             } else {
                 let descriptor = MTLTextureDescriptor()
-                let pixelFormat = MTLPixelFormat(rawValue: texture.pixelFormat.unsignedLongValue)!
-                if pixelFormat == .Invalid {
+                let pixelFormat = MTLPixelFormat(rawValue: texture.pixelFormat.uintValue)!
+                if pixelFormat == .invalid {
                     continue
                 }
                 descriptor.pixelFormat = pixelFormat
-                descriptor.textureType = MTLTextureType(rawValue: texture.textureType.unsignedLongValue)!
-                descriptor.width = texture.width.integerValue
-                descriptor.height = texture.height.integerValue
-                descriptor.depth = texture.depth.integerValue
-                descriptor.mipmapLevelCount = texture.mipmapLevelCount.integerValue
-                descriptor.sampleCount = texture.sampleCount.integerValue
-                descriptor.arrayLength = texture.arrayLength.integerValue
-                descriptor.storageMode = .Managed
-                newTexture = device.newTextureWithDescriptor(descriptor)
+                descriptor.textureType = MTLTextureType(rawValue: texture.textureType.uintValue)!
+                descriptor.width = texture.width.intValue
+                descriptor.height = texture.height.intValue
+                descriptor.depth = texture.depth.intValue
+                descriptor.mipmapLevelCount = texture.mipmapLevelCount.intValue
+                descriptor.sampleCount = texture.sampleCount.intValue
+                descriptor.arrayLength = texture.arrayLength.intValue
+                descriptor.storageMode = .managed
+                newTexture = device.makeTexture(descriptor: descriptor)
             }
             assert(newTexture != nil)
             textures[texture] = newTexture
@@ -117,7 +117,7 @@ class MetalState {
             descriptor.computeFunction = function
             var reflection: MTLComputePipelineReflection?
             do {
-                try computePipelineStates[computePipelineState] = device.newComputePipelineStateWithDescriptor(descriptor, options: MTLPipelineOption(rawValue: MTLPipelineOption.ArgumentInfo.rawValue | MTLPipelineOption.BufferTypeInfo.rawValue), reflection: &reflection)
+                try computePipelineStates[computePipelineState] = device.makeComputePipelineState(descriptor: descriptor, options: MTLPipelineOption(rawValue: MTLPipelineOption.argumentInfo.rawValue | MTLPipelineOption.bufferTypeInfo.rawValue), reflection: &reflection)
                 if let reflection = reflection {
                     if let delegate = delegate {
                         delegate.reflection(reflection.arguments)
@@ -130,28 +130,28 @@ class MetalState {
 
         for depthStencilState in MetalState.fetchAll(managedObjectContext, entityName: "DepthStencilState") as! [DepthStencilState] {
             let descriptor = MTLDepthStencilDescriptor()
-            descriptor.depthCompareFunction = MTLCompareFunction(rawValue: depthStencilState.depthCompareFunction.unsignedLongValue)!
-            descriptor.depthWriteEnabled = depthStencilState.depthWriteEnabled.boolValue
+            descriptor.depthCompareFunction = MTLCompareFunction(rawValue: depthStencilState.depthCompareFunction.uintValue)!
+            descriptor.isDepthWriteEnabled = depthStencilState.depthWriteEnabled.boolValue
 
             let backFaceStencil = MTLStencilDescriptor()
-            backFaceStencil.stencilFailureOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.stencilFailureOperation.unsignedLongValue)!
-            backFaceStencil.depthFailureOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.depthFailureOperation.unsignedLongValue)!
-            backFaceStencil.depthStencilPassOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.depthStencilPassOperation.unsignedLongValue)!
-            backFaceStencil.stencilCompareFunction = MTLCompareFunction(rawValue: depthStencilState.backFaceStencil.stencilCompareFunction.unsignedLongValue)!
-            backFaceStencil.readMask = depthStencilState.backFaceStencil.readMask.unsignedIntValue
-            backFaceStencil.writeMask = depthStencilState.backFaceStencil.writeMask.unsignedIntValue
+            backFaceStencil.stencilFailureOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.stencilFailureOperation.uintValue)!
+            backFaceStencil.depthFailureOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.depthFailureOperation.uintValue)!
+            backFaceStencil.depthStencilPassOperation = MTLStencilOperation(rawValue: depthStencilState.backFaceStencil.depthStencilPassOperation.uintValue)!
+            backFaceStencil.stencilCompareFunction = MTLCompareFunction(rawValue: depthStencilState.backFaceStencil.stencilCompareFunction.uintValue)!
+            backFaceStencil.readMask = depthStencilState.backFaceStencil.readMask.uint32Value
+            backFaceStencil.writeMask = depthStencilState.backFaceStencil.writeMask.uint32Value
             descriptor.backFaceStencil = backFaceStencil
 
             let frontFaceStencil = MTLStencilDescriptor()
-            frontFaceStencil.stencilFailureOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.stencilFailureOperation.unsignedLongValue)!
-            frontFaceStencil.depthFailureOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.depthFailureOperation.unsignedLongValue)!
-            frontFaceStencil.depthStencilPassOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.depthStencilPassOperation.unsignedLongValue)!
-            frontFaceStencil.stencilCompareFunction = MTLCompareFunction(rawValue: depthStencilState.frontFaceStencil.stencilCompareFunction.unsignedLongValue)!
-            frontFaceStencil.readMask = depthStencilState.frontFaceStencil.readMask.unsignedIntValue
-            frontFaceStencil.writeMask = depthStencilState.frontFaceStencil.writeMask.unsignedIntValue
+            frontFaceStencil.stencilFailureOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.stencilFailureOperation.uintValue)!
+            frontFaceStencil.depthFailureOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.depthFailureOperation.uintValue)!
+            frontFaceStencil.depthStencilPassOperation = MTLStencilOperation(rawValue: depthStencilState.frontFaceStencil.depthStencilPassOperation.uintValue)!
+            frontFaceStencil.stencilCompareFunction = MTLCompareFunction(rawValue: depthStencilState.frontFaceStencil.stencilCompareFunction.uintValue)!
+            frontFaceStencil.readMask = depthStencilState.frontFaceStencil.readMask.uint32Value
+            frontFaceStencil.writeMask = depthStencilState.frontFaceStencil.writeMask.uint32Value
             descriptor.frontFaceStencil = frontFaceStencil
 
-            depthStencilStates[depthStencilState] = device.newDepthStencilStateWithDescriptor(descriptor)
+            depthStencilStates[depthStencilState] = device.makeDepthStencilState(descriptor: descriptor)
         }
 
         for renderPipelineState in MetalState.fetchAll(managedObjectContext, entityName: "RenderPipelineState") as! [RenderPipelineState] {
@@ -171,19 +171,19 @@ class MetalState {
                 } else {
                     descriptor.colorAttachments[i].pixelFormat = view.colorPixelFormat
                 }
-                descriptor.colorAttachments[i].blendingEnabled = colorAttachment.blendingEnabled.boolValue
-                var colorWriteMask = MTLColorWriteMask.None.rawValue
-                colorWriteMask |= colorAttachment.writeRed.boolValue ? MTLColorWriteMask.Red.rawValue : 0
-                colorWriteMask |= colorAttachment.writeGreen.boolValue ? MTLColorWriteMask.Green.rawValue : 0
-                colorWriteMask |= colorAttachment.writeBlue.boolValue ? MTLColorWriteMask.Blue.rawValue : 0
-                colorWriteMask |= colorAttachment.writeAlpha.boolValue ? MTLColorWriteMask.Alpha.rawValue : 0
+                descriptor.colorAttachments[i].isBlendingEnabled = colorAttachment.blendingEnabled.boolValue
+                var colorWriteMask = MTLColorWriteMask().rawValue
+                colorWriteMask |= colorAttachment.writeRed.boolValue ? MTLColorWriteMask.red.rawValue : 0
+                colorWriteMask |= colorAttachment.writeGreen.boolValue ? MTLColorWriteMask.green.rawValue : 0
+                colorWriteMask |= colorAttachment.writeBlue.boolValue ? MTLColorWriteMask.blue.rawValue : 0
+                colorWriteMask |= colorAttachment.writeAlpha.boolValue ? MTLColorWriteMask.alpha.rawValue : 0
                 descriptor.colorAttachments[i].writeMask = MTLColorWriteMask(rawValue: colorWriteMask)
-                descriptor.colorAttachments[i].rgbBlendOperation = MTLBlendOperation(rawValue: colorAttachment.rgbBlendOperation.unsignedLongValue)!
-                descriptor.colorAttachments[i].alphaBlendOperation = MTLBlendOperation(rawValue: colorAttachment.alphaBlendOperation.unsignedLongValue)!
-                descriptor.colorAttachments[i].sourceRGBBlendFactor = MTLBlendFactor(rawValue: colorAttachment.sourceRGBBlendFactor.unsignedLongValue)!
-                descriptor.colorAttachments[i].sourceAlphaBlendFactor = MTLBlendFactor(rawValue: colorAttachment.sourceAlphaBlendFactor.unsignedLongValue)!
-                descriptor.colorAttachments[i].destinationRGBBlendFactor = MTLBlendFactor(rawValue: colorAttachment.destinationRGBBlendFactor.unsignedLongValue)!
-                descriptor.colorAttachments[i].destinationAlphaBlendFactor = MTLBlendFactor(rawValue: colorAttachment.destinationAlphaBlendFactor.unsignedLongValue)!
+                descriptor.colorAttachments[i].rgbBlendOperation = MTLBlendOperation(rawValue: colorAttachment.rgbBlendOperation.uintValue)!
+                descriptor.colorAttachments[i].alphaBlendOperation = MTLBlendOperation(rawValue: colorAttachment.alphaBlendOperation.uintValue)!
+                descriptor.colorAttachments[i].sourceRGBBlendFactor = MTLBlendFactor(rawValue: colorAttachment.sourceRGBBlendFactor.uintValue)!
+                descriptor.colorAttachments[i].sourceAlphaBlendFactor = MTLBlendFactor(rawValue: colorAttachment.sourceAlphaBlendFactor.uintValue)!
+                descriptor.colorAttachments[i].destinationRGBBlendFactor = MTLBlendFactor(rawValue: colorAttachment.destinationRGBBlendFactor.uintValue)!
+                descriptor.colorAttachments[i].destinationAlphaBlendFactor = MTLBlendFactor(rawValue: colorAttachment.destinationAlphaBlendFactor.uintValue)!
             }
             if let depthAttachmentPixelFormat = renderPipelineState.depthAttachmentPixelFormat {
                 descriptor.depthAttachmentPixelFormat = MetalState.toMetalPixelFormat(depthAttachmentPixelFormat)
@@ -196,35 +196,35 @@ class MetalState {
                 descriptor.stencilAttachmentPixelFormat = view.depthStencilPixelFormat
             }
             if let sampleCount = renderPipelineState.sampleCount {
-                descriptor.sampleCount = sampleCount.integerValue
+                descriptor.sampleCount = sampleCount.intValue
             } else {
                 descriptor.sampleCount = view.sampleCount
             }
             let vertexDescriptor = MTLVertexDescriptor()
             for vertexAttributeObject in renderPipelineState.vertexAttributes {
                 let vertexAttribute = vertexAttributeObject as! VertexAttribute
-                let index = vertexAttribute.index.integerValue
+                let index = vertexAttribute.index.intValue
                 vertexDescriptor.attributes[index].format = MetalState.toMetalVertexFormat(vertexAttribute.format)
                 vertexDescriptor.attributes[index].offset = Int(vertexAttribute.offset)
                 vertexDescriptor.attributes[index].bufferIndex = Int(vertexAttribute.bufferIndex)
             }
             for vertexBufferLayoutObject in renderPipelineState.vertexBufferLayouts {
                 let vertexBufferLayout = vertexBufferLayoutObject as! VertexBufferLayout
-                let index = vertexBufferLayout.index.integerValue
+                let index = vertexBufferLayout.index.intValue
                 vertexDescriptor.layouts[index].stepFunction = MetalState.toMetalVertexStepFunction(vertexBufferLayout.stepFunction)
                 vertexDescriptor.layouts[index].stepRate = Int(vertexBufferLayout.stepRate)
                 vertexDescriptor.layouts[index].stride = Int(vertexBufferLayout.stride)
             }
             descriptor.vertexDescriptor = vertexDescriptor
-            descriptor.alphaToCoverageEnabled = renderPipelineState.alphaToCoverageEnabled.boolValue
-            descriptor.alphaToOneEnabled = renderPipelineState.alphaToOneEnabled.boolValue
-            descriptor.rasterizationEnabled = renderPipelineState.rasterizationEnabled.boolValue
-            if let inputPrimitiveTopology = MTLPrimitiveTopologyClass(rawValue: renderPipelineState.inputPrimitiveTopology.unsignedLongValue) {
+            descriptor.isAlphaToCoverageEnabled = renderPipelineState.alphaToCoverageEnabled.boolValue
+            descriptor.isAlphaToOneEnabled = renderPipelineState.alphaToOneEnabled.boolValue
+            descriptor.isRasterizationEnabled = renderPipelineState.rasterizationEnabled.boolValue
+            if let inputPrimitiveTopology = MTLPrimitiveTopologyClass(rawValue: renderPipelineState.inputPrimitiveTopology.uintValue) {
                 descriptor.inputPrimitiveTopology = inputPrimitiveTopology
             }
             var reflection: MTLRenderPipelineReflection?
             do {
-                try renderPipelineStates[renderPipelineState] = device.newRenderPipelineStateWithDescriptor(descriptor, options: MTLPipelineOption(rawValue: MTLPipelineOption.ArgumentInfo.rawValue | MTLPipelineOption.BufferTypeInfo.rawValue), reflection: &reflection)
+                try renderPipelineStates[renderPipelineState] = device.makeRenderPipelineState(descriptor: descriptor, options: MTLPipelineOption(rawValue: MTLPipelineOption.argumentInfo.rawValue | MTLPipelineOption.bufferTypeInfo.rawValue), reflection: &reflection)
                 if let reflection = reflection {
                     if let vertexArguments = reflection.vertexArguments {
                         if let delegate = delegate {

@@ -12,11 +12,11 @@ import CoreData
 class RenderPipelineState: NSManagedObject {
     override func validateForInsert() throws {
         try super.validateForInsert()
-        try validatePropertyIsUnique("RenderPipelineState", managedObjectContext: managedObjectContext!, name: "name", value: name, probe: self)
+        try validatePropertyIsUnique("RenderPipelineState", managedObjectContext: managedObjectContext!, name: "name", value: name as NSString, probe: self)
     }
 
     override func validateForUpdate() throws {
         try super.validateForUpdate()
-        try validatePropertyIsUnique("RenderPipelineState", managedObjectContext: managedObjectContext!, name: "name", value: name, probe: self)
+        try validatePropertyIsUnique("RenderPipelineState", managedObjectContext: managedObjectContext!, name: "name", value: name as NSString, probe: self)
     }
 }

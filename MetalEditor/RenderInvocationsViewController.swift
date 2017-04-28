@@ -13,7 +13,7 @@ class RenderInvocationsViewController: InvocationsViewController, InvocationRemo
     @IBOutlet var renderToTextureCheckbox: NSButton!
     @IBOutlet var detailsButton: NSButton!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: PassRemoveObserver, pass: RenderPass) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, removeObserver: PassRemoveObserver, pass: RenderPass) {
         self.renderPass = pass
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.managedObjectContext = managedObjectContext
@@ -29,38 +29,38 @@ class RenderInvocationsViewController: InvocationsViewController, InvocationRemo
         super.viewDidLoad()
 
         renderToTextureCheckbox.state = renderPass.descriptor != nil ? NSOnState : NSOffState
-        detailsButton.enabled = renderPass.descriptor != nil
+        detailsButton.isEnabled = renderPass.descriptor != nil
     }
 
-    @IBAction func renderToTextureChecked(sender: NSButton) {
+    @IBAction func renderToTextureChecked(_ sender: NSButton) {
         if sender.state == NSOnState {
-            let depthAttachment = NSEntityDescription.insertNewObjectForEntityForName("DepthAttachment", inManagedObjectContext: managedObjectContext) as! DepthAttachment
+            let depthAttachment = NSEntityDescription.insertNewObject(forEntityName: "DepthAttachment", into: managedObjectContext) as! DepthAttachment
             depthAttachment.clearValue = 1.0
             depthAttachment.texture = nil
             depthAttachment.level = 0
             depthAttachment.slice = 0
             depthAttachment.depthPlane = 0
-            depthAttachment.loadAction = MTLLoadAction.DontCare.rawValue
-            depthAttachment.storeAction = MTLStoreAction.DontCare.rawValue
+            depthAttachment.loadAction = NSNumber(value:  MTLLoadAction.dontCare.rawValue)
+            depthAttachment.storeAction = NSNumber(value: MTLStoreAction.dontCare.rawValue)
             depthAttachment.resolveTexture = nil
             depthAttachment.resolveLevel = 0
             depthAttachment.resolveSlice = 0
             depthAttachment.resolveDepthPlane = 0
 
-            let stencilAttachment = NSEntityDescription.insertNewObjectForEntityForName("StencilAttachment", inManagedObjectContext: managedObjectContext) as! StencilAttachment
+            let stencilAttachment = NSEntityDescription.insertNewObject(forEntityName: "StencilAttachment", into: managedObjectContext) as! StencilAttachment
             stencilAttachment.clearValue = 0
             stencilAttachment.texture = nil
             stencilAttachment.level = 0
             stencilAttachment.slice = 0
             stencilAttachment.depthPlane = 0
-            stencilAttachment.loadAction = MTLLoadAction.DontCare.rawValue
-            stencilAttachment.storeAction = MTLStoreAction.DontCare.rawValue
+            stencilAttachment.loadAction = NSNumber(value: MTLLoadAction.dontCare.rawValue)
+            stencilAttachment.storeAction = NSNumber(value: MTLStoreAction.dontCare.rawValue)
             stencilAttachment.resolveTexture = nil
             stencilAttachment.resolveLevel = 0
             stencilAttachment.resolveSlice = 0
             stencilAttachment.resolveDepthPlane = 0
 
-            let renderPassDescriptor = NSEntityDescription.insertNewObjectForEntityForName("RenderPassDescriptor", inManagedObjectContext: managedObjectContext) as! RenderPassDescriptor
+            let renderPassDescriptor = NSEntityDescription.insertNewObject(forEntityName: "RenderPassDescriptor", into: managedObjectContext) as! RenderPassDescriptor
             renderPassDescriptor.depthAttachment = depthAttachment
             renderPassDescriptor.stencilAttachment = stencilAttachment
             renderPassDescriptor.visibilityResultBuffer = nil
@@ -71,65 +71,65 @@ class RenderInvocationsViewController: InvocationsViewController, InvocationRemo
             let descriptor = renderPass.descriptor!
             renderPass.descriptor = nil
             for colorAttachment in descriptor.colorAttachments {
-                descriptor.mutableOrderedSetValueForKey("colorAttachments").removeObject(colorAttachment)
-                managedObjectContext.deleteObject(colorAttachment as! ColorAttachment)
+                descriptor.mutableOrderedSetValue(forKey: "colorAttachments").remove(colorAttachment)
+                managedObjectContext.delete(colorAttachment as! ColorAttachment)
             }
-            managedObjectContext.deleteObject(descriptor.depthAttachment)
-            managedObjectContext.deleteObject(descriptor.stencilAttachment)
-            managedObjectContext.deleteObject(descriptor)
+            managedObjectContext.delete(descriptor.depthAttachment)
+            managedObjectContext.delete(descriptor.stencilAttachment)
+            managedObjectContext.delete(descriptor)
         }
-        detailsButton.enabled = renderPass.descriptor != nil
+        detailsButton.isEnabled = renderPass.descriptor != nil
         modelObserver.modelDidChange()
     }
 
-    @IBAction func detailsPushed(sender: NSButton) {
-        let viewController = RenderToTextureViewController(nibName: "RenderToTextureView", bundle: nil, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, renderPassDescriptor: renderPass.descriptor!)!
+    @IBAction func detailsPushed(_ sender: NSButton) {
+        let viewController = RenderToTextureViewController(nibName: "RenderToTextureView", bundle: Bundle.main, managedObjectContext: managedObjectContext, modelObserver: modelObserver, dismissObserver: self, renderPassDescriptor: renderPass.descriptor!)!
         presentViewControllerAsSheet(viewController)
     }
 
-    func addRenderInvocationView(invocation: RenderInvocation) {
+    func addRenderInvocationView(_ invocation: RenderInvocation) {
         let subController = InvocationViewController(nibName: "Invocation", bundle: nil, managedObjectContext: managedObjectContext!, modelObserver: modelObserver, removeObserver: self, invocation: invocation)!
         addChildViewController(subController)
         stackView.addArrangedSubview(subController.view)
     }
 
-    @IBAction func addInvocation(sender: NSButton) {
-        let renderInvocation = NSEntityDescription.insertNewObjectForEntityForName("RenderInvocation", inManagedObjectContext: managedObjectContext) as! RenderInvocation
+    @IBAction func addInvocation(_ sender: NSButton) {
+        let renderInvocation = NSEntityDescription.insertNewObject(forEntityName: "RenderInvocation", into: managedObjectContext) as! RenderInvocation
         renderInvocation.name = "New Render Invocation"
         renderInvocation.state = nil
-        renderInvocation.primitive = MTLPrimitiveType.Triangle.rawValue
+        renderInvocation.primitive = NSNumber(value: MTLPrimitiveType.triangle.rawValue)
         renderInvocation.vertexStart = 0
         renderInvocation.vertexCount = 0
         renderInvocation.blendColorRed = 0
         renderInvocation.blendColorGreen = 0
         renderInvocation.blendColorBlue = 0
         renderInvocation.blendColorAlpha = 0
-        renderInvocation.cullMode = MTLCullMode.None.rawValue
+        renderInvocation.cullMode = NSNumber(value: MTLCullMode.none.rawValue)
         renderInvocation.depthBias = 0
         renderInvocation.depthSlopeScale = 0
         renderInvocation.depthClamp = 0
-        renderInvocation.depthClipMode = MTLDepthClipMode.Clip.rawValue
+        renderInvocation.depthClipMode = NSNumber(value: MTLDepthClipMode.clip.rawValue)
         renderInvocation.depthStencilState = nil
-        renderInvocation.frontFacingWinding = MTLWinding.Clockwise.rawValue
+        renderInvocation.frontFacingWinding = NSNumber(value: MTLWinding.clockwise.rawValue)
         renderInvocation.scissorRect = nil
         renderInvocation.stencilFrontReferenceValue = 0
         renderInvocation.stencilBackReferenceValue = 0
-        renderInvocation.triangleFillMode = MTLTriangleFillMode.Fill.rawValue
+        renderInvocation.triangleFillMode = NSNumber(value: MTLTriangleFillMode.fill.rawValue)
         renderInvocation.viewport = nil
-        renderInvocation.visibilityResultMode = MTLVisibilityResultMode.Disabled.rawValue
+        renderInvocation.visibilityResultMode = NSNumber(value: MTLVisibilityResultMode.disabled.rawValue)
         renderInvocation.visibilityResultOffset = 0
 
-        renderPass.mutableOrderedSetValueForKey("invocations").addObject(renderInvocation)
+        renderPass.mutableOrderedSetValue(forKey: "invocations").add(renderInvocation)
         addRenderInvocationView(renderInvocation)
         modelObserver.modelDidChange()
     }
 
-    func removeInvocation(controller: InvocationViewController) {
-        renderPass.mutableOrderedSetValueForKey("invocations").removeObject(controller.invocation)
+    func removeInvocation(_ controller: InvocationViewController) {
+        renderPass.mutableOrderedSetValue(forKey: "invocations").remove(controller.invocation)
         super.removeInvocation(controller, pass: renderPass)
     }
 
-    func dismiss(controller: NSViewController) {
+    func dismiss(_ controller: NSViewController) {
         dismissViewController(controller)
     }
 }

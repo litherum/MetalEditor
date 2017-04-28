@@ -23,7 +23,7 @@ class RenderPassAttachmentViewController: NSViewController {
     @IBOutlet var resolveSliceTextField: NSTextField!
     @IBOutlet var resolveDepthPlaneTextField: NSTextField!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, renderPassAttachment: RenderPassAttachment) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, managedObjectContext: NSManagedObjectContext, modelObserver: ModelObserver, renderPassAttachment: RenderPassAttachment) {
         self.managedObjectContext = managedObjectContext
         self.modelObserver = modelObserver
         self.renderPassAttachment = renderPassAttachment
@@ -34,12 +34,12 @@ class RenderPassAttachmentViewController: NSViewController {
         fatalError()
     }
 
-    func createTextureMenu(currentTexture: Texture?) -> (NSMenu, NSMenuItem?) {
-        let fetchRequest = NSFetchRequest(entityName: "Texture")
+    func createTextureMenu(_ currentTexture: Texture?) -> (NSMenu, NSMenuItem?) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Texture")
 
         var selectedItem: NSMenuItem?
         do {
-            let textures = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Texture]
+            let textures = try managedObjectContext.fetch(fetchRequest) as! [Texture]
             let result = NSMenu()
             result.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
             for texture in textures {
@@ -64,28 +64,28 @@ class RenderPassAttachmentViewController: NSViewController {
         let (textureMenu, textureSelectedItem) = createTextureMenu(renderPassAttachment.texture)
         texturePopUp.menu = textureMenu
         if let toSelect = textureSelectedItem {
-            texturePopUp.selectItem(toSelect)
+            texturePopUp.select(toSelect)
         } else {
-            texturePopUp.selectItemAtIndex(0)
+            texturePopUp.selectItem(at: 0)
         }
-        levelTextField.integerValue = renderPassAttachment.level.integerValue
-        sliceTextField.integerValue = renderPassAttachment.slice.integerValue
-        depthPlaneTextField.integerValue = renderPassAttachment.depthPlane.integerValue
-        loadActionPopUp.selectItemAtIndex(renderPassAttachment.loadAction.integerValue)
-        storeActionPopUp.selectItemAtIndex(renderPassAttachment.storeAction.integerValue)
+        levelTextField.integerValue = renderPassAttachment.level.intValue
+        sliceTextField.integerValue = renderPassAttachment.slice.intValue
+        depthPlaneTextField.integerValue = renderPassAttachment.depthPlane.intValue
+        loadActionPopUp.selectItem(at: renderPassAttachment.loadAction.intValue)
+        storeActionPopUp.selectItem(at: renderPassAttachment.storeAction.intValue)
         let (resolveTextureMenu, resolveTextureSelectedItem) = createTextureMenu(renderPassAttachment.resolveTexture)
         resolveTexturePopUp.menu = resolveTextureMenu
         if let toSelect = resolveTextureSelectedItem {
-            resolveTexturePopUp.selectItem(toSelect)
+            resolveTexturePopUp.select(toSelect)
         } else {
-            resolveTexturePopUp.selectItemAtIndex(0)
+            resolveTexturePopUp.selectItem(at: 0)
         }
-        resolveLevelTextField.integerValue = renderPassAttachment.resolveLevel.integerValue
-        resolveSliceTextField.integerValue = renderPassAttachment.resolveSlice.integerValue
-        resolveDepthPlaneTextField.integerValue = renderPassAttachment.resolveDepthPlane.integerValue
+        resolveLevelTextField.integerValue = renderPassAttachment.resolveLevel.intValue
+        resolveSliceTextField.integerValue = renderPassAttachment.resolveSlice.intValue
+        resolveDepthPlaneTextField.integerValue = renderPassAttachment.resolveDepthPlane.intValue
     }
 
-    @IBAction func textureSelected(sender: NSPopUpButton) {
+    @IBAction func textureSelected(_ sender: NSPopUpButton) {
         let selectedItem = sender.selectedItem!
 
         guard let selectionObject = selectedItem.representedObject else {
@@ -98,32 +98,32 @@ class RenderPassAttachmentViewController: NSViewController {
         modelObserver.modelDidChange()
     }
 
-    @IBAction func levelSet(sender: NSTextField) {
-        renderPassAttachment.level = sender.integerValue
+    @IBAction func levelSet(_ sender: NSTextField) {
+        renderPassAttachment.level = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func sliceSet(sender: NSTextField) {
-        renderPassAttachment.slice = sender.integerValue
+    @IBAction func sliceSet(_ sender: NSTextField) {
+        renderPassAttachment.slice = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func depthPlaneSet(sender: NSTextField) {
-        renderPassAttachment.depthPlane = sender.integerValue
+    @IBAction func depthPlaneSet(_ sender: NSTextField) {
+        renderPassAttachment.depthPlane = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func loadActionSelected(sender: NSPopUpButton) {
-        renderPassAttachment.loadAction = sender.indexOfSelectedItem
+    @IBAction func loadActionSelected(_ sender: NSPopUpButton) {
+        renderPassAttachment.loadAction = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func storeActionSelected(sender: NSPopUpButton) {
-        renderPassAttachment.loadAction = sender.indexOfSelectedItem
+    @IBAction func storeActionSelected(_ sender: NSPopUpButton) {
+        renderPassAttachment.loadAction = NSNumber(sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func resolveTextureSelected(sender: NSPopUpButton) {
+    @IBAction func resolveTextureSelected(_ sender: NSPopUpButton) {
         let selectedItem = sender.selectedItem!
 
         guard let selectionObject = selectedItem.representedObject else {
@@ -136,18 +136,18 @@ class RenderPassAttachmentViewController: NSViewController {
         modelObserver.modelDidChange()
     }
 
-    @IBAction func resolveLevelSet(sender: NSTextField) {
-        renderPassAttachment.resolveLevel = sender.integerValue
+    @IBAction func resolveLevelSet(_ sender: NSTextField) {
+        renderPassAttachment.resolveLevel = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func resolveSliceSet(sender: NSTextField) {
-        renderPassAttachment.resolveSlice = sender.integerValue
+    @IBAction func resolveSliceSet(_ sender: NSTextField) {
+        renderPassAttachment.resolveSlice = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func resolveDepthPlaneSet(sender: NSTextField) {
-        renderPassAttachment.resolveDepthPlane = sender.integerValue
+    @IBAction func resolveDepthPlaneSet(_ sender: NSTextField) {
+        renderPassAttachment.resolveDepthPlane = NSNumber(sender.integerValue)
         modelObserver.modelDidChange()
     }
 

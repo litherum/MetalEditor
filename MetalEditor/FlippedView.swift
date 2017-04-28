@@ -9,7 +9,7 @@
 import Cocoa
 
 class FlippedView: NSView {
-    override var flipped: Bool {
+    override var isFlipped: Bool {
         get {
             return true
         }

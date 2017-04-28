@@ -18,8 +18,8 @@ class PreviewController: NSViewController, MTKViewDelegate {
     var builtInBuffers: [MTLBuffer] = []
     var metalState: MetalState!
     var frame: Frame!
-    var size: CGSize = CGSizeMake(0, 0)
-    var startDate = NSDate()
+    var size: CGSize = CGSize(width: 0, height: 0)
+    var startDate = Date()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
         metalView.delegate = self
     }
 
-    func initializeWithDevice(device: MTLDevice, commandQueue: MTLCommandQueue, frame: Frame, metalState: MetalState) {
+    func initializeWithDevice(_ device: MTLDevice, commandQueue: MTLCommandQueue, frame: Frame, metalState: MetalState) {
         self.device = device
         self.commandQueue = commandQueue
         self.frame = frame
@@ -35,28 +35,28 @@ class PreviewController: NSViewController, MTKViewDelegate {
         metalView.device = device
     }
 
-    func view(view: MTKView, willLayoutWithSize size: CGSize) {
+    func view(_ view: MTKView, willLayoutWithSize size: CGSize) {
         self.size = size
     }
 
-    func mtkView(mtkView: MTKView, drawableSizeWillChange size: CGSize) {
+    func mtkView(_ mtkView: MTKView, drawableSizeWillChange size: CGSize) {
         self.size = size;
     }
 
-    private class func toMetalPrimitiveType(i: NSNumber) -> MTLPrimitiveType {
+    fileprivate class func toMetalPrimitiveType(_ i: NSNumber) -> MTLPrimitiveType {
         return MTLPrimitiveType(rawValue: UInt(i))!
     }
 
-    private class func bufferIndex(i: Int) -> Int {
+    fileprivate class func bufferIndex(_ i: Int) -> Int {
         // FIXME: Should be able to put uniforms in buffer 0
         return i == 0 ? 0 : i + 1
     }
 
-    func drawInMTKView(view: MTKView) {
+    func draw(in view: MTKView) {
         drawInView(view);
     }
 
-    private class func emptyRenderPassDescriptor(descriptor: RenderPassDescriptor) -> Bool {
+    fileprivate class func emptyRenderPassDescriptor(_ descriptor: RenderPassDescriptor) -> Bool {
         for colorAttachment in descriptor.colorAttachments {
             let c = colorAttachment as! ColorAttachment
             if c.texture != nil || c.resolveTexture != nil {
@@ -66,7 +66,7 @@ class PreviewController: NSViewController, MTKViewDelegate {
         return descriptor.depthAttachment.texture == nil && descriptor.depthAttachment.resolveTexture == nil && descriptor.stencilAttachment.texture == nil && descriptor.stencilAttachment.resolveTexture == nil
     }
 
-    private func generateMetalRenderPassDescriptor(descriptor: RenderPassDescriptor) -> MTLRenderPassDescriptor? {
+    fileprivate func generateMetalRenderPassDescriptor(_ descriptor: RenderPassDescriptor) -> MTLRenderPassDescriptor? {
         if PreviewController.emptyRenderPassDescriptor(descriptor) {
             return nil
         }
@@ -82,97 +82,98 @@ class PreviewController: NSViewController, MTKViewDelegate {
             } else {
                 metalColorAttachment.texture = nil
             }
-            metalColorAttachment.level = colorAttachment.level.integerValue
-            metalColorAttachment.slice = colorAttachment.slice.integerValue
-            metalColorAttachment.depthPlane = colorAttachment.depthPlane.integerValue
-            metalColorAttachment.loadAction = MTLLoadAction(rawValue: colorAttachment.loadAction.unsignedLongValue)!
-            metalColorAttachment.storeAction = MTLStoreAction(rawValue: colorAttachment.storeAction.unsignedLongValue)!
+            metalColorAttachment.level = colorAttachment.level.intValue
+            metalColorAttachment.slice = colorAttachment.slice.intValue
+            metalColorAttachment.depthPlane = colorAttachment.depthPlane.intValue
+            metalColorAttachment.loadAction = MTLLoadAction(rawValue: colorAttachment.loadAction.uintValue)!
+            metalColorAttachment.storeAction = MTLStoreAction(rawValue: colorAttachment.storeAction.uintValue)!
             if let resolveTexture = colorAttachment.resolveTexture {
                 metalColorAttachment.resolveTexture = metalState.textures[resolveTexture]
             } else {
                 metalColorAttachment.resolveTexture = nil
             }
-            metalColorAttachment.resolveLevel = colorAttachment.resolveLevel.integerValue
-            metalColorAttachment.resolveSlice = colorAttachment.resolveSlice.integerValue
-            metalColorAttachment.resolveDepthPlane = colorAttachment.resolveDepthPlane.integerValue
+            metalColorAttachment.resolveLevel = colorAttachment.resolveLevel.intValue
+            metalColorAttachment.resolveSlice = colorAttachment.resolveSlice.intValue
+            metalColorAttachment.resolveDepthPlane = colorAttachment.resolveDepthPlane.intValue
             metalColorAttachments[i] = metalColorAttachment
         }
 
         let metalDepthAttachment = metalRenderPassDescriptor.depthAttachment
         if let texture = descriptor.depthAttachment.texture {
-            metalDepthAttachment.texture = metalState.textures[texture]
+            metalDepthAttachment?.texture = metalState.textures[texture]
         } else {
-            metalDepthAttachment.texture = nil
+            metalDepthAttachment?.texture = nil
         }
-        metalDepthAttachment.level = descriptor.depthAttachment.level.integerValue
-        metalDepthAttachment.slice = descriptor.depthAttachment.slice.integerValue
-        metalDepthAttachment.depthPlane = descriptor.depthAttachment.depthPlane.integerValue
-        metalDepthAttachment.loadAction = MTLLoadAction(rawValue: descriptor.depthAttachment.loadAction.unsignedLongValue)!
-        metalDepthAttachment.storeAction = MTLStoreAction(rawValue: descriptor.depthAttachment.storeAction.unsignedLongValue)!
+        metalDepthAttachment?.level = descriptor.depthAttachment.level.intValue
+        metalDepthAttachment?.slice = descriptor.depthAttachment.slice.intValue
+        metalDepthAttachment?.depthPlane = descriptor.depthAttachment.depthPlane.intValue
+        metalDepthAttachment?.loadAction = MTLLoadAction(rawValue: descriptor.depthAttachment.loadAction.uintValue)!
+        metalDepthAttachment?.storeAction = MTLStoreAction(rawValue: descriptor.depthAttachment.storeAction.uintValue)!
         if let resolveTexture = descriptor.depthAttachment.resolveTexture {
-            metalDepthAttachment.resolveTexture = metalState.textures[resolveTexture]
+            metalDepthAttachment?.resolveTexture = metalState.textures[resolveTexture]
         } else {
-            metalDepthAttachment.resolveTexture = nil
+            metalDepthAttachment?.resolveTexture = nil
         }
-        metalDepthAttachment.resolveLevel = descriptor.depthAttachment.resolveLevel.integerValue
-        metalDepthAttachment.resolveSlice = descriptor.depthAttachment.resolveSlice.integerValue
-        metalDepthAttachment.resolveDepthPlane = descriptor.depthAttachment.resolveDepthPlane.integerValue
+        metalDepthAttachment?.resolveLevel = descriptor.depthAttachment.resolveLevel.intValue
+        metalDepthAttachment?.resolveSlice = descriptor.depthAttachment.resolveSlice.intValue
+        metalDepthAttachment?.resolveDepthPlane = descriptor.depthAttachment.resolveDepthPlane.intValue
 
         let metalStencilAttachment = metalRenderPassDescriptor.stencilAttachment
         if let texture = descriptor.stencilAttachment.texture {
-            metalStencilAttachment.texture = metalState.textures[texture]
+            metalStencilAttachment?.texture = metalState.textures[texture]
         } else {
-            metalStencilAttachment.texture = nil
+            metalStencilAttachment?.texture = nil
         }
-        metalStencilAttachment.level = descriptor.stencilAttachment.level.integerValue
-        metalStencilAttachment.slice = descriptor.stencilAttachment.slice.integerValue
-        metalStencilAttachment.depthPlane = descriptor.stencilAttachment.depthPlane.integerValue
-        metalStencilAttachment.loadAction = MTLLoadAction(rawValue: descriptor.stencilAttachment.loadAction.unsignedLongValue)!
-        metalStencilAttachment.storeAction = MTLStoreAction(rawValue: descriptor.stencilAttachment.storeAction.unsignedLongValue)!
+        metalStencilAttachment?.level = descriptor.stencilAttachment.level.intValue
+        metalStencilAttachment?.slice = descriptor.stencilAttachment.slice.intValue
+        metalStencilAttachment?.depthPlane = descriptor.stencilAttachment.depthPlane.intValue
+        metalStencilAttachment?.loadAction = MTLLoadAction(rawValue: descriptor.stencilAttachment.loadAction.uintValue)!
+        metalStencilAttachment?.storeAction = MTLStoreAction(rawValue: descriptor.stencilAttachment.storeAction.uintValue)!
         if let resolveTexture = descriptor.stencilAttachment.resolveTexture {
-            metalStencilAttachment.resolveTexture = metalState.textures[resolveTexture]
+            metalStencilAttachment?.resolveTexture = metalState.textures[resolveTexture]
         } else {
-            metalStencilAttachment.resolveTexture = nil
+            metalStencilAttachment?.resolveTexture = nil
         }
-        metalStencilAttachment.resolveLevel = descriptor.stencilAttachment.resolveLevel.integerValue
-        metalStencilAttachment.resolveSlice = descriptor.stencilAttachment.resolveSlice.integerValue
-        metalStencilAttachment.resolveDepthPlane = descriptor.stencilAttachment.resolveDepthPlane.integerValue
+        metalStencilAttachment?.resolveLevel = descriptor.stencilAttachment.resolveLevel.intValue
+        metalStencilAttachment?.resolveSlice = descriptor.stencilAttachment.resolveSlice.intValue
+        metalStencilAttachment?.resolveDepthPlane = descriptor.stencilAttachment.resolveDepthPlane.intValue
 
         return metalRenderPassDescriptor
     }
 
-    private func populateBuiltInBuffer(ptr: UnsafeMutablePointer<Void>) {
+    fileprivate func populateBuiltInBuffer(_ ptr: UnsafeMutableRawPointer) {
         guard let uniforms = sliderValues.uniforms else {
             return
         }
-        for uniform in uniforms {
-            switch uniform.type {
-            case .Float:
-                assert(uniform.offset % 4 == 0)
-                let floatPtr = UnsafeMutablePointer<Float>(ptr)
-                var toWrite: Float = 0
-                switch uniform.name {
-                case "time":
-                    toWrite = Float(NSDate().timeIntervalSinceDate(startDate))
-                case "width":
-                    toWrite = Float(size.width)
-                case "height":
-                    toWrite = Float(size.height)
-                default:
-                    toWrite = uniform.value.floatValue
-                }
-                floatPtr[uniform.offset / 4] = toWrite
-            case .Int:
-                assert(uniform.offset % 4 == 0)
-                let intPtr = UnsafeMutablePointer<Int32>(ptr)
-                intPtr[uniform.offset / 4] = uniform.value.intValue
-            default:
-                continue
-            }
-        }
+        fatalError()
+//        for uniform in uniforms {
+//            switch uniform.type {
+//            case .float:
+//                assert(uniform.offset % 4 == 0)
+//                let floatPtr: UnsafeMutablePointer<Float> = ptr
+//                var toWrite: Float = 0
+//                switch uniform.name {
+//                case "time":
+//                    toWrite = Float(Date().timeIntervalSince(startDate))
+//                case "width":
+//                    toWrite = Float(size.width)
+//                case "height":
+//                    toWrite = Float(size.height)
+//                default:
+//                    toWrite = uniform.value.floatValue
+//                }
+//                floatPtr[uniform.offset / 4] = toWrite
+//            case .int:
+//                assert(uniform.offset % 4 == 0)
+//                let intPtr = UnsafeMutablePointer<Int32>(ptr)
+//                intPtr[uniform.offset / 4] = uniform.value.int32Value
+//            default:
+//                continue
+//            }
+//        }
     }
 
-    func drawInView(view: MTKView) {
+    func drawInView(_ view: MTKView) {
         guard frame != nil else {
             return
         }
@@ -184,19 +185,19 @@ class PreviewController: NSViewController, MTKViewDelegate {
         if builtInBuffers.count > 0 {
             builtInBuffer = builtInBuffers.removeLast()
         } else {
-            builtInBuffer = device.newBufferWithLength(builtInBufferLength, options: .StorageModeManaged)
+            builtInBuffer = device.makeBuffer(length: builtInBufferLength, options: .storageModeManaged)
         }
         assert(builtInBuffer != nil)
         populateBuiltInBuffer(builtInBuffer.contents())
-        if builtInBuffer.storageMode == .Managed {
+        if builtInBuffer.storageMode == .managed {
             builtInBuffer.didModifyRange(NSMakeRange(0, builtInBufferLength))
         }
         for passObject in frame.passes {
             let pass = passObject as! Pass
-            let commandBuffer = commandQueue.commandBuffer()
+            let commandBuffer = commandQueue.makeCommandBuffer()
             if let computePass = pass as? ComputePass {
-                let computeCommandEncoder = commandBuffer.computeCommandEncoder()
-                computeCommandEncoder.setBuffer(builtInBuffer, offset: 0, atIndex: 1)
+                let computeCommandEncoder = commandBuffer.makeComputeCommandEncoder()
+                computeCommandEncoder.setBuffer(builtInBuffer, offset: 0, at: 1)
                 for invocationObject in computePass.invocations {
                     let invocation = invocationObject as! ComputeInvocation
                     let invocationState = invocation.state!
@@ -207,17 +208,17 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     for i in 0 ..< invocation.bufferBindings.count {
                         let bufferOptional = (invocation.bufferBindings[i] as! BufferBinding).buffer
                         if let buffer = bufferOptional {
-                            computeCommandEncoder.setBuffer(metalState.buffers[buffer], offset: 0, atIndex: PreviewController.bufferIndex(i))
+                            computeCommandEncoder.setBuffer(metalState.buffers[buffer], offset: 0, at: PreviewController.bufferIndex(i))
                         } else {
-                            computeCommandEncoder.setBuffer(nil, offset: 0, atIndex: PreviewController.bufferIndex(i))
+                            computeCommandEncoder.setBuffer(nil, offset: 0, at: PreviewController.bufferIndex(i))
                         }
                     }
                     for i in 0 ..< invocation.textureBindings.count {
                         let textureOptional = (invocation.textureBindings[i] as! TextureBinding).texture
                         if let texture = textureOptional {
-                            computeCommandEncoder.setTexture(metalState.textures[texture], atIndex: i)
+                            computeCommandEncoder.setTexture(metalState.textures[texture], at: i)
                         } else {
-                            computeCommandEncoder.setTexture(nil, atIndex: i)
+                            computeCommandEncoder.setTexture(nil, at: i)
                         }
                     }
                     let threadgroupsPerGrid = invocation.threadgroupsPerGrid
@@ -240,9 +241,9 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     }
                     renderPassDescriptor = descriptor
                 }
-                let renderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor)
-                renderCommandEncoder.setVertexBuffer(builtInBuffer, offset: 0, atIndex: 1)
-                renderCommandEncoder.setFragmentBuffer(builtInBuffer, offset: 0, atIndex: 1)
+                let renderCommandEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
+                renderCommandEncoder.setVertexBuffer(builtInBuffer, offset: 0, at: 1)
+                renderCommandEncoder.setFragmentBuffer(builtInBuffer, offset: 0, at: 1)
                 for invocationObject in renderPass.invocations {
                     let invocation = invocationObject as! RenderInvocation
                     let invocationState = invocation.state!
@@ -254,39 +255,39 @@ class PreviewController: NSViewController, MTKViewDelegate {
                     for i in 0 ..< invocation.vertexBufferBindings.count {
                         let bufferOptional = (invocation.vertexBufferBindings[i] as! BufferBinding).buffer
                         if let buffer = bufferOptional {
-                            renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, atIndex: PreviewController.bufferIndex(i))
+                            renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, at: PreviewController.bufferIndex(i))
                         } else {
-                            renderCommandEncoder.setVertexBuffer(nil, offset: 0, atIndex: PreviewController.bufferIndex(i))
+                            renderCommandEncoder.setVertexBuffer(nil, offset: 0, at: PreviewController.bufferIndex(i))
                         }
                     }
                     for i in 0 ..< invocation.fragmentBufferBindings.count {
                         let bufferOptional = (invocation.fragmentBufferBindings[i] as! BufferBinding).buffer
                         if let buffer = bufferOptional {
-                            renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, atIndex: PreviewController.bufferIndex(i))
+                            renderCommandEncoder.setVertexBuffer(metalState.buffers[buffer], offset: 0, at: PreviewController.bufferIndex(i))
                         } else {
-                            renderCommandEncoder.setVertexBuffer(nil, offset: 0, atIndex: PreviewController.bufferIndex(i))
+                            renderCommandEncoder.setVertexBuffer(nil, offset: 0, at: PreviewController.bufferIndex(i))
                         }
                     }
                     for i in 0 ..< invocation.vertexTextureBindings.count {
                         let textureOptional = (invocation.vertexTextureBindings[i] as! TextureBinding).texture
                         if let texture = textureOptional {
-                            renderCommandEncoder.setVertexTexture(metalState.textures[texture], atIndex: i)
+                            renderCommandEncoder.setVertexTexture(metalState.textures[texture], at: i)
                         } else {
-                            renderCommandEncoder.setVertexTexture(nil, atIndex: i)
+                            renderCommandEncoder.setVertexTexture(nil, at: i)
                         }
                     }
                     for i in 0 ..< invocation.fragmentTextureBindings.count {
                         let textureOptional = (invocation.fragmentTextureBindings[i] as! TextureBinding).texture
                         if let texture = textureOptional {
-                            renderCommandEncoder.setFragmentTexture(metalState.textures[texture], atIndex: i)
+                            renderCommandEncoder.setFragmentTexture(metalState.textures[texture], at: i)
                         } else {
-                            renderCommandEncoder.setFragmentTexture(nil, atIndex: i)
+                            renderCommandEncoder.setFragmentTexture(nil, at: i)
                         }
                     }
-                    renderCommandEncoder.setBlendColorRed(invocation.blendColorRed.floatValue, green: invocation.blendColorGreen.floatValue, blue: invocation.blendColorBlue.floatValue, alpha: invocation.blendColorAlpha.floatValue)
-                    renderCommandEncoder.setCullMode(MTLCullMode(rawValue: invocation.cullMode.unsignedLongValue)!)
+                    renderCommandEncoder.setBlendColor(red: invocation.blendColorRed.floatValue, green: invocation.blendColorGreen.floatValue, blue: invocation.blendColorBlue.floatValue, alpha: invocation.blendColorAlpha.floatValue)
+                    renderCommandEncoder.setCullMode(MTLCullMode(rawValue: invocation.cullMode.uintValue)!)
                     renderCommandEncoder.setDepthBias(invocation.depthBias.floatValue, slopeScale: invocation.depthSlopeScale.floatValue, clamp: invocation.depthClamp.floatValue)
-                    renderCommandEncoder.setDepthClipMode(MTLDepthClipMode(rawValue: invocation.depthClipMode.unsignedLongValue)!)
+                    renderCommandEncoder.setDepthClipMode(MTLDepthClipMode(rawValue: invocation.depthClipMode.uintValue)!)
 
                     if let depthStencilState = invocation.depthStencilState {
                         guard let metalDepthStencilState = metalState.depthStencilStates[depthStencilState] else {
@@ -294,22 +295,22 @@ class PreviewController: NSViewController, MTKViewDelegate {
                         }
                         renderCommandEncoder.setDepthStencilState(metalDepthStencilState)
                     } else {
-                        renderCommandEncoder.setDepthStencilState(device.newDepthStencilStateWithDescriptor(MTLDepthStencilDescriptor()))
+                        renderCommandEncoder.setDepthStencilState(device.makeDepthStencilState(descriptor: MTLDepthStencilDescriptor()))
                     }
                     
-                    renderCommandEncoder.setFrontFacingWinding(MTLWinding(rawValue: invocation.frontFacingWinding.unsignedLongValue)!)
+                    renderCommandEncoder.setFrontFacing(MTLWinding(rawValue: invocation.frontFacingWinding.uintValue)!)
                     if let scissorRect = invocation.scissorRect {
-                        if scissorRect.width.integerValue > 0 && scissorRect.height.integerValue > 0 {
-                            renderCommandEncoder.setScissorRect(MTLScissorRect(x: scissorRect.x.integerValue, y: scissorRect.y.integerValue, width: scissorRect.width.integerValue, height: scissorRect.height.integerValue))
+                        if scissorRect.width.intValue > 0 && scissorRect.height.intValue > 0 {
+                            renderCommandEncoder.setScissorRect(MTLScissorRect(x: scissorRect.x.intValue, y: scissorRect.y.intValue, width: scissorRect.width.intValue, height: scissorRect.height.intValue))
                         }
                     }
-                    renderCommandEncoder.setStencilFrontReferenceValue(invocation.stencilFrontReferenceValue.unsignedIntValue, backReferenceValue: invocation.stencilBackReferenceValue.unsignedIntValue)
-                    renderCommandEncoder.setTriangleFillMode(MTLTriangleFillMode(rawValue: invocation.triangleFillMode.unsignedLongValue)!)
+                    renderCommandEncoder.setStencilReferenceValues(front: invocation.stencilFrontReferenceValue.uint32Value, back: invocation.stencilBackReferenceValue.uint32Value)
+                    renderCommandEncoder.setTriangleFillMode(MTLTriangleFillMode(rawValue: invocation.triangleFillMode.uintValue)!)
                     if let viewport = invocation.viewport {
                         renderCommandEncoder.setViewport(MTLViewport(originX: viewport.originX.doubleValue, originY: viewport.originY.doubleValue, width: viewport.width.doubleValue, height: viewport.height.doubleValue, znear: viewport.zNear.doubleValue, zfar: viewport.zFar.doubleValue))
                     }
-                    renderCommandEncoder.setVisibilityResultMode(MTLVisibilityResultMode(rawValue: invocation.visibilityResultMode.unsignedLongValue)!, offset: invocation.visibilityResultOffset.integerValue)
-                    renderCommandEncoder.drawPrimitives(PreviewController.toMetalPrimitiveType(invocation.primitive), vertexStart: Int(invocation.vertexStart), vertexCount: Int(invocation.vertexCount))
+                    renderCommandEncoder.setVisibilityResultMode(MTLVisibilityResultMode(rawValue: invocation.visibilityResultMode.uintValue)!, offset: invocation.visibilityResultOffset.intValue)
+                    renderCommandEncoder.drawPrimitives(type: PreviewController.toMetalPrimitiveType(invocation.primitive), vertexStart: Int(invocation.vertexStart), vertexCount: Int(invocation.vertexCount))
                 }
                 renderCommandEncoder.endEncoding()
             } else {
@@ -317,14 +318,14 @@ class PreviewController: NSViewController, MTKViewDelegate {
             }
             if pass == frame.passes[frame.passes.count - 1] as! Pass {
                 commandBuffer.addCompletedHandler() {(commandBuffer) in
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         if self.builtInBufferLength == builtInBuffer.length {
                             self.builtInBuffers.append(builtInBuffer)
                         }
                     }
                 }
                 if metalView.currentDrawable != nil {
-                    commandBuffer.presentDrawable(metalView.currentDrawable!)
+                    commandBuffer.present(metalView.currentDrawable!)
                 }
             }
             commandBuffer.commit()

@@ -24,7 +24,7 @@ class Uniform {
 
 class SliderValues: NSViewController {
 
-    private class func printArrayType(type: MTLArrayType, space: Int) {
+    fileprivate class func printArrayType(_ type: MTLArrayType, space: Int) {
         let printSpace: () -> () = {
             for _ in 0 ..< space {
                 print("  ", terminator: "")
@@ -39,12 +39,12 @@ class SliderValues: NSViewController {
         printSpace()
         print("Stride: \(type.stride)")
         switch type.elementType {
-        case .Struct:
+        case .struct:
             if let structType = type.elementStructType() {
                 printStructType(structType, space: space + 1)
             }
-        case .Array:
-            if let arrayType = type.elementArrayType() {
+        case .array:
+            if let arrayType = type.element() {
                 printArrayType(arrayType, space: space + 1)
             }
         default:
@@ -53,7 +53,7 @@ class SliderValues: NSViewController {
         }
     }
     
-    private class func printStructType(type: MTLStructType, space: Int) {
+    fileprivate class func printStructType(_ type: MTLStructType, space: Int) {
         let printSpace: () -> () = {
             for _ in 0 ..< space {
                 print("  ", terminator: "")
@@ -70,11 +70,11 @@ class SliderValues: NSViewController {
             printSpace()
             print("Member Offset: \(member.offset)")
             switch member.dataType {
-            case .Struct:
+            case .struct:
                 if let structType = member.structType() {
                     printStructType(structType, space: space + 1)
                 }
-            case .Array:
+            case .array:
                 if let arrayType = member.arrayType() {
                     printArrayType(arrayType, space: space + 1)
                 }
@@ -85,176 +85,176 @@ class SliderValues: NSViewController {
         }
     }
 
-    private class func dataType(type: MTLDataType) -> String {
+    fileprivate class func dataType(_ type: MTLDataType) -> String {
         switch type {
-        case .None:
+        case .none:
             return "None"
-        case .Struct:
+        case .struct:
             return "Struct"
-        case .Array:
+        case .array:
             return "Array"
-        case .Float:
+        case .float:
             return "Float"
-        case .Float2:
+        case .float2:
             return "Float2"
-        case .Float3:
+        case .float3:
             return "Float3"
-        case .Float4:
+        case .float4:
             return "Float4"
-        case .Float2x2:
+        case .float2x2:
             return "Float2x2"
-        case .Float2x3:
+        case .float2x3:
             return "Float2x3"
-        case .Float2x4:
+        case .float2x4:
             return "Float2x4"
-        case .Float3x2:
+        case .float3x2:
             return "Float3x2"
-        case .Float3x3:
+        case .float3x3:
             return "Float3x3"
-        case .Float3x4:
+        case .float3x4:
             return "Float3x4"
-        case .Float4x2:
+        case .float4x2:
             return "Float4x2"
-        case .Float4x3:
+        case .float4x3:
             return "Float4x3"
-        case .Float4x4:
+        case .float4x4:
             return "Float4x4"
-        case .Half:
+        case .half:
             return "Half"
-        case .Half2:
+        case .half2:
             return "Half2"
-        case .Half3:
+        case .half3:
             return "Half3"
-        case .Half4:
+        case .half4:
             return "Half4"
-        case .Half2x2:
+        case .half2x2:
             return "Half2x2"
-        case .Half2x3:
+        case .half2x3:
             return "Half2x3"
-        case .Half2x4:
+        case .half2x4:
             return "Half2x4"
-        case .Half3x2:
+        case .half3x2:
             return "Half3x2"
-        case .Half3x3:
+        case .half3x3:
             return "Half3x3"
-        case .Half3x4:
+        case .half3x4:
             return "Half3x4"
-        case .Half4x2:
+        case .half4x2:
             return "Half4x2"
-        case .Half4x3:
+        case .half4x3:
             return "Half4x3"
-        case .Half4x4:
+        case .half4x4:
             return "Half4x4"
-        case .Int:
+        case .int:
             return "Int"
-        case .Int2:
+        case .int2:
             return "Int2"
-        case .Int3:
+        case .int3:
             return "Int3"
-        case .Int4:
+        case .int4:
             return "Int4"
-        case .UInt:
+        case .uint:
             return "UInt"
-        case .UInt2:
+        case .uint2:
             return "UInt2"
-        case .UInt3:
+        case .uint3:
             return "UInt3"
-        case .UInt4:
+        case .uint4:
             return "UInt4"
-        case .Short:
+        case .short:
             return "Short"
-        case .Short2:
+        case .short2:
             return "Short2"
-        case .Short3:
+        case .short3:
             return "Short3"
-        case .Short4:
+        case .short4:
             return "Short4"
-        case .UShort:
+        case .ushort:
             return "UShort"
-        case .UShort2:
+        case .ushort2:
             return "UShort2"
-        case .UShort3:
+        case .ushort3:
             return "UShort3"
-        case .UShort4:
+        case .ushort4:
             return "UShort4"
-        case .Char:
+        case .char:
             return "Char"
-        case .Char2:
+        case .char2:
             return "Char2"
-        case .Char3:
+        case .char3:
             return "Char3"
-        case .Char4:
+        case .char4:
             return "Char4"
-        case .UChar:
+        case .uchar:
             return "UChar"
-        case .UChar2:
+        case .uchar2:
             return "UChar2"
-        case .UChar3:
+        case .uchar3:
             return "UChar3"
-        case .UChar4:
+        case .uchar4:
             return "UChar4"
-        case .Bool:
+        case .bool:
             return "Bool"
-        case .Bool2:
+        case .bool2:
             return "Bool2"
-        case .Bool3:
+        case .bool3:
             return "Bool3"
-        case .Bool4:
+        case .bool4:
             return "Bool4"
         }
     }
 
-    private class func printArguments(arguments: [MTLArgument]) {
+    fileprivate class func printArguments(_ arguments: [MTLArgument]) {
         for argument in arguments {
             print("Argument \(argument.index): \"\(argument.name)\"")
             switch argument.access {
-            case .ReadOnly:
+            case .readOnly:
                 print("  Access: Read Only")
-            case .ReadWrite:
+            case .readWrite:
                 print("  Access: Read / Write")
-            case .WriteOnly:
+            case .writeOnly:
                 print("  Access: Write Only")
             }
-            if argument.active {
+            if argument.isActive {
                 print("  Active")
             } else {
                 print("  Inactive")
             }
             switch argument.type {
-            case .Buffer:
+            case .buffer:
                 print("  Type: Buffer")
                 print("  Alignment: \(argument.bufferAlignment)")
                 print("  Data Size: \(argument.bufferDataSize)")
                 switch argument.bufferDataType {
-                case .Struct:
+                case .struct:
                     SliderValues.printStructType(argument.bufferStructType, space: 2)
                 default:
                     print("  Data Type: \(SliderValues.dataType(argument.bufferDataType))")
                 }
-            case .ThreadgroupMemory:
+            case .threadgroupMemory:
                 print("  Type: ThreadgroupMemory")
                 print("  Alignment: \(argument.threadgroupMemoryAlignment)")
                 print("  Data Size: \(argument.threadgroupMemoryDataSize)")
-            case .Sampler:
+            case .sampler:
                 print("  Type: Sampler")
-            case .Texture:
+            case .texture:
                 print("  Type: Texture")
                 switch argument.textureType {
-                case .Type1D:
+                case .type1D:
                     print("  1 Dimensional")
-                case .Type1DArray:
+                case .type1DArray:
                     print("  1 Dimensional Array")
-                case .Type2D:
+                case .type2D:
                     print("  2 Dimensional")
-                case .Type2DArray:
+                case .type2DArray:
                     print("  2 Dimensional Array")
-                case .Type2DMultisample:
+                case .type2DMultisample:
                     print("  2 Dimensional Multisampled")
-                case .TypeCube:
+                case .typeCube:
                     print("  Cube")
-                case .TypeCubeArray:
+                case .typeCubeArray:
                     print("  Cube Array")
-                case .Type3D:
+                case .type3D:
                     print("  3 Dimensional")
                 }
                 print("  Data Type: \(SliderValues.dataType(argument.textureDataType))")
@@ -277,19 +277,19 @@ class SliderValues: NSViewController {
         length = 0
     }
 
-    private func recordUniform(uniform: Uniform, lengthInBytes: Int) {
+    fileprivate func recordUniform(_ uniform: Uniform, lengthInBytes: Int) {
         uniforms!.append(uniform)
         length = max(length, uniform.offset + lengthInBytes)
     }
 
-    private func populateValue(type: MTLDataType, structType: MTLStructType?, arrayType: MTLArrayType?, name: String, offset: Int) {
+    fileprivate func populateValue(_ type: MTLDataType, structType: MTLStructType?, arrayType: MTLArrayType?, name: String, offset: Int) {
         switch type {
-        case .Struct:
+        case .struct:
             populateWithStruct(structType!, prefix: name, offset: offset)
-        case .Array:
+        case .array:
             populateWithArray(arrayType!, prefix: name, offset: offset)
-        case .Float:
-            let uniform = Uniform(name: name, type: type, offset: offset, value: NSNumber(float: 0))
+        case .float:
+            let uniform = Uniform(name: name, type: type, offset: offset, value: NSNumber(value: 0 as Float))
             if name != "time" && name != "width" && name != "height" {
                 let controller = SliderViewController(nibName: "Slider", bundle: nil, uniform: uniform)!
                 stackView.addArrangedSubview(controller.view)
@@ -300,8 +300,8 @@ class SliderValues: NSViewController {
                 controller.maxTextField.delegate = doubleTextFieldDelegate
             }
             recordUniform(uniform, lengthInBytes: 4)
-        case .Int:
-            let uniform = Uniform(name: name, type: type, offset: offset, value: NSNumber(float: 0))
+        case .int:
+            let uniform = Uniform(name: name, type: type, offset: offset, value: NSNumber(value: 0 as Float))
             let controller = SliderViewController(nibName: "Slider", bundle: nil, uniform: uniform)!
             stackView.addArrangedSubview(controller.view)
             addChildViewController(controller)
@@ -319,15 +319,15 @@ class SliderValues: NSViewController {
         }
     }
 
-    private func populateWithArray(arrayType: MTLArrayType, prefix: String, offset: Int) {
+    fileprivate func populateWithArray(_ arrayType: MTLArrayType, prefix: String, offset: Int) {
         for i in 0 ..< arrayType.arrayLength {
             let fullOffset = offset + i * arrayType.stride
             let fullName = "\(prefix)[\(i)]"
-            populateValue(arrayType.elementType, structType: arrayType.elementStructType(), arrayType: arrayType.elementArrayType(), name: fullName, offset: fullOffset)
+            populateValue(arrayType.elementType, structType: arrayType.elementStructType(), arrayType: arrayType.element(), name: fullName, offset: fullOffset)
         }
     }
 
-    private func populateWithStruct(structType: MTLStructType, prefix: String, offset: Int) {
+    fileprivate func populateWithStruct(_ structType: MTLStructType, prefix: String, offset: Int) {
         for member in structType.members {
             let fullOffset = offset + member.offset
             let fullName = prefix == "" ? member.name : "\(prefix).\(member.name)"
@@ -335,13 +335,13 @@ class SliderValues: NSViewController {
         }
     }
 
-    func reflection(reflection: [MTLArgument]) {
+    func reflection(_ reflection: [MTLArgument]) {
         guard uniforms == nil else {
             return
         }
 
         for argument in reflection {
-            guard argument.name == "uniforms" && (argument.access == .ReadOnly || argument.access == .ReadWrite) && argument.type == .Buffer && argument.bufferDataType == .Struct else {
+            guard argument.name == "uniforms" && (argument.access == .readOnly || argument.access == .readWrite) && argument.type == .buffer && argument.bufferDataType == .struct else {
                 continue
             }
             uniforms = []

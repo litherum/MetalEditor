@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol RenderStateColorAttachmentRemoveObserver: class {
-    func remove(viewController: RenderStateColorAttachmentViewController)
+    func remove(_ viewController: RenderStateColorAttachmentViewController)
 }
 
 class RenderStateColorAttachmentViewController: NSViewController {
@@ -29,7 +29,7 @@ class RenderStateColorAttachmentViewController: NSViewController {
     @IBOutlet var rgbDestBlendFactorCheckBox: NSPopUpButton!
     @IBOutlet var alphaDestBlendFactorCheckBox: NSPopUpButton!
 
-    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?, modelObserver: ModelObserver, removeObserver: RenderStateColorAttachmentRemoveObserver, colorAttachment: RenderPipelineColorAttachment) {
+    init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, modelObserver: ModelObserver, removeObserver: RenderStateColorAttachmentRemoveObserver, colorAttachment: RenderPipelineColorAttachment) {
         self.modelObserver = modelObserver
         self.removeObserver = removeObserver
         self.colorAttachment = colorAttachment
@@ -42,28 +42,28 @@ class RenderStateColorAttachmentViewController: NSViewController {
 
     func setFieldsFromColorAttachment() {
         if let attachmentPixelFormat = colorAttachment.pixelFormat {
-            let pixelFormat = MTLPixelFormat(rawValue: attachmentPixelFormat.unsignedLongValue)!
-            pixelFormatPopUp.selectItemAtIndex(pixelFormatToIndex(pixelFormat) + 1)
+            let pixelFormat = MTLPixelFormat(rawValue: attachmentPixelFormat.uintValue)!
+            pixelFormatPopUp.selectItem(at: pixelFormatToIndex(pixelFormat) + 1)
         } else {
-            pixelFormatPopUp.selectItemAtIndex(0)
+            pixelFormatPopUp.selectItem(at: 0)
         }
         redWriteMaskCheckBox.state = colorAttachment.writeRed.boolValue ? NSOnState : NSOffState
         greenWriteMaskCheckBox.state = colorAttachment.writeGreen.boolValue ? NSOnState : NSOffState
         blueWriteMaskCheckBox.state = colorAttachment.writeBlue.boolValue ? NSOnState : NSOffState
         alphaWriteMaskCheckBox.state = colorAttachment.writeAlpha.boolValue ? NSOnState : NSOffState
         blendingCheckBox.state = colorAttachment.blendingEnabled.boolValue ? NSOnState : NSOffState
-        rgbBlendOpCheckBox.enabled = colorAttachment.blendingEnabled.boolValue
-        alphaBlendOpCheckBox.enabled = colorAttachment.blendingEnabled.boolValue
-        rgbSourceBlendFactorCheckBox.enabled = colorAttachment.blendingEnabled.boolValue
-        alphaSourceBlendFactorCheckBox.enabled = colorAttachment.blendingEnabled.boolValue
-        rgbDestBlendFactorCheckBox.enabled = colorAttachment.blendingEnabled.boolValue
-        alphaDestBlendFactorCheckBox.enabled = colorAttachment.blendingEnabled.boolValue
-        rgbBlendOpCheckBox.selectItemAtIndex(colorAttachment.rgbBlendOperation.integerValue)
-        alphaBlendOpCheckBox.selectItemAtIndex(colorAttachment.alphaBlendOperation.integerValue)
-        rgbSourceBlendFactorCheckBox.selectItemAtIndex(colorAttachment.sourceRGBBlendFactor.integerValue)
-        alphaSourceBlendFactorCheckBox.selectItemAtIndex(colorAttachment.sourceAlphaBlendFactor.integerValue)
-        rgbDestBlendFactorCheckBox.selectItemAtIndex(colorAttachment.destinationRGBBlendFactor.integerValue)
-        alphaDestBlendFactorCheckBox.selectItemAtIndex(colorAttachment.destinationAlphaBlendFactor.integerValue)
+        rgbBlendOpCheckBox.isEnabled = colorAttachment.blendingEnabled.boolValue
+        alphaBlendOpCheckBox.isEnabled = colorAttachment.blendingEnabled.boolValue
+        rgbSourceBlendFactorCheckBox.isEnabled = colorAttachment.blendingEnabled.boolValue
+        alphaSourceBlendFactorCheckBox.isEnabled = colorAttachment.blendingEnabled.boolValue
+        rgbDestBlendFactorCheckBox.isEnabled = colorAttachment.blendingEnabled.boolValue
+        alphaDestBlendFactorCheckBox.isEnabled = colorAttachment.blendingEnabled.boolValue
+        rgbBlendOpCheckBox.selectItem(at: colorAttachment.rgbBlendOperation.intValue)
+        alphaBlendOpCheckBox.selectItem(at: colorAttachment.alphaBlendOperation.intValue)
+        rgbSourceBlendFactorCheckBox.selectItem(at: colorAttachment.sourceRGBBlendFactor.intValue)
+        alphaSourceBlendFactorCheckBox.selectItem(at: colorAttachment.sourceAlphaBlendFactor.intValue)
+        rgbDestBlendFactorCheckBox.selectItem(at: colorAttachment.destinationRGBBlendFactor.intValue)
+        alphaDestBlendFactorCheckBox.selectItem(at: colorAttachment.destinationAlphaBlendFactor.intValue)
     }
 
     override func viewDidLoad() {
@@ -73,62 +73,62 @@ class RenderStateColorAttachmentViewController: NSViewController {
         setFieldsFromColorAttachment()
     }
     
-    @IBAction func pixelFormatSelected(sender: NSPopUpButton) {
+    @IBAction func pixelFormatSelected(_ sender: NSPopUpButton) {
         guard sender.indexOfSelectedItem > 0 else {
             colorAttachment.pixelFormat = nil
             modelObserver.modelDidChange()
             return
         }
         let format = indexToPixelFormat(sender.indexOfSelectedItem - 1)!
-        colorAttachment.pixelFormat = format.rawValue
+        colorAttachment.pixelFormat = NSNumber(value: format.rawValue)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func writeMaskChecked(sender: NSButton) {
-        colorAttachment.writeRed = redWriteMaskCheckBox.state == NSOnState
-        colorAttachment.writeGreen = greenWriteMaskCheckBox.state == NSOnState
-        colorAttachment.writeBlue = blueWriteMaskCheckBox.state == NSOnState
-        colorAttachment.writeAlpha = alphaWriteMaskCheckBox.state == NSOnState
+    @IBAction func writeMaskChecked(_ sender: NSButton) {
+        colorAttachment.writeRed = NSNumber(value: redWriteMaskCheckBox.state == NSOnState)
+        colorAttachment.writeGreen = NSNumber(value: greenWriteMaskCheckBox.state == NSOnState)
+        colorAttachment.writeBlue = NSNumber(value: blueWriteMaskCheckBox.state == NSOnState)
+        colorAttachment.writeAlpha = NSNumber(value:  alphaWriteMaskCheckBox.state == NSOnState)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func blendingChecked(sender: NSButton) {
-        colorAttachment.blendingEnabled = sender.state == NSOnState
+    @IBAction func blendingChecked(_ sender: NSButton) {
+        colorAttachment.blendingEnabled = NSNumber(value:  sender.state == NSOnState)
         setFieldsFromColorAttachment()
         modelObserver.modelDidChange()
     }
 
-    @IBAction func rgbBlendOpSelected(sender: NSPopUpButton) {
-        colorAttachment.rgbBlendOperation = sender.indexOfSelectedItem
+    @IBAction func rgbBlendOpSelected(_ sender: NSPopUpButton) {
+        colorAttachment.rgbBlendOperation =  NSNumber(value: sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func alphaBlendOpSelected(sender: NSPopUpButton) {
-        colorAttachment.alphaBlendOperation = sender.indexOfSelectedItem
+    @IBAction func alphaBlendOpSelected(_ sender: NSPopUpButton) {
+        colorAttachment.alphaBlendOperation =  NSNumber(value: sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func rgbSourceBlendFactorSelected(sender: NSPopUpButton) {
-        colorAttachment.sourceRGBBlendFactor = sender.indexOfSelectedItem
+    @IBAction func rgbSourceBlendFactorSelected(_ sender: NSPopUpButton) {
+        colorAttachment.sourceRGBBlendFactor =  NSNumber(value: sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func alphaSourceBlendFactorSelected(sender: NSPopUpButton) {
-        colorAttachment.sourceAlphaBlendFactor = sender.indexOfSelectedItem
+    @IBAction func alphaSourceBlendFactorSelected(_ sender: NSPopUpButton) {
+        colorAttachment.sourceAlphaBlendFactor =  NSNumber(value: sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func rgbDestBlendFactorSelected(sender: NSPopUpButton) {
-        colorAttachment.destinationRGBBlendFactor = sender.indexOfSelectedItem
+    @IBAction func rgbDestBlendFactorSelected(_ sender: NSPopUpButton) {
+        colorAttachment.destinationRGBBlendFactor =  NSNumber(value: sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func alphaDestBlendFactorSelected(sender: NSPopUpButton) {
-        colorAttachment.destinationAlphaBlendFactor = sender.indexOfSelectedItem
+    @IBAction func alphaDestBlendFactorSelected(_ sender: NSPopUpButton) {
+        colorAttachment.destinationAlphaBlendFactor =  NSNumber(value: sender.indexOfSelectedItem)
         modelObserver.modelDidChange()
     }
 
-    @IBAction func removePushed(sender: NSButton) {
+    @IBAction func removePushed(_ sender: NSButton) {
         removeObserver.remove(self)
     }
 }
